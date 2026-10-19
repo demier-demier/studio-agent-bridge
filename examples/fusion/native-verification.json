@@ -1,0 +1,135 @@
+{
+  "kind": "observed-native-integration",
+  "observed_date": "2026-10-19",
+  "version": "2705.1.30",
+  "mcp_transport": "stdio to local Fusion HTTP",
+  "create": {
+    "status": "verified",
+    "solid_bodies": 8,
+    "sketches": 17,
+    "all_sketches_constrained": true,
+    "timeline_entries": 58,
+    "bounds_mm": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        160.0,
+        100.0,
+        70.0
+      ]
+    ],
+    "roundtrip": {
+      "verified": true,
+      "checks": {
+        "body_count": true,
+        "timeline_count": true,
+        "healthy_features": true,
+        "parameter_expressions": true,
+        "solid_geometry": true,
+        "bounds": true,
+        "sketch_constraints": true
+      },
+      "observed_bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          160.0,
+          100.0,
+          70.0
+        ]
+      ]
+    }
+  },
+  "parameter_revision": {
+    "status": "verified",
+    "bounds_mm": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        180.0,
+        100.0,
+        80.0
+      ]
+    ],
+    "roundtrip": {
+      "verified": true,
+      "checks": {
+        "body_count": true,
+        "timeline_count": true,
+        "healthy_features": true,
+        "parameter_expressions": true,
+        "solid_geometry": true,
+        "bounds": true,
+        "sketch_constraints": true
+      },
+      "observed_bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          180.0,
+          100.0,
+          80.0
+        ]
+      ]
+    }
+  },
+  "trusted_python_revision": {
+    "status": "verified",
+    "bounds_mm": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        180.0,
+        100.0,
+        88.0
+      ]
+    ],
+    "roundtrip": {
+      "verified": true,
+      "checks": {
+        "body_count": true,
+        "timeline_count": true,
+        "healthy_features": true,
+        "parameter_expressions": true,
+        "solid_geometry": true,
+        "bounds": true,
+        "sketch_constraints": true
+      },
+      "observed_bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          180.0,
+          100.0,
+          88.0
+        ]
+      ]
+    }
+  },
+  "artifact_hashes": {
+    "sensor-enclosure.step": "38a3ada29d64452c3a9f21b02282b82a8293a0ea24729ed136191d5262910d0a",
+    "sensor-enclosure.f3d": "131f42592f4a69bc1d25d6c815b22e91b2ee308ea9a5bdbc127a294decbd35b2",
+    "fusion-preview.png": "2416b6466da6c8481d1e95207efb7dfd4434196d4c1a25ead042afdff9bd6fb6"
+  },
+  "limitations": [
+    "Original synthetic functional geometry fixture; manufacturing loads, sealing, CAM, drawings and print readiness are not verified."
+  ]
+}

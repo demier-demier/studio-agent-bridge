@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "kind": "observed-native-integration",
+  "observed_date": "2026-10-19",
+  "engine": {
+    "MajorVersion": 5,
+    "MinorVersion": 7,
+    "PatchVersion": 4,
+    "Changelist": 51494982
+  },
+  "headless": true,
+  "rendering_verified": false,
+  "operations": {
+    "initialize": {
+      "status": "verified",
+      "elapsed_seconds": 42.92,
+      "native_evidence_sha256": "cbc91e5fa2fd88be2d1355555dd9b54b2200f5e710c1c68a365b0de70e755077"
+    },
+    "import": {
+      "status": "verified",
+      "elapsed_seconds": 9.907,
+      "native_evidence_sha256": "71f90c437d00a9cc4d8d82bde8715dccc92ced202f839d3d9552a75e61e8e845"
+    },
+    "scene": {
+      "status": "verified",
+      "elapsed_seconds": 7.55,
+      "native_evidence_sha256": "86c8d607c116203529a95bb6626f6991ec93f560d466d2254b917c1051f381f9"
+    },
+    "reopen": {
+      "status": "verified",
+      "elapsed_seconds": 8.559,
+      "native_evidence_sha256": "72f43cb84d5d92588f6a68e30c4ceac8c8e13e9df5aabbe278f35d504328c21d"
+    }
+  },
+  "input": {
+    "format": "FBX",
+    "mesh_smoothing": "FACE",
+    "sha256": "d3ef9af80b18d306b255451aaef7379e46c37a2f6b8ed4c4fb87878f8a91258c"
+  },
+  "import": {
+    "static_meshes": 84,
+    "triangles_lod0": 40176,
+    "aggregate_size_cm": [
+      174.0,
+      135.200004,
+      135.250009
+    ],
+    "expected_size_cm": [
+      174,
+      135.2,
+      135.25
+    ],
+    "scale_check": true
+  },
+  "scene": {
+    "level": "/Game/StudioAgentBridge/Maps/InspectionStageVerified",
+    "actor_count": 90,
+    "sequence": {
+      "path": "/Game/StudioAgentBridge/Sequences/InspectionStageVerified_CameraMove.InspectionStageVerified_CameraMove",
+      "fps": 24,
+      "frames": 96,
+      "bindings": [
+        {
+          "name": "Camera_Inspection",
+          "resolved_objects": [
+            "CineCameraActor_0"
+          ],
+          "tracks": [
+            {
+              "class": "MovieScene3DTransformTrack",
+              "sections": [
+                {
+                  "channels": 9,
+                  "keys_per_channel": [
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "camera_cuts": [
+        {
+          "resolved_camera_objects": [
+            "CineCameraActor_0"
+          ]
+        }
+      ]
+    },
+    "fresh_process_reopen": true
+  },
+  "observed_failures_fixed": [
+    "FBX exporter without smoothing groups triggered a native Slate logger assertion in headless import; FACE smoothing export passed.",
+    "Camera binding created in an unsaved Untitled world did not resolve after restart; saving the world before binding and checking in a new process passed."
+  ],
+  "limitations": [
+    "Native asset and scene structure verified; GPU rendering, visual equivalence, packaged gameplay and performance are not verified.",
+    "This is a single original synthetic integration fixture, not a general reliability benchmark."
+  ]
+}

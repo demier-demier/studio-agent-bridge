@@ -1,0 +1,34 @@
+{
+  "kind": "development_observation",
+  "host": "Blender 5.2.0 LTS",
+  "observed_date": "2026-10-19",
+  "asset": "Original procedural inspection rover",
+  "scene_object_count": 90,
+  "asset_mesh_count": 84,
+  "studio_mesh_count": 1,
+  "editable_modifier_count": 84,
+  "material_count": 9,
+  "asset_dimensions_m": [1.7400000095, 1.3520001173, 1.3525000852],
+  "native_reopen": {
+    "names_preserved": true,
+    "mesh_count_preserved": true,
+    "modifier_count_preserved": true,
+    "dimensions_preserved": true
+  },
+  "glb_roundtrip": {
+    "mesh_count": 84,
+    "dimensions_within_2mm": true
+  },
+  "fbx_roundtrip_with_face_smoothing": {
+    "mesh_count": 84,
+    "dimensions_within_2mm": true
+  },
+  "trusted_script_revision": {
+    "requested_mast_extension_m": 0.15,
+    "observed_total_height_m": 1.5025000614,
+    "source_native_file_unchanged": true,
+    "native_reopen_verified": true,
+    "render_visually_inspected": true
+  },
+  "scope": "Recorded observations, not an automatically refreshed benchmark or engineering certification. Reproduce using the adapter and retain its local verification reports."
+}

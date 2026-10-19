@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "studio-agent-bridge"
+version = "0.1.0"
+description = "Local MCP orchestration for evidence-backed native CAD and 3D workflows"
+requires-python = ">=3.12"
+dependencies = ["mcp==2.3.0", "pydantic==2.14.1"]
+license = "MIT"
+authors = [{name = "Bernardo Demier"}]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2", "ruff==0.14.1"]
+
+[project.scripts]
+studio-agent-bridge = "studio_agent_bridge.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+studio_agent_bridge = ["host_scripts/**/*.py"]
+
+[tool.setuptools.data-files]
+"share/studio-agent-bridge/prompts" = ["prompts/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["integration: requires an installed native 3D application"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
