@@ -19,6 +19,17 @@ from studio_agent_bridge.host_scripts.unreal.environment_contract import (
 )
 
 
+@pytest.fixture
+def forbid_native_launch(tmp_path, monkeypatch):
+    """Exercise preflight guards without depending on a host Unreal install."""
+    monkeypatch.setattr(unreal, "_executable", lambda config: tmp_path / "UnrealEditor-Cmd")
+
+    def unexpected_launch(*args, **kwargs):
+        pytest.fail("Invalid environment input reached native process launch")
+
+    monkeypatch.setattr(unreal, "_run", unexpected_launch)
+
+
 def bundle(tmp_path):
     mesh = tmp_path / "mesh.fbx"
     mesh.write_bytes(b"synthetic boundary fixture, not a valid native FBX")
@@ -143,12 +154,10 @@ def test_adapter_selects_explicit_rendering_mode(
     assert absent not in observed["command"]
 
 
-def test_environment_adapter_validates_bundle_before_native_launch(tmp_path, monkeypatch):
+def test_environment_adapter_validates_bundle_before_native_launch(tmp_path, forbid_native_launch):
     path, _ = bundle(tmp_path)
     unreal._project(tmp_path, {}, {}, True)
     (tmp_path / "mesh.fbx").write_bytes(b"changed after export")
-    launched = []
-    monkeypatch.setattr(unreal, "_run", lambda *args: launched.append(True))
     result = unreal.execute(
         tmp_path,
         {
@@ -160,10 +169,9 @@ def test_environment_adapter_validates_bundle_before_native_launch(tmp_path, mon
     )
     assert result["status"] == "failed"
     assert "hash mismatch" in result["summary"]
-    assert not launched
 
 
-def test_render_output_never_overwrites_existing_file(tmp_path):
+def test_render_output_never_overwrites_existing_file(tmp_path, forbid_native_launch):
     path, _ = bundle(tmp_path)
     unreal._project(tmp_path, {}, {}, True)
     image = tmp_path / "keep.png"
@@ -182,6 +190,7 @@ def test_render_output_never_overwrites_existing_file(tmp_path):
         {},
     )
     assert result["status"] == "failed"
+    assert "render_output must be a new workspace PNG path" in result["summary"]
     assert image.read_bytes() == b"keep"
 
 
@@ -225,15 +234,14 @@ def test_map_creation_refuses_external_or_existing_map(level, existing):
         guard_map_creation("/Game/StudioAgentBridge/Environments/Fresh", level, existing)
 
 
-def test_build_scene_cannot_overwrite_existing_map_in_another_namespace(tmp_path, monkeypatch):
+def test_build_scene_cannot_overwrite_existing_map_in_another_namespace(
+    tmp_path, forbid_native_launch
+):
     path, _ = bundle(tmp_path)
     project = unreal._project(tmp_path, {}, {}, True)
     saved = project.parent / "Content/StudioAgentBridge/Maps/Preserve.umap"
     saved.parent.mkdir(parents=True)
     saved.write_bytes(b"valuable map")
-    launched = []
-    monkeypatch.setattr(unreal, "_executable", lambda config: Path("/fake/UnrealEditor-Cmd"))
-    monkeypatch.setattr(unreal, "_run", lambda *args: launched.append(True))
     result = unreal.execute(
         tmp_path,
         {
@@ -250,4 +258,3 @@ def test_build_scene_cannot_overwrite_existing_map_in_another_namespace(tmp_path
     assert result["status"] == "failed"
     assert "fresh destination" in result["summary"]
     assert saved.read_bytes() == b"valuable map"
-    assert not launched
