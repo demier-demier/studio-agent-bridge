@@ -39,3 +39,6 @@ python3 scripts/package-public-assets.py \
 The script preserves the original ZIP, strips only PNG metadata, substitutes the verified sanitized scene, updates evidence and internal manifests, and fixes archive timestamps. Native F3D/STEP/STL bytes are unchanged. It refreshes the committed asset manifest; review any changed hash before building. The original local proof has its own hashes, so it is not interchangeable with the sanitized public package.
 
 The demo falls back to the native render if the 3D component reports an error. WebGL is required for the interactive mesh. Browser appearance does not certify physical board fit, fabrication or engineering performance.
+# Source archive hosting
+
+The portfolio publisher creates `/studio-agent-bridge-source.zip` from the same clean Git commit recorded in `release.json`. It contains the complete tracked source, tests, documentation and example assets, except the generated native-scene ZIP, which is available as a separate download. An included `SOURCE_ARCHIVE_README.txt` explains where to restore that one file before building the demo. This keeps each public file within the hosting size limit. When deploying independently, also create the archive at the hosting root or update its download link.
