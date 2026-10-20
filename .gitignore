@@ -22,6 +22,7 @@ runs/
 *.f3z
 *.fbx
 *.glb
+!web/public/assets/rpi5-open-tray.glb
 *.stl
 *.step
 *.uasset
@@ -29,3 +30,5 @@ runs/
 Saved/
 Intermediate/
 DerivedDataCache/
+node_modules/
+web/dist/

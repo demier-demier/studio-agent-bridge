@@ -1,0 +1,393 @@
+{
+  "observed_local_date": "2026-10-19",
+  "fusion_version": "2705.1.30",
+  "blender_version": "5.2.0 LTS",
+  "baseline_reopened": {
+    "checks": {
+      "one_connected_solid": true,
+      "bounds_match_parameters": true,
+      "four_mounting_bores_at_drawing_centres": true,
+      "four_chassis_bores_through_plate": true,
+      "bores_and_central_relief_are_void": true,
+      "all_sketches_fully_constrained": true,
+      "healthy_timeline": true
+    },
+    "size_mm": [
+      101.0,
+      72.00000000000001,
+      11.0
+    ],
+    "parameters_mm": {
+      "board_length": 85.0,
+      "board_width": 56.00000000000001,
+      "hole_pitch_x": 58.00000000000001,
+      "hole_pitch_y": 49.0,
+      "hole_offset_x": 3.5000000000000004,
+      "hole_offset_y": 3.5000000000000004,
+      "board_bore": 2.7,
+      "edge_margin": 8.0,
+      "plate_thickness": 3.0000000000000004,
+      "board_clearance": 8.0,
+      "standoff_outer": 6.000000000000001,
+      "chassis_bore": 3.4000000000000004,
+      "relief_inset": 9.0
+    },
+    "mounting_bores": [
+      {
+        "centre_xy_mm": [
+          11.500000000000002,
+          11.500000000000002
+        ],
+        "diameter_mm": 2.7,
+        "z_bounds_mm": [
+          0.0,
+          11.0
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          11.500000000000002,
+          60.50000000000001
+        ],
+        "diameter_mm": 2.7,
+        "z_bounds_mm": [
+          0.0,
+          11.0
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          69.50000000000001,
+          11.500000000000002
+        ],
+        "diameter_mm": 2.6999999999999957,
+        "z_bounds_mm": [
+          0.0,
+          11.0
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          69.50000000000001,
+          60.50000000000001
+        ],
+        "diameter_mm": 2.6999999999999957,
+        "z_bounds_mm": [
+          0.0,
+          11.0
+        ],
+        "vertical": true
+      }
+    ],
+    "chassis_bores": [
+      {
+        "centre_xy_mm": [
+          4.0,
+          4.0
+        ],
+        "diameter_mm": 3.400000000000001,
+        "z_bounds_mm": [
+          0.0,
+          3.0000000000000004
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          4.0,
+          68.0
+        ],
+        "diameter_mm": 3.400000000000001,
+        "z_bounds_mm": [
+          0.0,
+          3.0000000000000004
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          97.0,
+          4.0
+        ],
+        "diameter_mm": 3.3999999999999986,
+        "z_bounds_mm": [
+          0.0,
+          3.0000000000000004
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          97.0,
+          68.0
+        ],
+        "diameter_mm": 3.3999999999999986,
+        "z_bounds_mm": [
+          0.0,
+          3.0000000000000004
+        ],
+        "vertical": true
+      }
+    ],
+    "volume_mm3": 14721.903936116027,
+    "timeline_count": 43,
+    "sketch_count": 15,
+    "source_scope": "Approximate official reference drawing; no physical board fit test"
+  },
+  "variant_reopened": {
+    "checks": {
+      "one_connected_solid": true,
+      "bounds_match_parameters": true,
+      "four_mounting_bores_at_drawing_centres": true,
+      "four_chassis_bores_through_plate": true,
+      "bores_and_central_relief_are_void": true,
+      "all_sketches_fully_constrained": true,
+      "healthy_timeline": true
+    },
+    "size_mm": [
+      109.0,
+      80.0,
+      14.000000000000002
+    ],
+    "parameters_mm": {
+      "board_length": 85.0,
+      "board_width": 56.00000000000001,
+      "hole_pitch_x": 58.00000000000001,
+      "hole_pitch_y": 49.0,
+      "hole_offset_x": 3.5000000000000004,
+      "hole_offset_y": 3.5000000000000004,
+      "board_bore": 2.7,
+      "edge_margin": 12.000000000000002,
+      "plate_thickness": 3.0000000000000004,
+      "board_clearance": 11.0,
+      "standoff_outer": 6.000000000000001,
+      "chassis_bore": 3.4000000000000004,
+      "relief_inset": 9.0
+    },
+    "mounting_bores": [
+      {
+        "centre_xy_mm": [
+          15.500000000000004,
+          15.500000000000004
+        ],
+        "diameter_mm": 2.7,
+        "z_bounds_mm": [
+          0.0,
+          14.000000000000002
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          15.500000000000004,
+          64.50000000000001
+        ],
+        "diameter_mm": 2.7,
+        "z_bounds_mm": [
+          0.0,
+          14.000000000000002
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          73.50000000000001,
+          15.500000000000004
+        ],
+        "diameter_mm": 2.6999999999999957,
+        "z_bounds_mm": [
+          0.0,
+          14.000000000000002
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          73.50000000000001,
+          64.50000000000001
+        ],
+        "diameter_mm": 2.6999999999999957,
+        "z_bounds_mm": [
+          0.0,
+          14.000000000000002
+        ],
+        "vertical": true
+      }
+    ],
+    "chassis_bores": [
+      {
+        "centre_xy_mm": [
+          6.000000000000001,
+          6.000000000000001
+        ],
+        "diameter_mm": 3.400000000000001,
+        "z_bounds_mm": [
+          0.0,
+          3.0000000000000004
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          6.000000000000001,
+          74.0
+        ],
+        "diameter_mm": 3.400000000000001,
+        "z_bounds_mm": [
+          0.0,
+          3.0000000000000004
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          103.0,
+          6.000000000000001
+        ],
+        "diameter_mm": 3.3999999999999986,
+        "z_bounds_mm": [
+          0.0,
+          3.0000000000000004
+        ],
+        "vertical": true
+      },
+      {
+        "centre_xy_mm": [
+          103.0,
+          74.0
+        ],
+        "diameter_mm": 3.3999999999999986,
+        "z_bounds_mm": [
+          0.0,
+          3.0000000000000004
+        ],
+        "vertical": true
+      }
+    ],
+    "volume_mm3": 19336.489311369725,
+    "timeline_count": 43,
+    "sketch_count": 15,
+    "source_scope": "Approximate official reference drawing; no physical board fit test"
+  },
+  "archive_roundtrip": {
+    "baseline": {
+      "verified": true,
+      "checks": {
+        "body_count": true,
+        "timeline_count": true,
+        "healthy_features": true,
+        "parameter_expressions": true,
+        "solid_geometry": true,
+        "bounds": true,
+        "sketch_constraints": true
+      },
+      "observed_bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          101.0,
+          72.00000000000001,
+          11.0
+        ]
+      ]
+    },
+    "variant": {
+      "verified": true,
+      "checks": {
+        "body_count": true,
+        "timeline_count": true,
+        "healthy_features": true,
+        "parameter_expressions": true,
+        "solid_geometry": true,
+        "bounds": true,
+        "sketch_constraints": true
+      },
+      "observed_bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          109.0,
+          80.0,
+          14.000000000000002
+        ]
+      ]
+    }
+  },
+  "cad_to_blender": {
+    "input_filename": "sensor-enclosure.stl",
+    "input_units": "mm",
+    "scene_units": "m",
+    "scale": 0.001,
+    "measured_tray_dimensions_mm": [
+      101.00000351667404,
+      72.00000435113907,
+      11.00000087171793
+    ],
+    "max_bounds_error_mm": 4.351139068603516e-06,
+    "physical_fit_tested": false
+  },
+  "artifact_sha256": {
+    "baseline.f3d": "36ccb0487ba2717e37a69f8c66adf1d7e8f9d0722e44ef128de8fee19136f01e",
+    "baseline.step": "03a49da429bc2fd5317609626ef467dc789bb7f8a993bf28bd7ba1f2037fe9fc",
+    "baseline.stl": "73231ebeae2867e5aece897495515ecbdc4597fe20faf863c9ecb66f13730526",
+    "variant.f3d": "6bac8c8415ad48a8e63f3a29ef55ce59a3ea5823bb0cc250a4bd694b1a2b6b68",
+    "variant.step": "b38348e51824132a63d093335edeb0e5c117ed098f7f3611564861c227dd62b7",
+    "variant.stl": "0373224c646ff06b7902a7b6be5a00445ba2c83667715322f1a7aa2053ec6f2b"
+  },
+  "physical_fit_tested": false,
+  "step_geometry_reimport_tested": false,
+  "readme_scope": "Native geometry and parameter behavior; not production release or a physical assembly.",
+  "blender_reopen": {
+    "checks": {
+      "object_names_preserved": true,
+      "mesh_count_preserved": true,
+      "modifier_count_preserved": true,
+      "material_count_preserved": true,
+      "animated_objects_preserved": true,
+      "render_settings_preserved": true,
+      "dimensions_preserved": true
+    },
+    "measured_tray_dimensions_mm": [
+      101.00000351667404,
+      72.00000435113907,
+      11.00000087171793
+    ],
+    "scene_sha256": "d305dc9d1785cc3493988c96c5424605f00554adcd0949e9b43788e411fd8678",
+    "render_sha256": "68d8b78a25cb6fc3866be137522488f8b97c0334ff53fa724fb7f58a32e07b6d",
+    "all_checks_passed": true,
+    "original_scene_sha256": "75c03c0fa2f650acacaa88eddf29fd5b100e3f0c9f690222ccdf12a4725553ea",
+    "original_render_sha256": "baa9ce5712d7e0981a261646e599f94c4482de6e45d83a0d24ad844d4152b937"
+  },
+  "browser_mesh": {
+    "source": "Fusion STL -> Blender native scene -> GLB",
+    "sha256": "c013133c519a0b6425425f776d94921c3de52a74fe6899e881edc12ad563f642",
+    "bytes": 63168,
+    "fresh_process_import": {
+      "mesh_count_preserved": true,
+      "dimensions_preserved": true
+    },
+    "dimensions_mm": [
+      101.00000351667404,
+      72.00000435113907,
+      11.00000087171793
+    ],
+    "mesh_count": 1,
+    "triangles": 1472,
+    "editable_cad_in_browser": false
+  },
+  "public_packaging": {
+    "png_processing": "Metadata chunks removed; critical image chunks unchanged",
+    "blend_processing": "Native work copy with relative render path and no saved file-browser screen; reopened by bridge",
+    "native_cad_geometry_changed": false,
+    "native_zip_sha256": "560cf51fda8556cd853104202d6f26549c7aa5d635958af8de143dc6055187cc"
+  }
+}

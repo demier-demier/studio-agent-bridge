@@ -4,7 +4,7 @@ Observed on macOS on **2026-10-19**. This record separates orchestration tests f
 
 ## Automated tests
 
-**81 tests passed; one opt-in Blender native test was skipped in the ordinary suite.** Ruff passed across source, tests and examples. The Blender native integration was separately executed successfully against the installed application, along with the targeted native operations below. The project wheel was built and inspected for all host scripts and role prompt resources.
+**92 tests passed; one opt-in Blender native test was skipped in the ordinary suite.** Ruff passed across source, tests and examples. The Blender native integration was separately executed successfully against the installed application, along with the targeted native operations below. The project wheel was built and inspected for all host scripts and role prompt resources.
 
 The ordinary suite covers real MCP stdio negotiation/tool calls, revision conflicts, event-chain consistency, source/artifact changes, path and symlink boundaries, script opt-in, stale evidence, concurrent native actions, interrupted subprocesses, unresolved outcomes, export failures, Unreal object-reference handoffs and stable log snapshots. Mocked adapter tests are not counted as application geometry tests.
 
@@ -53,6 +53,12 @@ The ordinary suite covers real MCP stdio negotiation/tool calls, revision confli
 - Unreal helper processes continued appending to inherited stdout after editor exit. The manifested log is now a frozen snapshot; the changing diagnostic log is excluded from the manifest.
 - Native Unreal object paths returned by inspection can now be passed back as input, with strict package/suffix validation.
 
+## Second Fusion case: board mounting fixture
+
+The [Raspberry Pi 5 open tray](../examples/fusion/rpi5-open-tray/) was created on 19 October 2026 from attributed numerical facts in the official approximate mechanical drawing. Default and revised F3D archives passed the seven archive checks, and an additional independent reopen measured actual BRep bore axes/depths and voids. Each contains one connected solid, 15 constrained sketches, 13 parameters and 43 healthy timeline entries. Bounds changed from 101 × 72 × 11 mm to 109 × 80 × 14 mm; the 58 × 49 mm board mounting pattern was preserved. The exported STL was imported into Blender in metres, dimension-checked and rendered. Native Blender reopen also succeeded.
+
+This extends the native proof to a second CAD brief with real source dimensions. No physical board, fastener, cooler, print, material or production tolerance was tested. STEP was exported but not reimported. Public [evidence](../examples/fusion/rpi5-open-tray/observed-native-proof.json) and [source provenance](../examples/fusion/rpi5-open-tray/dimensions.json) preserve these boundaries.
+
 ## What these checks do not establish
 
-This is one original native fixture per workflow, not a reliability benchmark for arbitrary briefs. The Fusion enclosure and Blender rover have no engineering certification, load analysis or manufacturing release. Interchange checks do not prove identical shaders, every local transform or rig behavior. Unreal execution used NullRHI, so GPU rendering, Lumen/Nanite output, animation appearance, packaged gameplay and performance are unverified. The client must create acceptance checks for each new project and inspect its actual outputs.
+These are original native examples, not a reliability benchmark for arbitrary briefs. The Fusion enclosure, board fixture and Blender rover have no engineering certification, load analysis or manufacturing release. Interchange checks do not prove identical shaders, every local transform or rig behavior. Unreal execution used NullRHI, so GPU rendering, Lumen/Nanite output, animation appearance, packaged gameplay and performance are unverified. The client must create acceptance checks for each new project and inspect its actual outputs.

@@ -1,0 +1,26 @@
+{
+  "dimensions.json": {
+    "bytes": 2182,
+    "sha256": "615ca5412afa7679e223547e9f80acd73656bc8a778f5adf33e3b02de56c06c3"
+  },
+  "evidence.json": {
+    "bytes": 10075,
+    "sha256": "56e20107f862f771a3fabfb091569e0066868bb4a9e063e38dce0e78928406ec"
+  },
+  "fusion-native.png": {
+    "bytes": 168744,
+    "sha256": "8e16e1c0e72cb17382dd83b130f01cb13bdd58d49886b4e4f9fab746f882ef0e"
+  },
+  "rpi5-native-case.zip": {
+    "bytes": 1911969,
+    "sha256": "560cf51fda8556cd853104202d6f26549c7aa5d635958af8de143dc6055187cc"
+  },
+  "rpi5-open-tray.glb": {
+    "bytes": 63168,
+    "sha256": "c013133c519a0b6425425f776d94921c3de52a74fe6899e881edc12ad563f642"
+  },
+  "rpi5-render.png": {
+    "bytes": 1090382,
+    "sha256": "68d8b78a25cb6fc3866be137522488f8b97c0334ff53fa724fb7f58a32e07b6d"
+  }
+}

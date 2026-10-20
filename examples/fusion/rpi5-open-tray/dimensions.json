@@ -1,0 +1,45 @@
+{
+  "source": {
+    "publisher": "Raspberry Pi Ltd",
+    "title": "Raspberry Pi 5 mechanical drawing",
+    "url": "https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-mechanical-drawing.pdf",
+    "accessed_at": "2026-10-19T21:30:00-03:00",
+    "sha256": "5dd680d6c1f5e7aa9c7b020695e315d04aac862df82ff01d4e9041cd0668d7f2",
+    "pages": 1,
+    "inspection": "Rendered PDF diagram visually inspected; dimensions are not extracted by position-free text parsing",
+    "notice": "Dimensions are approximate reference data, not production specifications. Board components are incompletely represented; check a physical board."
+  },
+  "reference_dimensions_mm": {
+    "board_length": 85.0,
+    "board_width": 56.0,
+    "hole_pitch_x": 58.0,
+    "hole_pitch_y": 49.0,
+    "hole_offset_x": 3.5,
+    "hole_offset_y": 3.5,
+    "board_bore": 2.7
+  },
+  "coordinate_convention": "Viewed from above; PCB lower-left nominal outline is (0,0), long edge is X. Fixture board origin is (edge_margin, edge_margin).",
+  "derived_dimensions": {
+    "hole_offset_y": "(56 - 49) / 2 = 3.5 mm, based on symmetric mounting rows in the drawing; verify against a physical board."
+  },
+  "original_fixture_design_mm": {
+    "edge_margin": 8.0,
+    "plate_thickness": 3.0,
+    "board_clearance": 8.0,
+    "standoff_outer": 6.0,
+    "chassis_bore": 3.4,
+    "relief_inset": 9.0
+  },
+  "rights": {
+    "publisher_policy": "https://www.raspberrypi.com/licensing/",
+    "policy_observation": "The publisher distinguishes online documentation, PDFs and design files; most PDFs are CC BY-ND 4.0. This specific drawing does not print an explicit licence.",
+    "distribution": "No official PDF, screenshot, board mesh, logo or adapted drawing is redistributed. Code and fixture geometry are original; numerical reference facts are attributed. Raspberry Pi is used only to identify the intended board; no endorsement is implied."
+  },
+  "physical_fit_tested": false,
+  "scope_exclusions": [
+    "Underside component and connector clearance",
+    "Cooler, HAT and cable compatibility",
+    "Fastener selection, torque and thread engagement",
+    "Print process, material, tolerances, load and thermal validation"
+  ]
+}

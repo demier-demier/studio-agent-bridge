@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Explore a real, verified CAD workflow: an original Raspberry Pi 5 mounting fixture built in Fusion, measured, revised and transferred to Blender through MCP." />
+    <meta name="theme-color" content="#101b20" />
+    <title>Studio Agent Bridge · From drawing to verified geometry</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="site-header wrap">
+        <a class="brand" href="./" aria-label="Studio Agent Bridge home"><span class="brand-symbol" aria-hidden="true">⌘</span><span>STUDIO<span class="brand-light">AGENT BRIDGE</span></span></a>
+        <nav aria-label="Main navigation"><a href="#evidence">Evidence</a><a href="#workflow">Workflow</a><a href="https://github.com/demier-demier/studio-agent-bridge" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a><a class="lab-link" href="/">AI &amp; Security Lab</a></nav>
+      </header>
+
+      <main class="wrap">
+        <section class="intro">
+          <div><p class="eyebrow"><span></span> APPLIED CASE / 01</p><h1>From reference drawing<br>to <em>verified geometry.</em></h1><p class="intro-copy">An original open mounting fixture for a Raspberry Pi 5 bench prototype. Built in Fusion, measured from the solid, revised parametrically, and brought into Blender through MCP.</p></div>
+          <div class="intro-note"><span class="mono">FUSION → BLENDER → WEB</span><p>Real native files.<br>Visible evidence.<br>Clear limits.</p></div>
+        </section>
+
+        <section class="model-section" aria-labelledby="model-title">
+          <div class="model-shell">
+            <div class="model-toolbar"><div><span class="status-dot"></span><h2 id="model-title">Open mounting tray</h2><span class="model-tag">BASELINE</span></div><div class="view-tabs" role="group" aria-label="Preview mode"><button class="active" id="mode-3d" aria-pressed="true">Interactive 3D</button><button id="mode-render" aria-pressed="false">Native render</button></div></div>
+            <div class="viewport">
+              <model-viewer id="tray-viewer" src="./assets/rpi5-open-tray.glb" poster="./assets/rpi5-render.png" alt="Original open mounting tray, with four raised hollow standoffs, four chassis holes and a central opening" camera-controls touch-action="pan-y" shadow-intensity="0.8" shadow-softness="0.7" exposure="1" camera-orbit="35deg 45deg 0.25m" min-camera-orbit="auto 0deg 0.11m" max-camera-orbit="auto 180deg 0.6m" environment-image="neutral" interaction-prompt="none" loading="eager" reveal="auto"></model-viewer>
+              <img id="native-render" src="./assets/rpi5-render.png" alt="The actual exported tray geometry rendered in Blender" hidden />
+              <div class="viewport-label"><span class="mono">101 × 72 × 11 mm</span><span>Actual exported geometry</span></div>
+              <div id="viewer-hint" class="viewer-hint"><span id="load-state">Loading verified mesh…</span><span class="hint-detail">Drag to orbit · scroll to zoom</span></div>
+              <button id="reset-view" class="reset-view" aria-label="Reset model camera">↺ Reset view</button>
+            </div>
+            <div class="model-caption"><span><span class="status-dot"></span> <span id="mesh-count">1</span> mesh · <span id="triangle-count">1,472</span> triangles · <span id="mesh-size">62</span> KB</span><span>Read-only mesh viewer. Editable CAD is in the F3D download.</span></div>
+          </div>
+          <aside class="case-panel">
+            <span class="eyebrow">THE ENGINEERING BRIEF</span><h2>Make a useful fixture.<br>Keep the proof.</h2><p>Support the board on four standoffs, preserve underside access, and add separate mounting points for a bench or chassis.</p>
+            <dl class="feature-list"><div><dt>Source geometry</dt><dd>Official public mechanical drawing</dd></div><div><dt>Native authoring</dt><dd>Autodesk Fusion · parametric solid</dd></div><div><dt>Acceptance</dt><dd>Measured, exported &amp; reopened</dd></div></dl>
+            <a class="button primary" href="./assets/rpi5-native-case.zip" download="RPi5-Open-Tray-native-case.zip"><span>Download native case</span><span aria-hidden="true">↓</span></a>
+            <p class="download-note">F3D · STEP · STL · BLEND · evidence<br>1.9 MB · two CAD configurations</p>
+            <a class="text-link" href="https://github.com/demier-demier/studio-agent-bridge/tree/main/examples/fusion/rpi5-open-tray" target="_blank" rel="noopener">Inspect the source code <span aria-hidden="true">↗</span></a>
+          </aside>
+        </section>
+
+        <section class="metrics" aria-label="Native design measurements"><div><strong>01</strong><span>connected solid</span></div><div><strong>13</strong><span>editable parameters</span></div><div><strong>15</strong><span>fully constrained sketches</span></div><div><strong>43</strong><span>healthy timeline entries</span></div></section>
+
+        <section class="evidence-section section-space" id="evidence">
+          <div class="section-heading"><div><p class="eyebrow">MEASURED, NOT ASSUMED</p><h2>A parameter change.<br>The same board pattern.</h2></div><p>Increasing the margin and standoff height produces a new fixture while preserving the board's mounting geometry. Both archives were reopened and inspected independently.</p></div>
+          <div class="comparison">
+            <div class="variant-card"><p class="mono">01 / BASELINE</p><h3>101 <span>×</span> 72 <span>×</span> 11 <small>mm</small></h3><dl><div><dt>Edge margin</dt><dd>8 mm</dd></div><div><dt>Standoff height above plate</dt><dd>8 mm</dd></div><div><dt>Plate thickness</dt><dd>3 mm</dd></div></dl><span class="verified"><span>✓</span> Native archive reopened</span></div>
+            <div class="variant-card variant-accent"><p class="mono">02 / PARAMETER REVISION</p><h3>109 <span>×</span> 80 <span>×</span> 14 <small>mm</small></h3><dl><div><dt>Edge margin</dt><dd>12 mm</dd></div><div><dt>Standoff height above plate</dt><dd>11 mm</dd></div><div><dt>Plate thickness</dt><dd>3 mm</dd></div></dl><span class="verified"><span>✓</span> Original archive preserved</span></div>
+            <div class="pattern-card"><span class="pattern-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span><p>Four board bores</p><h3>58 × 49 <small>mm</small></h3><p>Ø2.7 mm · through the full support depth</p><span class="subtle">Pattern retained in both configurations</span></div>
+          </div>
+          <div class="checks-panel"><div><span class="eyebrow">NATIVE ACCEPTANCE CHECKS</span><h3>Inspect the resulting solid.</h3><p>Cylindrical BRep faces establish bore position and depth. Point containment checks establish that the holes and central relief are actually open.</p></div><ul id="native-checks"><li>Loading measured evidence…</li></ul></div>
+          <details class="coordinates"><summary>Inspect measured mounting-bore coordinates <span>+</span></summary><div class="table-scroll"><table><thead><tr><th>Bore</th><th>Baseline X / Y</th><th>Revised X / Y</th><th>Diameter</th></tr></thead><tbody id="bore-rows"></tbody></table></div><p>Coordinates are in fixture space, in millimetres. The board origin moves with the margin.</p></details>
+          <div class="evidence-links"><a href="./assets/evidence.json" target="_blank" rel="noopener">Measured evidence JSON ↗</a><a href="./assets/dimensions.json" target="_blank" rel="noopener">Dimensions &amp; provenance ↗</a><a href="./assets/fusion-native.png" target="_blank" rel="noopener">Fusion viewport ↗</a><a href="./assets/rpi5-open-tray.glb" download>Download GLB ↓</a></div>
+        </section>
+
+        <section class="workflow-section section-space" id="workflow"><div class="section-heading"><div><p class="eyebrow">A REPRODUCIBLE NATIVE WORKFLOW</p><h2>One brief. A traceable path.</h2></div><p>The client agent plans and writes the native operations. The bridge executes them, preserves revisions, and records measured results.</p></div><div class="workflow-grid"><article><span>01</span><h3>Read the reference</h3><p>Attribute the manufacturer's drawing. Separate source dimensions from original fixture design choices.</p></article><article><span>02</span><h3>Build in Fusion</h3><p>Create named sketches and features. Save a parametric F3D with the editable design history.</p></article><article><span>03</span><h3>Change &amp; verify</h3><p>Revise margin and height. Reopen both archives and measure the actual solid and mounting pattern.</p></article><article><span>04</span><h3>Transfer &amp; inspect</h3><p>Import the actual mesh into Blender. Confirm scale, render it, and verify the GLB in a fresh process.</p></article></div></section>
+
+        <section class="boundary"><div class="boundary-label">PROTOTYPE STATUS</div><div><h2>Drawing alignment is verified.<br>Physical fit is still to be tested.</h2><p>The official drawing uses approximate reference dimensions and does not show all components. No physical board, fastener, cooler, material or print process was tested. STEP was exported but not reimported; STL topology and print preparation remain unvalidated.</p><p>This browser shows a mesh. It does not run the local MCP server, edit the Fusion timeline, or replace engineering review.</p><a href="https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-mechanical-drawing.pdf" target="_blank" rel="noopener">Read the official Raspberry Pi reference drawing ↗</a></div></section>
+
+        <section class="download-footer"><div><p class="eyebrow">REPRODUCE THE CASE</p><h2>Open the files.<br>Inspect the decisions.</h2><p>Original fixture and code. Attributed public dimensions.<br>No copied board model or third-party drawing is bundled.</p></div><div><a class="button primary" href="./assets/rpi5-native-case.zip" download="RPi5-Open-Tray-native-case.zip">Download the native case <span aria-hidden="true">↓</span></a><button class="checksum" id="copy-checksum">Copy ZIP SHA-256 <span aria-hidden="true">⧉</span></button><span class="checksum-status" id="checksum-status" aria-live="polite"></span></div></section>
+      </main>
+      <footer class="site-footer wrap"><span>Studio Agent Bridge · Bernardo Demier</span><span>Native proof observed 19 Oct 2026 · Web viewer added 20 Oct 2026</span><a href="https://github.com/demier-demier/studio-agent-bridge" target="_blank" rel="noopener">Source &amp; reproduction guide ↗</a></footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

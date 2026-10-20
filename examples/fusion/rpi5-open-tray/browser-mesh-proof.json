@@ -1,0 +1,17 @@
+{
+  "source": "Fusion STL -> Blender native scene -> GLB",
+  "sha256": "c013133c519a0b6425425f776d94921c3de52a74fe6899e881edc12ad563f642",
+  "bytes": 63168,
+  "fresh_process_import": {
+    "mesh_count_preserved": true,
+    "dimensions_preserved": true
+  },
+  "dimensions_mm": [
+    101.00000351667404,
+    72.00000435113907,
+    11.00000087171793
+  ],
+  "mesh_count": 1,
+  "triangles": 1472,
+  "editable_cad_in_browser": false
+}

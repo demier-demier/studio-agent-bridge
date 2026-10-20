@@ -22,6 +22,16 @@ The Fusion enclosure has **8 solid bodies, 17 fully constrained sketches and 58 
 
 These original assets exercise the pipeline. Native scripts allow models beyond the examples, using the installed applications' exposed Python APIs. A script running successfully does not establish that an arbitrary design brief is complete; the client must compare the output with its requirements.
 
+## Applied case: a board mounting fixture
+
+**[Open the browser demo](https://bernardo-demier-ai-lab.fancy-fly-9200.chatgpt.site/studio-agent-bridge/)** — explore the actual exported 3D mesh, compare verified measurements, inspect the source evidence and download the native case. The browser visualizes geometry; parametric CAD editing remains in Fusion.
+
+The [Raspberry Pi 5 open tray case](examples/fusion/rpi5-open-tray/) starts from an official public mechanical drawing and creates an original parametric fixture. Two native configurations were built, independently reopened and measured: **101 × 72 × 11 mm** and **109 × 80 × 14 mm**, each with one connected solid, 15 fully constrained sketches and 43 timeline entries. BRep checks verify bore centres, diameters, full depths and open relief. The actual exported mesh was transferred to Blender, scale-checked and rendered.
+
+![Original open mounting fixture, transferred from Fusion to Blender](docs/images/rpi5-open-tray.png)
+
+The case includes reproducible scripts, source attribution, measured evidence and a parameter revision. It demonstrates a useful bench-fixture workflow; physical board fit, material/process suitability and production tolerances remain untested. The source itself labels its dimensions approximate reference data.
+
 ## Quick start
 
 Supported bridge platforms: **macOS and Linux** (POSIX host locks). Fusion requires a supported desktop installation; host availability varies by OS. Python **3.12+** is required. Native applications and their licenses are separate.
@@ -114,4 +124,4 @@ The ordinary suite checks orchestration, paths, failures, revisions, locks and r
 
 This is a local native tooling project, not a CAD kernel, remote rendering service or replacement for engineering review. Fusion feature history remains in F3D; mesh formats do not preserve it. Blender modifiers remain editable in the native blend file and are evaluated during export. Unreal Python automates the editor rather than gameplay runtime. Arbitrary scripts are privileged and should only come from a trusted client.
 
-All bundled models and examples are original synthetic portfolio work. No employer/client assets or proprietary source are included. MIT covers this repository's original code; application licenses remain separate.
+All bundled fixture geometry and example code are original portfolio work. Third-party numerical reference facts are attributed in the applied case. No employer/client assets or proprietary source are included. MIT covers this repository's original code; application licences and source notices remain separate.
