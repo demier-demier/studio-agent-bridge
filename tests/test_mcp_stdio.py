@@ -27,14 +27,28 @@ def test_stdio_tools_prompts_resources_and_call(tmp_path):
                 "studio_list_artifacts",
                 "studio_plan_workflow",
                 "studio_reconcile_job",
+                "studio_plan_environment",
             } <= names
             prompts = await client.list_prompts()
             assert {prompt.name for prompt in prompts.prompts} == {
                 "studio_workflow",
                 "studio_review",
+                "studio_environment",
             }
             roles = await client.read_resource("studio://roles")
             assert "geometry_qa" in roles.contents[0].text
+            environment = await client.call_tool(
+                "studio_plan_environment",
+                {"brief": {"goal": "Create an occupied robotics laboratory", "zones": ["Robotics", "Electronics"]}},
+            )
+            assert not environment.is_error
+            assert environment.structured_content["status"] == "planned"
+            assert environment.structured_content["brief"]["detail"] == "high"
+            invalid = await client.call_tool(
+                "studio_plan_environment",
+                {"brief": {"goal": "An invalid environment", "size_m": [12, -1, 4]}},
+            )
+            assert invalid.is_error
             created = await client.call_tool(
                 "studio_create_job",
                 {

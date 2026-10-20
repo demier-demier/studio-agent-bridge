@@ -95,6 +95,69 @@ class BlenderBoundaryTests(unittest.TestCase):
     def test_nan_does_not_verify(self):
         self.assertFalse(blender._near([float("nan")], [1.0]))
 
+    def test_environment_options_are_validated_before_host_launch(self):
+        source = self.workspace / "source.blend"
+        source.write_bytes(b"fixture")
+        invalid = [
+            {"export_collection": ""},
+            {"export_collection": []},
+            {"export_collection": "x\n"},
+            {"include_presentation": "true"},
+            {"max_assets": 257},
+            {"max_assets": True},
+            {"max_objects": 5001},
+            {"split_assets": True, "environment_manifest": False},
+            {"render_settings": {"resolution": [10000, 10000]}},
+            {"render_settings": {"samples": 0}},
+            {"render_settings": {"engine": "SHELL"}},
+            {"render_settings": {"device": "unknown"}},
+        ]
+        for index, parameters in enumerate(invalid):
+            with (
+                self.subTest(parameters=parameters),
+                patch.object(blender, "_executable", return_value="fake"),
+                patch.object(blender, "_launch") as launch,
+            ):
+                self.run_dir = self.workspace / "runs" / str(index)
+                result = self.run_action(
+                    "export_asset", {"input_blend": "source.blend", **parameters}
+                )
+                self.assertEqual(result["status"], "failed")
+                launch.assert_not_called()
+
+    def test_environment_options_reach_fresh_host_job(self):
+        source = self.workspace / "source.blend"
+        source.write_bytes(b"fixture")
+        with (
+            patch.object(blender, "_executable", return_value="fake"),
+            patch.object(
+                blender,
+                "_launch",
+                return_value={
+                    "blender_version": "test",
+                    "scene": {"object_count": 1, "mesh_count": 1},
+                    "outputs": [],
+                },
+            ) as launch,
+        ):
+            result = self.run_action(
+                "inspect",
+                {
+                    "input_blend": "source.blend",
+                    "export_collection": "StudioEnvironment",
+                    "include_presentation": True,
+                    "environment_manifest": True,
+                    "split_assets": True,
+                    "render_settings": {"resolution": [1920, 1080], "samples": 16},
+                },
+            )
+        self.assertEqual(result["status"], "verified")
+        job = launch.call_args.args[1]
+        self.assertEqual(job["export_collection"], "StudioEnvironment")
+        self.assertTrue(job["include_presentation"])
+        self.assertTrue(job["split_assets"])
+        self.assertEqual(job["render_settings"]["resolution"], [1920, 1080])
+
     def test_inspect_returns_native_artifact_and_hash(self):
         source = self.workspace / "source.blend"
         source.write_bytes(b"fixture, no real geometry")

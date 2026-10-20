@@ -1,0 +1,42 @@
+{
+  "bench.png": {
+    "bytes": 1839141,
+    "sha256": "0f3ec442a3a6dec9d2863b7a5120309f7258ee90fd26d89958539e11fcccc185"
+  },
+  "case.json": {
+    "bytes": 8305,
+    "sha256": "511763adc403c77b831a0d508bb3585ed05079c19a215bcd82544e4c6754ac11"
+  },
+  "environment-manifest.json": {
+    "bytes": 3099072,
+    "sha256": "856ee52312b3d8b38424bf58f09be554ee10797229ce3415e8b6f543547208d4"
+  },
+  "evidence.json": {
+    "bytes": 1586306,
+    "sha256": "b03f9e86ce1b4206f20220f8a90b86b8d474fd50996cf06c0370fd07639b6783"
+  },
+  "industrial-lab-native.zip": {
+    "bytes": 7508068,
+    "sha256": "0f921d10711de0788c2a77ab79421fdf1177f10b8a9a3042f90aa1ea3f8f60d0"
+  },
+  "industrial-lab.glb": {
+    "bytes": 2479564,
+    "sha256": "1d35c3e9d358ab3e35a2a7a9ce9119d17dda89d1c49c26f8a441d874a47f6cc3"
+  },
+  "night.png": {
+    "bytes": 2136987,
+    "sha256": "5f8edeceb380ca625b64212706c5b761ef22e1f27b197c2748806df54b693a9b"
+  },
+  "overview.png": {
+    "bytes": 2125107,
+    "sha256": "9747a141b802f93d85715f0c2f225a4ea618bff7dd835295bb34085d52a1e84c"
+  },
+  "robot.png": {
+    "bytes": 2026413,
+    "sha256": "b2c71eb96acaafd09f3919fdabc987a6a268e1af3ecff05f47e455a853aa7b66"
+  },
+  "unreal.png": {
+    "bytes": 3090912,
+    "sha256": "63cdc22c216423206b2b99f6bdce3c9014f3e9c26c18ffff3872588c608ea050"
+  }
+}

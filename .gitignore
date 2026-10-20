@@ -23,6 +23,7 @@ runs/
 *.fbx
 *.glb
 !web/public/assets/rpi5-open-tray.glb
+!web/public/assets/environment/industrial-lab.glb
 *.stl
 *.step
 *.uasset

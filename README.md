@@ -6,7 +6,7 @@ An MCP client can plan a model, execute native Python, inspect real geometry, re
 
 The language model runs in your MCP client. This repository supplies the native execution layer, role handoffs and durable job state. It works with a single capable agent or a client that delegates to multiple agents; it does not bundle an LLM or require a separate inference API key.
 
-![Original procedural inspection rover rendered in Blender](docs/images/blender-rover.png)
+![Original complete robotics laboratory rendered in Blender](docs/images/industrial-lab.png)
 
 ## What actually runs
 
@@ -16,11 +16,23 @@ The language model runs in your MCP client. This repository supplies the native 
 | Blender | Scene construction, inspection, asset import/export, materials, animation, rendering and trusted Python | `.blend`, separate objects and retained modifiers | Blender 5.2.0 LTS |
 | Unreal Engine | New project, FBX asset import, scene assembly, materials, lights, camera, sequence, inspection and trusted Python | `.uproject`, `.uasset`, `.umap` | Unreal 5.7.4 |
 
-The verified Blender → Unreal handoff contains **84 meshes and 40,176 triangles**, with measured dimensions of **174 × 135.2 × 135.25 cm** in Unreal. The scene has 90 actors and a four-second camera sequence. Fresh-process inspection confirmed that the camera binding resolves to the saved actor. Unreal validation used NullRHI: GPU rendering, visual equivalence and packaged gameplay were not tested.
+The original rover handoff contains **84 meshes and 40,176 triangles**, with measured dimensions of **174 × 135.2 × 135.25 cm** in Unreal. That scene has 90 actors and a four-second camera sequence; fresh-process inspection confirmed its saved camera binding. Its original checks used NullRHI. The complete laboratory below additionally exercises real GPU rendering and a substantially larger environment.
 
 The Fusion enclosure has **8 solid bodies, 17 fully constrained sketches and 58 timeline entries**. A width/height change produced a new native model measuring **180 × 100 × 80 mm**, with the original file preserved. Exported F3D files are reopened and compared against seven geometry/history checks before the action is accepted as verified.
 
 These original assets exercise the pipeline. Native scripts allow models beyond the examples, using the installed applications' exposed Python APIs. A script running successfully does not establish that an arbitrary design brief is complete; the client must compare the output with its requirements.
+
+## Applied case: a complete robotics laboratory
+
+**[Explore the detailed environment](https://bernardo-demier-ai-lab.fancy-fly-9200.chatgpt.site/studio-agent-bridge/environment/)** — native render gallery, interactive interior mesh, recorded checks and downloadable day/night Blender scenes with the reusable transfer bundle.
+
+The [original laboratory](examples/environments/industrial_lab/) contains complete architecture, an equipped robotics cell, an electronics bench, compute racks, utilities and original PBR surfaces: **1,571 mesh instances, 84 evaluated FBX prototypes, 17 materials, 18 texture maps and 253,920 placed triangles**. Four native cameras and nine lights are retained in the interchange manifest. The editable Blender files preserve source curves, text, separate objects and bevel modifiers.
+
+A chat-directed revision changed the lighting to evening and moved the diagnostic cart by 0.4 m. Both native scenes were reopened. Reversing the edit restored all lights exactly and the 28 cart components within floating-point tolerance. A fresh Blender import of the public GLB preserved mesh count, materials and measured bounds.
+
+Unreal independently reopened the final saved level with **1,571 mesh actors, 84 shared mesh assets, 17 materials, nine lights and four cameras**. All mesh bounds and instance placements passed the transfer checks. A real 1920 × 1080 GPU capture was inspected; the native operation exited successfully. PBR textures and original camera framing transfer, while renderer exposure and shadow appearance remain target-specific. Robot control, navigation baking and packaged gameplay are not part of this case.
+
+The case exposed and fixed a real shared-mesh export failure: the initial GLB silently lost materials. The exporter now uses temporary evaluated prototypes and checks every object's material assignment. Geometry counts alone would not have caught the loss. See [the environment workflow](docs/environments.md) for chat prompts, native evidence and transfer limits.
 
 ## Applied case: a board mounting fixture
 
@@ -69,6 +81,16 @@ Or:
 
 > Use Studio Agent Bridge to create an editable inspection rover in Blender, render it, export the asset to Unreal, create a lit presentation stage and camera sequence, then reopen both native projects and verify the transferred dimensions. Keep the Blender modifiers and report conversion losses.
 
+For complete environments:
+
+> Create a detailed industrial robotics laboratory in Blender: 12 × 9 m, an equipped robotics cell, electronics benches, server racks and utilities. Model the architecture, assemblies, cable routes, vents, fittings and props; use original PBR materials, practical lights and three interior camera views. Inspect the renders, correct unfinished details, then transfer the complete scene to Unreal and reopen both native files. Keep everything editable and preserve versions for changes through chat.
+
+Then continue naturally:
+
+> Keep the layout and objects. Create an evening lighting revision, bring the camera closer to the robot and save it separately from the daytime scene.
+
+The [environment workflow](docs/environments.md) defaults to **high detail**. The chat agent handles planning, native scripts, visual review and revisions. The MCP server validates the structured brief and executes host actions; the user does not need to write scripts. Blockouts remain intermediate work, and numeric geometry checks do not substitute for visual inspection.
+
 For a custom project, include dimensions, intended behavior, materials or style, target native files and acceptance checks. The client writes a workspace script and invokes `run_script`; each adapter's entry point is documented below.
 
 ## Agent workflow
@@ -87,7 +109,7 @@ flowchart LR
   I -->|Checks satisfied| J[Deliver models and evidence]
 ```
 
-The MCP server exposes seven tools, two workflow prompts and resources for roles, capabilities and jobs. Jobs have revision checks and a SHA-256 event chain. A per-host process lock prevents two bridge agents from changing the same application at once. Interrupted actions require inspection and reconciliation; they are never blindly replayed.
+The MCP server exposes eight tools, three workflow prompts and resources for roles, capabilities and jobs. Jobs have revision checks and a SHA-256 event chain. A per-host process lock prevents two bridge agents from changing the same application at once. Interrupted actions require inspection and reconciliation; they are never blindly replayed.
 
 | Guide | Contents |
 | --- | --- |
@@ -95,6 +117,7 @@ The MCP server exposes seven tools, two workflow prompts and resources for roles
 | [Fusion](docs/fusion.md) | Parametric construction, revisions, native archives and Python entry point |
 | [Blender](docs/blender.md) | Scene operations, native scripts, rendering and export validation |
 | [Unreal](docs/unreal.md) | Editor projects, FBX handoff, scene/sequence creation and native checks |
+| [Detailed environments](docs/environments.md) | Chat briefs, complete Blender scenes, Unreal transfer, visual review and revisions |
 | [Validation](docs/validation.md) | Recorded native acceptance results and test boundaries |
 | [Agent roles](prompts/) | Prompts for planning, modeling, geometry QA, interchange and review |
 

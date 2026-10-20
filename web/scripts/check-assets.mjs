@@ -20,3 +20,21 @@ if (Object.values(evidence.baseline_reopened.checks).some(x => x !== true) ||
   throw new Error('Native acceptance record contains a failed check');
 }
 console.log(`Verified ${Object.keys(expected).length} bundled assets and native GLB evidence.`);
+
+const environmentRoot = `${assets}/environment`;
+const environment = JSON.parse(await readFile(`${environmentRoot}/case.json`, 'utf8'));
+const environmentManifest = JSON.parse(await readFile(`${environmentRoot}/manifest.json`, 'utf8'));
+for (const [name, record] of Object.entries(environmentManifest)) {
+  if (!/^[a-zA-Z0-9_.-]+$/.test(name)) throw new Error('Unsafe environment asset filename');
+  const bytes = await readFile(`${environmentRoot}/${name}`);
+  if (bytes.length !== record.bytes || createHash('sha256').update(bytes).digest('hex') !== record.sha256) {
+    throw new Error(`Environment asset integrity failed: ${name}`);
+  }
+}
+if (environment.views.length < 3 || !environment.views.some(v => v.host.startsWith('Blender'))) {
+  throw new Error('Environment case requires multiple real native views');
+}
+for (const entry of [...environment.views, ...environment.downloads, {file: environment.mesh}]) {
+  if (entry.file && !environmentManifest[entry.file]) throw new Error(`Missing environment evidence asset: ${entry.file}`);
+}
+console.log(`Verified ${Object.keys(environmentManifest).length} environment assets; evidence is recorded native output, not a CI render.`);

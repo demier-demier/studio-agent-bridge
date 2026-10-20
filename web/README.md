@@ -2,6 +2,8 @@
 
 Static, responsive case-study page with the **actual Fusion → Blender → GLB** fixture, native measurements, source attribution and downloadable native files. The browser is a read-only mesh viewer, not a CAD editor or a native MCP host.
 
+The `/environment/` case adds a complete original robotics laboratory, several real Blender/Unreal views, interior-camera GLB exploration, a reversible lighting/layout example and downloadable native scenes. Renderer labels distinguish actual native images from the browser's own lighting.
+
 ## Reproducible build
 
 Use Node 22.12+ (Node 22 in CI). Direct dependencies are pinned and the lockfile fixes transitive versions.
@@ -16,6 +18,8 @@ npm run preview
 `dist/` is generated and ignored. Deploy its contents to `/studio-agent-bridge/`; relative asset URLs also support another subdirectory. The navigation link back to the portfolio uses `/`. No API key, server, analytics or external CDN is needed. The model-viewer/Three.js bundle is local and about 293 KB gzipped. Third-party licences are included in `public/THIRD_PARTY_NOTICES.txt`.
 
 `npm run build` first verifies every committed asset against `public/assets/manifest.json`, confirms the native checks passed and checks the GLB hash against the native export evidence. CI installs with `npm ci` and performs this build separately from the Python job.
+
+Environment assets have a separate hash manifest in `public/assets/environment/`. Packaging requires a successful independent reopen of both portable `.blend` files and a current per-object GLB material-assignment check. `scripts/package-environment.py --config /absolute/local/package-config.json` consumes explicitly selected verified run directories and render paths; it copies original native assets, strips only PNG metadata, writes curated evidence without private local logs, and validates the resulting ZIP. The local configuration is not committed.
 
 ## Source assets
 

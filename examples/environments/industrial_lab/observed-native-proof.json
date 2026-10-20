@@ -1,0 +1,157 @@
+{
+  "case": "Industrial AI Robotics Lab",
+  "observed_at": "2026-10-20",
+  "native_host": "Blender 5.2.0 LTS",
+  "scope": "Native modeling, rendering, reversible preset/cart edit, portable native files and independently imported GLB. Unreal evidence is maintained separately by the target host.",
+  "authorship": "Original synthetic geometry, layout and texture maps; no third-party scene assets.",
+  "counts": {
+    "uniqueAssets": 84,
+    "meshInstances": 1571,
+    "materials": 17,
+    "cameras": 4,
+    "lights": 9,
+    "uniqueVertices": 17756,
+    "uniqueTriangles": 26304,
+    "instanceTriangles": 253920
+  },
+  "bounds_world_m": {
+    "min": [
+      -6.199999809265137,
+      -4.699999809265137,
+      -0.28999999165534973
+    ],
+    "max": [
+      6.199999809265137,
+      4.699999809265137,
+      4.230000019073486
+    ],
+    "dimensions": [
+      12.399999618530273,
+      9.399999618530273,
+      4.520000010728836
+    ]
+  },
+  "native_independent_reopen": {
+    "day": true,
+    "night": true,
+    "source_hash_preserved": true,
+    "checks": [
+      "object names",
+      "mesh count",
+      "modifiers",
+      "material count",
+      "render settings",
+      "bounds"
+    ]
+  },
+  "glb_structure": {
+    "meshInstances": 1571,
+    "meshDefinitions": 82,
+    "materials": 17,
+    "images": 18,
+    "assignedMaterialNamesPreserved": true,
+    "resourcesEmbedded": true,
+    "sha256": "1d35c3e9d358ab3e35a2a7a9ce9119d17dda89d1c49c26f8a441d874a47f6cc3",
+    "limitation": "Structural checks do not prove renderer or arbitrary shader equivalence."
+  },
+  "glb_independent_import": {
+    "fresh_process": true,
+    "mesh_count": 1571,
+    "material_count": 17,
+    "bounds_m": {
+      "min": [
+        -6.199999809265137,
+        -4.699999809265137,
+        -0.28999999165534973
+      ],
+      "max": [
+        6.199999809265137,
+        4.699999809265137,
+        4.230000019073486
+      ],
+      "dimensions": [
+        12.399999618530273,
+        9.399999618530273,
+        4.520000010728836
+      ]
+    },
+    "native_reopen_passed": true
+  },
+  "revision": {
+    "forward": "day to night; cart +0.4m X",
+    "reverse": "night to day; cart -0.4m X",
+    "cart_objects_moved": 28,
+    "mesh_count_preserved": true,
+    "maximum_cart_return_error_m": 2.384185791015625e-07,
+    "all_light_colors_energy_and_diffuser_emission_restored_exactly": true,
+    "offset_guard": "non-finite and abs(offset)>1m rejected before saving"
+  },
+  "artifacts": {
+    "native_day": {
+      "local_run_reference": "000022-run_script/scene.blend",
+      "sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+      "bytes": 1807297,
+      "decompressed_private_path_scan": {
+        "/Users/": 0,
+        "/var/folders/": 0,
+        "StudioAgentWorkspace": 0
+      }
+    },
+    "native_night": {
+      "local_run_reference": "000024-run_script/scene.blend",
+      "sha256": "6e5fd370bd68ccae502988716ea823a4b52a7b68b1fa17853dce27993da7136a",
+      "bytes": 1807203,
+      "decompressed_private_path_scan": {
+        "/Users/": 0,
+        "/var/folders/": 0,
+        "StudioAgentWorkspace": 0
+      }
+    },
+    "full_glb": {
+      "local_run_reference": "000016-run_script/industrial-lab.glb",
+      "sha256": "1d35c3e9d358ab3e35a2a7a9ce9119d17dda89d1c49c26f8a441d874a47f6cc3",
+      "bytes": 2479564
+    },
+    "interchange_manifest": {
+      "local_run_reference": "000016-run_script/environment-manifest.json",
+      "sha256": "856ee52312b3d8b38424bf58f09be554ee10797229ce3415e8b6f543547208d4",
+      "bytes": 3099072
+    },
+    "raw_day_overview": {
+      "local_run_reference": "000012-run_script/view-overview-day.png",
+      "sha256": "ebabd89b614f3477b9f1a443edb05c3c4edb830d8afc3811c84af08652ccc8aa",
+      "bytes": 2125540,
+      "hash_scope": "raw native PNG before public metadata stripping; published PNG has a separate hash"
+    },
+    "raw_robot_close": {
+      "local_run_reference": "000012-run_script/view-robotdetail-day.png",
+      "sha256": "8ceca92bc48de0e794a3a42967bcf548322abaa81c359631fc52709c5eaa5cd1",
+      "bytes": 2026849,
+      "hash_scope": "raw native PNG before public metadata stripping; published PNG has a separate hash"
+    },
+    "raw_bench_close": {
+      "local_run_reference": "000012-run_script/view-benchdetail-day.png",
+      "sha256": "c1cd0aae74e8589e89bdc60ffb9eaf9fc5c152e3b9fb3800e3077b6fc96491c3",
+      "bytes": 1839577,
+      "hash_scope": "raw native PNG before public metadata stripping; published PNG has a separate hash"
+    },
+    "raw_night_overview": {
+      "local_run_reference": "000014-run_script/view-overview-night.png",
+      "sha256": "26535ea79f3c90b594ea6d6499c2b292a05abc2d501745bedfa7a6219840ebd0",
+      "bytes": 2137420,
+      "hash_scope": "raw native PNG before public metadata stripping; published PNG has a separate hash"
+    }
+  },
+  "failed_candidate": {
+    "issue": "Direct glTF exporter lost object-level material overrides with linked meshes. Only 9 of 17 materials appeared.",
+    "resolution": "Temporary evaluated geometry/material prototypes, full per-object assignment gate and fresh import passed. Rejected candidate is not the delivered GLB."
+  },
+  "limitations": [
+    "Visual environment, not certified architecture or electrical engineering.",
+    "Robot assembly is individually editable, not an IK controller or motion simulation.",
+    "Opaque tinted visualization windows.",
+    "No physical robot or real hardware fit test.",
+    "Cross-engine render fidelity and gameplay require target-host evidence.",
+    "Native images retain metadata; public copies must strip metadata while retaining pixel content."
+  ]
+}

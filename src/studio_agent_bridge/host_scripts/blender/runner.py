@@ -1,5 +1,6 @@
 """Executed only inside Blender. Read one JSON job and emit measured results."""
 
+import importlib.util
 import json
 import runpy
 import sys
@@ -9,10 +10,15 @@ from pathlib import Path
 import bpy
 from mathutils import Vector
 
+_environment_spec = importlib.util.spec_from_file_location(
+    "studio_environment_export", Path(__file__).with_name("environment_export.py")
+)
+environment = importlib.util.module_from_spec(_environment_spec)
+_environment_spec.loader.exec_module(environment)
 
-def asset_objects():
-    collection = bpy.data.collections.get("InspectionRover")
-    return list(collection.all_objects) if collection else list(bpy.context.scene.objects)
+
+def asset_objects(collection_name=None, include_presentation=False):
+    return environment.export_selection(bpy, collection_name, include_presentation)[0]
 
 
 def bounds(objects):
@@ -36,15 +42,19 @@ def bounds(objects):
     }
 
 
-def inspect_scene():
+def inspect_scene(collection_name=None, include_presentation=False):
     bpy.context.view_layer.update()
     objects = sorted(bpy.context.scene.objects, key=lambda obj: obj.name)
-    asset = asset_objects()
+    asset = asset_objects(collection_name, include_presentation)
+    instances = environment.mesh_instances(bpy, asset)
     meshes = [obj for obj in objects if obj.type == "MESH"]
     return {
         "object_count": len(objects),
         "mesh_count": len(meshes),
-        "asset_mesh_count": sum(obj.type == "MESH" for obj in asset),
+        "asset_mesh_count": len(instances),
+        "export_selection": environment.export_selection(
+            bpy, collection_name, include_presentation
+        )[1],
         "object_names": [obj.name for obj in objects],
         "modifier_count": sum(len(obj.modifiers) for obj in objects),
         "material_count": len(bpy.data.materials),
@@ -52,7 +62,7 @@ def inspect_scene():
         "polygons": sum(len(obj.data.polygons) for obj in meshes),
         "unit_system": bpy.context.scene.unit_settings.system,
         "unit_scale": bpy.context.scene.unit_settings.scale_length,
-        "asset_bounds_m": bounds(asset),
+        "asset_bounds_m": environment.measured_bounds(bpy, instances),
         "frame_range": [bpy.context.scene.frame_start, bpy.context.scene.frame_end],
         "animated_objects": [
             obj.name for obj in objects if obj.animation_data and obj.animation_data.action
@@ -92,50 +102,76 @@ def import_asset(path):
         raise ValueError("Unsupported asset format")
 
 
-def export_assets(directory, formats, stem):
-    bpy.ops.object.select_all(action="DESELECT")
-    for obj in asset_objects():
-        obj.select_set(True)
+def export_assets(directory, formats, stem, collection_name=None, include_presentation=False):
+    old_selection = list(bpy.context.selected_objects)
+    old_active = bpy.context.view_layer.objects.active
+    selected = asset_objects(collection_name, include_presentation)
+    if not any(obj.type == "MESH" or obj.instance_type == "COLLECTION" for obj in selected):
+        raise ValueError("Export selection contains no mesh geometry")
     outputs = []
-    if "glb" in formats:
-        path = directory / (stem + ".glb")
-        bpy.ops.export_scene.gltf(
-            filepath=str(path),
-            export_format="GLB",
-            use_selection=True,
-            export_apply=True,
-            export_animations=False,
-            export_yup=True,
-        )
-        outputs.append({"kind": "glb", "path": str(path)})
-    if "fbx" in formats:
-        path = directory / (stem + ".fbx")
-        bpy.ops.export_scene.fbx(
-            filepath=str(path),
-            use_selection=True,
-            object_types={"MESH", "EMPTY"},
-            use_mesh_modifiers=True,
-            mesh_smooth_type="FACE",
-            add_leaf_bones=False,
-            bake_anim=False,
-            axis_forward="-Z",
-            axis_up="Y",
-            apply_unit_scale=True,
-            apply_scale_options="FBX_SCALE_UNITS",
-            path_mode="AUTO",
-        )
-        outputs.append({"kind": "fbx", "path": str(path)})
+    try:
+        bpy.ops.object.select_all(action="DESELECT")
+        for obj in selected:
+            obj.select_set(True)
+        if "glb" in formats:
+            path = directory / (stem + ".glb")
+            checks = environment.export_scene_glb(bpy, path, selected, include_presentation)
+            check_path = directory / (stem + ".glb.checks.json")
+            check_path.write_text(json.dumps(checks, indent=2, allow_nan=False), encoding="utf-8")
+            outputs.append({"kind": "glb", "path": str(path)})
+            outputs.append({"kind": "glb-checks", "path": str(check_path)})
+        if "fbx" in formats:
+            path = directory / (stem + ".fbx")
+            bpy.ops.export_scene.fbx(
+                filepath=str(path),
+                use_selection=True,
+                object_types={"MESH", "EMPTY", "CAMERA", "LIGHT"}
+                if include_presentation
+                else {"MESH", "EMPTY"},
+                use_mesh_modifiers=True,
+                mesh_smooth_type="FACE",
+                add_leaf_bones=False,
+                bake_anim=False,
+                axis_forward="-Z",
+                axis_up="Y",
+                apply_unit_scale=True,
+                apply_scale_options="FBX_SCALE_UNITS",
+                path_mode="AUTO",
+                use_custom_props=True,
+            )
+            outputs.append({"kind": "fbx", "path": str(path)})
+    finally:
+        bpy.ops.object.select_all(action="DESELECT")
+        for obj in old_selection:
+            obj.select_set(True)
+        bpy.context.view_layer.objects.active = old_active
     return outputs
 
 
-def setup_render():
+def setup_render(settings=None):
+    settings = settings or {}
+    engine = settings.get("engine", "CYCLES")
+    resolution = settings.get("resolution", [1200, 900])
+    samples = settings.get("samples", 32)
+    if (
+        engine not in {"CYCLES", "BLENDER_EEVEE"}
+        or not isinstance(resolution, list)
+        or len(resolution) != 2
+        or any(type(v) is not int or not 64 <= v <= 3840 for v in resolution)
+        or resolution[0] * resolution[1] > 8294400
+        or type(samples) is not int
+        or not 1 <= samples <= 256
+    ):
+        raise ValueError(
+            "Invalid render settings: engine, 64–3840 dimensions (max 8.3 MP), samples 1–256"
+        )
     scene = bpy.context.scene
-    scene.render.engine = "CYCLES"
+    scene.render.engine = engine
     scene.cycles.device = "CPU"
-    scene.cycles.samples = 32
+    scene.cycles.samples = samples
     scene.cycles.use_denoising = True
-    scene.render.resolution_x = 1200
-    scene.render.resolution_y = 900
+    scene.render.resolution_x = resolution[0]
+    scene.render.resolution_y = resolution[1]
     scene.render.resolution_percentage = 100
     scene.render.image_settings.file_format = "PNG"
     scene.render.image_settings.color_mode = "RGBA"
@@ -154,6 +190,8 @@ def main(job):
         bpy.context.scene.unit_settings.system = "METRIC"
         bpy.context.scene.unit_settings.scale_length = 1.0
     outputs = []
+    collection_name = job.get("export_collection")
+    include_presentation = job.get("include_presentation", False)
     stem = "inspection_rover" if action == "create_demo" else "scene"
     if action == "create_demo":
         demo_path = Path(__file__).with_name("inspection_rover.py")
@@ -172,14 +210,32 @@ def main(job):
     elif action not in {"inspect", "export_asset", "render"}:
         raise ValueError("Unknown Blender operation")
     if job.get("render"):
-        setup_render()
+        setup_render(job.get("render_settings"))
         bpy.context.scene.render.filepath = str(directory / "preview.png")
     if action not in {"inspect", "verify_export"}:
         path = directory / (stem + ".blend")
         bpy.ops.wm.save_as_mainfile(filepath=str(path), compress=True, check_existing=False)
         outputs.append({"kind": "blend", "path": str(path)})
     if action in {"create_demo", "export_asset"}:
-        outputs.extend(export_assets(directory, job.get("export_formats", ["glb", "fbx"]), stem))
+        outputs.extend(
+            export_assets(
+                directory,
+                job.get("export_formats", ["glb", "fbx"]),
+                stem,
+                collection_name,
+                include_presentation,
+            )
+        )
+        if job.get("environment_manifest", action == "export_asset"):
+            manifest, environment_outputs = environment.export_environment(
+                directory,
+                collection_name=collection_name,
+                include_presentation=include_presentation,
+                split_assets=job.get("split_assets", False),
+                max_assets=job.get("max_assets", 256),
+                max_objects=job.get("max_objects", 5000),
+            )
+            outputs.extend(environment_outputs)
     if job.get("render"):
         path = directory / "preview.png"
         bpy.ops.render.render(write_still=True)
@@ -187,7 +243,7 @@ def main(job):
     return {
         "status": "ok",
         "blender_version": bpy.app.version_string,
-        "scene": inspect_scene(),
+        "scene": inspect_scene(collection_name, include_presentation),
         "outputs": outputs,
     }
 

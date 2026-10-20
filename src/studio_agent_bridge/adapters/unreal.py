@@ -1,4 +1,4 @@
-"""Launch Unreal's native Python commandlet in an owned, isolated project.
+"""Launch native Unreal Python automation in an owned, isolated project.
 
 The adapter is an automation boundary, not a Python security sandbox. Trusted
 ``run_script`` input has the editor process's filesystem and network authority.
@@ -9,12 +9,15 @@ from __future__ import annotations
 import contextlib
 import hashlib
 import json
+import math
 import os
 import re
 import signal
 import subprocess
 import time
 from pathlib import Path
+
+from ..host_scripts.unreal.environment_contract import guard_map_creation, validate_manifest
 
 ACTIONS = {"create_project", "import_asset", "build_scene", "inspect", "run_script"}
 PLUGIN_NAMES = ["PythonScriptPlugin", "EditorScriptingUtilities", "SequencerScripting"]
@@ -68,7 +71,7 @@ def probe(config: dict) -> dict:
         "executable": str(executable) if executable else None,
         "version": _version(executable),
         "actions": sorted(ACTIONS),
-        "summary": "Native executable detected; execution still requires a successful project commandlet."
+        "summary": "Native executable detected; execution still requires a successful editor run."
         if executable
         else "UnrealEditor-Cmd was not found.",
         "limitations": [
@@ -225,6 +228,13 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
                 "Trusted script execution is disabled; explicitly enable allow_scripts"
             )
         parameters = dict(request.get("parameters", {}))
+        rendering = parameters.get("rendering", "structure")
+        if rendering not in {"structure", "gpu"}:
+            raise ValueError("rendering must be structure or gpu")
+        if rendering == "gpu":
+            limitations[1] = (
+                "GPU rendering was requested; a saved image must be inspected before claiming appearance."
+            )
         run_dir = _contained(workspace, run_dir)
         run_dir.mkdir(parents=True, exist_ok=True)
         project = _project(workspace, parameters, config, action == "create_project")
@@ -238,7 +248,43 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
                 "observations": {"probe": probe(config)},
                 "limitations": limitations,
             }
-        if action == "import_asset":
+        if parameters.get("environment_manifest"):
+            source_manifest = _contained(workspace, parameters["environment_manifest"])
+            validate_manifest(source_manifest)
+            parameters["environment_manifest"] = str(source_manifest)
+            parameters["destination"] = _game_path(
+                parameters.get("destination", "/Game/StudioAgentBridge/Environments/Environment")
+            )
+            if action not in {"import_asset", "build_scene", "inspect"}:
+                raise ValueError(
+                    "Environment manifests apply to import_asset, build_scene or inspect"
+                )
+        if parameters.get("render_output"):
+            output = _contained(workspace, parameters["render_output"])
+            if output.suffix.lower() != ".png" or output.exists():
+                raise ValueError("render_output must be a new workspace PNG path")
+            if rendering != "gpu" or not parameters.get("environment_manifest"):
+                raise ValueError("Environment image capture requires rendering=gpu and a manifest")
+            size = parameters.get("render_size", [1280, 720])
+            if (
+                not isinstance(size, list)
+                or len(size) != 2
+                or any(
+                    not isinstance(n, int) or isinstance(n, bool) or not 64 <= n <= 2048
+                    for n in size
+                )
+            ):
+                raise ValueError("render_size must contain two integers from 64 to 2048")
+            parameters["render_output"] = str(output)
+            exposure = parameters.get("render_exposure", -7)
+            if (
+                not isinstance(exposure, (int, float))
+                or isinstance(exposure, bool)
+                or not math.isfinite(exposure)
+                or not -16 <= exposure <= 16
+            ):
+                raise ValueError("render_exposure must be finite EV compensation from -16 to 16")
+        if action == "import_asset" and not parameters.get("environment_manifest"):
             source = _contained(workspace, parameters["source"])
             if source.suffix.lower() != ".fbx" or not source.is_file():
                 raise ValueError("source must identify an existing workspace FBX file")
@@ -256,6 +302,12 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
             parameters["level_path"] = _game_reference(parameters["level_path"])
         if parameters.get("sequence_path"):
             parameters["sequence_path"] = _game_reference(parameters["sequence_path"])
+        if action == "build_scene" and parameters.get("environment_manifest"):
+            level = parameters.get(
+                "level_path", parameters["destination"] + "/Maps/" + parameters["name"]
+            )
+            native_map = project.parent / "Content" / (level.removeprefix("/Game/") + ".umap")
+            guard_map_creation(parameters["destination"], level, native_map.exists())
         if action == "run_script":
             script = _contained(workspace, parameters["script_path"])
             if script.suffix != ".py" or not script.is_file():
@@ -280,19 +332,35 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
             "response": str(response),
             "project": str(project),
             "workspace": str(workspace),
+            "editor_session": bool(parameters.get("environment_manifest")),
         }
         request_file = run_dir / "unreal-request.json"
         request_file.write_text(json.dumps(payload, indent=2) + "\n")
         host_script = (
             Path(__file__).resolve().parents[1] / "host_scripts" / "unreal" / "dispatch.py"
         )
+        editor_binary = executable.parent / "UnrealEditor.app/Contents/MacOS/UnrealEditor"
+        launch_executable = (
+            editor_binary if payload["editor_session"] and editor_binary.is_file() else executable
+        )
         command = [
-            str(executable),
+            str(launch_executable),
             str(project),
-            "-run=pythonscript",
-            f'-script="{host_script}"',
+            *(
+                [f'-ExecutePythonScript="{host_script}"', "-windowed", "-ResX=1280", "-ResY=720"]
+                if payload["editor_session"]
+                else ["-run=pythonscript", f'-script="{host_script}"']
+            ),
             "-unattended",
-            "-nullrhi",
+            *(
+                ["-nullrhi"]
+                if rendering == "structure"
+                else (
+                    []
+                    if payload["editor_session"]
+                    else ["-AllowCommandletRendering", "-RenderOffscreen"]
+                )
+            ),
             "-nosplash",
             "-nop4",
             "-nosound",
@@ -317,6 +385,7 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
             "timed_out": timed_out,
             "elapsed_seconds": round(time.monotonic() - started, 3),
             "engine": _version(executable),
+            "rendering_mode": rendering,
             "log_snapshot": "Captured when the editor process exited; later helper-process output remains in the unmanifested unreal-process.log.",
         }
         if not response.is_file():

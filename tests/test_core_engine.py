@@ -122,6 +122,29 @@ def test_declared_path_escape_rejected_before_dispatch(setup, path):
     assert adapter.calls == 0
 
 
+def test_environment_path_is_host_specific_and_rejected_before_dispatch(tmp_path):
+    adapter = FixtureAdapter()
+    engine = Engine(
+        tmp_path / "workspace",
+        {},
+        adapters={"unreal": adapter, "blender": adapter},
+        lock_dir=tmp_path / "locks",
+    )
+    unreal_job = engine.create_job("environment", "unreal", "Test environment manifest boundaries")
+    for value in ("../private.json", "/tmp/private.json", True):
+        with pytest.raises(WorkspaceError):
+            engine.execute_action(
+                unreal_job["id"], "build_scene", {"environment_manifest": value}, 1
+            )
+    assert adapter.calls == 0
+    blender_job = engine.create_job("export", "blender", "Test the Blender export toggle")
+    result = engine.execute_action(
+        blender_job["id"], "export_asset", {"environment_manifest": True}, 1
+    )
+    assert result["status"] == "verified"
+    assert adapter.calls == 1
+
+
 def test_symlink_input_and_symlink_parent_rejected(setup, tmp_path):
     engine, job, adapter = setup
     outside = tmp_path / "outside"

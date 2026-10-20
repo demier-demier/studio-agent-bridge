@@ -15,6 +15,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from studio_agent_bridge.host_scripts.blender.environment_export import validate_manifest
+
 ACTIONS = frozenset(
     {"create_demo", "inspect", "import_asset", "export_asset", "render", "run_script"}
 )
@@ -85,6 +87,63 @@ def _artifact(workspace: Path, path: Path, kind: str) -> dict:
         "kind": kind,
         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
         "bytes": path.stat().st_size,
+    }
+
+
+def _environment_evidence(run_dir: Path, manifest_path: Path, split_assets: bool) -> dict:
+    """Check the native host's interchange files before trusting its manifest."""
+    manifest_path = manifest_path.resolve()
+    if (
+        not manifest_path.is_relative_to(run_dir)
+        or not manifest_path.is_file()
+        or manifest_path.stat().st_size > 16_000_000
+    ):
+        raise ValueError("Environment manifest is missing, outside its run, or too large.")
+    manifest = validate_manifest(json.loads(manifest_path.read_text(encoding="utf-8")))
+    referenced_files = {}
+
+    def verify(relative, expected):
+        if not isinstance(relative, str) or Path(relative).is_absolute():
+            raise ValueError("Environment file path must be relative.")
+        path = (run_dir / relative).resolve()
+        if not path.is_relative_to(run_dir) or not path.is_file():
+            raise ValueError("Environment reference is missing or escapes its run directory.")
+        if path.stat().st_size > 128_000_000:
+            raise ValueError("Environment reference exceeds the 128 MB bound.")
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if expected != actual:
+            raise ValueError("Environment file hash mismatch: " + relative)
+        referenced_files[relative] = actual
+
+    material_ids = {material["id"] for material in manifest["materials"]}
+    for asset in manifest["assets"]:
+        if any(slot not in material_ids | {None} for slot in asset["materialSlots"]):
+            raise ValueError("Environment asset references an unknown material.")
+        if asset.get("exportFile"):
+            verify(asset["exportFile"], asset.get("fileSha256"))
+        elif split_assets:
+            raise ValueError("Requested split mesh asset is missing.")
+    for material in manifest["materials"]:
+        for texture in material.get("textures", {}).values():
+            verify(texture["path"], texture["sha256"])
+    counts = manifest["totals"]
+    if counts["uniqueAssets"] != len(manifest["assets"]) or counts["meshInstances"] != len(
+        manifest["objects"]
+    ):
+        raise ValueError("Environment manifest totals disagree with records.")
+    return {
+        "schema": manifest["schemaVersion"],
+        "totals": counts,
+        "bounds_m": manifest["boundsWorld"],
+        "referenced_file_hashes": referenced_files,
+        "limitations": manifest["limitations"],
+        "checks": {
+            "manifest_structure_valid": True,
+            "referenced_files_match_hashes": True,
+            "split_assets_complete": bool(
+                split_assets and all(a.get("exportFile") for a in manifest["assets"])
+            ),
+        },
     }
 
 
@@ -199,6 +258,54 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
         ):
             raise ValueError("export_formats must contain glb and/or fbx.")
         job["render"] = parameters.get("render", action in {"create_demo", "render"}) is True
+        collection = parameters.get("export_collection")
+        if collection is not None and (
+            not isinstance(collection, str)
+            or not collection.strip()
+            or len(collection) > 128
+            or any(ord(c) < 32 for c in collection)
+        ):
+            raise ValueError(
+                "export_collection must be a nonempty collection name up to 128 characters."
+            )
+        job["export_collection"] = collection
+        for field, default in (
+            ("include_presentation", False),
+            ("environment_manifest", action == "export_asset"),
+            ("split_assets", False),
+        ):
+            value = parameters.get(field, default)
+            if type(value) is not bool:
+                raise ValueError(f"{field} must be a boolean.")
+            job[field] = value
+        if job["split_assets"] and not job["environment_manifest"]:
+            raise ValueError("split_assets requires environment_manifest=true.")
+        for field, maximum in (("max_assets", 256), ("max_objects", 5000)):
+            value = parameters.get(field, maximum)
+            if type(value) is not int or not 1 <= value <= maximum:
+                raise ValueError(f"{field} must be an integer from 1 to {maximum}.")
+            job[field] = value
+        render_settings = parameters.get("render_settings", {})
+        if not isinstance(render_settings, dict) or set(render_settings) - {
+            "engine",
+            "resolution",
+            "samples",
+        }:
+            raise ValueError("render_settings supports engine, resolution and samples only.")
+        engine = render_settings.get("engine", "CYCLES")
+        resolution = render_settings.get("resolution", [1200, 900])
+        samples = render_settings.get("samples", 32)
+        if (
+            engine not in {"CYCLES", "BLENDER_EEVEE"}
+            or not isinstance(resolution, list)
+            or len(resolution) != 2
+            or any(type(v) is not int or not 64 <= v <= 3840 for v in resolution)
+            or resolution[0] * resolution[1] > 8294400
+            or type(samples) is not int
+            or not 1 <= samples <= 256
+        ):
+            raise ValueError("Invalid bounded render_settings.")
+        job["render_settings"] = render_settings
         job["script_parameters"] = parameters.get("script_parameters", {})
         if not isinstance(job["script_parameters"], dict):
             raise ValueError("script_parameters must be an object.")
@@ -216,7 +323,13 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
         if native:
             reopened = _launch(
                 executable,
-                {"action": "inspect", "input_blend": native["path"], "output_dir": str(run_dir)},
+                {
+                    "action": "inspect",
+                    "input_blend": native["path"],
+                    "output_dir": str(run_dir),
+                    "export_collection": collection,
+                    "include_presentation": job["include_presentation"],
+                },
                 run_dir,
                 "reopen",
                 timeout,
@@ -281,6 +394,15 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
             if not path.is_relative_to(run_dir):
                 raise RuntimeError("Host reported an output outside its run directory.")
             artifacts.append(_artifact(workspace, path, item["kind"]))
+            if item["kind"] == "environment-manifest":
+                evidence = _environment_evidence(run_dir, path, job["split_assets"])
+                verification["environment"] = evidence
+                limitations.extend(evidence["limitations"])
+                verification["checks"].extend(
+                    {"name": "environment_" + name, "passed": passed}
+                    for name, passed in evidence["checks"].items()
+                    if name != "split_assets_complete" or job["split_assets"]
+                )
         # The inspect action verifies a loaded native file without rewriting it.
         if action == "inspect":
             verification["checks"].append(

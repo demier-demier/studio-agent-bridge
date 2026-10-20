@@ -1,0 +1,28 @@
+{
+  "title": "Industrial AI Robotics Lab",
+  "authorship": "Original procedural geometry, layout and PBR maps",
+  "third_party_assets": [],
+  "unit": "metre",
+  "interior_envelope_m": [12, 9, 4.2],
+  "asset_collection": "StudioEnvironment",
+  "presentation_collection": "PresentationRig",
+  "editable_sources_collection": "SourceGeometry",
+  "categories": ["architecture", "ceiling", "compute", "electronics", "fasteners", "furniture", "lighting_fixture", "props", "robotics", "signage", "utilities"],
+  "acceptance": [
+    "Complete shell with entrance and removable ceiling",
+    "Equipped electronics bench, three compute racks and robot workcell",
+    "Original packed PBR maps and portable relative paths",
+    "Native independent reopen with measured mesh count and bounds",
+    "Three inspected detail/wide views and a distinct night revision",
+    "Finite cart translation measured before and after",
+    "Native source preservation and reversible supported presets",
+    "Measured static Unreal handoff verified by the target host"
+  ],
+  "limitations": [
+    "Visualization only; no building or industrial safety certification",
+    "Robot visual assembly is not an IK controller or simulation",
+    "Opaque visualization window panels",
+    "Mesh interchange does not retain native text, curves or modifiers",
+    "Blender verification does not establish Unreal render or gameplay behavior"
+  ]
+}

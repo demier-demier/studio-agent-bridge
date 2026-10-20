@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A complete original robotics laboratory: chat-directed Blender authoring, detailed native geometry and a measured Unreal environment handoff.">
+  <meta name="theme-color" content="#101b20">
+  <title>Studio Agent Bridge · A complete environment</title>
+</head>
+<body>
+  <header class="wrap header"><a class="brand" href="../">STUDIO <span>AGENT BRIDGE</span></a><nav><a href="../">CAD case</a><a href="#evidence">Evidence</a><a href="https://github.com/demier-demier/studio-agent-bridge/tree/main/examples/environments/industrial_lab" target="_blank" rel="noopener">Source ↗</a><a href="/">AI Lab</a></nav></header>
+  <main class="wrap">
+    <section class="intro"><p class="eyebrow">ENVIRONMENT / 02 · BLENDER → UNREAL</p><h1>A complete space.<br><em>Directed through chat.</em></h1><p class="lede">Architecture, a robotic workcell, electronics, compute racks and utilities. An original editable laboratory built with native tools, then transferred as an environment.</p></section>
+    <section class="gallery" aria-labelledby="gallery-title">
+      <div class="toolbar"><h2 id="gallery-title">Inside the laboratory</h2><span id="host-badge">Native renders</span></div>
+      <div class="viewport"><img id="scene-image" alt="Detailed original robotics laboratory" /><model-viewer id="scene-viewer" hidden camera-controls touch-action="pan-y" environment-image="neutral" interaction-prompt="none" shadow-intensity="0" min-camera-orbit="auto 0.01deg 0.05m" max-camera-orbit="auto 179.99deg 50m" min-field-of-view="20deg" max-field-of-view="90deg" field-of-view="65deg" alt="Actual exported laboratory mesh"></model-viewer><div id="load-state" class="load-state" role="status">Loading native scene evidence…</div></div>
+      <div class="gallery-bottom"><p id="view-caption">Measured native outputs, with source files and reproducible scripts.</p><button id="mesh-mode" disabled>Explore 3D mesh</button></div>
+      <div class="view-list" id="view-list" role="group" aria-label="Native scene views"></div>
+    </section>
+    <section class="stats" aria-label="Measured scene data" id="scene-stats"></section>
+    <section class="story"><div><p class="eyebrow">BUILT AS A PLACE</p><h2>Detail beyond<br>the hero object.</h2></div><div class="story-copy"><p>The environment includes structural panels and openings, ceiling services, an articulated robotic assembly, instrumented work surfaces, server hardware, wiring and original signage.</p><p>Repeated elements share meshes and materials. The transfer records local mesh assets and instance transforms, rather than flattening the whole room into one anonymous object.</p><p>Native Blender files retain editable objects. Unreal reconstructs a saved level with measured placement, PBR materials, lights and cameras. The images above identify which native renderer produced each view.</p></div></section>
+    <section class="chat-section" id="workflow"><p class="eyebrow">THE WORKFLOW IS A CONVERSATION</p><h2>Describe. Inspect. Revise.</h2><div class="chat-example"><p class="chat-label">INITIAL BRIEF</p><blockquote id="chat-brief">Create a detailed robotics laboratory in Blender, with complete architecture, an equipped workcell, electronics benches and server racks. Use original PBR materials, three interior camera views and a close-up. Inspect the renders, transfer the full environment to Unreal and reopen both native files.</blockquote><button id="copy-brief">Copy chat brief</button><span id="copy-status" role="status"></span></div><div class="revision"><span>FOLLOW-UP</span><p>“Keep the objects and layout. Make an evening lighting revision and move the camera closer to the robot. Preserve the daytime file.”</p></div><p class="boundary-note">Use these prompts in a capable local MCP client connected to Studio Agent Bridge. This browser displays exported results; it does not control your desktop or run a hosted modeling agent.</p></section>
+    <section class="evidence-section" id="evidence"><div><p class="eyebrow">CHECK THE RESULT</p><h2>Native files.<br>Recorded evidence.</h2><p>Integrity checks and visual review answer different questions. Inspect the original measurements and reported conversion limits.</p><div class="downloads" id="downloads"></div></div><div><h3>Observed in this case</h3><ul id="observed-checks"></ul><h3>Transfer limits</h3><ul id="case-limits"></ul></div></section>
+    <section class="original-note"><p>Original procedural portfolio scene and original texture assets. No employer assets, client models or private project files. This is a visualization environment; robot control, engineering simulation and packaged gameplay are separate work.</p></section>
+  </main>
+  <footer class="wrap footer"><span>Bernardo Demier · Studio Agent Bridge</span><a href="https://github.com/demier-demier/studio-agent-bridge" target="_blank" rel="noopener">Code &amp; reproduction ↗</a></footer>
+  <script type="module" src="/src/environment.js"></script>
+</body></html>

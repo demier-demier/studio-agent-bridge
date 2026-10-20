@@ -41,7 +41,10 @@ PATH_KEYS = {
     "source",
     "input_path",
     "output_path",
+    "render_output",
 }
+# Blender's environment_manifest is an export toggle; Unreal's is an input filename.
+HOST_PATH_KEYS = {"unreal": {"environment_manifest"}}
 PATH_LIST_KEYS = {"expected_artifacts"}
 
 

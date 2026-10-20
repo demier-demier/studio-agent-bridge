@@ -14,7 +14,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from .models import ACTIONS, PATH_KEYS, PATH_LIST_KEYS, ActionRequest, ActionResult, plan_workflow
+from .models import (
+    ACTIONS,
+    HOST_PATH_KEYS,
+    PATH_KEYS,
+    PATH_LIST_KEYS,
+    ActionRequest,
+    ActionResult,
+    plan_workflow,
+)
 from .workspace import Workspace, WorkspaceError, canonical, file_digest, host_lock
 
 _STDOUT_LOCK = threading.Lock()
@@ -283,7 +291,7 @@ class Engine:
                 "Trusted Python scripts are disabled. Start the server with STUDIO_ALLOW_SCRIPTS=1 only for trusted clients."
             )
         for key, value in parameters.items():
-            if key in PATH_KEYS:
+            if key in PATH_KEYS or key in HOST_PATH_KEYS.get(host, set()):
                 self.workspace.resolve(value)
             elif key in PATH_LIST_KEYS:
                 if not isinstance(value, list) or len(value) > 2000:

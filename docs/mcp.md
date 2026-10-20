@@ -43,13 +43,18 @@ The server does not change client settings, enable application plugins, obtain c
 |---|---|
 | `studio_status` | Probe installed hosts, list actions, report script privilege and unresolved native actions. |
 | `studio_plan_workflow` | Return planner, native modeler, geometry QA, interop and reviewer responsibilities for one to three hosts. |
+| `studio_plan_environment` | Validate an environment brief and return high-detail construction, visual review, transfer and revision requirements. This is a plan, not a generated scene. |
 | `studio_create_job` | Persist one single-host job with a goal and an initial revision. |
 | `studio_execute_action` | Dispatch one supported action with parameters and an expected job revision. |
 | `studio_inspect_job` | Read current state and check event/snapshot consistency. |
 | `studio_list_artifacts` | List artifacts from completed actions and recheck their current sizes and hashes. |
 | `studio_reconcile_job` | Record a trusted operator's observed outcome after an uncertain interruption. |
 
-Prompts: `studio_workflow` and `studio_review`. Resources: `studio://roles`, `studio://capabilities`, and `studio://jobs/{job_id}`. Standalone role prompts are in `prompts/`.
+Prompts: `studio_workflow`, `studio_environment` and `studio_review`. Resources: `studio://roles`, `studio://capabilities`, and `studio://jobs/{job_id}`. Standalone role prompts are in `prompts/`.
+
+The environment planner accepts a structured `brief` containing `goal`, optional `zones`, `style`, `size_m`, `detail` (`high` or `hero`), `target`, `seed`, `triangle_budget`, `texture_resolution` and `reference_policy`. Defaults produce a high-detail Blender → Unreal plan with original assets and a bounded 2 million triangle / 2048 texture budget. Budgets are ceilings, not quality scores. No native application is launched by planning. Use `environment-plan --brief '{"goal":"A fully equipped robotics laboratory"}'` from the CLI.
+
+After upgrading a running server, reconnect the MCP client to discover new tools and prompts. A fresh CLI process loads the current implementation immediately; existing native `run_script` operations remain usable for clients with an older tool list.
 
 One job is bound to one host. For a cross-application workflow, the client creates one job per host and passes a workspace-relative exported artifact to the next. The plan names required handoff evidence: content hash, units, axis convention, target measurements and known semantic losses. A format conversion does not preserve a native CAD feature timeline automatically.
 

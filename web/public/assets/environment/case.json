@@ -1,0 +1,309 @@
+{
+  "views": [
+    {
+      "id": "overview",
+      "label": "Interior overview",
+      "host": "Blender \u00b7 day",
+      "caption": "Blender Cycles \u00b7 complete architecture, robotic workcell, compute racks and practical lighting.",
+      "file": "overview.png",
+      "camera": {
+        "matrixWorld": [
+          [
+            0.6481962203979492,
+            -0.1016329824924469,
+            0.7546604871749878,
+            5.349999904632568
+          ],
+          [
+            0.7614733576774597,
+            0.0865139439702034,
+            -0.6423968076705933,
+            -3.950000047683716
+          ],
+          [
+            4.8810136377142044e-08,
+            0.9910529851913452,
+            0.13346882164478302,
+            2.6500000953674316
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "translationMeters": [
+          5.349999904632568,
+          -3.950000047683716,
+          2.6500000953674316
+        ],
+        "rotationQuaternionWxyz": [
+          0.6834067106246948,
+          0.597539484500885,
+          0.2760656476020813,
+          0.3157367408275604
+        ],
+        "scale": [
+          1.0,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "id": "robot",
+      "label": "Robotics detail",
+      "host": "Blender \u00b7 day",
+      "caption": "Blender Cycles \u00b7 articulated visual assembly with fasteners, cable guides, gripper and optical sensor.",
+      "file": "robot.png",
+      "camera": {
+        "matrixWorld": [
+          [
+            0.7795088887214661,
+            -0.1165122464299202,
+            0.6154597997665405,
+            2.0999999046325684
+          ],
+          [
+            0.6263911724090576,
+            0.1449929028749466,
+            -0.7659054398536682,
+            -2.549999952316284
+          ],
+          [
+            6.195024582211772e-08,
+            0.982548713684082,
+            0.18600550293922424,
+            2.299999952316284
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "translationMeters": [
+          2.0999999046325684,
+          -2.549999952316284,
+          2.299999952316284
+        ],
+        "rotationQuaternionWxyz": [
+          0.7263792753219604,
+          0.6017704606056213,
+          0.21182452142238617,
+          0.2556871473789215
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          0.9999999403953552
+        ]
+      }
+    },
+    {
+      "id": "bench",
+      "label": "Electronics bench",
+      "host": "Blender \u00b7 day",
+      "caption": "Blender Cycles \u00b7 instrumented workbench with individual keys, controls, connectors, wiring and tools.",
+      "file": "bench.png",
+      "camera": {
+        "matrixWorld": [
+          [
+            0.6246951222419739,
+            -0.12049072980880737,
+            0.7715166807174683,
+            -1.2000000476837158
+          ],
+          [
+            0.7808687686920166,
+            0.09639247506856918,
+            -0.6172134876251221,
+            1.4199999570846558
+          ],
+          [
+            1.0146827378321177e-07,
+            0.9880235195159912,
+            0.15430335700511932,
+            1.850000023841858
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "translationMeters": [
+          -1.2000000476837158,
+          1.4199999570846558,
+          1.850000023841858
+        ],
+        "rotationQuaternionWxyz": [
+          0.6847245693206787,
+          0.5860885977745056,
+          0.2816886603832245,
+          0.32909563183784485
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "id": "night",
+      "label": "Evening revision",
+      "host": "Blender \u00b7 night",
+      "caption": "Blender Cycles \u00b7 a separate evening lighting revision with the diagnostic cart moved 0.4 m. The daytime baseline is preserved.",
+      "file": "night.png",
+      "camera": {
+        "matrixWorld": [
+          [
+            0.6481962203979492,
+            -0.1016329824924469,
+            0.7546604871749878,
+            5.349999904632568
+          ],
+          [
+            0.7614733576774597,
+            0.0865139439702034,
+            -0.6423968076705933,
+            -3.950000047683716
+          ],
+          [
+            4.8810136377142044e-08,
+            0.9910529851913452,
+            0.13346882164478302,
+            2.6500000953674316
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "translationMeters": [
+          5.349999904632568,
+          -3.950000047683716,
+          2.6500000953674316
+        ],
+        "rotationQuaternionWxyz": [
+          0.6834067106246948,
+          0.597539484500885,
+          0.2760656476020813,
+          0.3157367408275604
+        ],
+        "scale": [
+          1.0,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "id": "unreal",
+      "label": "Inside Unreal",
+      "host": "Unreal \u00b7 GPU",
+      "caption": "Unreal Engine 5.7.4 \u00b7 actual 1920 \u00d7 1080 GPU capture after reopening the final saved level. Target-specific exposure and shadows.",
+      "file": "unreal.png",
+      "camera": {
+        "matrixWorld": [
+          [
+            0.6481962203979492,
+            -0.1016329824924469,
+            0.7546604871749878,
+            5.349999904632568
+          ],
+          [
+            0.7614733576774597,
+            0.0865139439702034,
+            -0.6423968076705933,
+            -3.950000047683716
+          ],
+          [
+            4.8810136377142044e-08,
+            0.9910529851913452,
+            0.13346882164478302,
+            2.6500000953674316
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "translationMeters": [
+          5.349999904632568,
+          -3.950000047683716,
+          2.6500000953674316
+        ],
+        "rotationQuaternionWxyz": [
+          0.6834067106246948,
+          0.597539484500885,
+          0.2760656476020813,
+          0.3157367408275604
+        ],
+        "scale": [
+          1.0,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    }
+  ],
+  "mesh": "industrial-lab.glb",
+  "stats": [
+    {
+      "value": "1,571",
+      "label": "placed mesh instances"
+    },
+    {
+      "value": "84",
+      "label": "shared evaluated mesh assets"
+    },
+    {
+      "value": "17",
+      "label": "PBR materials"
+    },
+    {
+      "value": "253,920",
+      "label": "evaluated scene triangles"
+    }
+  ],
+  "observed": [
+    "Both portable Blender scenes independently reopened with 1,571 editable mesh objects and 18 packed textures.",
+    "The corrected GLB was reimported in a fresh Blender process: mesh count, 17 materials and world bounds preserved.",
+    "Per-object material assignments checked in the GLB; all image and buffer resources embedded.",
+    "Night lighting and a 0.4 m cart movement saved as a separate revision; the return to daytime restored all lights and cart placement.",
+    "Unreal reopened the saved level in a fresh process: 1,571 mesh actors, 84 shared assets, 17 materials, nine lights and four cameras verified. The GPU capture was visually reviewed."
+  ],
+  "limitations": [
+    "The browser shows an evaluated mesh; Blender modifiers and source curves remain in the native files.",
+    "Renderer exposure and light intensity require target-specific review; PBR transfer is not pixel equivalence.",
+    "This case does not include robot simulation, navigation baking or packaged gameplay.",
+    "Unreal removes degenerate triangles during FBX import: 253,404 placed triangles measured in the target versus 253,920 in the source. Both counts are recorded."
+  ],
+  "downloads": [
+    {
+      "file": "industrial-lab-native.zip",
+      "label": "Native scenes, transfer bundle & scripts"
+    },
+    {
+      "file": "industrial-lab.glb",
+      "label": "Actual exported GLB"
+    },
+    {
+      "file": "evidence.json",
+      "label": "Recorded native evidence"
+    },
+    {
+      "file": "environment-manifest.json",
+      "label": "Environment scene manifest"
+    }
+  ]
+}

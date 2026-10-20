@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 from .engine import Engine, load_config
+from .environment import plan_environment
 from .models import ACTIONS, plan_workflow
 
 
@@ -29,6 +30,8 @@ def parser() -> argparse.ArgumentParser:
     plan = commands.add_parser("plan")
     plan.add_argument("--hosts", nargs="+", choices=list(ACTIONS), required=True)
     plan.add_argument("--goal", required=True)
+    environment = commands.add_parser("environment-plan")
+    environment.add_argument("--brief", required=True, help="JSON environment brief with a goal")
     jobs = commands.add_parser("job").add_subparsers(dest="job_command", required=True)
     create = jobs.add_parser("create")
     create.add_argument("--name", required=True)
@@ -67,6 +70,8 @@ def main(argv: list[str] | None = None) -> int:
             result = engine.status()
         elif args.command == "plan":
             result = plan_workflow(args.goal, args.hosts)
+        elif args.command == "environment-plan":
+            result = plan_environment(json.loads(args.brief))
         elif args.command == "run":
             parameters = json.loads(args.parameters)
             if not isinstance(parameters, dict):

@@ -5,6 +5,7 @@ import math
 import os
 import re
 import runpy
+import sys
 import traceback
 from pathlib import Path
 
@@ -410,7 +411,25 @@ def main():
     parameters = request["parameters"]
     result = {"schema": 1, "success": False, "action": action}
     try:
-        if action == "create_project":
+        if parameters.get("environment_manifest") and action in {
+            "build_scene",
+            "import_asset",
+            "inspect",
+        }:
+            sys.path.insert(0, str(Path(__file__).parent))
+            import environment
+
+            if request.get("editor_session") and parameters.get("render_output"):
+                parameters["_defer_capture"] = True
+            result.update(
+                environment.run(
+                    project,
+                    parameters,
+                    inspect_only=action == "inspect",
+                    import_only=action == "import_asset",
+                )
+            )
+        elif action == "create_project":
             result.update(create_project(project))
         elif action == "import_asset":
             result.update(import_asset(project, parameters))
@@ -449,7 +468,44 @@ def main():
                 "traceback": traceback.format_exc(),
             }
         )
+    if result["success"] and parameters.get("_defer_capture"):
+        # Full editor ticks are required for a populated scene/render state.
+        # A commandlet can export a valid but black PNG even with Metal loaded.
+        try:
+            unreal.AutomationLibrary.finish_loading_before_screenshot()
+            unreal.EditorPythonScripting.set_keep_python_script_alive(True)
+            world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
+            prepared_capture = environment.prepare_capture(world, parameters)
+        except Exception as error:
+            result.update(success=False, summary=str(error), traceback=traceback.format_exc())
+            response.write_text(json.dumps(result, indent=2) + "\n")
+            unreal.EditorPythonScripting.set_keep_python_script_alive(False)
+            return
+        pending = {"frames": 0, "handle": None}
+
+        def capture_after_frames(delta_seconds):
+            pending["frames"] += 1
+            if pending["frames"] < 120:
+                return
+            unreal.unregister_slate_post_tick_callback(pending["handle"])
+            try:
+                world = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_editor_world()
+                result["verification"]["render"] = environment.capture(
+                    world, parameters, prepared_capture
+                )
+                result["verification"]["render"]["warmupFrames"] = pending["frames"]
+                result["files"].append(native_file(Path(parameters["render_output"]), "render"))
+            except Exception as error:
+                result.update(success=False, summary=str(error), traceback=traceback.format_exc())
+            response.write_text(json.dumps(result, indent=2) + "\n")
+            unreal.EditorPythonScripting.set_keep_python_script_alive(False)
+
+        pending["handle"] = unreal.register_slate_post_tick_callback(capture_after_frames)
+        return
     response.write_text(json.dumps(result, indent=2) + "\n")
+    if request.get("editor_session"):
+        unreal.EditorPythonScripting.set_keep_python_script_alive(False)
+        return
     if not result["success"]:
         raise RuntimeError(result["summary"])
 
