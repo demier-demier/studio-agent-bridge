@@ -34,6 +34,14 @@ Unreal independently reopened the final saved level with **1,571 mesh actors, 84
 
 The case exposed and fixed a real shared-mesh export failure: the initial GLB silently lost materials. The exporter now uses temporary evaluated prototypes and checks every object's material assignment. Geometry counts alone would not have caught the loss. See [the environment workflow](docs/environments.md) for chat prompts, native evidence and transfer limits.
 
+## Reliability case: recovering interrupted native actions
+
+**[Explore the recovery lab](https://bernardo-demier-ai-lab.fancy-fly-9200.chatgpt.site/studio-agent-bridge/recovery/)** — step through recorded process interruptions, preserved effects and explicit reconciliation. The Python bridge and SQLite are real; these fault-injection traces use synthetic host adapters, not native modeling applications.
+
+A durable action intent is published before run-directory allocation or native dispatch. Inspection uses a consistent database snapshot, avoiding false event-chain failures when another process commits concurrently. The new `studio_recovery_report` tool explains unresolved intent and preserved run directories without launching an editor or changing state. Recovery does not automatically replay an action or infer that an external process is idle.
+
+See the [recovery design, threat model and reproduction guide](docs/recovery.md) and the [executable experiment](examples/recovery/). Native geometry evidence remains in the separate cases above and below.
+
 ## Applied case: a board mounting fixture
 
 **[Open the browser demo](https://bernardo-demier-ai-lab.fancy-fly-9200.chatgpt.site/studio-agent-bridge/)** — explore the actual exported 3D mesh, compare verified measurements, inspect the source evidence and download the native case. The browser visualizes geometry; parametric CAD editing remains in Fusion.
@@ -109,7 +117,7 @@ flowchart LR
   I -->|Checks satisfied| J[Deliver models and evidence]
 ```
 
-The MCP server exposes eight tools, three workflow prompts and resources for roles, capabilities and jobs. Jobs have revision checks and a SHA-256 event chain. A per-host process lock prevents two bridge agents from changing the same application at once. Interrupted actions require inspection and reconciliation; they are never blindly replayed.
+The MCP server exposes nine tools, three workflow prompts and resources for roles, capabilities and jobs. Jobs have revision checks and a SHA-256 event chain. A per-host process lock prevents two bridge agents from changing the same application at once. Interrupted actions require inspection and reconciliation; they are never blindly replayed.
 
 | Guide | Contents |
 | --- | --- |

@@ -38,3 +38,24 @@ for (const entry of [...environment.views, ...environment.downloads, {file: envi
   if (entry.file && !environmentManifest[entry.file]) throw new Error(`Missing environment evidence asset: ${entry.file}`);
 }
 console.log(`Verified ${Object.keys(environmentManifest).length} environment assets; evidence is recorded native output, not a CI render.`);
+
+const recoveryBytes = await readFile(`${assets}/recovery.json`);
+const recoverySource = await readFile(new URL('../../examples/recovery/observed-recovery.json', import.meta.url));
+if (!recoveryBytes.equals(recoverySource)) throw new Error('Recovery demo differs from the recorded experiment');
+const recovery = JSON.parse(recoveryBytes);
+if (recovery.provenance.native_apps_used !== false || recovery.provenance.cloud_used !== false ||
+    recovery.provenance.kind !== 'observed-synthetic-adapter-execution') {
+  throw new Error('Recovery demo must identify its synthetic-host execution boundary');
+}
+for (const scenario of recovery.cases) {
+  if (!scenario.steps.length || !Object.keys(scenario.checks).length ||
+      Object.values(scenario.checks).some(value => value !== true)) {
+    throw new Error(`Failed or empty recovery evidence: ${scenario.id}`);
+  }
+  for (const step of scenario.steps) {
+    if (step.report && (step.report.automatic_replay !== false || step.report.native_host_idle !== 'unknown')) {
+      throw new Error(`Invalid recovery guarantee: ${scenario.id}`);
+    }
+  }
+}
+console.log(`Verified ${recovery.cases.length} recorded recovery scenarios; synthetic hosts, no browser execution.`);

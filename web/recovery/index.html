@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Inspect real process-crash and recovery traces from Studio Agent Bridge. Durable native-action intent, preserved outputs and explicit reconciliation, tested with synthetic host adapters.">
+  <meta name="theme-color" content="#f4f2eb"><title>Studio Agent Bridge · Recovery lab</title>
+</head>
+<body>
+  <header class="wrap header"><a class="brand" href="../">STUDIO <span>AGENT BRIDGE</span></a><nav aria-label="Main"><a href="../environment/">3D environment</a><a href="#lab">Recovery lab</a><a href="https://github.com/demier-demier/studio-agent-bridge/blob/main/docs/recovery.md">Technical guide ↗</a></nav></header>
+  <main class="wrap">
+    <section class="intro"><p class="eyebrow">RELIABILITY / 03 · NATIVE AGENT WORKFLOWS</p><h1>A stopped agent.<br><em>A trace you can inspect.</em></h1><p class="lede">An editor may finish a change even when the agent loses its connection. Explore how the bridge preserves intent and evidence, blocks blind retries, and makes recovery an explicit decision.</p><p class="scope"><strong>Recorded fault-injection lab.</strong> Real Python bridge, SQLite and terminated child processes. Synthetic host adapters; no Blender or Unreal execution in these traces. This page explores recorded outcomes.</p></section>
+    <section id="lab" class="lab" aria-labelledby="lab-heading">
+      <div class="lab-top"><div><p class="eyebrow">CHOOSE A FAILURE BOUNDARY</p><h2 id="lab-heading">Follow the evidence.</h2></div><a href="../assets/recovery.json" download>Download raw traces ↓</a></div>
+      <p id="load-status" role="status">Loading measured recovery traces…</p>
+      <div id="case-list" class="case-list" role="group" aria-label="Recovery scenarios"></div>
+      <div class="case-intro"><h3 id="case-title"></h3><p id="case-description"></p></div>
+      <div class="lab-grid">
+        <section class="timeline-panel" aria-label="Recorded execution steps"><ol id="timeline"></ol><div class="step-controls"><button id="previous" disabled>← Previous</button><span id="position" aria-live="polite"></span><button id="next" disabled>Next →</button></div></section>
+        <section class="evidence-panel" aria-labelledby="step-title"><p class="eyebrow" id="step-number">OBSERVATION</p><h3 id="step-title"></h3><p id="step-detail"></p><div class="readouts"><div><span>Job state</span><strong id="job-state">—</strong></div><div><span>Revision</span><strong id="job-revision">—</strong></div><div><span>Adapter calls</span><strong id="adapter-calls">—</strong></div><div><span>Native host idle</span><strong id="host-idle">Unknown</strong></div></div><div id="decision" class="decision" role="status"></div><details><summary>Inspect this recorded step</summary><pre id="recorded-json"></pre></details></section>
+      </div>
+      <section class="checks"><h3>Assertions from this run</h3><ul id="case-checks"></ul><ul id="case-limits" class="limitations"></ul></section>
+    </section>
+    <section class="principles"><article><span>01 / WRITE INTENT FIRST</span><h2>Before native work starts.</h2><p>The bridge publishes a complete action marker before allocating its run directory or dispatching the native action. A restart can identify an unfinished preparation without discarding its files.</p></article><article><span>02 / KEEP A CONSISTENT READ</span><h2>One database snapshot.</h2><p>Job state and event-chain verification share a read transaction. A concurrent writer can commit a new revision without making the reader combine two different histories.</p></article><article><span>03 / RECOVER DELIBERATELY</span><h2>Inspect before continuing.</h2><p>A recovery report is read-only. It never decides that Blender or Unreal is idle. The operator checks the host and outputs before reconciling; a subsequent action must be explicitly requested.</p></article></section>
+    <section class="reproduce"><div><p class="eyebrow">REPRODUCIBLE, NOT A PRODUCTION CLAIM</p><h2>Run the same experiment.</h2><p>Use the source repository and its pinned setup instructions. The generator creates temporary synthetic workspaces and measures the engine's decisions. It does not connect to a modeling application.</p><pre><code>.venv/bin/python examples/recovery/generate.py</code></pre><a href="https://github.com/demier-demier/studio-agent-bridge/tree/main/examples/recovery">Generator and recorded evidence ↗</a></div><div><h3>What this does not prove</h3><ul><li>No claim of exactly-once native edits, automatic rollback or power-loss safety on every filesystem.</li><li>Unknown or corrupt marker ownership keeps the host blocked; it is not guessed.</li><li>The lock coordinates bridge processes, not manual editor activity or arbitrary Python.</li><li>Scene quality, physical correctness and source-file version binding remain separate checks.</li></ul><p id="provenance" class="provenance"></p></div></section>
+  </main>
+  <footer class="wrap footer"><span>Bernardo Demier · Studio Agent Bridge</span><a href="../environment/">Explore the complete 3D environment →</a></footer>
+  <script type="module" src="/src/recovery.js"></script>
+</body>
+</html>

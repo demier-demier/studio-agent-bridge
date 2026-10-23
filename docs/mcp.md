@@ -48,6 +48,7 @@ The server does not change client settings, enable application plugins, obtain c
 | `studio_execute_action` | Dispatch one supported action with parameters and an expected job revision. |
 | `studio_inspect_job` | Read current state and check event/snapshot consistency. |
 | `studio_list_artifacts` | List artifacts from completed actions and recheck their current sizes and hashes. |
+| `studio_recovery_report` | Inspect unresolved intent and run-directory provenance without editing state, launching a host or deciding that a host is idle. |
 | `studio_reconcile_job` | Record a trusted operator's observed outcome after an uncertain interruption. |
 
 Prompts: `studio_workflow`, `studio_environment` and `studio_review`. Resources: `studio://roles`, `studio://capabilities`, and `studio://jobs/{job_id}`. Standalone role prompts are in `prompts/`.
@@ -104,12 +105,15 @@ To recover, inspect the actual host/process and output files first. Then record 
 
 ```sh
 .venv/bin/studio-agent-bridge job inspect --job JOB_ID
+.venv/bin/studio-agent-bridge job recovery --job JOB_ID
 .venv/bin/studio-agent-bridge job reconcile --job JOB_ID --revision CURRENT_REVISION \
   --confirm-host-idle \
   --notes "Observed the previous process is stopped; inspected the output and identified the completed native changes."
 ```
 
 This confirmation is a trusted operator assertion, not an independent idle detector or rollback. Reconciliation never retries an action. A new action must be explicitly requested. The server does not claim exactly-once native edits or crash-safe transactions spanning SQLite and CAD editors.
+
+The [recovery guide](recovery.md) describes atomic action intent, interrupted preparation, preserved legacy run directories, consistent read transactions and the reproducible fault-injection lab. The report returns only workspace-relative paths for the selected job; marker ownership is never guessed when metadata is malformed or belongs to another workspace.
 
 ## Evidence gates
 

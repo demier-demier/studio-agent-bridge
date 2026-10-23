@@ -37,7 +37,7 @@ def parser() -> argparse.ArgumentParser:
     create.add_argument("--name", required=True)
     create.add_argument("--host", choices=list(ACTIONS), required=True)
     create.add_argument("--goal", required=True)
-    for verb in ("inspect", "artifacts"):
+    for verb in ("inspect", "artifacts", "recovery"):
         jobs.add_parser(verb).add_argument("--job", required=True)
     reconcile = jobs.add_parser("reconcile")
     reconcile.add_argument("--job", required=True)
@@ -83,6 +83,8 @@ def main(argv: list[str] | None = None) -> int:
             result = engine.inspect_job(args.job)
         elif args.job_command == "artifacts":
             result = engine.list_artifacts(args.job)
+        elif args.job_command == "recovery":
+            result = engine.recovery_report(args.job)
         else:
             result = engine.reconcile_job(
                 args.job, args.notes, args.confirm_host_idle, args.revision

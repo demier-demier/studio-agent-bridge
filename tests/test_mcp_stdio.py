@@ -27,6 +27,7 @@ def test_stdio_tools_prompts_resources_and_call(tmp_path):
                 "studio_list_artifacts",
                 "studio_plan_workflow",
                 "studio_reconcile_job",
+                "studio_recovery_report",
                 "studio_plan_environment",
             } <= names
             prompts = await client.list_prompts()
@@ -62,6 +63,11 @@ def test_stdio_tools_prompts_resources_and_call(tmp_path):
             assert job["revision"] == 1
             inspected = await client.call_tool("studio_inspect_job", {"job_id": job["id"]})
             assert inspected.structured_content["ledger"]["valid"]
+            recovery = await client.call_tool("studio_recovery_report", {"job_id": job["id"]})
+            assert not recovery.is_error
+            assert recovery.structured_content["job_id"] == job["id"]
+            unchanged = await client.call_tool("studio_inspect_job", {"job_id": job["id"]})
+            assert unchanged.structured_content["revision"] == job["revision"]
             denied = await client.call_tool(
                 "studio_execute_action",
                 {
@@ -104,6 +110,12 @@ def test_cli_json_errors_and_durable_job(tmp_path):
         base + ["job", "inspect", "--job", job["id"]], capture_output=True, text=True, timeout=15
     )
     assert json.loads(inspected.stdout)["ledger"]["valid"]
+    recovery = subprocess.run(
+        base + ["job", "recovery", "--job", job["id"]],
+        capture_output=True, text=True, timeout=15,
+    )
+    assert recovery.returncode == 0
+    assert json.loads(recovery.stdout)["job_id"] == job["id"]
     rejected = subprocess.run(
         base + ["run", "--job", job["id"], "--action", "inspect", "--parameters", "[]"],
         capture_output=True,

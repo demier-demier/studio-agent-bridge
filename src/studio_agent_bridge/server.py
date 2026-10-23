@@ -74,6 +74,16 @@ def make_server(engine: Engine) -> MCPServer:
         return engine.list_artifacts(job_id)
 
     @server.tool()
+    def studio_recovery_report(job_id: str) -> dict[str, Any]:
+        """Inspect durable recovery evidence without editing files or launching a host.
+
+        Reports unresolved intents and preserved run directories. It does not detect
+        whether a native process is idle, repair files, or authorize automatic replay.
+        Inspect the actual host and artifacts before explicit reconciliation.
+        """
+        return engine.recovery_report(job_id)
+
+    @server.tool()
     def studio_reconcile_job(
         job_id: str, notes: str, host_is_idle: bool, expected_revision: int
     ) -> dict[str, Any]:

@@ -1,0 +1,1107 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-23T12:22:11.719909+00:00",
+  "provenance": {
+    "kind": "observed-synthetic-adapter-execution",
+    "generator": "examples/recovery/generate.py",
+    "engine_source": "src/studio_agent_bridge/engine.py",
+    "source_sha256": {
+      "examples/recovery/generate.py": "d8a312e7ef17929c5d16459d5ba984ac90022ce76894806bbf71d7abc8c9219e",
+      "src/studio_agent_bridge/engine.py": "78765e48a420b089b981b8e2200c259df5d1dea7f1824aab570544378d24f590",
+      "src/studio_agent_bridge/workspace.py": "48531e5b6c3f5cd1b6c9850b84fac6f94bd401eeb4fa901e81b63197da04d43b"
+    },
+    "python_version": "3.12.14",
+    "native_apps_used": false,
+    "cloud_used": false,
+    "isolated_workspaces_and_lock_directories": true
+  },
+  "cases": [
+    {
+      "id": "clean-action",
+      "title": "A completed action stays completed",
+      "description": "The control case distinguishes a clean finish from an uncertain external outcome.",
+      "steps": [
+        {
+          "title": "Job created",
+          "detail": "A fresh engine job is ready; no adapter has run.",
+          "status": "ready",
+          "revision": 1,
+          "adapter_calls": 0,
+          "effects": [],
+          "report": {
+            "schema_version": 1,
+            "job_id": "clean-action-29a1ca07d9d2",
+            "host": "blender",
+            "status": "ready",
+            "revision": 1,
+            "ledger": {
+              "valid": true,
+              "events": 1,
+              "head": "b673f4b3d1d351a486594a51906de7d2cdc960929163e9ac6e036fb9ca24d213"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "absent",
+              "ownership": "none",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [],
+            "event_state": {
+              "last_type": "job_created",
+              "action_event_type": null,
+              "action_event_revision": null,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": false,
+              "allowed": false,
+              "reason": "No unresolved bridge evidence was observed; this does not establish native host idleness.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Synthetic action completed",
+          "detail": "The real engine recorded start and finish events, validated the owned files, and cleared its intent.",
+          "status": "executed_unverified",
+          "revision": 3,
+          "adapter_calls": 1,
+          "effects": [
+            {
+              "path": "jobs/clean-action-29a1ca07d9d2/runs/000002-create_demo/synthetic-effect.txt",
+              "bytes": 68,
+              "sha256": "46b7a971860434eb991b308079c457dfb5beb1849acfefa4681febc34bc92a25"
+            }
+          ],
+          "report": {
+            "schema_version": 1,
+            "job_id": "clean-action-29a1ca07d9d2",
+            "host": "blender",
+            "status": "executed_unverified",
+            "revision": 3,
+            "ledger": {
+              "valid": true,
+              "events": 3,
+              "head": "02bc1453b8e928d85d111a7c7c9f52c3b9144ebcfa7729c9ccd4bb7e8515a5ea"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "absent",
+              "ownership": "none",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [
+              {
+                "path": "jobs/clean-action-29a1ca07d9d2/runs/000002-create_demo",
+                "revision": 2,
+                "action": "create_demo",
+                "provenance": "ledger",
+                "unresolved": false,
+                "state": "directory",
+                "has_entries": true
+              }
+            ],
+            "event_state": {
+              "last_type": "action_finished",
+              "action_event_type": "action_finished",
+              "action_event_revision": 3,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": false,
+              "allowed": false,
+              "reason": "No unresolved bridge evidence was observed; this does not establish native host idleness.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Restart and inspect",
+          "detail": "A new Engine instance read the persisted ledger without dispatching another action.",
+          "status": "executed_unverified",
+          "revision": 3,
+          "adapter_calls": 1,
+          "effects": [
+            {
+              "path": "jobs/clean-action-29a1ca07d9d2/runs/000002-create_demo/synthetic-effect.txt",
+              "bytes": 68,
+              "sha256": "46b7a971860434eb991b308079c457dfb5beb1849acfefa4681febc34bc92a25"
+            }
+          ],
+          "report": {
+            "schema_version": 1,
+            "job_id": "clean-action-29a1ca07d9d2",
+            "host": "blender",
+            "status": "executed_unverified",
+            "revision": 3,
+            "ledger": {
+              "valid": true,
+              "events": 3,
+              "head": "02bc1453b8e928d85d111a7c7c9f52c3b9144ebcfa7729c9ccd4bb7e8515a5ea"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "absent",
+              "ownership": "none",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [
+              {
+                "path": "jobs/clean-action-29a1ca07d9d2/runs/000002-create_demo",
+                "revision": 2,
+                "action": "create_demo",
+                "provenance": "ledger",
+                "unresolved": false,
+                "state": "directory",
+                "has_entries": true
+              }
+            ],
+            "event_state": {
+              "last_type": "action_finished",
+              "action_event_type": "action_finished",
+              "action_event_revision": 3,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": false,
+              "allowed": false,
+              "reason": "No unresolved bridge evidence was observed; this does not establish native host idleness.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        }
+      ],
+      "checks": {
+        "one_adapter_dispatch": true,
+        "one_owned_effect": true,
+        "completed_at_revision_three": true,
+        "synthetic_result_not_claimed_native_verified": true,
+        "intent_cleared": true,
+        "ledger_valid_after_restart": true,
+        "inspection_preserves_revision": true,
+        "no_reconciliation_needed": true,
+        "no_automatic_replay": true
+      },
+      "limitations": [
+        "Only the orchestration lifecycle and synthetic files are exercised."
+      ]
+    },
+    {
+      "id": "effect-then-crash",
+      "title": "An effect survives a terminated worker",
+      "description": "The child persisted a synthetic effect, then exited inside the adapter before the engine could record completion.",
+      "steps": [
+        {
+          "title": "Job created",
+          "detail": "The job is ready at revision 1.",
+          "status": "ready",
+          "revision": 1,
+          "adapter_calls": 0,
+          "effects": [],
+          "report": {
+            "schema_version": 1,
+            "job_id": "effect-then-crash-e0a4da7034ae",
+            "host": "blender",
+            "status": "ready",
+            "revision": 1,
+            "ledger": {
+              "valid": true,
+              "events": 1,
+              "head": "817b14dc76f31aebd3f7ecbcc6a7aa8a4430fbdb2a00b7e0f3da6e3c4c73c01c"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "absent",
+              "ownership": "none",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [],
+            "event_state": {
+              "last_type": "job_created",
+              "action_event_type": null,
+              "action_event_revision": null,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": false,
+              "allowed": false,
+              "reason": "No unresolved bridge evidence was observed; this does not establish native host idleness.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Abrupt child exit; engine restarted",
+          "detail": "The child persisted a synthetic effect, then exited inside the adapter before the engine could record completion. The parent waited for and reaped exit code 73.",
+          "status": "interrupted",
+          "revision": 2,
+          "adapter_calls": 1,
+          "effects": [
+            {
+              "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo/synthetic-effect.txt",
+              "bytes": 68,
+              "sha256": "46b7a971860434eb991b308079c457dfb5beb1849acfefa4681febc34bc92a25"
+            }
+          ],
+          "report": {
+            "schema_version": 1,
+            "job_id": "effect-then-crash-e0a4da7034ae",
+            "host": "blender",
+            "status": "running",
+            "revision": 2,
+            "ledger": {
+              "valid": true,
+              "events": 2,
+              "head": "5b919febe9962b170754dae1ae48eada6b1e3589ebcadd572882081f6375c035"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "valid",
+              "ownership": "this_job",
+              "protocol": "v1",
+              "run_dir": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo",
+              "matches_ledger": true
+            },
+            "run_directories": [
+              {
+                "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo",
+                "revision": 2,
+                "action": "create_demo",
+                "provenance": "ledger",
+                "unresolved": true,
+                "state": "directory",
+                "has_entries": true
+              }
+            ],
+            "event_state": {
+              "last_type": "action_started",
+              "action_event_type": "action_started",
+              "action_event_revision": 2,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": true,
+              "allowed": true,
+              "reason": "Explicit operator inspection and host-is-idle confirmation are required. No action will be replayed.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Retry rejected",
+          "detail": "execute_action raised ReconciliationRequired; the adapter count and ledger revision did not advance.",
+          "status": "blocked",
+          "revision": 2,
+          "adapter_calls": 1,
+          "effects": [
+            {
+              "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo/synthetic-effect.txt",
+              "bytes": 68,
+              "sha256": "46b7a971860434eb991b308079c457dfb5beb1849acfefa4681febc34bc92a25"
+            }
+          ],
+          "report": {
+            "schema_version": 1,
+            "job_id": "effect-then-crash-e0a4da7034ae",
+            "host": "blender",
+            "status": "running",
+            "revision": 2,
+            "ledger": {
+              "valid": true,
+              "events": 2,
+              "head": "5b919febe9962b170754dae1ae48eada6b1e3589ebcadd572882081f6375c035"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "valid",
+              "ownership": "this_job",
+              "protocol": "v1",
+              "run_dir": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo",
+              "matches_ledger": true
+            },
+            "run_directories": [
+              {
+                "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo",
+                "revision": 2,
+                "action": "create_demo",
+                "provenance": "ledger",
+                "unresolved": true,
+                "state": "directory",
+                "has_entries": true
+              }
+            ],
+            "event_state": {
+              "last_type": "action_started",
+              "action_event_type": "action_started",
+              "action_event_revision": 2,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": true,
+              "allowed": true,
+              "reason": "Explicit operator inspection and host-is-idle confirmation are required. No action will be replayed.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Read the recovery report",
+          "detail": "The report exposes owned intent and persisted evidence. It does not infer that a native host is idle or replay an action.",
+          "status": "running",
+          "revision": 2,
+          "adapter_calls": 1,
+          "effects": [
+            {
+              "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo/synthetic-effect.txt",
+              "bytes": 68,
+              "sha256": "46b7a971860434eb991b308079c457dfb5beb1849acfefa4681febc34bc92a25"
+            }
+          ],
+          "report": {
+            "schema_version": 1,
+            "job_id": "effect-then-crash-e0a4da7034ae",
+            "host": "blender",
+            "status": "running",
+            "revision": 2,
+            "ledger": {
+              "valid": true,
+              "events": 2,
+              "head": "5b919febe9962b170754dae1ae48eada6b1e3589ebcadd572882081f6375c035"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "valid",
+              "ownership": "this_job",
+              "protocol": "v1",
+              "run_dir": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo",
+              "matches_ledger": true
+            },
+            "run_directories": [
+              {
+                "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo",
+                "revision": 2,
+                "action": "create_demo",
+                "provenance": "ledger",
+                "unresolved": true,
+                "state": "directory",
+                "has_entries": true
+              }
+            ],
+            "event_state": {
+              "last_type": "action_started",
+              "action_event_type": "action_started",
+              "action_event_revision": 2,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": true,
+              "allowed": true,
+              "reason": "Explicit operator inspection and host-is-idle confirmation are required. No action will be replayed.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Explicit operator reconciliation",
+          "detail": "After confirming the synthetic child had stopped, the caller supplied host_is_idle=True. The engine recorded reconciliation without dispatching the adapter or deleting prior evidence.",
+          "status": "ready",
+          "revision": 3,
+          "adapter_calls": 1,
+          "effects": [
+            {
+              "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo/synthetic-effect.txt",
+              "bytes": 68,
+              "sha256": "46b7a971860434eb991b308079c457dfb5beb1849acfefa4681febc34bc92a25"
+            }
+          ],
+          "report": {
+            "schema_version": 1,
+            "job_id": "effect-then-crash-e0a4da7034ae",
+            "host": "blender",
+            "status": "ready",
+            "revision": 3,
+            "ledger": {
+              "valid": true,
+              "events": 3,
+              "head": "bbbdf1017a72a14bd054742aa6c7f65a85caa78deac88cfc9169cbe13ad9b0cb"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "absent",
+              "ownership": "none",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [
+              {
+                "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo",
+                "revision": 2,
+                "action": "create_demo",
+                "provenance": "ledger",
+                "unresolved": false,
+                "state": "directory",
+                "has_entries": true
+              }
+            ],
+            "event_state": {
+              "last_type": "operator_reconciled",
+              "action_event_type": "action_started",
+              "action_event_revision": 2,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": false,
+              "allowed": false,
+              "reason": "No unresolved bridge evidence was observed; this does not establish native host idleness.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "A new action is explicitly requested",
+          "detail": "A separate execute_action call uses the reconciled revision and writes to a fresh run directory. This is a new action, not an automatic replay.",
+          "status": "executed_unverified",
+          "revision": 5,
+          "adapter_calls": 2,
+          "effects": [
+            {
+              "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo/synthetic-effect.txt",
+              "bytes": 68,
+              "sha256": "46b7a971860434eb991b308079c457dfb5beb1849acfefa4681febc34bc92a25"
+            },
+            {
+              "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000004-create_demo/synthetic-effect.txt",
+              "bytes": 68,
+              "sha256": "46b7a971860434eb991b308079c457dfb5beb1849acfefa4681febc34bc92a25"
+            }
+          ],
+          "report": {
+            "schema_version": 1,
+            "job_id": "effect-then-crash-e0a4da7034ae",
+            "host": "blender",
+            "status": "executed_unverified",
+            "revision": 5,
+            "ledger": {
+              "valid": true,
+              "events": 5,
+              "head": "802dd4c3eb25af4cbb7d35a4b7cc6baa110130edaf2b4a08c05e0f37bb60c616"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "absent",
+              "ownership": "none",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [
+              {
+                "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000002-create_demo",
+                "revision": 2,
+                "action": "create_demo",
+                "provenance": "ledger",
+                "unresolved": false,
+                "state": "directory",
+                "has_entries": true
+              },
+              {
+                "path": "jobs/effect-then-crash-e0a4da7034ae/runs/000004-create_demo",
+                "revision": 4,
+                "action": "create_demo",
+                "provenance": "ledger",
+                "unresolved": false,
+                "state": "directory",
+                "has_entries": true
+              }
+            ],
+            "event_state": {
+              "last_type": "action_finished",
+              "action_event_type": "action_finished",
+              "action_event_revision": 5,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": false,
+              "allowed": false,
+              "reason": "No unresolved bridge evidence was observed; this does not establish native host idleness.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        }
+      ],
+      "checks": {
+        "child_exit_observed": true,
+        "expected_adapter_count_at_crash": true,
+        "expected_ledger_revision_at_crash": true,
+        "crash_status_preserved": true,
+        "owned_marker_reported": true,
+        "reconciliation_required": true,
+        "owned_reconciliation_allowed": true,
+        "retry_did_not_dispatch": true,
+        "retry_preserved_revision": true,
+        "inspection_preserved_revision": true,
+        "no_automatic_replay": true,
+        "native_host_liveness_stays_unknown": true,
+        "operator_confirmation_explicit": true,
+        "reconciliation_did_not_dispatch": true,
+        "reconciliation_preserved_effect_files": true,
+        "new_action_is_separate_dispatch": true,
+        "new_effect_path_is_distinct": true,
+        "old_effects_remain_intact": true,
+        "final_ledger_valid": true,
+        "new_action_completed": true
+      },
+      "limitations": [
+        "The injected process exit is real, but the adapter and its external effect are synthetic.",
+        "The parent can confirm this synthetic child stopped because it waited for its exit; this does not demonstrate native application liveness detection.",
+        "Reconciliation acknowledges uncertainty. It does not roll back the synthetic effect or prove a real-world action succeeded."
+      ]
+    },
+    {
+      "id": "intent-window",
+      "title": "Intent survives the pre-dispatch crash window",
+      "description": "The child exited immediately after atomic host-intent publication, before action_started and adapter dispatch.",
+      "steps": [
+        {
+          "title": "Job created",
+          "detail": "The job is ready at revision 1.",
+          "status": "ready",
+          "revision": 1,
+          "adapter_calls": 0,
+          "effects": [],
+          "report": {
+            "schema_version": 1,
+            "job_id": "intent-window-19ce923bf24e",
+            "host": "blender",
+            "status": "ready",
+            "revision": 1,
+            "ledger": {
+              "valid": true,
+              "events": 1,
+              "head": "47b4139d7a01879ed413a0e175c4577de6f0a93cd50a8d4539e269bb285ac624"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "absent",
+              "ownership": "none",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [],
+            "event_state": {
+              "last_type": "job_created",
+              "action_event_type": null,
+              "action_event_revision": null,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": false,
+              "allowed": false,
+              "reason": "No unresolved bridge evidence was observed; this does not establish native host idleness.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Abrupt child exit; engine restarted",
+          "detail": "The child exited immediately after atomic host-intent publication, before action_started and adapter dispatch. The parent waited for and reaped exit code 74.",
+          "status": "interrupted",
+          "revision": 1,
+          "adapter_calls": 0,
+          "effects": [],
+          "report": {
+            "schema_version": 1,
+            "job_id": "intent-window-19ce923bf24e",
+            "host": "blender",
+            "status": "ready",
+            "revision": 1,
+            "ledger": {
+              "valid": true,
+              "events": 1,
+              "head": "47b4139d7a01879ed413a0e175c4577de6f0a93cd50a8d4539e269bb285ac624"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "valid",
+              "ownership": "this_job",
+              "protocol": "v1",
+              "run_dir": "jobs/intent-window-19ce923bf24e/runs/000002-create_demo",
+              "matches_ledger": false
+            },
+            "run_directories": [
+              {
+                "path": "jobs/intent-window-19ce923bf24e/runs/000002-create_demo",
+                "revision": 2,
+                "action": "create_demo",
+                "provenance": "host_intent",
+                "unresolved": true,
+                "state": "missing",
+                "has_entries": null
+              }
+            ],
+            "event_state": {
+              "last_type": "job_created",
+              "action_event_type": null,
+              "action_event_revision": null,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": true,
+              "allowed": true,
+              "reason": "Explicit operator inspection and host-is-idle confirmation are required. No action will be replayed.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Retry rejected",
+          "detail": "execute_action raised ReconciliationRequired; the adapter count and ledger revision did not advance.",
+          "status": "blocked",
+          "revision": 1,
+          "adapter_calls": 0,
+          "effects": [],
+          "report": {
+            "schema_version": 1,
+            "job_id": "intent-window-19ce923bf24e",
+            "host": "blender",
+            "status": "ready",
+            "revision": 1,
+            "ledger": {
+              "valid": true,
+              "events": 1,
+              "head": "47b4139d7a01879ed413a0e175c4577de6f0a93cd50a8d4539e269bb285ac624"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "valid",
+              "ownership": "this_job",
+              "protocol": "v1",
+              "run_dir": "jobs/intent-window-19ce923bf24e/runs/000002-create_demo",
+              "matches_ledger": false
+            },
+            "run_directories": [
+              {
+                "path": "jobs/intent-window-19ce923bf24e/runs/000002-create_demo",
+                "revision": 2,
+                "action": "create_demo",
+                "provenance": "host_intent",
+                "unresolved": true,
+                "state": "missing",
+                "has_entries": null
+              }
+            ],
+            "event_state": {
+              "last_type": "job_created",
+              "action_event_type": null,
+              "action_event_revision": null,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": true,
+              "allowed": true,
+              "reason": "Explicit operator inspection and host-is-idle confirmation are required. No action will be replayed.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Read the recovery report",
+          "detail": "The report exposes owned intent and persisted evidence. It does not infer that a native host is idle or replay an action.",
+          "status": "ready",
+          "revision": 1,
+          "adapter_calls": 0,
+          "effects": [],
+          "report": {
+            "schema_version": 1,
+            "job_id": "intent-window-19ce923bf24e",
+            "host": "blender",
+            "status": "ready",
+            "revision": 1,
+            "ledger": {
+              "valid": true,
+              "events": 1,
+              "head": "47b4139d7a01879ed413a0e175c4577de6f0a93cd50a8d4539e269bb285ac624"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "valid",
+              "ownership": "this_job",
+              "protocol": "v1",
+              "run_dir": "jobs/intent-window-19ce923bf24e/runs/000002-create_demo",
+              "matches_ledger": false
+            },
+            "run_directories": [
+              {
+                "path": "jobs/intent-window-19ce923bf24e/runs/000002-create_demo",
+                "revision": 2,
+                "action": "create_demo",
+                "provenance": "host_intent",
+                "unresolved": true,
+                "state": "missing",
+                "has_entries": null
+              }
+            ],
+            "event_state": {
+              "last_type": "job_created",
+              "action_event_type": null,
+              "action_event_revision": null,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": true,
+              "allowed": true,
+              "reason": "Explicit operator inspection and host-is-idle confirmation are required. No action will be replayed.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Explicit operator reconciliation",
+          "detail": "After confirming the synthetic child had stopped, the caller supplied host_is_idle=True. The engine recorded reconciliation without dispatching the adapter or deleting prior evidence.",
+          "status": "ready",
+          "revision": 2,
+          "adapter_calls": 0,
+          "effects": [],
+          "report": {
+            "schema_version": 1,
+            "job_id": "intent-window-19ce923bf24e",
+            "host": "blender",
+            "status": "ready",
+            "revision": 2,
+            "ledger": {
+              "valid": true,
+              "events": 2,
+              "head": "2adace3c778cd344421fbe02f89b92709e7c7256b2ec13a54b24dee9e5a0a976"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "absent",
+              "ownership": "none",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [],
+            "event_state": {
+              "last_type": "operator_reconciled",
+              "action_event_type": null,
+              "action_event_revision": null,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": false,
+              "allowed": false,
+              "reason": "No unresolved bridge evidence was observed; this does not establish native host idleness.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "A new action is explicitly requested",
+          "detail": "A separate execute_action call uses the reconciled revision and writes to a fresh run directory. This is a new action, not an automatic replay.",
+          "status": "executed_unverified",
+          "revision": 4,
+          "adapter_calls": 1,
+          "effects": [
+            {
+              "path": "jobs/intent-window-19ce923bf24e/runs/000003-create_demo/synthetic-effect.txt",
+              "bytes": 68,
+              "sha256": "46b7a971860434eb991b308079c457dfb5beb1849acfefa4681febc34bc92a25"
+            }
+          ],
+          "report": {
+            "schema_version": 1,
+            "job_id": "intent-window-19ce923bf24e",
+            "host": "blender",
+            "status": "executed_unverified",
+            "revision": 4,
+            "ledger": {
+              "valid": true,
+              "events": 4,
+              "head": "f7ae92eaffc5554c5fb6c03ffd47fad4a57560341505ce9900706d9096e598a0"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "absent",
+              "ownership": "none",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [
+              {
+                "path": "jobs/intent-window-19ce923bf24e/runs/000003-create_demo",
+                "revision": 3,
+                "action": "create_demo",
+                "provenance": "ledger",
+                "unresolved": false,
+                "state": "directory",
+                "has_entries": true
+              }
+            ],
+            "event_state": {
+              "last_type": "action_finished",
+              "action_event_type": "action_finished",
+              "action_event_revision": 4,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": false,
+              "allowed": false,
+              "reason": "No unresolved bridge evidence was observed; this does not establish native host idleness.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        }
+      ],
+      "checks": {
+        "child_exit_observed": true,
+        "expected_adapter_count_at_crash": true,
+        "expected_ledger_revision_at_crash": true,
+        "crash_status_preserved": true,
+        "owned_marker_reported": true,
+        "reconciliation_required": true,
+        "owned_reconciliation_allowed": true,
+        "retry_did_not_dispatch": true,
+        "retry_preserved_revision": true,
+        "inspection_preserved_revision": true,
+        "no_automatic_replay": true,
+        "native_host_liveness_stays_unknown": true,
+        "operator_confirmation_explicit": true,
+        "reconciliation_did_not_dispatch": true,
+        "reconciliation_preserved_effect_files": true,
+        "new_action_is_separate_dispatch": true,
+        "new_effect_path_is_distinct": true,
+        "old_effects_remain_intact": true,
+        "final_ledger_valid": true,
+        "new_action_completed": true
+      },
+      "limitations": [
+        "The injected process exit is real, but the adapter and its external effect are synthetic.",
+        "The parent can confirm this synthetic child stopped because it waited for its exit; this does not demonstrate native application liveness detection.",
+        "Reconciliation acknowledges uncertainty. It does not roll back the synthetic effect or prove a real-world action succeeded."
+      ]
+    },
+    {
+      "id": "unknown-marker",
+      "title": "Unknown ownership does not become permission",
+      "description": "A malformed host marker cannot be attributed to the current job, so the example leaves it unresolved.",
+      "steps": [
+        {
+          "title": "Malformed marker discovered",
+          "detail": "A deliberately truncated synthetic marker is present. Its ownership cannot be established from valid protocol data.",
+          "status": "ready",
+          "revision": 1,
+          "adapter_calls": 0,
+          "effects": [],
+          "report": {
+            "schema_version": 1,
+            "job_id": "unknown-marker-1efa1b946545",
+            "host": "blender",
+            "status": "ready",
+            "revision": 1,
+            "ledger": {
+              "valid": true,
+              "events": 1,
+              "head": "6cb9a54ec458819415282fc4996c19aab59c690d2b671de10026919065fc2007"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "malformed",
+              "ownership": "unknown",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [],
+            "event_state": {
+              "last_type": "job_created",
+              "action_event_type": null,
+              "action_event_revision": null,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": true,
+              "allowed": false,
+              "reason": "The host marker is malformed or unsafe. Ownership is unknown; preserve it for manual investigation.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Action rejected",
+          "detail": "execute_action raised ReconciliationRequired; no adapter ran.",
+          "status": "blocked",
+          "revision": 1,
+          "adapter_calls": 0,
+          "effects": [],
+          "report": {
+            "schema_version": 1,
+            "job_id": "unknown-marker-1efa1b946545",
+            "host": "blender",
+            "status": "ready",
+            "revision": 1,
+            "ledger": {
+              "valid": true,
+              "events": 1,
+              "head": "6cb9a54ec458819415282fc4996c19aab59c690d2b671de10026919065fc2007"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "malformed",
+              "ownership": "unknown",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [],
+            "event_state": {
+              "last_type": "job_created",
+              "action_event_type": null,
+              "action_event_revision": null,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": true,
+              "allowed": false,
+              "reason": "The host marker is malformed or unsafe. Ownership is unknown; preserve it for manual investigation.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        },
+        {
+          "title": "Reconciliation remains blocked",
+          "detail": "Even with explicit idle confirmation, reconcile_job raised ReconciliationRequired; the marker was not removed or assigned to this job.",
+          "status": "blocked",
+          "revision": 1,
+          "adapter_calls": 0,
+          "effects": [],
+          "report": {
+            "schema_version": 1,
+            "job_id": "unknown-marker-1efa1b946545",
+            "host": "blender",
+            "status": "ready",
+            "revision": 1,
+            "ledger": {
+              "valid": true,
+              "events": 1,
+              "head": "6cb9a54ec458819415282fc4996c19aab59c690d2b671de10026919065fc2007"
+            },
+            "host_marker": {
+              "file": "blender.active.json",
+              "scope": "host_lock_directory",
+              "state": "malformed",
+              "ownership": "unknown",
+              "protocol": null,
+              "run_dir": null
+            },
+            "run_directories": [],
+            "event_state": {
+              "last_type": "job_created",
+              "action_event_type": null,
+              "action_event_revision": null,
+              "preparation_failed": false
+            },
+            "conflicts": [],
+            "reconciliation": {
+              "required": true,
+              "allowed": false,
+              "reason": "The host marker is malformed or unsafe. Ownership is unknown; preserve it for manual investigation.",
+              "explicit_host_idle_required": true
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": false
+          }
+        }
+      ],
+      "checks": {
+        "ownership_unknown": true,
+        "reconciliation_required": true,
+        "reconciliation_not_allowed": true,
+        "explicit_reconciliation_rejected": true,
+        "no_adapter_dispatched": true,
+        "marker_bytes_preserved": true,
+        "ledger_revision_preserved": true,
+        "no_owned_effect_created": true,
+        "no_automatic_replay": true
+      },
+      "limitations": [
+        "The marker is intentionally malformed fixture data. The example does not infer its owner or propose automatic deletion.",
+        "The isolated temporary directory is removed only after evidence collection ends; unresolved state remains blocked throughout the observed case."
+      ]
+    }
+  ],
+  "limitations": [
+    "These are observed engine outcomes with explicitly synthetic host adapters, not native application or geometry verification.",
+    "The exporter uses abrupt child-process exits and isolated temporary files; no native application, external service, or cloud model is invoked.",
+    "The engine reports native host idleness as unknown. Operator reconciliation is an explicit assertion, not a liveness detector or rollback.",
+    "The snapshot is one execution of these scenarios, not an exhaustive crash-point proof or a concurrency stress test."
+  ]
+}

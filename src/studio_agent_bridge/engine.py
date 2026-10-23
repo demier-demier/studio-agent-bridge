@@ -23,7 +23,16 @@ from .models import (
     ActionResult,
     plan_workflow,
 )
-from .workspace import Workspace, WorkspaceError, canonical, file_digest, host_lock
+from .workspace import (
+    Workspace,
+    WorkspaceError,
+    atomic_json,
+    canonical,
+    file_digest,
+    host_lock,
+    read_bounded_json,
+    sync_directory,
+)
 
 _STDOUT_LOCK = threading.Lock()
 
@@ -103,6 +112,7 @@ class Engine:
         db = sqlite3.connect(self.database, timeout=5)
         db.row_factory = sqlite3.Row
         db.execute("PRAGMA journal_mode=WAL")
+        db.execute("PRAGMA synchronous=FULL")
         db.execute("PRAGMA foreign_keys=ON")
         try:
             with db:
@@ -118,6 +128,10 @@ class Engine:
         )
 
     def _read(self, db, job_id: str) -> dict:
+        # sqlite3's connection context does not begin a transaction for SELECT.
+        # Keep snapshot, chain, and subsequent inspection queries on one WAL snapshot.
+        if not db.in_transaction:
+            db.execute("BEGIN")
         row = db.execute("SELECT * FROM jobs WHERE id=?", (job_id,)).fetchone()
         if row is None:
             raise ValueError("Job does not exist.")
@@ -259,6 +273,271 @@ class Engine:
                 results.append({**artifact, "integrity": "missing_or_modified"})
         return {"job_id": job_id, "artifacts": results}
 
+    @staticmethod
+    def _run_identity(value: object, job_id: str, host: str) -> tuple[int, str] | None:
+        if not isinstance(value, str):
+            return None
+        match = re.fullmatch(
+            rf"jobs/{re.escape(job_id)}/runs/([0-9]{{6,10}})-([a-z_]{{1,80}})", value
+        )
+        if not match or match[2] not in ACTIONS[host]:
+            return None
+        revision = int(match[1])
+        if not 1 <= revision <= 1_000_000_000 or match[1] != f"{revision:06d}":
+            return None
+        return revision, match[2]
+
+    def _validate_intent(self, value: dict, host: str) -> dict:
+        """Validate the whole intent before using any ownership claim, including legacy markers."""
+        legacy = {"job_id", "workspace", "run_dir", "started_at"}
+        versioned = {
+            "schema_version",
+            "intent_id",
+            "job_id",
+            "workspace",
+            "host",
+            "action",
+            "expected_revision",
+            "run_dir",
+            "request_sha256",
+            "created_at",
+        }
+        is_legacy = set(value) == legacy
+        if not is_legacy and (
+            set(value) != versioned
+            or type(value.get("schema_version")) is not int
+            or value.get("schema_version") != 1
+        ):
+            raise WorkspaceError("Malformed host intent schema; ownership is unknown.")
+        job_id, workspace = value.get("job_id"), value.get("workspace")
+        if not isinstance(job_id, str) or not re.fullmatch(r"[a-z0-9-]{1,100}", job_id):
+            raise WorkspaceError("Malformed host intent identifier; ownership is unknown.")
+        if (
+            not isinstance(workspace, str)
+            or not 1 <= len(workspace) <= 4096
+            or "\x00" in workspace
+            or "\\" in workspace
+            or not Path(workspace).is_absolute()
+            or ".." in Path(workspace).parts
+        ):
+            raise WorkspaceError("Malformed host intent workspace; ownership is unknown.")
+        run_identity = self._run_identity(value.get("run_dir"), job_id, host)
+        if run_identity is None:
+            raise WorkspaceError("Malformed host intent run binding; ownership is unknown.")
+        timestamp = value.get("started_at" if is_legacy else "created_at")
+        if not isinstance(timestamp, str) or len(timestamp) > 80:
+            raise WorkspaceError("Malformed host intent timestamp; ownership is unknown.")
+        datetime.fromisoformat(timestamp)
+        if not is_legacy and (
+            value["host"] != host
+            or value["action"] != run_identity[1]
+            or type(value["expected_revision"]) is not int
+            or value["expected_revision"] + 1 != run_identity[0]
+            or not isinstance(value["intent_id"], str)
+            or re.fullmatch(r"[a-f0-9]{32}", value["intent_id"]) is None
+            or not isinstance(value["request_sha256"], str)
+            or re.fullmatch(r"[a-f0-9]{64}", value["request_sha256"]) is None
+        ):
+            raise WorkspaceError("Malformed host intent action binding; ownership is unknown.")
+        return {**value, "protocol": "legacy" if is_legacy else "v1"}
+
+    def _marker_observation(self, host: str, job_id: str) -> tuple[dict, dict | None]:
+        marker = self.lock_dir / f"{host}.active.json"
+        observation = {
+            "file": marker.name,
+            "scope": "host_lock_directory",
+            "state": "absent",
+            "ownership": "none",
+            "protocol": None,
+            "run_dir": None,
+        }
+        if marker.is_symlink():
+            return {**observation, "state": "unsafe", "ownership": "unknown"}, None
+        if self.lock_dir.is_symlink():
+            return {**observation, "state": "unsafe", "ownership": "unknown"}, None
+        try:
+            value = self._validate_intent(read_bounded_json(marker), host)
+        except FileNotFoundError:
+            return observation, None
+        except (OSError, ValueError, TypeError, KeyError, RecursionError):
+            return {**observation, "state": "malformed", "ownership": "unknown"}, None
+        ownership = "this_job"
+        if value["workspace"] != str(self.workspace.root):
+            ownership = "other_workspace"
+        elif value["job_id"] != job_id:
+            ownership = "other_job"
+        return {
+            **observation,
+            "state": "valid",
+            "ownership": ownership,
+            "protocol": value["protocol"],
+            "run_dir": value["run_dir"] if ownership == "this_job" else None,
+        }, value
+
+    def recovery_report(self, job_id: str) -> dict:
+        """Read-only observations, never evidence that a native host is idle.
+
+        Ledger reads share one SQLite snapshot. Filesystem observations can change
+        independently; reconciliation always repeats them under the host lock.
+        """
+        with self._connect() as db:
+            current = self._read(db, job_id)
+            rows = db.execute(
+                "SELECT body, hash FROM events WHERE job_id=? ORDER BY revision", (job_id,)
+            ).fetchall()
+        events = [json.loads(row["body"]) for row in rows]
+        host = current["host"]
+        marker, intent = self._marker_observation(host, job_id)
+        runs: dict[str, dict] = {}
+        conflicts = []
+        acknowledged = set(current.get("reconciled_run_dirs", []))
+        action_event = None
+
+        def record_run(value, provenance, unresolved):
+            identity = self._run_identity(value, job_id, host)
+            if identity is None:
+                conflicts.append("invalid_recorded_run_binding")
+                return
+            runs[value] = {
+                "path": value,
+                "revision": identity[0],
+                "action": identity[1],
+                "provenance": provenance,
+                "unresolved": unresolved and value not in acknowledged,
+            }
+
+        for event in events:
+            kind, state = event["type"], event["state"]
+            if kind in {"action_started", "action_finished", "action_uncertain"}:
+                action_event = event
+                if state.get("run_dir"):
+                    record_run(state["run_dir"], "ledger", kind != "action_finished")
+            elif kind == "operator_reconciled":
+                for path in state.get("reconciled_run_dirs", []):
+                    acknowledged.add(path)
+                if state.get("run_dir"):
+                    acknowledged.add(state["run_dir"])
+        for path in acknowledged:
+            if path in runs:
+                runs[path]["unresolved"] = False
+        if marker["ownership"] == "this_job":
+            path = intent["run_dir"]
+            if path not in runs:
+                record_run(path, "host_intent", True)
+            marker["matches_ledger"] = bool(
+                action_event
+                and action_event["state"].get("run_dir") == path
+                and (
+                    intent["protocol"] == "legacy"
+                    or action_event["state"].get("intent_id") == intent["intent_id"]
+                )
+            )
+            if intent["protocol"] == "v1":
+                if intent["expected_revision"] > current["revision"]:
+                    conflicts.append("intent_revision_ahead_of_ledger")
+                if action_event and action_event["state"].get("run_dir") == path:
+                    if (
+                        action_event["state"].get("intent_id") != intent["intent_id"]
+                        or hashlib.sha256(
+                            canonical(action_event["state"].get("last_action")).encode()
+                        ).hexdigest()
+                        != intent["request_sha256"]
+                    ):
+                        conflicts.append("intent_ledger_binding_conflict")
+        try:
+            parent = self.workspace.resolve(f"jobs/{job_id}/runs")
+            if parent.exists():
+                unknown_entries = 0
+                with os.scandir(parent) as children:
+                    for child in children:
+                        relative = f"jobs/{job_id}/runs/{child.name}"
+                        if relative in runs:
+                            continue
+                        if relative in acknowledged and self._run_identity(relative, job_id, host):
+                            record_run(relative, "reconciled_job_path", False)
+                            continue
+                        # Bound unexplained evidence, not legitimate ledger history.
+                        unknown_entries += 1
+                        if unknown_entries > 512:
+                            conflicts.append("run_directory_scan_limit")
+                            break
+                        if self._run_identity(relative, job_id, host):
+                            record_run(relative, "unreferenced_job_path", True)
+        except (OSError, WorkspaceError):
+            conflicts.append("run_parent_unreadable_or_unsafe")
+        for value in runs.values():
+            try:
+                path = self.workspace.resolve(value["path"])
+                value["state"] = (
+                    "directory"
+                    if path.is_dir()
+                    else "non_directory"
+                    if path.exists()
+                    else "missing"
+                )
+                value["has_entries"] = None
+                if path.is_dir():
+                    with os.scandir(path) as entries:
+                        value["has_entries"] = next(entries, None) is not None
+            except (OSError, WorkspaceError):
+                value["state"], value["has_entries"] = "unsafe_or_unreadable", None
+                conflicts.append("run_path_unreadable_or_unsafe")
+        unresolved = any(run["unresolved"] for run in runs.values())
+        required = (
+            marker["state"] != "absent"
+            or current["status"] in {"running", "needs_review"}
+            or unresolved
+            or bool(conflicts)
+        )
+        allowed = required and not conflicts and marker["ownership"] in {"none", "this_job"}
+        if marker["ownership"] in {"other_job", "other_workspace"}:
+            reason = "The host intent belongs to another job or workspace; reconcile its owner."
+        elif marker["ownership"] == "unknown":
+            reason = "The host marker is malformed or unsafe. Ownership is unknown; preserve it for manual investigation."
+        elif conflicts:
+            reason = "Recovery evidence conflicts or cannot be safely inspected; preserve it for manual investigation."
+        elif required:
+            reason = "Explicit operator inspection and host-is-idle confirmation are required. No action will be replayed."
+        else:
+            reason = "No unresolved bridge evidence was observed; this does not establish native host idleness."
+        return {
+            "schema_version": 1,
+            "job_id": job_id,
+            "host": host,
+            "status": current["status"],
+            "revision": current["revision"],
+            "ledger": {"valid": True, "events": len(rows), "head": rows[-1]["hash"]},
+            "host_marker": marker,
+            "run_directories": sorted(runs.values(), key=lambda value: value["path"]),
+            "event_state": {
+                "last_type": events[-1]["type"],
+                "action_event_type": action_event["type"] if action_event else None,
+                "action_event_revision": action_event["revision"] if action_event else None,
+                "preparation_failed": bool(
+                    action_event
+                    and action_event["state"].get("dispatch_phase") == "preparation_failed"
+                ),
+            },
+            "conflicts": sorted(set(conflicts)),
+            "reconciliation": {
+                "required": required,
+                "allowed": allowed,
+                "reason": reason,
+                "explicit_host_idle_required": True,
+            },
+            "native_host_idle": "unknown",
+            "automatic_replay": False,
+        }
+
+    def _publish_intent(self, marker: Path, intent: dict) -> None:
+        self._validate_intent(intent, intent["host"])
+        atomic_json(marker, intent)
+
+    @staticmethod
+    def _clear_intent(marker: Path) -> None:
+        marker.unlink(missing_ok=True)
+        sync_directory(marker.parent)
+
     def status(self) -> dict:
         hosts = {}
         for host in ACTIONS:
@@ -360,37 +639,43 @@ class Engine:
             current = self.inspect_job(job_id)
             if current["revision"] != expected:
                 raise RevisionConflict("Job changed; inspect its latest revision before retrying.")
-            if current["status"] in {"running", "needs_review"}:
-                raise ReconciliationRequired(
-                    "This job requires explicit reconciliation; it will not be replayed automatically."
-                )
-            run_dir = self.workspace.run_dir(job_id, expected + 1, action)
-            with marker.open("x") as stream:
-                stream.write(
-                    canonical(
-                        {
-                            "job_id": job_id,
-                            "workspace": str(self.workspace.root),
-                            "run_dir": self.workspace.relative(run_dir),
-                            "started_at": utc_now(),
-                        }
-                    )
-                )
-            started = self._append(
-                job_id,
-                "action_started",
-                {
-                    "status": "running",
-                    "last_action": request,
-                    "result": None,
-                    "run_dir": self.workspace.relative(run_dir),
-                },
-                expected,
-            )
+            recovery = self.recovery_report(job_id)
+            if recovery["reconciliation"]["required"]:
+                raise ReconciliationRequired(recovery["reconciliation"]["reason"])
+            run_path = self.workspace.run_path(job_id, expected + 1, action)
+            relative_run = self.workspace.relative(run_path)
+            intent = {
+                "schema_version": 1,
+                "intent_id": uuid.uuid4().hex,
+                "job_id": job_id,
+                "workspace": str(self.workspace.root),
+                "host": host,
+                "action": action,
+                "expected_revision": expected,
+                "run_dir": relative_run,
+                "request_sha256": hashlib.sha256(canonical(request).encode()).hexdigest(),
+                "created_at": utc_now(),
+            }
+            binding = {
+                "last_action": request,
+                "run_dir": relative_run,
+                "intent_id": intent["intent_id"],
+            }
             captured = io.StringIO()
+            native_attempted = False
             try:
+                # Cross-workspace guard is durable before creating any run directory.
+                self._publish_intent(marker, intent)
+                started = self._append(
+                    job_id,
+                    "action_started",
+                    {**binding, "status": "running", "result": None, "dispatch_phase": "admitted"},
+                    expected,
+                )
+                run_dir = self.workspace.run_dir(job_id, expected + 1, action)
                 # Protect MCP stdout even if an adapter accidentally prints.
                 with _STDOUT_LOCK, redirect_stdout(captured):
+                    native_attempted = True
                     raw = adapter.execute(self.workspace.root, request, run_dir, self.config)
                 result = self._validate_result(raw, action)
                 if captured.getvalue():
@@ -416,25 +701,59 @@ class Engine:
                     },
                     started["revision"],
                 )
-                marker.unlink()
-                return finished
             except Exception as exc:
+                observation, persisted_intent = self._marker_observation(host, job_id)
+                if (
+                    observation["ownership"] != "this_job"
+                    or not persisted_intent
+                    or persisted_intent.get("intent_id") != intent["intent_id"]
+                ):
+                    # Failure before publication cannot have reached a native adapter.
+                    # Partial temp files and any unexpected marker remain untouched.
+                    if observation["state"] == "absent" and not native_attempted:
+                        raise WorkspaceError(
+                            "Host intent could not be published. No native dispatch was attempted; unpublished temporary files were preserved."
+                        ) from exc
+                    raise ReconciliationRequired(
+                        "Host intent publication did not complete. No automatic retry occurred; inspect recovery evidence and preserve temporary files."
+                    ) from exc
+                latest = self.inspect_job(job_id)
+                if (
+                    latest["event_types"][-1] == "action_finished"
+                    and latest.get("intent_id") == intent["intent_id"]
+                ):
+                    return {**latest, "recovery_required": True}
                 result = {
                     "status": "failed",
-                    "summary": f"Orchestration error: {type(exc).__name__}: {exc}",
+                    "summary": f"{'Orchestration' if native_attempted else 'Preparation'} error: {type(exc).__name__}. Inspect recovery evidence before another action.",
                     "artifacts": [],
-                    "observations": {},
+                    "observations": {"native_dispatch_attempted": native_attempted},
                     "limitations": [
                         "The native action may have changed external state. Inspect the host and reconcile before another action; no automatic retry occurred."
+                        if native_attempted
+                        else "Preparation failed before calling the native adapter. Intent and any partial run directory were preserved; explicit reconciliation is required."
                     ],
                 }
                 self._append(
                     job_id,
                     "action_uncertain",
-                    {"status": "needs_review", "result": result},
-                    started["revision"],
+                    {
+                        **binding,
+                        "status": "needs_review",
+                        "result": result,
+                        "dispatch_phase": "native_uncertain"
+                        if native_attempted
+                        else "preparation_failed",
+                    },
+                    latest["revision"],
                 )
                 return self.inspect_job(job_id)
+            try:
+                self._clear_intent(marker)
+            except OSError:
+                # Native evidence is already committed. Do not overwrite it with a failed result.
+                return {**finished, "recovery_required": True}
+            return finished
 
     def reconcile_job(
         self, job_id: str, notes: str, host_is_idle: bool, expected_revision: int
@@ -450,22 +769,32 @@ class Engine:
             )
         current = self.inspect_job(job_id)
         with host_lock(current["host"], self.lock_dir):
+            current = self.inspect_job(job_id)
             marker = self.lock_dir / f"{current['host']}.active.json"
-            if marker.is_symlink():
-                raise WorkspaceError("Unresolved action marker cannot be a symlink.")
-            if marker.exists():
-                value = json.loads(marker.read_text())
-                if value["job_id"] != job_id or value["workspace"] != str(self.workspace.root):
-                    raise ReconciliationRequired(
-                        "The unresolved marker belongs to another job/workspace."
-                    )
-            elif current["status"] not in {"running", "needs_review"}:
+            report = self.recovery_report(job_id)
+            if report["revision"] != expected_revision:
+                raise RevisionConflict("Job changed; inspect its latest revision before retrying.")
+            if not report["reconciliation"]["required"]:
                 raise ValueError("This job has no unresolved action.")
+            if not report["reconciliation"]["allowed"]:
+                raise ReconciliationRequired(report["reconciliation"]["reason"])
+            acknowledged = set(current.get("reconciled_run_dirs", []))
+            acknowledged.update(
+                run["path"] for run in report["run_directories"] if run["unresolved"]
+            )
+            if report["host_marker"]["run_dir"]:
+                acknowledged.add(report["host_marker"]["run_dir"])
             state = self._append(
                 job_id,
                 "operator_reconciled",
-                {"status": "ready", "reconciliation": notes, "result": None},
+                {
+                    "status": "ready",
+                    "reconciliation": notes,
+                    "result": None,
+                    "reconciled_run_dirs": sorted(acknowledged),
+                    "dispatch_phase": "operator_reconciled",
+                },
                 expected_revision,
             )
-            marker.unlink(missing_ok=True)
+            self._clear_intent(marker)
             return state
