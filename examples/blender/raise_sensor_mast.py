@@ -1,7 +1,8 @@
 """Example agent-authored revision, executed inside an existing rover .blend.
 
 Copy this file into your configured workspace, then call run_script with an
-input_blend and script_parameters={"extra_height_m": 0.15}. Source stays intact.
+input_blend, its reviewed expected_source_sha256, and
+script_parameters={"extra_height_m": 0.15}. Source stays intact.
 """
 
 import bpy

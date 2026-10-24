@@ -1,0 +1,76 @@
+{
+  "schema": "source-binding-browser-case/v1",
+  "kind": "recorded-native-execution",
+  "proof_sha256": "7b4c3d89d8c78b92c497bca473da0b4ec385979cc39fb8b2c05f9628ffc7e552",
+  "render": {
+    "host": "Blender 5.2.0 LTS / Cycles",
+    "caption": "1200 \u00d7 834 native renders; same Overview camera and settings. Drag to compare the cart in the foreground. Only metadata was removed from the published images."
+  },
+  "metrics": {
+    "movement": "+25 cm",
+    "components": "28",
+    "meshes": "1,571",
+    "stale-launches": "0"
+  },
+  "steps": [
+    {
+      "title": "Reject the stale version",
+      "detail": "The submitted source hash did not match the bytes copied from the scene. Blender was never launched for this attempt. The engine still recorded the failed action.",
+      "result": "0 native launches \u00b7 job revision 1 \u2192 3",
+      "status": "blocked"
+    },
+    {
+      "title": "Edit from the preserved snapshot",
+      "detail": "The expected, source and snapshot hashes matched. The trusted script moved 28 cart components by 25 cm along X and saved a separate editable scene.",
+      "result": "Verified edit \u00b7 job revision 5 \u2192 7",
+      "status": "verified"
+    },
+    {
+      "title": "Reopen and measure again",
+      "detail": "Fresh Blender processes loaded the edited file, rechecked cart positions and rendered it. The original source and snapshots stayed unchanged; the scene retained 1,571 meshes.",
+      "result": "Native reopen + matching-camera render verified",
+      "status": "verified"
+    },
+    {
+      "title": "Check the actual target",
+      "detail": "The first Unreal build failed in NullRHI viewport handling. After confirming that process had exited, an explicit GPU-mode build used a new destination. A separate editor process reopened the saved level.",
+      "result": "1,571 mesh actors \u00b7 target structure verified",
+      "status": "verified"
+    }
+  ],
+  "identity": {
+    "Reviewed source SHA-256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+    "Snapshot used for the edit": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+    "Original source after all actions": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+    "Published native ZIP SHA-256": "c79d57e896fc6afc6dd5068ef33aed079f82c15b605bad8a05d631a431f2e8eb"
+  },
+  "checks": [
+    "Stale source rejected before Blender launch",
+    "Copied bytes match the reviewed hash",
+    "Source and snapshots preserved",
+    "Cart X movement measured; Y/Z unchanged",
+    "Cart positions persisted after reopening",
+    "Mesh count retained",
+    "Matching render camera and settings",
+    "Unreal saved level reopened separately"
+  ],
+  "unreal": {
+    "summary": "Unreal 5.7.4 reopened the revised laboratory in a fresh GPU-enabled editor process. This run checked static structure and placement; it did not capture an Unreal render.",
+    "checks": [
+      "1,571 mesh actors, 82 reusable mesh assets and 17 materials.",
+      "9 lights and 4 cameras retained.",
+      "Instance transforms, material properties and mesh bounds matched the exported manifest.",
+      "Maximum observed mesh-bounds residual: 0.00007153 cm.",
+      "Both the successful build and fresh inspection exited with code 0."
+    ]
+  },
+  "limitations": [
+    "The initial NullRHI environment build crashed in viewport actor placement. Its failure and the explicit GPU retry are retained in the raw evidence.",
+    "GPU mode was used for structure checks. Unreal appearance, navigation, robot control and packaged gameplay were not validated in this run.",
+    "Blender checks cover cart positions, mesh count and native reopen invariants, not every unrelated transform or mesh byte.",
+    "Only .blend bytes are pinned. The resource gate covers known built-in types, not every add-on, script or external dependency.",
+    "Trusted Python remains privileged. Read-only snapshots are not an OS sandbox or a rollback mechanism.",
+    "Downloads contain publication copies re-saved to remove local metadata. Their hashes are distinct from the unchanged execution source where applicable."
+  ],
+  "provenance": "Observed 2026-10-24. Original public laboratory, real Blender and Unreal adapters, no synthetic host substitution. Native files and image hashes are included in the downloadable evidence."
+}

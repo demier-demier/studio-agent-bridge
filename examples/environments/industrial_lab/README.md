@@ -32,8 +32,8 @@ Observed final geometry: 1,571 mesh instances; 84 evaluated FBX export prototype
 }
 ```
 
-4. Use the returned native file as `input_blend` for `revise_and_render.py`. `render_views` accepts `Overview`, `RobotDetail`, `BenchDetail` and `ComputeAisle`. Images are rendered in Cycles on CPU at 1440 × 1000, 48 samples. Render one or two cameras per action on slower machines rather than exceeding the configured host timeout.
-5. Use the final native file as `input_blend` for `export_environment_bundle.py`. It produces `environment-manifest.json`, unique FBX files, copied texture maps and the complete `industrial-lab.glb`. Its saved `.blend` uses packed images and relative resource paths.
+4. Use the returned native file as `input_blend` for `revise_and_render.py`, passing its reviewed artifact SHA-256 as `expected_source_sha256`. Existing-scene script actions require this hash and a packed, self-contained scene. `render_views` accepts `Overview`, `RobotDetail`, `BenchDetail` and `ComputeAisle`. Images are rendered in Cycles on CPU at 1440 × 1000, 48 samples. Render one or two cameras per action on slower machines rather than exceeding the configured host timeout.
+5. Use the final native file as `input_blend` with its reviewed `expected_source_sha256` for `export_environment_bundle.py`. It produces `environment-manifest.json`, unique FBX files, copied texture maps and the complete `industrial-lab.glb`. Its saved `.blend` uses packed images and relative resource paths.
 6. Run `sanitize_scene.py` against a work copy intended for sharing and scan the saved decompressed bytes for private paths. It cleans packed-image records and file-browser state as well as the render path.
 7. Inspect the returned evidence, independently reopen the native file, and reimport the GLB. An Unreal import must then check its own actor transforms, mesh bounds, materials and render; Blender success alone is not Unreal evidence.
 

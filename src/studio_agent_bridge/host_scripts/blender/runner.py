@@ -16,6 +16,12 @@ _environment_spec = importlib.util.spec_from_file_location(
 environment = importlib.util.module_from_spec(_environment_spec)
 _environment_spec.loader.exec_module(environment)
 
+_resources_spec = importlib.util.spec_from_file_location(
+    "studio_source_resources", Path(__file__).with_name("source_resources.py")
+)
+source_resources = importlib.util.module_from_spec(_resources_spec)
+_resources_spec.loader.exec_module(source_resources)
+
 
 def asset_objects(collection_name=None, include_presentation=False):
     return environment.export_selection(bpy, collection_name, include_presentation)[0]
@@ -189,6 +195,15 @@ def main(job):
         bpy.ops.wm.read_factory_settings(use_empty=True)
         bpy.context.scene.unit_settings.system = "METRIC"
         bpy.context.scene.unit_settings.scale_length = 1.0
+    resource_evidence = None
+    if job.get("require_packed_source"):
+        resource_evidence = source_resources.inspect_resources(bpy)
+        if not resource_evidence["supported"]:
+            return {
+                "status": "blocked",
+                "error": "Pinned source contains unsupported external resources; the requested action was not executed. Pack supported assets or use a self-contained source scene.",
+                "source_resources": resource_evidence,
+            }
     outputs = []
     collection_name = job.get("export_collection")
     include_presentation = job.get("include_presentation", False)
@@ -242,6 +257,7 @@ def main(job):
         outputs.append({"kind": "png", "path": str(path)})
     return {
         "status": "ok",
+        "source_resources": resource_evidence,
         "blender_version": bpy.app.version_string,
         "scene": inspect_scene(collection_name, include_presentation),
         "outputs": outputs,

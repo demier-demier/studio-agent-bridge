@@ -59,3 +59,36 @@ for (const scenario of recovery.cases) {
   }
 }
 console.log(`Verified ${recovery.cases.length} recorded recovery scenarios; synthetic hosts, no browser execution.`);
+
+const sourceRoot = `${assets}/source-binding`;
+const sourceManifest = JSON.parse(await readFile(`${sourceRoot}/manifest.json`, 'utf8'));
+for (const [name, record] of Object.entries(sourceManifest)) {
+  if (!/^[a-zA-Z0-9_.-]+$/.test(name)) throw new Error('Unsafe source-binding asset filename');
+  const bytes = await readFile(`${sourceRoot}/${name}`);
+  if (bytes.length !== record.bytes || createHash('sha256').update(bytes).digest('hex') !== record.sha256) {
+    throw new Error(`Source-binding asset integrity failed: ${name}`);
+  }
+}
+const nativeBytes = await readFile(`${sourceRoot}/observed-native-proof.json`);
+const nativeSource = await readFile(new URL('../../examples/source_binding/observed-native-proof.json', import.meta.url));
+if (!nativeBytes.equals(nativeSource)) throw new Error('Source-binding native evidence differs from the recorded case');
+const native = JSON.parse(nativeBytes);
+const sourceCase = JSON.parse(await readFile(`${sourceRoot}/case.json`, 'utf8'));
+if (native.provenance.synthetic_adapter_used !== false || native.provenance.kind !== 'observed-native-execution' ||
+    Object.values(native.checks).some(value => value !== true) ||
+    sourceCase.proof_sha256 !== createHash('sha256').update(nativeBytes).digest('hex')) {
+  throw new Error('Invalid native source-binding provenance or acceptance record');
+}
+for (const record of [...Object.values(native.renders), native.native_download]) {
+  if (sourceManifest[record.filename]?.sha256 !== record.sha256) throw new Error('Native source-binding file differs from measured output');
+}
+if (native.actions.find(action => action.id === 'stale-source-rejected')?.native_process_launches !== 0 ||
+    native.unreal.appearance_validated !== false || native.unreal.attempts[0].status !== 'failed' ||
+    native.unreal.attempts.at(-1).status !== 'verified') {
+  throw new Error('Source-binding demo must preserve both failure and target verification boundaries');
+}
+const resources = await readFile(`${sourceRoot}/observed-resource-proof.json`);
+if (!resources.equals(await readFile(new URL('../../examples/source_binding/observed-resource-proof.json', import.meta.url)))) {
+  throw new Error('Resource boundary evidence differs from its native record');
+}
+console.log(`Verified ${Object.keys(sourceManifest).length} source-binding assets and recorded native revision/transfer evidence.`);

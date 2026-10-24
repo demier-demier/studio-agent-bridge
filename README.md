@@ -42,6 +42,16 @@ A durable action intent is published before run-directory allocation or native d
 
 See the [recovery design, threat model and reproduction guide](docs/recovery.md) and the [executable experiment](examples/recovery/). Native geometry evidence remains in the separate cases above and below.
 
+## Reliability case: editing the scene version you reviewed
+
+**[Compare source-bound native revisions](https://bernardo-demier-ai-lab.fancy-fly-9200.chatgpt.site/studio-agent-bridge/source-binding/)** — compare matching-camera Blender renders, inspect the reviewed source identity and follow the recorded Unreal handoff.
+
+An existing-scene Blender `run_script` request now requires `expected_source_sha256`. The adapter hashes the bytes copied into its run-local snapshot and rejects a stale source before launching Blender. A valid edit opens the preserved snapshot, saves a separate scene, and checks the source and snapshot independently after execution. Supplying the hash also enables this protection for inspection, rendering, export and imports into an existing scene.
+
+The recorded case rejected a stale hash with **zero Blender launches**, then moved **28 cart components by 0.25 m** while preserving the original source and **1,571 mesh instances**. Fresh Blender processes confirmed the saved positions and matching-camera renders. Unreal reopened the transferred level with **1,571 mesh actors, 82 reusable mesh assets and 17 materials**. The initial NullRHI build crashed in viewport actor placement; an explicit GPU-mode retry in a new destination and a separate reopen passed. This run verifies target structure, not Unreal appearance. The failed attempt remains in the public evidence.
+
+Only the `.blend` bytes are pinned. The native gate rejects known unsupported external resources before running the edit script; supported resources must be packed. Read-only snapshot permissions are a cooperative safeguard, not OS immutability or a Python sandbox. Other scene-consuming actions remain available without a pin for compatibility and report that weaker mode. See the [design and threat model](docs/source-binding.md) and [native reproduction case](examples/source_binding/).
+
 ## Applied case: a board mounting fixture
 
 **[Open the browser demo](https://bernardo-demier-ai-lab.fancy-fly-9200.chatgpt.site/studio-agent-bridge/)** — explore the actual exported 3D mesh, compare verified measurements, inspect the source evidence and download the native case. The browser visualizes geometry; parametric CAD editing remains in Fusion.
@@ -126,6 +136,7 @@ The MCP server exposes nine tools, three workflow prompts and resources for role
 | [Blender](docs/blender.md) | Scene operations, native scripts, rendering and export validation |
 | [Unreal](docs/unreal.md) | Editor projects, FBX handoff, scene/sequence creation and native checks |
 | [Detailed environments](docs/environments.md) | Chat briefs, complete Blender scenes, Unreal transfer, visual review and revisions |
+| [Source-bound revisions](docs/source-binding.md) | Reviewed scene hashes, preserved snapshots, packed-resource limits and native edit evidence |
 | [Validation](docs/validation.md) | Recorded native acceptance results and test boundaries |
 | [Agent roles](prompts/) | Prompts for planning, modeling, geometry QA, interchange and review |
 

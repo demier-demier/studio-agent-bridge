@@ -57,6 +57,8 @@ The environment planner accepts a structured `brief` containing `goal`, optional
 
 After upgrading a running server, reconnect the MCP client to discover new tools and prompts. A fresh CLI process loads the current implementation immediately; existing native `run_script` operations remain usable for clients with an older tool list.
 
+Blender edits that provide `input_blend` now also require `expected_source_sha256` from the reviewed artifact. The tool signature remains the same; the parameter contract is stricter. Inspect the source before retrying a stale hash. See [source-bound revisions](source-binding.md) for snapshot, packed-resource and compatibility behavior.
+
 One job is bound to one host. For a cross-application workflow, the client creates one job per host and passes a workspace-relative exported artifact to the next. The plan names required handoff evidence: content hash, units, axis convention, target measurements and known semantic losses. A format conversion does not preserve a native CAD feature timeline automatically.
 
 ## CLI example

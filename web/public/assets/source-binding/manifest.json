@@ -1,0 +1,26 @@
+{
+  "after.png": {
+    "bytes": 1533170,
+    "sha256": "a523510ad91893cd71b33202fd3fc8b944d54b40a68f817732854457bccf1948"
+  },
+  "before.png": {
+    "bytes": 1530896,
+    "sha256": "151dad63d7619c396bc9c3de694cb9bde5f7d15e71ad92e3bdce56a6ecd05795"
+  },
+  "case.json": {
+    "bytes": 4359,
+    "sha256": "90ef682e1f410e5738502c7b7fa5f7f71e0e8742ceb77a1a5d21bcb3c651c8a7"
+  },
+  "observed-native-proof.json": {
+    "bytes": 51931,
+    "sha256": "7b4c3d89d8c78b92c497bca473da0b4ec385979cc39fb8b2c05f9628ffc7e552"
+  },
+  "observed-resource-proof.json": {
+    "bytes": 7613,
+    "sha256": "aca2b61e7c252adb36e1d14e4cba92f83f516314584a952f42871b37685d7c08"
+  },
+  "source-bound-cart-native.zip": {
+    "bytes": 3594377,
+    "sha256": "c79d57e896fc6afc6dd5068ef33aed079f82c15b605bad8a05d631a431f2e8eb"
+  }
+}

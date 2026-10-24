@@ -29,7 +29,7 @@ The client resolves optional style/layout choices with explicit assumptions. Ask
 5. Export an environment manifest and reusable mesh assets. Retain source units, instance transforms, PBR maps, lights and cameras; preserve the native source.
 6. Import into a separately owned Unreal project, reconstruct the environment, save and reopen its level, and compare measured geometry and placement.
 7. Inspect a real Unreal render or viewport. A headless structural check cannot establish visual parity.
-8. Make one meaningful revision from a chat instruction, saving new native artifacts and preserving the baseline.
+8. Make one meaningful revision from a chat instruction, saving new native artifacts and preserving the baseline. Inspect the baseline artifact and pass its reviewed SHA-256 as `expected_source_sha256` with `input_blend`; existing-scene `run_script` edits require it. Pack supported external resources first. A changed source requires renewed review, not an automatic hash refresh. See [source-bound revisions](source-binding.md).
 
 The new `studio_environment` MCP prompt embeds this workflow. Older active connections can use the existing native tools; reconnect to discover newly added prompts/tools. The CLI `environment-plan` also exposes the validated brief.
 

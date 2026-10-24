@@ -13,9 +13,11 @@ There is no model or LLM inside this adapter. The MCP client supplies the reason
 | `import_asset` | `asset_path` | Imports GLB/glTF or FBX into a fresh scene or optional `input_blend`; saves a new native file |
 | `export_asset` | `input_blend` | New native copy, requested `export_formats` (`glb`, `fbx`), environment manifest, optional unique local mesh assets; separate-process import verification |
 | `render` | `input_blend` | New native copy and PNG using the active camera and bounded `render_settings` |
-| `run_script` | `script_path`; optional `input_blend` | Executes an explicitly trusted Python file, saves a new scene, and optionally renders it |
+| `run_script` | `script_path`; `expected_source_sha256` when `input_blend` is supplied | Executes an explicitly trusted Python file, saves a new scene, and optionally renders it |
 
 All file parameters are relative to the configured workspace. Paths that resolve outside it are rejected. Every operation uses a fresh, empty output directory. The original input file is hashed before and after execution; unexpected changes prevent a verified result.
+
+For an existing scene, pass `expected_source_sha256` containing the 64-character lowercase SHA-256 of the artifact you reviewed. It is required for `run_script` with `input_blend`, and optional for the other actions that load a scene, including `import_asset`. A supplied hash is always enforced. A pinned action copies the scene into its own run directory, verifies the copied bytes before launching Blender, and checks the original and snapshot separately afterward. Pinned scenes must be self-contained with supported resources packed. Unpinned reads retain their original paths for compatibility and do not provide this source-version guarantee. See [source-bound revisions](source-binding.md) for the contract, limits and native reproduction case.
 
 `export_formats` defaults to `["glb", "fbx"]`. `render` defaults to true for `create_demo` and `render`, and false otherwise. `script_parameters` is passed as `STUDIO_PARAMETERS` to native scripts; `STUDIO_OUTPUT_DIR` is also provided. Scripts can use all installed `bpy` APIs, including geometry nodes, modifiers, constraints, animation, materials, and rendering. Those facilities are not all exercised by the bundled example.
 
@@ -93,7 +95,7 @@ The JSON result contains the actual artifact paths. Use the returned `.blend` pa
 ```sh
 studio-agent-bridge --workspace "$HOME/StudioAgentWorkspace" --allow-scripts run \
   --job JOB_ID --action run_script \
-  --parameters '{"input_blend":"PATH_FROM_PREVIOUS_RESULT.blend","script_path":"scripts/raise_sensor_mast.py","script_parameters":{"extra_height_m":0.15},"render":true}'
+  --parameters '{"input_blend":"PATH_FROM_PREVIOUS_RESULT.blend","expected_source_sha256":"REVIEWED_ARTIFACT_SHA256","script_path":"scripts/raise_sensor_mast.py","script_parameters":{"extra_height_m":0.15},"render":true}'
 ```
 
 The example changes the lower mast height and moves the upper sensors together. It preserves the original `.blend`, retains separate editable objects and modifiers, and records the measured new dimensions after reopening. It demonstrates a native revision beyond the fixed generator.

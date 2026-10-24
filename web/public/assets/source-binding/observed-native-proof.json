@@ -1,0 +1,1403 @@
+{
+  "schema_version": "source-binding-native-example/v1",
+  "generated_at": "2026-10-24T12:25:24.481992+00:00",
+  "provenance": {
+    "kind": "observed-native-execution",
+    "generator": "examples/source_binding/run_example.py",
+    "archive": {
+      "path": "web/public/assets/environment/industrial-lab-native.zip",
+      "sha256": "461fbaa85c1bda7e6a7bd71dece05bfa5c3b48b11db0b1883481c9b815f15485"
+    },
+    "extracted": [
+      {
+        "member": "scene-day.blend",
+        "workspace_path": "source/scene-day.blend",
+        "sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "bytes": 1807297
+      },
+      {
+        "member": "scripts/revise_and_render.py",
+        "workspace_path": "scripts/environments/revise_and_render.py",
+        "sha256": "ee4f7402e0a27251101a9f1944748908c7ea85d4925e4d54ec943ab96a1e48c5",
+        "bytes": 4842
+      },
+      {
+        "member": "scripts/sanitize_scene.py",
+        "workspace_path": "scripts/environments/sanitize_scene.py",
+        "sha256": "6be109a3086e6d7f10ce1ea9343c594717fdfded84d1414c55feac7a0c6b0dd4",
+        "bytes": 2078
+      },
+      {
+        "member": "scripts/export_environment_bundle.py",
+        "workspace_path": "scripts/environments/export_environment_bundle.py",
+        "sha256": "903db177cc075feb78a2976ee44b0125e83e1a88cf325e98282bfaf32da21561",
+        "bytes": 2201
+      },
+      {
+        "member": "scripts/environment_export.py",
+        "workspace_path": "scripts/environments/environment_export.py",
+        "sha256": "b1a0fccac2f35d5b274dcdbdb72e80aa13144a3d1da4f5ab3e2cc340250b4029",
+        "bytes": 36598
+      }
+    ],
+    "execution_sources": {
+      "src/studio_agent_bridge/engine.py": "78765e48a420b089b981b8e2200c259df5d1dea7f1824aab570544378d24f590",
+      "src/studio_agent_bridge/source_binding.py": "5f89dc53f51aae050cd47ab8f5db2754473a09e18ac511e6c416a02e6398efb8",
+      "src/studio_agent_bridge/adapters/blender.py": "91430be4604ef5e1acf2751fdbb9be8f23d3c2312870f579800de2a4c2ad1a8f",
+      "src/studio_agent_bridge/adapters/unreal.py": "66df8ca46bf3fad151873a6b4407f38a5c37da3a8e5b4067fdc23123df265897",
+      "src/studio_agent_bridge/host_scripts/blender/runner.py": "ee6f2a1c5a628640eaad08dc630bdcfe4057dff8191f77ce99a5237c7b2097a2",
+      "src/studio_agent_bridge/host_scripts/blender/source_resources.py": "1e9c9b0d5fda0edac073ec11bc2dc4545c39804e3e2e8f4602b7ec1b204ed99e",
+      "src/studio_agent_bridge/host_scripts/blender/environment_export.py": "b1a0fccac2f35d5b274dcdbdb72e80aa13144a3d1da4f5ab3e2cc340250b4029"
+    },
+    "unreal_execution_sources": {
+      "src/studio_agent_bridge/engine.py": "78765e48a420b089b981b8e2200c259df5d1dea7f1824aab570544378d24f590",
+      "src/studio_agent_bridge/source_binding.py": "5f89dc53f51aae050cd47ab8f5db2754473a09e18ac511e6c416a02e6398efb8",
+      "src/studio_agent_bridge/adapters/blender.py": "91430be4604ef5e1acf2751fdbb9be8f23d3c2312870f579800de2a4c2ad1a8f",
+      "src/studio_agent_bridge/adapters/unreal.py": "66df8ca46bf3fad151873a6b4407f38a5c37da3a8e5b4067fdc23123df265897",
+      "src/studio_agent_bridge/host_scripts/blender/runner.py": "ee6f2a1c5a628640eaad08dc630bdcfe4057dff8191f77ce99a5237c7b2097a2",
+      "src/studio_agent_bridge/host_scripts/blender/source_resources.py": "1e9c9b0d5fda0edac073ec11bc2dc4545c39804e3e2e8f4602b7ec1b204ed99e",
+      "src/studio_agent_bridge/host_scripts/blender/environment_export.py": "b1a0fccac2f35d5b274dcdbdb72e80aa13144a3d1da4f5ab3e2cc340250b4029"
+    },
+    "generator_sha256": "d53ee0eb03f295f5be19625611c1500917ed790d2d255bf7601783e4e5f4daf0",
+    "public_sanitizer_sha256": "6b7dfbc28a1ebc60b4f02eea23f616ac4a5ced2bb8f00a6f53099117e4cec5d5",
+    "synthetic_adapter_used": false
+  },
+  "host_versions": {
+    "blender": "Blender 5.2.0 LTS",
+    "unreal": {
+      "MajorVersion": 5,
+      "MinorVersion": 7,
+      "PatchVersion": 4,
+      "Changelist": 51494982
+    }
+  },
+  "request": {
+    "source": "source/scene-day.blend",
+    "expected_source_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+    "cart_offset_x_m": 0.25,
+    "lighting_theme": "day"
+  },
+  "source_sha256_after_actions": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+  "portable_native": {
+    "path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000014-run_script/scene.blend",
+    "sha256": "4ba483677420fa6f3837dd776b66035e1a23fe83671f639fd035cafc35b7fb3a",
+    "bytes": 1807116
+  },
+  "renders": {
+    "before": {
+      "filename": "before.png",
+      "width": 1200,
+      "height": 834,
+      "sha256": "151dad63d7619c396bc9c3de694cb9bde5f7d15e71ad92e3bdce56a6ecd05795",
+      "bytes": 1530896,
+      "raw_native_sha256": "d9752339166d32627a14c0a1e24b2025457fde7463603814ed66fae651bfcf15",
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt"
+      ],
+      "compressed_pixel_bytes_unchanged": true
+    },
+    "after": {
+      "filename": "after.png",
+      "width": 1200,
+      "height": 834,
+      "sha256": "a523510ad91893cd71b33202fd3fc8b944d54b40a68f817732854457bccf1948",
+      "bytes": 1533170,
+      "raw_native_sha256": "8c0818d4bc8dc2c626e7bc5b94b7932f9c1fc7de500286db00b637bcb84adfb9",
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt",
+        "tEXt"
+      ],
+      "compressed_pixel_bytes_unchanged": true
+    }
+  },
+  "native_download": {
+    "filename": "source-bound-cart-native.zip",
+    "sha256": "c79d57e896fc6afc6dd5068ef33aed079f82c15b605bad8a05d631a431f2e8eb",
+    "bytes": 3594377,
+    "native_sha256": "4ba483677420fa6f3837dd776b66035e1a23fe83671f639fd035cafc35b7fb3a",
+    "original_native_sha256": "ec8801cbbace312a98ecbe1db910fa79c6b8124e9c8f059e2e758679a7440d78",
+    "input_source_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+    "original_native_filename": "scene-baseline.blend",
+    "baseline_native_is_sanitized_copy": true,
+    "edited_native_filename": "scene-edited.blend",
+    "private_path_scan_passed": true,
+    "zip_integrity_passed": true
+  },
+  "public_copy_sanitization": {
+    "method": "Native path properties overwritten with long benign values then relative paths; saved and independently reopened by Blender",
+    "baseline_is_byte_identical_to_input": false,
+    "source_input_preserved": true,
+    "checks": {
+      "public-baseline-sanitization": {
+        "object_names_preserved": true,
+        "mesh_count_preserved": true,
+        "modifier_count_preserved": true,
+        "material_count_preserved": true,
+        "animated_objects_preserved": true,
+        "render_settings_preserved": true,
+        "dimensions_preserved": true
+      },
+      "public-edited-sanitization": {
+        "object_names_preserved": true,
+        "mesh_count_preserved": true,
+        "modifier_count_preserved": true,
+        "material_count_preserved": true,
+        "animated_objects_preserved": true,
+        "render_settings_preserved": true,
+        "dimensions_preserved": true
+      }
+    },
+    "scan_scope": "Decompressed native bytes checked for private path prefixes and the current local account identifier"
+  },
+  "actions": [
+    {
+      "id": "stale-source-rejected",
+      "action": "run_script",
+      "status": "failed",
+      "summary": "Expected source SHA-256 does not match copied .blend bytes; native dispatch was rejected.",
+      "revision_before": 1,
+      "revision_after": 3,
+      "native_process_launches": 0,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "rejected_before_native",
+        "source_path": "source/scene-day.blend",
+        "snapshot_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000002-run_script/source_snapshot/scene-day.blend",
+        "expected_source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "source_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "snapshot_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "bytes": 1807297,
+        "snapshot_sha256_after_action": null,
+        "source_sha256_after_action": null,
+        "snapshot_unchanged": null,
+        "source_unchanged": null,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ],
+        "error": "Expected source SHA-256 does not match copied .blend bytes; native dispatch was rejected."
+      },
+      "source_resources": null
+    },
+    {
+      "id": "source-baseline-render",
+      "action": "render",
+      "status": "verified",
+      "summary": "Blender render: 1571 meshes; native/export checks passed.",
+      "revision_before": 3,
+      "revision_after": 5,
+      "native_process_launches": 2,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "checked_after_action",
+        "source_path": "source/scene-day.blend",
+        "snapshot_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000004-render/source_snapshot/scene-day.blend",
+        "expected_source_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "source_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "snapshot_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "bytes": 1807297,
+        "snapshot_sha256_after_action": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "source_sha256_after_action": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "snapshot_unchanged": true,
+        "source_unchanged": true,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ]
+      },
+      "source_resources": {
+        "supported": true,
+        "scope": "common_builtin_resource_fields",
+        "checked_before_requested_action": true,
+        "packed_counts": {
+          "images": 18
+        },
+        "unsupported_counts": {},
+        "limitations": [
+          "Only the .blend bytes are pinned. Known unpacked resources, linked libraries and disk caches are rejected; no external files are copied.",
+          "This is not exhaustive dependency discovery for custom properties, add-ons, scripts, drivers or future resource types. Trusted scripts remain privileged."
+        ]
+      }
+    },
+    {
+      "id": "pinned-cart-edit",
+      "action": "run_script",
+      "status": "verified",
+      "summary": "Blender run_script: 1571 meshes; native/export checks passed.",
+      "revision_before": 5,
+      "revision_after": 7,
+      "native_process_launches": 2,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "checked_after_action",
+        "source_path": "source/scene-day.blend",
+        "snapshot_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000006-run_script/source_snapshot/scene-day.blend",
+        "expected_source_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "source_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "snapshot_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "bytes": 1807297,
+        "snapshot_sha256_after_action": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "source_sha256_after_action": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "snapshot_unchanged": true,
+        "source_unchanged": true,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ]
+      },
+      "source_resources": {
+        "supported": true,
+        "scope": "common_builtin_resource_fields",
+        "checked_before_requested_action": true,
+        "packed_counts": {
+          "images": 18
+        },
+        "unsupported_counts": {},
+        "limitations": [
+          "Only the .blend bytes are pinned. Known unpacked resources, linked libraries and disk caches are rejected; no external files are copied.",
+          "This is not exhaustive dependency discovery for custom properties, add-ons, scripts, drivers or future resource types. Trusted scripts remain privileged."
+        ]
+      }
+    },
+    {
+      "id": "fresh-cart-position-read",
+      "action": "run_script",
+      "status": "verified",
+      "summary": "Blender run_script: 1571 meshes; native/export checks passed.",
+      "revision_before": 7,
+      "revision_after": 9,
+      "native_process_launches": 2,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "checked_after_action",
+        "source_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000006-run_script/scene.blend",
+        "snapshot_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000008-run_script/source_snapshot/scene.blend",
+        "expected_source_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "source_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "snapshot_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "bytes": 1807392,
+        "snapshot_sha256_after_action": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "source_sha256_after_action": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "snapshot_unchanged": true,
+        "source_unchanged": true,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ]
+      },
+      "source_resources": {
+        "supported": true,
+        "scope": "common_builtin_resource_fields",
+        "checked_before_requested_action": true,
+        "packed_counts": {
+          "images": 18
+        },
+        "unsupported_counts": {},
+        "limitations": [
+          "Only the .blend bytes are pinned. Known unpacked resources, linked libraries and disk caches are rejected; no external files are copied.",
+          "This is not exhaustive dependency discovery for custom properties, add-ons, scripts, drivers or future resource types. Trusted scripts remain privileged."
+        ]
+      }
+    },
+    {
+      "id": "fresh-native-inspection",
+      "action": "inspect",
+      "status": "verified",
+      "summary": "Blender inspect: 1571 meshes; native/export checks passed.",
+      "revision_before": 9,
+      "revision_after": 11,
+      "native_process_launches": 1,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "checked_after_action",
+        "source_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000006-run_script/scene.blend",
+        "snapshot_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000010-inspect/source_snapshot/scene.blend",
+        "expected_source_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "source_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "snapshot_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "bytes": 1807392,
+        "snapshot_sha256_after_action": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "source_sha256_after_action": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "snapshot_unchanged": true,
+        "source_unchanged": true,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ]
+      },
+      "source_resources": {
+        "supported": true,
+        "scope": "common_builtin_resource_fields",
+        "checked_before_requested_action": true,
+        "packed_counts": {
+          "images": 18
+        },
+        "unsupported_counts": {},
+        "limitations": [
+          "Only the .blend bytes are pinned. Known unpacked resources, linked libraries and disk caches are rejected; no external files are copied.",
+          "This is not exhaustive dependency discovery for custom properties, add-ons, scripts, drivers or future resource types. Trusted scripts remain privileged."
+        ]
+      }
+    },
+    {
+      "id": "fresh-native-render",
+      "action": "render",
+      "status": "verified",
+      "summary": "Blender render: 1571 meshes; native/export checks passed.",
+      "revision_before": 11,
+      "revision_after": 13,
+      "native_process_launches": 2,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "checked_after_action",
+        "source_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000006-run_script/scene.blend",
+        "snapshot_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000012-render/source_snapshot/scene.blend",
+        "expected_source_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "source_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "snapshot_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "bytes": 1807392,
+        "snapshot_sha256_after_action": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "source_sha256_after_action": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "snapshot_unchanged": true,
+        "source_unchanged": true,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ]
+      },
+      "source_resources": {
+        "supported": true,
+        "scope": "common_builtin_resource_fields",
+        "checked_before_requested_action": true,
+        "packed_counts": {
+          "images": 18
+        },
+        "unsupported_counts": {},
+        "limitations": [
+          "Only the .blend bytes are pinned. Known unpacked resources, linked libraries and disk caches are rejected; no external files are copied.",
+          "This is not exhaustive dependency discovery for custom properties, add-ons, scripts, drivers or future resource types. Trusted scripts remain privileged."
+        ]
+      }
+    },
+    {
+      "id": "portable-edited-scene",
+      "action": "run_script",
+      "status": "verified",
+      "summary": "Blender run_script: 1571 meshes; native/export checks passed.",
+      "revision_before": 13,
+      "revision_after": 15,
+      "native_process_launches": 2,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "checked_after_action",
+        "source_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000006-run_script/scene.blend",
+        "snapshot_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000014-run_script/source_snapshot/scene.blend",
+        "expected_source_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "source_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "snapshot_sha256": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "bytes": 1807392,
+        "snapshot_sha256_after_action": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "source_sha256_after_action": "3c26ab21a5911fd34a82f6e92b98b36a9e56be1f11f4800184f222ab0a67d6eb",
+        "snapshot_unchanged": true,
+        "source_unchanged": true,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ]
+      },
+      "source_resources": {
+        "supported": true,
+        "scope": "common_builtin_resource_fields",
+        "checked_before_requested_action": true,
+        "packed_counts": {
+          "images": 18
+        },
+        "unsupported_counts": {},
+        "limitations": [
+          "Only the .blend bytes are pinned. Known unpacked resources, linked libraries and disk caches are rejected; no external files are copied.",
+          "This is not exhaustive dependency discovery for custom properties, add-ons, scripts, drivers or future resource types. Trusted scripts remain privileged."
+        ]
+      }
+    },
+    {
+      "id": "edited-environment-export",
+      "action": "export_asset",
+      "status": "verified",
+      "summary": "Blender export_asset: 1571 meshes; native/export checks passed.",
+      "revision_before": 15,
+      "revision_after": 17,
+      "native_process_launches": 3,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "checked_after_action",
+        "source_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000014-run_script/scene.blend",
+        "snapshot_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000016-export_asset/source_snapshot/scene.blend",
+        "expected_source_sha256": "0571a45300a313067b0b0f47a69659793c24fb5c25bc7b31930b38816eceae8f",
+        "source_sha256": "0571a45300a313067b0b0f47a69659793c24fb5c25bc7b31930b38816eceae8f",
+        "snapshot_sha256": "0571a45300a313067b0b0f47a69659793c24fb5c25bc7b31930b38816eceae8f",
+        "bytes": 1807341,
+        "snapshot_sha256_after_action": "0571a45300a313067b0b0f47a69659793c24fb5c25bc7b31930b38816eceae8f",
+        "source_sha256_after_action": "0571a45300a313067b0b0f47a69659793c24fb5c25bc7b31930b38816eceae8f",
+        "snapshot_unchanged": true,
+        "source_unchanged": true,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ]
+      },
+      "source_resources": {
+        "supported": true,
+        "scope": "common_builtin_resource_fields",
+        "checked_before_requested_action": true,
+        "packed_counts": {
+          "images": 18
+        },
+        "unsupported_counts": {},
+        "limitations": [
+          "Only the .blend bytes are pinned. Known unpacked resources, linked libraries and disk caches are rejected; no external files are copied.",
+          "This is not exhaustive dependency discovery for custom properties, add-ons, scripts, drivers or future resource types. Trusted scripts remain privileged."
+        ]
+      }
+    },
+    {
+      "id": "new-unreal-project",
+      "action": "create_project",
+      "status": "verified",
+      "summary": "Native Unreal project initialized and bootstrap map saved.",
+      "revision_before": 1,
+      "revision_after": 3,
+      "native_process_launches": 1,
+      "source_binding": null,
+      "source_resources": null
+    },
+    {
+      "id": "unreal-edited-scene",
+      "action": "build_scene",
+      "status": "failed",
+      "summary": "Unreal did not produce native verification evidence; inspect the process log.",
+      "revision_before": 3,
+      "revision_after": 5,
+      "native_process_launches": 1,
+      "source_binding": null,
+      "source_resources": null
+    },
+    {
+      "id": "unreal-gpu-edited-scene",
+      "action": "build_scene",
+      "status": "verified",
+      "summary": "Native environment assets and editable shared-mesh actors saved, reopened and measured.",
+      "revision_before": 5,
+      "revision_after": 7,
+      "native_process_launches": 1,
+      "source_binding": null,
+      "source_resources": null
+    },
+    {
+      "id": "unreal-gpu-fresh-reopen",
+      "action": "inspect",
+      "status": "verified",
+      "summary": "Native environment assets and editable shared-mesh actors saved, reopened and measured.",
+      "revision_before": 7,
+      "revision_after": 9,
+      "native_process_launches": 1,
+      "source_binding": null,
+      "source_resources": null
+    },
+    {
+      "id": "public-baseline-sanitization",
+      "action": "run_script",
+      "status": "verified",
+      "summary": "Blender run_script: 1571 meshes; native/export checks passed.",
+      "revision_before": 17,
+      "revision_after": 19,
+      "native_process_launches": 2,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "checked_after_action",
+        "source_path": "source/scene-day.blend",
+        "snapshot_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000018-run_script/source_snapshot/scene-day.blend",
+        "expected_source_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "source_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "snapshot_sha256": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "bytes": 1807297,
+        "snapshot_sha256_after_action": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "source_sha256_after_action": "f612b005e7dc558992902dac3bad8596e276cb971d13eb2f8855da1fa8dc104c",
+        "snapshot_unchanged": true,
+        "source_unchanged": true,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ]
+      },
+      "source_resources": {
+        "supported": true,
+        "scope": "common_builtin_resource_fields",
+        "checked_before_requested_action": true,
+        "packed_counts": {
+          "images": 18
+        },
+        "unsupported_counts": {},
+        "limitations": [
+          "Only the .blend bytes are pinned. Known unpacked resources, linked libraries and disk caches are rejected; no external files are copied.",
+          "This is not exhaustive dependency discovery for custom properties, add-ons, scripts, drivers or future resource types. Trusted scripts remain privileged."
+        ]
+      }
+    },
+    {
+      "id": "public-edited-sanitization",
+      "action": "run_script",
+      "status": "verified",
+      "summary": "Blender run_script: 1571 meshes; native/export checks passed.",
+      "revision_before": 19,
+      "revision_after": 21,
+      "native_process_launches": 2,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "checked_after_action",
+        "source_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000014-run_script/scene.blend",
+        "snapshot_path": "jobs/source-bound-cart-94cf9d46c1cf/runs/000020-run_script/source_snapshot/scene.blend",
+        "expected_source_sha256": "0571a45300a313067b0b0f47a69659793c24fb5c25bc7b31930b38816eceae8f",
+        "source_sha256": "0571a45300a313067b0b0f47a69659793c24fb5c25bc7b31930b38816eceae8f",
+        "snapshot_sha256": "0571a45300a313067b0b0f47a69659793c24fb5c25bc7b31930b38816eceae8f",
+        "bytes": 1807341,
+        "snapshot_sha256_after_action": "0571a45300a313067b0b0f47a69659793c24fb5c25bc7b31930b38816eceae8f",
+        "source_sha256_after_action": "0571a45300a313067b0b0f47a69659793c24fb5c25bc7b31930b38816eceae8f",
+        "snapshot_unchanged": true,
+        "source_unchanged": true,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ]
+      },
+      "source_resources": {
+        "supported": true,
+        "scope": "common_builtin_resource_fields",
+        "checked_before_requested_action": true,
+        "packed_counts": {
+          "images": 18
+        },
+        "unsupported_counts": {},
+        "limitations": [
+          "Only the .blend bytes are pinned. Known unpacked resources, linked libraries and disk caches are rejected; no external files are copied.",
+          "This is not exhaustive dependency discovery for custom properties, add-ons, scripts, drivers or future resource types. Trusted scripts remain privileged."
+        ]
+      }
+    }
+  ],
+  "cart_translation_measurements_m": {
+    "Cart_Top": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_LowerShelf": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_Post": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_Wheel": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_Post.001": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_Wheel.001": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_Post.002": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_Wheel.002": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_Post.003": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_Wheel.003": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_StandBase": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_Stand": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_Bezel": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_Display": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_UIline": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_UIline.001": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_UIline.002": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_UIline.003": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_UIline.004": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_UIbars": [
+      0.2499997615814209,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_UIbars.001": [
+      0.2499997615814209,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_UIbars.002": [
+      0.2499997615814209,
+      0.0,
+      0.0
+    ],
+    "Cart_DiagnosticMonitor_UIbars.003": [
+      0.2499997615814209,
+      0.0,
+      0.0
+    ],
+    "Cart_Tablet": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_TabletScreen": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Cart_InstrumentsCase": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Case_Latch": [
+      0.25,
+      0.0,
+      0.0
+    ],
+    "Case_Latch.001": [
+      0.25,
+      0.0,
+      0.0
+    ]
+  },
+  "before_after": {
+    "before": {
+      "theme": "day",
+      "meshes": 1571,
+      "lighting": {
+        "Ceiling_Practical": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Ceiling_Practical.001": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Ceiling_Practical.002": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Ceiling_Practical.003": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Ceiling_Practical.004": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Ceiling_Practical.005": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Entrance_SoftFill": {
+          "energy": 550.0,
+          "color": [
+            1.0,
+            0.7699999809265137,
+            0.5299999713897705
+          ]
+        },
+        "Robot_WarmEdge": {
+          "energy": 250.0,
+          "color": [
+            1.0,
+            0.5799999833106995,
+            0.25
+          ]
+        },
+        "Rack_CoolEdge": {
+          "energy": 250.0,
+          "color": [
+            0.3199999928474426,
+            0.6700000166893005,
+            1.0
+          ]
+        },
+        "diffuser": {
+          "strength": 3.0,
+          "color": [
+            0.800000011920929,
+            0.8799999952316284,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "cart_world_positions_m": {
+        "Cart_Top": [
+          3.75,
+          0.25,
+          1.0199999809265137
+        ],
+        "Cart_LowerShelf": [
+          3.75,
+          0.25,
+          0.25
+        ],
+        "Cart_Post": [
+          3.2699999809265137,
+          -0.019999999552965164,
+          0.6150000095367432
+        ],
+        "Cart_Wheel": [
+          3.2699999809265137,
+          -0.019999999552965164,
+          0.11999999731779099
+        ],
+        "Cart_Post.001": [
+          3.2699999809265137,
+          0.5199999809265137,
+          0.6150000095367432
+        ],
+        "Cart_Wheel.001": [
+          3.2699999809265137,
+          0.5199999809265137,
+          0.11999999731779099
+        ],
+        "Cart_Post.002": [
+          4.230000019073486,
+          -0.019999999552965164,
+          0.6150000095367432
+        ],
+        "Cart_Wheel.002": [
+          4.230000019073486,
+          -0.019999999552965164,
+          0.11999999731779099
+        ],
+        "Cart_Post.003": [
+          4.230000019073486,
+          0.5199999809265137,
+          0.6150000095367432
+        ],
+        "Cart_Wheel.003": [
+          4.230000019073486,
+          0.5199999809265137,
+          0.11999999731779099
+        ],
+        "Cart_DiagnosticMonitor_StandBase": [
+          3.75,
+          0.3700000047683716,
+          1.0800000429153442
+        ],
+        "Cart_DiagnosticMonitor_Stand": [
+          3.75,
+          0.41499999165534973,
+          1.25
+        ],
+        "Cart_DiagnosticMonitor_Bezel": [
+          3.75,
+          0.3700000047683716,
+          1.4600000381469727
+        ],
+        "Cart_DiagnosticMonitor_Display": [
+          3.75,
+          0.3319999873638153,
+          1.4600000381469727
+        ],
+        "Cart_DiagnosticMonitor_UIline": [
+          3.7200000286102295,
+          0.3269999921321869,
+          1.5800000429153442
+        ],
+        "Cart_DiagnosticMonitor_UIline.001": [
+          3.7200000286102295,
+          0.3269999921321869,
+          1.524999976158142
+        ],
+        "Cart_DiagnosticMonitor_UIline.002": [
+          3.7200000286102295,
+          0.3269999921321869,
+          1.4700000286102295
+        ],
+        "Cart_DiagnosticMonitor_UIline.003": [
+          3.7200000286102295,
+          0.3269999921321869,
+          1.4149999618530273
+        ],
+        "Cart_DiagnosticMonitor_UIline.004": [
+          3.7200000286102295,
+          0.3269999921321869,
+          1.3600000143051147
+        ],
+        "Cart_DiagnosticMonitor_UIbars": [
+          3.990000009536743,
+          0.32499998807907104,
+          1.3600000143051147
+        ],
+        "Cart_DiagnosticMonitor_UIbars.001": [
+          3.990000009536743,
+          0.32499998807907104,
+          1.4149999618530273
+        ],
+        "Cart_DiagnosticMonitor_UIbars.002": [
+          3.990000009536743,
+          0.32499998807907104,
+          1.4700000286102295
+        ],
+        "Cart_DiagnosticMonitor_UIbars.003": [
+          3.990000009536743,
+          0.32499998807907104,
+          1.524999976158142
+        ],
+        "Cart_Tablet": [
+          3.75,
+          0.029999999329447746,
+          1.0700000524520874
+        ],
+        "Cart_TabletScreen": [
+          3.75,
+          0.029999999329447746,
+          1.0850000381469727
+        ],
+        "Cart_InstrumentsCase": [
+          3.75,
+          0.25,
+          0.4300000071525574
+        ],
+        "Case_Latch": [
+          3.5,
+          0.019999999552965164,
+          0.5
+        ],
+        "Case_Latch.001": [
+          4.0,
+          0.019999999552965164,
+          0.5
+        ]
+      }
+    },
+    "after": {
+      "theme": "day",
+      "meshes": 1571,
+      "cart_world_positions_m": {
+        "Cart_Top": [
+          4.0,
+          0.25,
+          1.0199999809265137
+        ],
+        "Cart_LowerShelf": [
+          4.0,
+          0.25,
+          0.25
+        ],
+        "Cart_Post": [
+          3.5199999809265137,
+          -0.019999999552965164,
+          0.6150000095367432
+        ],
+        "Cart_Wheel": [
+          3.5199999809265137,
+          -0.019999999552965164,
+          0.11999999731779099
+        ],
+        "Cart_Post.001": [
+          3.5199999809265137,
+          0.5199999809265137,
+          0.6150000095367432
+        ],
+        "Cart_Wheel.001": [
+          3.5199999809265137,
+          0.5199999809265137,
+          0.11999999731779099
+        ],
+        "Cart_Post.002": [
+          4.480000019073486,
+          -0.019999999552965164,
+          0.6150000095367432
+        ],
+        "Cart_Wheel.002": [
+          4.480000019073486,
+          -0.019999999552965164,
+          0.11999999731779099
+        ],
+        "Cart_Post.003": [
+          4.480000019073486,
+          0.5199999809265137,
+          0.6150000095367432
+        ],
+        "Cart_Wheel.003": [
+          4.480000019073486,
+          0.5199999809265137,
+          0.11999999731779099
+        ],
+        "Cart_DiagnosticMonitor_StandBase": [
+          4.0,
+          0.3700000047683716,
+          1.0800000429153442
+        ],
+        "Cart_DiagnosticMonitor_Stand": [
+          4.0,
+          0.41499999165534973,
+          1.25
+        ],
+        "Cart_DiagnosticMonitor_Bezel": [
+          4.0,
+          0.3700000047683716,
+          1.4600000381469727
+        ],
+        "Cart_DiagnosticMonitor_Display": [
+          4.0,
+          0.3319999873638153,
+          1.4600000381469727
+        ],
+        "Cart_DiagnosticMonitor_UIline": [
+          3.9700000286102295,
+          0.3269999921321869,
+          1.5800000429153442
+        ],
+        "Cart_DiagnosticMonitor_UIline.001": [
+          3.9700000286102295,
+          0.3269999921321869,
+          1.524999976158142
+        ],
+        "Cart_DiagnosticMonitor_UIline.002": [
+          3.9700000286102295,
+          0.3269999921321869,
+          1.4700000286102295
+        ],
+        "Cart_DiagnosticMonitor_UIline.003": [
+          3.9700000286102295,
+          0.3269999921321869,
+          1.4149999618530273
+        ],
+        "Cart_DiagnosticMonitor_UIline.004": [
+          3.9700000286102295,
+          0.3269999921321869,
+          1.3600000143051147
+        ],
+        "Cart_DiagnosticMonitor_UIbars": [
+          4.239999771118164,
+          0.32499998807907104,
+          1.3600000143051147
+        ],
+        "Cart_DiagnosticMonitor_UIbars.001": [
+          4.239999771118164,
+          0.32499998807907104,
+          1.4149999618530273
+        ],
+        "Cart_DiagnosticMonitor_UIbars.002": [
+          4.239999771118164,
+          0.32499998807907104,
+          1.4700000286102295
+        ],
+        "Cart_DiagnosticMonitor_UIbars.003": [
+          4.239999771118164,
+          0.32499998807907104,
+          1.524999976158142
+        ],
+        "Cart_Tablet": [
+          4.0,
+          0.029999999329447746,
+          1.0700000524520874
+        ],
+        "Cart_TabletScreen": [
+          4.0,
+          0.029999999329447746,
+          1.0850000381469727
+        ],
+        "Cart_InstrumentsCase": [
+          4.0,
+          0.25,
+          0.4300000071525574
+        ],
+        "Case_Latch": [
+          3.75,
+          0.019999999552965164,
+          0.5
+        ],
+        "Case_Latch.001": [
+          4.25,
+          0.019999999552965164,
+          0.5
+        ]
+      },
+      "lighting": {
+        "Ceiling_Practical": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Ceiling_Practical.001": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Ceiling_Practical.002": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Ceiling_Practical.003": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Ceiling_Practical.004": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Ceiling_Practical.005": {
+          "energy": 650.0,
+          "color": [
+            0.8799999952316284,
+            0.9300000071525574,
+            1.0
+          ]
+        },
+        "Entrance_SoftFill": {
+          "energy": 550.0,
+          "color": [
+            1.0,
+            0.7699999809265137,
+            0.5299999713897705
+          ]
+        },
+        "Robot_WarmEdge": {
+          "energy": 250.0,
+          "color": [
+            1.0,
+            0.5799999833106995,
+            0.25
+          ]
+        },
+        "Rack_CoolEdge": {
+          "energy": 250.0,
+          "color": [
+            0.3199999928474426,
+            0.6700000166893005,
+            1.0
+          ]
+        },
+        "diffuser": {
+          "strength": 3.0,
+          "color": [
+            0.800000011920929,
+            0.8799999952316284,
+            1.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "reopened_positions_match_after": true,
+    "geometry_rebuilt": false
+  },
+  "fresh_native_inspection": {
+    "object_count": 1617,
+    "mesh_count": 1571,
+    "asset_mesh_count": 1571,
+    "modifier_count": 1463,
+    "material_count": 17,
+    "asset_bounds_m": {
+      "min": [
+        -6.199999809265137,
+        -4.699999809265137,
+        -0.28999999165534973
+      ],
+      "max": [
+        6.199999809265137,
+        4.699999809265137,
+        4.230000019073486
+      ],
+      "dimensions": [
+        12.399999618530273,
+        9.399999618530273,
+        4.520000010728836
+      ]
+    },
+    "unit_system": "METRIC",
+    "unit_scale": 1.0,
+    "render_settings": {
+      "engine": "CYCLES",
+      "resolution": [
+        1440,
+        1000
+      ],
+      "camera": "Camera_Overview"
+    }
+  },
+  "checks": {
+    "stale_hash_started_no_native_process": true,
+    "stale_hash_failed": true,
+    "source_original_preserved": true,
+    "new_native_differs_from_source": true,
+    "cart_objects_measured": true,
+    "cart_x_shift_within_tolerance": true,
+    "cart_y_z_preserved": true,
+    "cart_positions_persist_after_reopen": true,
+    "mesh_count_preserved": true,
+    "fresh_inspection_verified": true,
+    "fresh_render_verified": true,
+    "edit_uses_expected_source_snapshot": true,
+    "all_verified_source_bindings_pinned": true,
+    "all_snapshots_preserved": true,
+    "matching_render_camera_and_settings": true,
+    "sanitized_public_copies_reopened": true,
+    "unreal_fresh_reopen_verified": true,
+    "unreal_object_count_preserved": true,
+    "unreal_transforms_verified": true,
+    "unreal_materials_and_mesh_bounds_verified": true
+  },
+  "unreal_status": "verified-structure-with-gpu-editor",
+  "unreal": {
+    "status": "verified-structure-with-gpu-editor",
+    "attempts": [
+      {
+        "action_id": "unreal-edited-scene",
+        "status": "failed",
+        "rendering_mode": "structure",
+        "returncode": 1,
+        "timed_out": false,
+        "native_process_launches": 1,
+        "failure": {
+          "category": "native-editor-viewport-assertion",
+          "detail": "Unreal exited after an array-bounds assertion in viewport hit-proxy handling during actor placement.",
+          "native_verification_produced": false,
+          "raw_log_sha256": [
+            "b45018c5d4e2df381465695404dff72ac39af656b066790da851797e750e8d50"
+          ]
+        }
+      },
+      {
+        "action_id": "unreal-gpu-edited-scene",
+        "status": "verified",
+        "rendering_mode": "gpu",
+        "returncode": 0,
+        "timed_out": false,
+        "native_process_launches": 1,
+        "verification": {
+          "passed": true,
+          "reopened": true,
+          "manifestSha256": "9bba2247edf9051e43747d4d470bfc0d9e86b93bd550c0af2ebbc2b1f1d80bb9",
+          "engineVersion": "5.7.4-51494982+++UE5+Release-5.7",
+          "objectCount": 1571,
+          "uniqueMeshCount": 82,
+          "sharedMeshInstances": 1489,
+          "transformChecksPassed": true,
+          "coordinatePolicy": "Blender RH meters Z-up \u2192 Unreal LH centimeters Z-up: reflect Y; cameras/lights rotate local -Z/+Y to +X/+Z.",
+          "navigation": {
+            "status": "not-built",
+            "reason": "Simple collision is verified independently; a navigation bake and path query are not implied."
+          },
+          "mesh_asset_count": 82,
+          "material_count": 17,
+          "light_count": 9,
+          "camera_count": 4,
+          "max_mesh_bounds_residual_cm": 7.152557373046875e-05,
+          "all_mesh_bounds_checks_passed": true,
+          "all_material_checks_passed": true
+        }
+      },
+      {
+        "action_id": "unreal-gpu-fresh-reopen",
+        "status": "verified",
+        "rendering_mode": "gpu",
+        "returncode": 0,
+        "timed_out": false,
+        "native_process_launches": 1,
+        "verification": {
+          "passed": true,
+          "reopened": true,
+          "manifestSha256": "9bba2247edf9051e43747d4d470bfc0d9e86b93bd550c0af2ebbc2b1f1d80bb9",
+          "engineVersion": "5.7.4-51494982+++UE5+Release-5.7",
+          "objectCount": 1571,
+          "uniqueMeshCount": 82,
+          "sharedMeshInstances": 1489,
+          "transformChecksPassed": true,
+          "coordinatePolicy": "Blender RH meters Z-up \u2192 Unreal LH centimeters Z-up: reflect Y; cameras/lights rotate local -Z/+Y to +X/+Z.",
+          "navigation": {
+            "status": "not-built",
+            "reason": "Simple collision is verified independently; a navigation bake and path query are not implied."
+          },
+          "mesh_asset_count": 82,
+          "material_count": 17,
+          "light_count": 9,
+          "camera_count": 4,
+          "max_mesh_bounds_residual_cm": 7.152557373046875e-05,
+          "all_mesh_bounds_checks_passed": true,
+          "all_material_checks_passed": true
+        }
+      }
+    ],
+    "explicit_retry": {
+      "explicit": true,
+      "previous_native_process_exited": true,
+      "previous_returncode": 1,
+      "fresh_destination": "/Game/StudioAgentBridge/Environments/SourceBoundLabGpu",
+      "source_hashes": {
+        "src/studio_agent_bridge/engine.py": "78765e48a420b089b981b8e2200c259df5d1dea7f1824aab570544378d24f590",
+        "src/studio_agent_bridge/source_binding.py": "5f89dc53f51aae050cd47ab8f5db2754473a09e18ac511e6c416a02e6398efb8",
+        "src/studio_agent_bridge/adapters/blender.py": "91430be4604ef5e1acf2751fdbb9be8f23d3c2312870f579800de2a4c2ad1a8f",
+        "src/studio_agent_bridge/adapters/unreal.py": "66df8ca46bf3fad151873a6b4407f38a5c37da3a8e5b4067fdc23123df265897",
+        "src/studio_agent_bridge/host_scripts/blender/runner.py": "ee6f2a1c5a628640eaad08dc630bdcfe4057dff8191f77ce99a5237c7b2097a2",
+        "src/studio_agent_bridge/host_scripts/blender/source_resources.py": "1e9c9b0d5fda0edac073ec11bc2dc4545c39804e3e2e8f4602b7ec1b204ed99e",
+        "src/studio_agent_bridge/host_scripts/blender/environment_export.py": "b1a0fccac2f35d5b274dcdbdb72e80aa13144a3d1da4f5ab3e2cc340250b4029"
+      }
+    },
+    "appearance_validated": false,
+    "scope": "Native static structure, saved asset properties, and measured transforms; no Unreal render was captured."
+  },
+  "limitations": [
+    "This is a controlled native edit of the original bundled demonstration scene, not arbitrary natural-language modeling.",
+    "Source pinning captures one self-contained packed .blend file; external resource trees and trusted script dependencies are outside that binding.",
+    "Blender native reopen and measured object changes do not establish physical accuracy, safe robot operation, or a certified building layout.",
+    "Measurements cover cart positions, mesh counts and adapter reopen invariants; complete mesh data and every non-cart transform were not independently compared.",
+    "Unreal verification, when present, covers static scene structure and measured transforms. GPU editor mode alone does not validate appearance, simulation, or gameplay.",
+    "The raw render hash describes the native output. Any metadata-stripped public image must receive its own hash."
+  ]
+}

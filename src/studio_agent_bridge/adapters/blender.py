@@ -16,6 +16,15 @@ from pathlib import Path
 from typing import Any
 
 from studio_agent_bridge.host_scripts.blender.environment_export import validate_manifest
+from studio_agent_bridge.source_binding import (
+    SourceBindingError,
+    check_source,
+    expected_digest,
+    prepare_source,
+    relative_input,
+    write_evidence,
+)
+from studio_agent_bridge.workspace import file_digest
 
 ACTIONS = frozenset(
     {"create_demo", "inspect", "import_asset", "export_asset", "render", "run_script"}
@@ -71,21 +80,14 @@ def probe(config: dict) -> dict:
 
 
 def _input(workspace: Path, value: Any, suffixes: set[str]) -> Path:
-    if not isinstance(value, str) or not value or Path(value).is_absolute():
-        raise ValueError("Input paths must be nonempty workspace-relative paths.")
-    resolved = (workspace / value).resolve()
-    if not resolved.is_relative_to(workspace) or not resolved.is_file():
-        raise ValueError("Input file is missing or outside the workspace.")
-    if resolved.suffix.lower() not in suffixes:
-        raise ValueError("Input file has an unsupported extension.")
-    return resolved
+    return relative_input(workspace, value, suffixes)
 
 
 def _artifact(workspace: Path, path: Path, kind: str) -> dict:
     return {
         "path": path.relative_to(workspace).as_posix(),
         "kind": kind,
-        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "sha256": file_digest(path),
         "bytes": path.stat().st_size,
     }
 
@@ -147,6 +149,12 @@ def _environment_evidence(run_dir: Path, manifest_path: Path, split_assets: bool
     }
 
 
+class SourceResourceError(RuntimeError):
+    def __init__(self, message: str, evidence: dict):
+        super().__init__(message)
+        self.evidence = evidence
+
+
 def _launch(executable: str, job: dict, run_dir: Path, label: str, timeout: int) -> dict:
     job_path = run_dir / f"{label}.job.json"
     result_path = run_dir / f"{label}.result.json"
@@ -186,8 +194,48 @@ def _launch(executable: str, job: dict, run_dir: Path, label: str, timeout: int)
         )
     result = json.loads(result_path.read_text(encoding="utf-8"))
     if result.get("status") != "ok":
+        if result.get("source_resources"):
+            raise SourceResourceError(result["error"], result["source_resources"])
         raise RuntimeError(result.get("error", "Blender operation failed."))
     return result
+
+
+def _source_artifacts(workspace: Path, run_dir: Path, binding: dict | None, artifacts: list):
+    """Input evidence is metadata; it cannot stand in for a new native output."""
+    paths = {item["path"] for item in artifacts}
+    candidates = list(run_dir.glob("source-binding*.json"))
+    if binding and binding.get("snapshot_path"):
+        candidates.append(workspace / binding["snapshot_path"])
+    for path in candidates:
+        if (
+            path.is_file()
+            and not path.is_symlink()
+            and path.relative_to(workspace).as_posix() not in paths
+        ):
+            artifacts.append(_artifact(workspace, path, "metadata"))
+            paths.add(path.relative_to(workspace).as_posix())
+
+
+def _validated_outputs(run_dir: Path, outputs: Any, snapshot: str | None) -> list[dict]:
+    if not isinstance(outputs, list):
+        raise ValueError("Host outputs must be a list.")
+    seen = set()
+    for item in outputs:
+        path = Path(item["path"])
+        if path.is_symlink():
+            raise ValueError("Host outputs must not be symlinks.")
+        path = path.resolve()
+        if not path.is_relative_to(run_dir) or not path.is_file():
+            raise ValueError(
+                "Host reported a missing output or an output outside its run directory."
+            )
+        if str(path) == snapshot or path in seen:
+            raise ValueError("Host output aliases source input or duplicates another output.")
+        if item["kind"] == "blend" and path.suffix.lower() != ".blend":
+            raise ValueError("Native scene outputs must be .blend files.")
+        seen.add(path)
+        item["path"] = str(path)
+    return outputs
 
 
 def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict:
@@ -198,6 +246,10 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
         "Successful Blender roundtrip does not prove import or appearance in Unreal Engine.",
     ]
     artifacts: list[dict] = []
+    binding = None
+    verification: dict[str, Any] = {}
+    native_attempted = False
+    source_checked = False
     try:
         workspace = workspace.resolve()
         run_dir = run_dir.resolve()
@@ -210,6 +262,7 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
         parameters = request.get("parameters", {})
         if action not in ACTIONS or not isinstance(parameters, dict):
             raise ValueError("Unsupported Blender action or parameters.")
+        expected = expected_digest(action, parameters)
         if action == "run_script" and config.get("allow_scripts") is not True:
             return {
                 "status": "blocked",
@@ -240,7 +293,8 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
             if field in parameters:
                 path = _input(workspace, parameters[field], extensions)
                 job[field] = str(path)
-                source_hashes[parameters[field]] = hashlib.sha256(path.read_bytes()).hexdigest()
+                if field != "input_blend":
+                    source_hashes[path.relative_to(workspace).as_posix()] = file_digest(path)
         required = {
             "inspect": "input_blend",
             "export_asset": "input_blend",
@@ -309,8 +363,18 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
         job["script_parameters"] = parameters.get("script_parameters", {})
         if not isinstance(job["script_parameters"], dict):
             raise ValueError("script_parameters must be an object.")
+        if "input_blend" in job:
+            binding = prepare_source(workspace, Path(job["input_blend"]), run_dir, expected)
+            source_hashes[binding["source_path"]] = binding["source_sha256"]
+            limitations.extend(binding["limitations"])
+            if binding["mode"] == "pinned_snapshot":
+                job["input_blend"] = str(workspace / binding["snapshot_path"])
+                job["require_packed_source"] = True
+            before_dispatch = check_source(workspace, binding, before_dispatch=True)
+            write_evidence(run_dir, "source-binding-dispatch.json", before_dispatch)
+        native_attempted = True
         result = _launch(executable, job, run_dir, "execute", timeout)
-        verification: dict[str, Any] = {
+        verification = {
             "action": action,
             "blender_version": result["blender_version"],
             "units": "meters",
@@ -318,8 +382,26 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
             "initial_scene": result["scene"],
             "checks": [],
         }
-        outputs = result.get("outputs", [])
+        if binding and binding["mode"] == "pinned_snapshot":
+            verification["source_resources"] = result.get("source_resources", {})
+            verification["checks"].append(
+                {
+                    "name": "packed_source_resource_gate",
+                    "passed": result.get("source_resources", {}).get("supported") is True,
+                }
+            )
+        outputs = _validated_outputs(
+            run_dir,
+            result.get("outputs", []),
+            str(workspace / binding["snapshot_path"])
+            if binding and binding["snapshot_path"]
+            else None,
+        )
         native = next((item for item in outputs if item["kind"] == "blend"), None)
+        if action != "inspect":
+            verification["checks"].append(
+                {"name": "new_native_scene_saved", "passed": native is not None}
+            )
         if native:
             reopened = _launch(
                 executable,
@@ -383,9 +465,9 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
                 for key, value in checks.items()
             )
         for relative_path, old_hash in source_hashes.items():
-            unchanged = (
-                hashlib.sha256((workspace / relative_path).read_bytes()).hexdigest() == old_hash
-            )
+            if binding and relative_path == binding["source_path"]:
+                continue
+            unchanged = file_digest(workspace / relative_path) == old_hash
             verification["checks"].append(
                 {"name": "source_unchanged:" + relative_path, "passed": unchanged}
             )
@@ -409,6 +491,22 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
                 {"name": "native_file_opened", "passed": result["scene"]["object_count"] >= 0}
             )
             artifacts.append(_artifact(workspace, Path(job["input_blend"]), "blend"))
+        if binding:
+            binding = check_source(workspace, binding)
+            write_evidence(run_dir, "source-binding-check.json", binding)
+            source_checked = True
+            verification["source_binding"] = binding
+            verification["checks"].append(
+                {
+                    "name": "source_unchanged:" + binding["source_path"],
+                    "passed": binding["source_unchanged"],
+                }
+            )
+            if binding["snapshot_path"]:
+                verification["checks"].append(
+                    {"name": "snapshot_unchanged", "passed": binding["snapshot_unchanged"]}
+                )
+        _source_artifacts(workspace, run_dir, binding, artifacts)
         verified = bool(verification["checks"]) and all(
             item["passed"] for item in verification["checks"]
         )
@@ -427,7 +525,25 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
             "limitations": limitations,
         }
     except (ValueError, RuntimeError, OSError, TypeError, KeyError, json.JSONDecodeError) as error:
+        if isinstance(error, SourceBindingError) and error.evidence:
+            binding = error.evidence
+            if not native_attempted and not (run_dir / "source-binding-failure.json").exists():
+                try:
+                    write_evidence(run_dir, "source-binding-failure.json", binding)
+                except OSError:
+                    binding["evidence_write_failed"] = True
+        if isinstance(error, SourceResourceError):
+            verification["source_resources"] = error.evidence
+        if binding:
+            if native_attempted and not source_checked:
+                binding = check_source(workspace, binding)
+                try:
+                    write_evidence(run_dir, "source-binding-check.json", binding)
+                except OSError:
+                    binding["evidence_write_failed"] = True
+            verification["source_binding"] = binding
         if run_dir.is_dir() and run_dir.is_relative_to(workspace):
+            _source_artifacts(workspace, run_dir, binding, artifacts)
             artifacts.extend(
                 _artifact(workspace, path, "log") for path in sorted(run_dir.glob("*.log.txt"))
             )
@@ -435,7 +551,7 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
             "status": "failed",
             "summary": str(error),
             "artifacts": artifacts,
-            "observations": {},
+            "observations": verification,
             "limitations": limitations,
         }
 

@@ -1,0 +1,148 @@
+{
+  "schema_version": "source-binding-resource-example/v1",
+  "generated_at": "2026-10-24T12:13:02.034988+00:00",
+  "provenance": {
+    "kind": "observed-native-execution",
+    "generator": "examples/source_binding/check_resources.py",
+    "execution_sources": {
+      "src/studio_agent_bridge/engine.py": "78765e48a420b089b981b8e2200c259df5d1dea7f1824aab570544378d24f590",
+      "src/studio_agent_bridge/source_binding.py": "5f89dc53f51aae050cd47ab8f5db2754473a09e18ac511e6c416a02e6398efb8",
+      "src/studio_agent_bridge/adapters/blender.py": "91430be4604ef5e1acf2751fdbb9be8f23d3c2312870f579800de2a4c2ad1a8f",
+      "src/studio_agent_bridge/adapters/unreal.py": "66df8ca46bf3fad151873a6b4407f38a5c37da3a8e5b4067fdc23123df265897",
+      "src/studio_agent_bridge/host_scripts/blender/runner.py": "ee6f2a1c5a628640eaad08dc630bdcfe4057dff8191f77ce99a5237c7b2097a2",
+      "src/studio_agent_bridge/host_scripts/blender/source_resources.py": "1e9c9b0d5fda0edac073ec11bc2dc4545c39804e3e2e8f4602b7ec1b204ed99e",
+      "src/studio_agent_bridge/host_scripts/blender/environment_export.py": "b1a0fccac2f35d5b274dcdbdb72e80aa13144a3d1da4f5ab3e2cc340250b4029"
+    },
+    "fixture_sha256": {
+      "build_image_fixture.py": "ff0940c984796a8fd5f9ff2ea74765b77039d627994a06b8861cca8599925473",
+      "edit_fixture.py": "b1a91762523a59f327fed17c4797217cf1d69f71a285c905ef9301b2f39ffb57"
+    },
+    "synthetic_adapter_used": false,
+    "test_only_geometry": true
+  },
+  "cases": [
+    {
+      "id": "packed-file-image",
+      "fixture_image": {
+        "purpose": "original test-only resource boundary fixture",
+        "image_source": "FILE",
+        "image_filepath": "//fixture-image.png",
+        "packed": true,
+        "packed_files": 1,
+        "image_size": [
+          2,
+          2
+        ]
+      },
+      "status": "verified",
+      "summary": "Blender run_script: 1 meshes; native/export checks passed.",
+      "native_process_launches": 2,
+      "requested_script_executed": true,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "checked_after_action",
+        "source_path": "jobs/resource-packed-178093f3e44e/runs/000002-run_script/scene.blend",
+        "snapshot_path": "jobs/resource-packed-178093f3e44e/runs/000004-run_script/source_snapshot/scene.blend",
+        "expected_source_sha256": "e105b730e5be05efeea4329345342a40e111c1262db27e2cecddafdd840c410c",
+        "source_sha256": "e105b730e5be05efeea4329345342a40e111c1262db27e2cecddafdd840c410c",
+        "snapshot_sha256": "e105b730e5be05efeea4329345342a40e111c1262db27e2cecddafdd840c410c",
+        "bytes": 89279,
+        "snapshot_sha256_after_action": "e105b730e5be05efeea4329345342a40e111c1262db27e2cecddafdd840c410c",
+        "source_sha256_after_action": "e105b730e5be05efeea4329345342a40e111c1262db27e2cecddafdd840c410c",
+        "snapshot_unchanged": true,
+        "source_unchanged": true,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ]
+      },
+      "source_resources": {
+        "supported": true,
+        "scope": "common_builtin_resource_fields",
+        "checked_before_requested_action": true,
+        "packed_counts": {
+          "images": 1
+        },
+        "unsupported_counts": {},
+        "limitations": [
+          "Only the .blend bytes are pinned. Known unpacked resources, linked libraries and disk caches are rejected; no external files are copied.",
+          "This is not exhaustive dependency discovery for custom properties, add-ons, scripts, drivers or future resource types. Trusted scripts remain privileged."
+        ]
+      },
+      "blender_version": "5.2.0 LTS",
+      "checks": {
+        "actual_file_image": true,
+        "actual_packed_state": true,
+        "requested_script_matches_policy": true,
+        "expected_status": true
+      }
+    },
+    {
+      "id": "unpacked-file-image",
+      "fixture_image": {
+        "purpose": "original test-only resource boundary fixture",
+        "image_source": "FILE",
+        "image_filepath": "//fixture-image.png",
+        "packed": false,
+        "packed_files": 0,
+        "image_size": [
+          0,
+          0
+        ]
+      },
+      "status": "failed",
+      "summary": "Pinned source contains unsupported external resources; the requested action was not executed. Pack supported assets or use a self-contained source scene.",
+      "native_process_launches": 1,
+      "requested_script_executed": false,
+      "source_binding": {
+        "schema_version": 1,
+        "mode": "pinned_snapshot",
+        "phase": "checked_after_action",
+        "source_path": "jobs/resource-unpacked-0b7b5529bc22/runs/000002-run_script/scene.blend",
+        "snapshot_path": "jobs/resource-unpacked-0b7b5529bc22/runs/000004-run_script/source_snapshot/scene.blend",
+        "expected_source_sha256": "b4f314fd9c8befae7f2e95693f0d589d98bcf2f74cbc37a6a9acb1cf9be92316",
+        "source_sha256": "b4f314fd9c8befae7f2e95693f0d589d98bcf2f74cbc37a6a9acb1cf9be92316",
+        "snapshot_sha256": "b4f314fd9c8befae7f2e95693f0d589d98bcf2f74cbc37a6a9acb1cf9be92316",
+        "bytes": 89004,
+        "snapshot_sha256_after_action": "b4f314fd9c8befae7f2e95693f0d589d98bcf2f74cbc37a6a9acb1cf9be92316",
+        "source_sha256_after_action": "b4f314fd9c8befae7f2e95693f0d589d98bcf2f74cbc37a6a9acb1cf9be92316",
+        "snapshot_unchanged": true,
+        "source_unchanged": true,
+        "resources_scope": "blend_bytes_only",
+        "limitations": [
+          "Only the .blend file bytes are pinned; external relative resources are not copied. Pinned loads require packed or self-contained assets.",
+          "Read-only permissions are an accidental-write guard, not OS immutability. Trusted scripts can change permissions or other files.",
+          "Before/after digest checks are observations, not continuous attestation against a same-user process that changes and restores bytes."
+        ]
+      },
+      "source_resources": {
+        "supported": false,
+        "scope": "common_builtin_resource_fields",
+        "checked_before_requested_action": true,
+        "packed_counts": {},
+        "unsupported_counts": {
+          "unpacked_or_unsupported_images": 1
+        },
+        "limitations": [
+          "Only the .blend bytes are pinned. Known unpacked resources, linked libraries and disk caches are rejected; no external files are copied.",
+          "This is not exhaustive dependency discovery for custom properties, add-ons, scripts, drivers or future resource types. Trusted scripts remain privileged."
+        ]
+      },
+      "blender_version": null,
+      "checks": {
+        "actual_file_image": true,
+        "actual_packed_state": true,
+        "requested_script_matches_policy": true,
+        "expected_status": true
+      }
+    }
+  ],
+  "limitations": [
+    "These are minimal authored test scenes executed by real Blender; they are separate from the detailed lab edit.",
+    "The unpacked resource is rejected after opening the native file. This is intentionally one native launch, not a pre-launch hash rejection.",
+    "The check validates this image boundary; it is not an exhaustive test of every Blender resource type."
+  ]
+}
