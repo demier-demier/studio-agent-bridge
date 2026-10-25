@@ -75,7 +75,7 @@ destination, and an existing map is refused before any asset import.
 | `destination` | Native package namespace. Construction refuses an existing namespace to preserve edits. |
 | `simple_collision` | Default `true`: creates and measures one box proxy per unique mesh. This is not exact collision or navigation. |
 | `level_path` | Saved native map to reopen during `inspect`. |
-| `rendering` | `structure` uses NullRHI; `gpu` activates the platform renderer. Both environment modes launch the full editor. |
+| `rendering` | `structure` uses NullRHI; `gpu` activates the platform renderer. Both environment modes select the full editor. On macOS with detected Unreal 5.7.4, manifest-driven `build_scene` requires explicit `gpu`; the known failing NullRHI combination is blocked before launch. |
 | `render_output` | New workspace PNG path. Requires `gpu`. Existing files are refused. |
 | `camera_name` | Exported camera label to render; default is the first native cine camera. |
 | `render_size` | `[width,height]`, each 64–2048; default `[1280,720]`. |
@@ -101,6 +101,23 @@ Pass this as `build_scene` parameters through MCP or the CLI. Set
 non-default project; the job name alone does not select a project. A subsequent
 `inspect` must provide the same manifest/destination and the saved `level_path`.
 Use a different `render_output` for each inspection.
+
+### Preflight for the observed macOS NullRHI failure
+
+On the tested Unreal 5.7.4 macOS installation, full-editor environment construction
+with `rendering: "structure"` crashed during actor placement after saving imported
+assets. The adapter now blocks that exact action/platform/version combination
+before native launch or project writes. Omitting `rendering` selects `structure`
+and is blocked too. Select `"rendering": "gpu"` explicitly to construct this
+environment; the bridge never switches renderers or retries automatically.
+
+`editor_session` is derived from a nonempty `environment_manifest`; it is not a
+client override. Ordinary commandlet operations and manifest-only `import_asset`
+or `inspect` retain their existing behavior. Other versions/platforms are outside
+this measured compatibility rule, not certified compatible. The Engine still
+records a blocked action and advances the job revision. See the
+[preflight design and evidence](unreal-preflight.md) for the distinction between
+ledger writes, project preservation and native execution.
 
 Meshes preserve shared asset references with individually editable actors.
 The importer measures local bounds against the manifest, including axis signs

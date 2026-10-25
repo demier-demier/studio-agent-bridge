@@ -14,6 +14,7 @@ import os
 import re
 import signal
 import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -22,6 +23,7 @@ from ..host_scripts.unreal.environment_contract import guard_map_creation, valid
 ACTIONS = {"create_project", "import_asset", "build_scene", "inspect", "run_script"}
 PLUGIN_NAMES = ["PythonScriptPlugin", "EditorScriptingUtilities", "SequencerScripting"]
 MARKER = ".studio-agent-project.json"
+ENVIRONMENT_NULLRHI_RESTRICTION = "unreal_macos_5_7_4_environment_nullrhi"
 
 
 def _contained(workspace: Path, value: str | Path) -> Path:
@@ -78,6 +80,39 @@ def probe(config: dict) -> dict:
             "Filesystem discovery does not prove the editor starts.",
             "Python automation is editor-only; gameplay and arbitrary Blueprint graph authoring are not guaranteed.",
         ],
+    }
+
+
+def _environment_mode_preflight(
+    action: str, parameters: dict, rendering: str, version: dict, platform: str
+) -> dict | None:
+    """Reject one observed native crash; other combinations are not certified here.
+
+    Environment builds run in a full editor. On the observed macOS 5.7.4 build,
+    actor placement enters viewport hit-proxy rendering and crashes under NullRHI.
+    Derive the execution path ourselves; a caller's editor_session flag is ignored.
+    """
+    editor_session = bool(parameters.get("environment_manifest"))
+    release = tuple(version.get(key) for key in ("MajorVersion", "MinorVersion", "PatchVersion"))
+    if not (
+        action == "build_scene"
+        and editor_session
+        and rendering == "structure"
+        and platform == "darwin"
+        and release == (5, 7, 4)
+    ):
+        return None
+    return {
+        "decision": "blocked",
+        "code": ENVIRONMENT_NULLRHI_RESTRICTION,
+        "action": action,
+        "editor_session": editor_session,
+        "rendering_mode": rendering,
+        "engine": version,
+        "platform": platform,
+        "required_parameters": {"rendering": "gpu"},
+        "basis": "observed_native_failure",
+        "scope": "Environment actor creation in a full editor on macOS with Unreal 5.7.4. Other versions, platforms and actions are not certified by this guard.",
     }
 
 
@@ -235,11 +270,22 @@ def execute(workspace: Path, request: dict, run_dir: Path, config: dict) -> dict
             limitations[1] = (
                 "GPU rendering was requested; a saved image must be inspected before claiming appearance."
             )
+        executable = _executable(config)
+        preflight = _environment_mode_preflight(
+            action, parameters, rendering, _version(executable), sys.platform
+        )
+        if preflight:
+            return {
+                "status": "blocked",
+                "summary": "Known native crash combination blocked before launch: Unreal 5.7.4 on macOS, environment build_scene, rendering=structure. Retry explicitly with rendering=gpu in a fresh run and destination. No native process or asset import was attempted.",
+                "artifacts": [],
+                "observations": {"preflight": preflight, "native_launch_attempted": False},
+                "limitations": limitations,
+            }
         run_dir = _contained(workspace, run_dir)
         run_dir.mkdir(parents=True, exist_ok=True)
         project = _project(workspace, parameters, config, action == "create_project")
         artifacts.append(_artifact(workspace, project, "unreal-project"))
-        executable = _executable(config)
         if executable is None:
             return {
                 "status": "blocked",

@@ -4,6 +4,8 @@ Static, responsive case-study page with the **actual Fusion → Blender → GLB*
 
 The `/environment/` case adds a complete original robotics laboratory, several real Blender/Unreal views, interior-camera GLB exploration, a reversible lighting/layout example and downloadable native scenes. Renderer labels distinguish actual native images from the browser's own lighting.
 
+The `/source-binding/#unreal-preflight` follow-up steps through five recorded Engine actions: two known-risk environment requests rejected before native launch, creation of an owned project, an explicit GPU build and a fresh inspection. Its JSON is an exact byte copy of `examples/unreal_preflight/observed-native-proof.json`; the build checks that identity, the zero-launch/project-preservation assertions and the separate GPU outcomes. The browser does not execute native actions. No Unreal image was captured for this follow-up.
+
 ## Reproducible build
 
 Use Node 22.12+ (Node 22 in CI). Direct dependencies are pinned and the lockfile fixes transitive versions.

@@ -8,4 +8,6 @@ Organize exportable objects in `StudioEnvironment`, with `studio_asset=True` and
 
 Save and reopen the editable Blender file. Render at least three useful views, including a close view, and inspect actual pixels for visual finish, coherent materials, clipping and empty areas. Fix visible failures before transfer. Reconstruct the environment in an owned Unreal project, reopen the saved level, compare geometry/transforms, and inspect a real Unreal render or viewport. Record unsupported material nodes, animation, lighting differences and missing GPU validation explicitly.
 
+For manifest-driven environment construction on macOS with detected Unreal 5.7.4, explicitly request `rendering: "gpu"`. The known full-editor NullRHI build is blocked before launch. Read any preflight result, preserve failed destinations and retrieve the latest job revision before a separate request. Do not silently change rendering mode or automatically replay interrupted work. GPU execution alone is not a visual inspection.
+
 For a new chat instruction, inspect the current scene and job revision, save a new version, apply the requested change and verify its effect. Keep the previous approved scene. The client provides reasoning and scripts; the MCP server provides native execution and evidence.

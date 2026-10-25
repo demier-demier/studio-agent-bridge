@@ -52,6 +52,8 @@ The recorded case rejected a stale hash with **zero Blender launches**, then mov
 
 Only the `.blend` bytes are pinned. The native gate rejects known unsupported external resources before running the edit script; supported resources must be packed. Read-only snapshot permissions are a cooperative safeguard, not OS immutability or a Python sandbox. Other scene-consuming actions remain available without a pin for compatibility and report that weaker mode. See the [design and threat model](docs/source-binding.md) and [native reproduction case](examples/source_binding/).
 
+**Follow-up: reject the known Unreal crash before launch.** The adapter now blocks manifest-driven `build_scene` with NullRHI on macOS with detected Unreal 5.7.4. Two real requests launched no subprocesses and preserved the native project tree; the Engine still recorded their lifecycle. An explicitly selected GPU build and fresh inspection of the original public lab verified 1,571 mesh actors, 84 shared mesh assets, 17 materials, nine lights and four cameras. This separate run captured no Unreal image. [Explore the five recorded actions](https://bernardo-demier-ai-lab.fancy-fly-9200.chatgpt.site/studio-agent-bridge/source-binding/#unreal-preflight), [reproduce them](examples/unreal_preflight/), or read the [compatibility decision and limits](docs/unreal-preflight.md).
+
 ## Applied case: a board mounting fixture
 
 **[Open the browser demo](https://bernardo-demier-ai-lab.fancy-fly-9200.chatgpt.site/studio-agent-bridge/)** — explore the actual exported 3D mesh, compare verified measurements, inspect the source evidence and download the native case. The browser visualizes geometry; parametric CAD editing remains in Fusion.

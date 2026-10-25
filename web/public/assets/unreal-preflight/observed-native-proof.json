@@ -1,0 +1,280 @@
+{
+  "schema_version": "unreal-preflight-native-example/v1",
+  "generated_at": "2026-10-25T12:14:03.136631+00:00",
+  "provenance": {
+    "kind": "observed-native-execution",
+    "generator": "examples/unreal_preflight/run_example.py",
+    "generator_sha256": "8dbb9e8936f5de116943ebb7b424e726b8fe7741c4ffc7e9858d6656df3d3e22",
+    "source_archive": {
+      "path": "web/public/assets/environment/industrial-lab-native.zip",
+      "sha256": "461fbaa85c1bda7e6a7bd71dece05bfa5c3b48b11db0b1883481c9b815f15485"
+    },
+    "source_manifest": {
+      "path": "source/transfer/environment-manifest.json",
+      "sha256": "856ee52312b3d8b38424bf58f09be554ee10797229ce3415e8b6f543547208d4"
+    },
+    "validated_transfer_members": 103,
+    "execution_sources": {
+      "src/studio_agent_bridge/engine.py": "78765e48a420b089b981b8e2200c259df5d1dea7f1824aab570544378d24f590",
+      "src/studio_agent_bridge/workspace.py": "48531e5b6c3f5cd1b6c9850b84fac6f94bd401eeb4fa901e81b63197da04d43b",
+      "src/studio_agent_bridge/adapters/unreal.py": "af5393d6cc9a287e92612919e982f9690f55d24a0faa13d9532cdbcc4f175ff5",
+      "src/studio_agent_bridge/host_scripts/unreal/dispatch.py": "78618b7503a08ef1124760a475d0729646155eec264e6f7b07f44767a3f08e02",
+      "src/studio_agent_bridge/host_scripts/unreal/environment.py": "2c4188e71d5686dd0984eb6f8c9aae189932be8ccb95537ee292eeeec0a88992",
+      "src/studio_agent_bridge/host_scripts/unreal/environment_contract.py": "bf7eeadaf85bdbb320a0899276e981c50651d3f652bd1f1a978ccfbf80950a3e"
+    },
+    "synthetic_adapter_used": false,
+    "scene": "Separate run of the original public lab transfer, not the edited-cart target"
+  },
+  "host_version": {
+    "MajorVersion": 5,
+    "MinorVersion": 7,
+    "PatchVersion": 4,
+    "Changelist": 51494982
+  },
+  "platform": "darwin",
+  "attempts": [
+    {
+      "id": "reject-before-project",
+      "action": "build_scene",
+      "status": "blocked",
+      "rendering": "structure",
+      "editor_session": true,
+      "native_process_launches": 0,
+      "subprocess_launches": 0,
+      "revision_before": 1,
+      "revision_after": 3,
+      "preflight": {
+        "decision": "blocked",
+        "code": "unreal_macos_5_7_4_environment_nullrhi",
+        "action": "build_scene",
+        "editor_session": true,
+        "rendering_mode": "structure",
+        "engine": {
+          "MajorVersion": 5,
+          "MinorVersion": 7,
+          "PatchVersion": 4,
+          "Changelist": 51494982
+        },
+        "platform": "darwin",
+        "required_parameters": {
+          "rendering": "gpu"
+        },
+        "basis": "observed_native_failure",
+        "scope": "Environment actor creation in a full editor on macOS with Unreal 5.7.4. Other versions, platforms and actions are not certified by this guard."
+      },
+      "returncode": null,
+      "timed_out": null,
+      "project_effects": {
+        "before": {
+          "exists": false,
+          "entries": 0,
+          "files": 0,
+          "bytes": 0,
+          "tree_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "after": {
+          "exists": false,
+          "entries": 0,
+          "files": 0,
+          "bytes": 0,
+          "tree_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "unchanged": true
+      }
+    },
+    {
+      "id": "create-owned-project",
+      "action": "create_project",
+      "status": "verified",
+      "rendering": "structure",
+      "editor_session": false,
+      "native_process_launches": 1,
+      "subprocess_launches": 1,
+      "revision_before": 3,
+      "revision_after": 5,
+      "preflight": null,
+      "returncode": 0,
+      "timed_out": false,
+      "project_effects": {
+        "before": {
+          "exists": false,
+          "entries": 0,
+          "files": 0,
+          "bytes": 0,
+          "tree_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "after": {
+          "exists": true,
+          "entries": 38,
+          "files": 14,
+          "bytes": 102405,
+          "tree_sha256": "7516bffbc1110591f9323b86f534ddda51a1dfabb2b9af6a27298f33dcab7e2f"
+        },
+        "unchanged": false
+      }
+    },
+    {
+      "id": "reject-existing-project",
+      "action": "build_scene",
+      "status": "blocked",
+      "rendering": "structure",
+      "editor_session": true,
+      "native_process_launches": 0,
+      "subprocess_launches": 0,
+      "revision_before": 5,
+      "revision_after": 7,
+      "preflight": {
+        "decision": "blocked",
+        "code": "unreal_macos_5_7_4_environment_nullrhi",
+        "action": "build_scene",
+        "editor_session": true,
+        "rendering_mode": "structure",
+        "engine": {
+          "MajorVersion": 5,
+          "MinorVersion": 7,
+          "PatchVersion": 4,
+          "Changelist": 51494982
+        },
+        "platform": "darwin",
+        "required_parameters": {
+          "rendering": "gpu"
+        },
+        "basis": "observed_native_failure",
+        "scope": "Environment actor creation in a full editor on macOS with Unreal 5.7.4. Other versions, platforms and actions are not certified by this guard."
+      },
+      "returncode": null,
+      "timed_out": null,
+      "project_effects": {
+        "before": {
+          "exists": true,
+          "entries": 38,
+          "files": 14,
+          "bytes": 102405,
+          "tree_sha256": "7516bffbc1110591f9323b86f534ddda51a1dfabb2b9af6a27298f33dcab7e2f"
+        },
+        "after": {
+          "exists": true,
+          "entries": 38,
+          "files": 14,
+          "bytes": 102405,
+          "tree_sha256": "7516bffbc1110591f9323b86f534ddda51a1dfabb2b9af6a27298f33dcab7e2f"
+        },
+        "unchanged": true
+      }
+    },
+    {
+      "id": "explicit-gpu-build",
+      "action": "build_scene",
+      "status": "verified",
+      "rendering": "gpu",
+      "editor_session": true,
+      "native_process_launches": 1,
+      "subprocess_launches": 1,
+      "revision_before": 7,
+      "revision_after": 9,
+      "preflight": null,
+      "returncode": 0,
+      "timed_out": false,
+      "project_effects": {
+        "before": {
+          "exists": true,
+          "entries": 38,
+          "files": 14,
+          "bytes": 102405,
+          "tree_sha256": "7516bffbc1110591f9323b86f534ddda51a1dfabb2b9af6a27298f33dcab7e2f"
+        },
+        "after": {
+          "exists": true,
+          "entries": 185,
+          "files": 147,
+          "bytes": 79950479,
+          "tree_sha256": "638b7c1260c8920a4b1d8b32159144a96f3750604e25d4ae0e1db9106c5b2d5a"
+        },
+        "unchanged": false
+      }
+    },
+    {
+      "id": "fresh-gpu-inspection",
+      "action": "inspect",
+      "status": "verified",
+      "rendering": "gpu",
+      "editor_session": true,
+      "native_process_launches": 1,
+      "subprocess_launches": 1,
+      "revision_before": 9,
+      "revision_after": 11,
+      "preflight": null,
+      "returncode": 0,
+      "timed_out": false,
+      "project_effects": {
+        "before": {
+          "exists": true,
+          "entries": 185,
+          "files": 147,
+          "bytes": 79950479,
+          "tree_sha256": "638b7c1260c8920a4b1d8b32159144a96f3750604e25d4ae0e1db9106c5b2d5a"
+        },
+        "after": {
+          "exists": true,
+          "entries": 187,
+          "files": 148,
+          "bytes": 81647541,
+          "tree_sha256": "693c3f189e8a1ae2fcad521fa6964479f8649ddf752660900c0e9eeacd83aa28"
+        },
+        "unchanged": false
+      }
+    }
+  ],
+  "source_totals": {
+    "uniqueAssets": 84,
+    "meshInstances": 1571,
+    "materials": 17,
+    "cameras": 4,
+    "lights": 9,
+    "uniqueVertices": 17756,
+    "uniqueTriangles": 26304,
+    "instanceTriangles": 253920
+  },
+  "target": {
+    "status": "verified",
+    "mesh_actors": 1571,
+    "mesh_assets": 84,
+    "materials": 17,
+    "lights": 9,
+    "cameras": 4,
+    "shared_mesh_instances": 1487,
+    "reopened": true,
+    "transform_checks_passed": true,
+    "max_mesh_bounds_residual_cm": 7.152557373046875e-05,
+    "manifest_sha256": "856ee52312b3d8b38424bf58f09be554ee10797229ce3415e8b6f543547208d4",
+    "appearance_validated": false
+  },
+  "checks": {
+    "both_unsafe_requests_blocked": true,
+    "rejections_started_no_subprocess": true,
+    "rejections_preserved_project_trees": true,
+    "rejection_created_no_project": true,
+    "rejection_existing_project_was_present": true,
+    "rejections_recorded_engine_lifecycle": true,
+    "explicit_gpu_build_verified": true,
+    "fresh_inspection_verified": true,
+    "native_scene_reopened": true,
+    "mesh_actor_count_matches_source": true,
+    "mesh_asset_count_matches_source": true,
+    "material_count_matches_source": true,
+    "rig_counts_match_source": true,
+    "transforms_verified": true,
+    "mesh_bounds_verified": true,
+    "materials_verified": true,
+    "source_manifest_preserved": true,
+    "implementation_unchanged": true
+  },
+  "limitations": [
+    "The rejection is an adapter preflight for the observed Unreal 5.7.4 macOS environment-build combination, not a claim that every NullRHI action fails.",
+    "Engine ledger and run evidence are intentionally written for rejected requests; no native subprocess or project/import side effect was observed.",
+    "The GPU build is a separately requested stage. There is no automatic fallback or replay.",
+    "Native static structure, transforms, mesh bounds and material properties were measured; no Unreal image was captured or visually validated.",
+    "Navigation, gameplay, simulation, GPU performance, and photometric parity were not tested.",
+    "Project fingerprints compare entry names, file contents and modification timestamps around each request; raw local paths and host logs remain private."
+  ]
+}

@@ -30,9 +30,11 @@ From the repository root, choose a **new empty private directory**:
 
 Use `--blender` or `--unreal` to specify an executable if automatic discovery does not locate it. The native stages keep their raw evidence, logs, SQLite ledger, source snapshots, rendered files, and owned project under the chosen work root. They do not modify the source ZIP or any existing native project. A failed native stage preserves its diagnostics; inspect them before preparing another fresh run. The script refuses to overwrite a prior prepared workspace or repeat an already recorded action.
 
-The recorded Unreal 5.7.4 run hit a native viewport array-bounds assertion during actor placement in the first `rendering: "structure"` (NullRHI) attempt. That process exited with code 1. An **explicit** alternate GPU editor attempt then saved and independently reopened the scene successfully. Both outcomes appear in the JSON. The failed attempt's partial imported assets remain untouched.
+The recorded 24 October Unreal 5.7.4 run hit a native viewport array-bounds assertion during actor placement in the first `rendering: "structure"` (NullRHI) attempt. That process exited with code 1. An **explicit** alternate GPU editor attempt then saved and independently reopened the scene successfully. Both outcomes appear in the historical JSON. The failed attempt's partial imported assets remain untouched.
 
-After inspecting a matching failure, the following separate stage confirms that the earlier process exited, uses a new destination and map, and performs one GPU-mode build plus a fresh reopen. It is never invoked automatically and refuses an ambiguous or timed-out previous process:
+With the current adapter on macOS/Unreal 5.7.4, the same `unreal` stage stops at a **blocked preflight**, with zero native launches for the build. This is an expected compatibility refusal, not a reproduced crash. Inspect its record, then explicitly run `unreal-gpu-retry` below. The follow-up accepts only that identified zero-launch block or a recorded native failure whose process exited; it never switches modes automatically. A fresh standalone test of the guard is in [unreal_preflight](../unreal_preflight/). The checked-in October 24 proof is preserved verbatim, rather than relabelled as a run of today's code.
+
+After inspecting a matching failure or preflight refusal, the following separate stage verifies its retry basis, uses a new destination and map, and performs one GPU-mode build plus a fresh reopen. For the never-launched preflight case it records that no process existed, without claiming a process exit. It is never invoked automatically and refuses an ambiguous or timed-out previous process:
 
 ```bash
 .venv/bin/python examples/source_binding/run_example.py \

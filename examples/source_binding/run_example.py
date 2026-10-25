@@ -435,7 +435,11 @@ def native_unreal(root: Path, args, state: dict) -> dict:
         audit,
     )
     if built["status"] != "verified":
-        state["unreal_status"] = "failed-structure-attempt"
+        state["unreal_status"] = (
+            "blocked-structure-attempt"
+            if built["status"] == "blocked"
+            else "failed-structure-attempt"
+        )
         write_json(root / "state.json", state)
     require_verified(built)
     inspected = act(
@@ -462,14 +466,49 @@ def native_unreal(root: Path, args, state: dict) -> dict:
     return state
 
 
-def native_unreal_gpu_retry(root: Path, args, state: dict) -> dict:
-    """One explicit alternate-mode attempt after the previous editor has exited."""
-    previous = state["actions"].get("unreal-edited-scene")
-    if previous is None or previous["status"] != "failed":
-        raise ValueError("This explicit retry requires a recorded failed structure attempt.")
+def explicit_gpu_retry_basis(previous: dict | None) -> dict:
+    """Distinguish a never-launched preflight block from an exited native failure."""
+    if previous is None or previous.get("status") not in {"failed", "blocked"}:
+        raise ValueError(
+            "This explicit retry requires a recorded failed or known preflight-blocked structure attempt."
+        )
     observation = previous["result"]["result"].get("observations", {})
+    if previous["status"] == "blocked":
+        guard = observation.get("preflight", {})
+        if not (
+            guard.get("decision") == "blocked"
+            and guard.get("code") == unreal.ENVIRONMENT_NULLRHI_RESTRICTION
+            and guard.get("action") == "build_scene"
+            and guard.get("editor_session") is True
+            and guard.get("rendering_mode") == "structure"
+            and observation.get("native_launch_attempted") is False
+            and type(previous.get("native_process_launches")) is int
+            and previous["native_process_launches"] == 0
+            and observation.get("returncode") is None
+            and observation.get("timed_out") is None
+        ):
+            raise ValueError(
+                "Only the known preflight block with zero observed native launches permits this explicit alternate-mode attempt."
+            )
+        return {
+            "previous_attempt": "preflight-blocked",
+            "previous_native_process_launches": 0,
+            "previous_native_process_exited": None,
+            "previous_returncode": None,
+            "preflight_code": guard["code"],
+        }
     if observation.get("returncode") is None or observation.get("timed_out") is not False:
         raise ValueError("Confirm the prior native process exited before this explicit retry.")
+    return {
+        "previous_attempt": "native-failure",
+        "previous_native_process_exited": True,
+        "previous_returncode": observation["returncode"],
+    }
+
+
+def native_unreal_gpu_retry(root: Path, args, state: dict) -> dict:
+    """One explicit alternate-mode attempt; never an automatic fallback."""
+    basis = explicit_gpu_retry_basis(state["actions"].get("unreal-edited-scene"))
     source_hashes = implementation_hashes()
     engine = engine_for(root, args)
     audit = NativeLaunchAudit(root)
@@ -483,8 +522,7 @@ def native_unreal_gpu_retry(root: Path, args, state: dict) -> dict:
     }
     state["unreal_retry"] = {
         "explicit": True,
-        "previous_native_process_exited": True,
-        "previous_returncode": observation["returncode"],
+        **basis,
         "fresh_destination": destination,
         "source_hashes": source_hashes,
     }
@@ -711,6 +749,25 @@ def unreal_observations(workspace: Path, state: dict) -> dict:
             "timed_out": observations.get("timed_out"),
             "native_process_launches": record["native_process_launches"],
         }
+        guard = observations.get("preflight")
+        if guard:
+            attempt["preflight"] = {
+                key: guard[key]
+                for key in (
+                    "decision",
+                    "code",
+                    "action",
+                    "editor_session",
+                    "rendering_mode",
+                    "engine",
+                    "platform",
+                    "required_parameters",
+                    "basis",
+                )
+                if key in guard
+            }
+            attempt["rendering_mode"] = guard.get("rendering_mode")
+            attempt["native_launch_attempted"] = observations.get("native_launch_attempted")
         verification = observations.get("native", {}).get("verification")
         if verification:
             attempt["verification"] = {

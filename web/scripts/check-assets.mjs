@@ -92,3 +92,25 @@ if (!resources.equals(await readFile(new URL('../../examples/source_binding/obse
   throw new Error('Resource boundary evidence differs from its native record');
 }
 console.log(`Verified ${Object.keys(sourceManifest).length} source-binding assets and recorded native revision/transfer evidence.`);
+
+const preflightBytes = await readFile(`${assets}/unreal-preflight/observed-native-proof.json`);
+const preflightSource = await readFile(new URL('../../examples/unreal_preflight/observed-native-proof.json', import.meta.url));
+if (!preflightBytes.equals(preflightSource)) throw new Error('Unreal preflight demo differs from its native record');
+const preflight = JSON.parse(preflightBytes);
+const rejected = preflight.attempts.filter(attempt => attempt.id.startsWith('reject-'));
+const gpuBuild = preflight.attempts.find(attempt => attempt.id === 'explicit-gpu-build');
+const gpuInspect = preflight.attempts.find(attempt => attempt.id === 'fresh-gpu-inspection');
+if (preflight.schema_version !== 'unreal-preflight-native-example/v1' ||
+    preflight.provenance.kind !== 'observed-native-execution' ||
+    preflight.provenance.synthetic_adapter_used !== false ||
+    !Object.keys(preflight.checks).length || Object.values(preflight.checks).some(value => value !== true) ||
+    rejected.length !== 2 || rejected.some(attempt => attempt.status !== 'blocked' ||
+      attempt.native_process_launches !== 0 || attempt.subprocess_launches !== 0 ||
+      attempt.project_effects.unchanged !== true || attempt.revision_after <= attempt.revision_before ||
+      attempt.preflight?.code !== 'unreal_macos_5_7_4_environment_nullrhi') ||
+    [gpuBuild, gpuInspect].some(attempt => !attempt || attempt.status !== 'verified' ||
+      attempt.rendering !== 'gpu' || attempt.native_process_launches !== 1 || attempt.returncode !== 0) ||
+    preflight.target.reopened !== true || preflight.target.appearance_validated !== false) {
+  throw new Error('Invalid Unreal preflight native execution boundary');
+}
+console.log(`Verified ${preflight.attempts.length} actual Unreal actions and ${Object.keys(preflight.checks).length} preflight/transfer checks; no appearance claim.`);

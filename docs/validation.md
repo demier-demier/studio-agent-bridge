@@ -1,6 +1,14 @@
 # Native acceptance record
 
-Observed on macOS on **2026-10-19**. This record separates orchestration tests from application-backed results. Full machine logs and working files remain in the local workspace; these public reports contain original synthetic geometry measurements and artifact hashes.
+The original record below was observed on macOS on **2026-10-19**. This record separates orchestration tests from application-backed results. Full machine logs and working files remain in the local workspace; these public reports contain original synthetic geometry measurements and artifact hashes.
+
+## Follow-up: Unreal launch preflight, 25 October 2026
+
+The current ordinary suite has **261 passed, one opt-in Blender integration skipped**; lint and wheel build passed locally. These tests include mocked adapter contracts and are separate from native application evidence.
+
+The [new native regression case](../examples/unreal_preflight/) executed five real Engine actions with Unreal 5.7.4 on macOS. All 18 acceptance checks passed. Two known-risk NullRHI environment builds were blocked before any subprocess launch, preserving the absent or existing native project. Explicit GPU construction and fresh inspection each exited 0 and verified the original lab's 1,571 mesh actors, 84 mesh assets, 17 materials, nine lights and four cameras. No image was captured in this follow-up. The historical crash in the [October 24 source-bound revision](../examples/source_binding/observed-native-proof.json) remains unchanged.
+
+The following sections retain their original dated measurements and limitations; their test count and NullRHI-only appearance boundary apply to the October 19 cases.
 
 ## Automated tests
 

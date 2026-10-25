@@ -19,7 +19,7 @@ jobs:
       - run: python -m pip install -r requirements.lock.txt
       - run: python -m pip install --no-deps -e .
       - run: python -m pytest -q -m "not integration"
-      - run: ruff check src tests examples/recovery examples/source_binding
+      - run: ruff check src tests examples/recovery examples/source_binding examples/unreal_preflight
       - run: python -m pip wheel --no-deps --wheel-dir dist .
   browser-demo:
     runs-on: ubuntu-latest
