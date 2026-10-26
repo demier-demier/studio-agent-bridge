@@ -85,3 +85,31 @@ document.querySelector('#copy-brief').addEventListener('click',async()=>{
   try {await navigator.clipboard.writeText(document.querySelector('#chat-brief').textContent);document.querySelector('#copy-status').textContent='Brief copied';}
   catch {document.querySelector('#copy-status').textContent='Select and copy the brief above.';}
 });
+
+try {
+  const response = await fetch(root + 'publication-proof.json');
+  if (!response.ok) throw new Error('Publication evidence unavailable');
+  const proof = await response.json();
+  if (proof.schema_version !== 'publication-safety-native-example/v1' ||
+      proof.provenance.kind !== 'observed-native-execution' ||
+      !Object.keys(proof.checks).length || Object.values(proof.checks).some(value => value !== true) ||
+      proof.scenes.length !== 2 || proof.scenes.some(scene => scene.comparison.reopened.passed !== true || scene.scan.passed !== true) ||
+      proof.fbx.typed_comparison_passed !== true || proof.archive.scan_passed !== true ||
+      proof.unreal.target.status !== 'verified' || proof.unreal.target.reopened !== true ||
+      proof.unreal.target.manifest_sha256 !== proof.fbx.publication_manifest_sha256) throw new Error('Unexpected publication evidence');
+  document.querySelector('#publication-status').textContent = `${proof.scenes.length} scenes reopened · ${proof.fbx.files} FBX files checked · separate Unreal transfer verified.`;
+  const facts = [
+    'Both scenes passed declared model comparisons after cleanup and independent reopening: exact base-scene values and a stated tolerance for evaluated floating-point geometry.',
+    `Evaluated float tolerance: ${proof.scenes[0].comparison.reopened.evaluated_float_tolerance}. Largest observed residual: ${Math.max(...proof.scenes.map(scene => scene.comparison.reopened.max_evaluated_float_residual))}.`,
+    `${proof.fbx.changed_fields} FBX path fields rewritten; every other parsed typed value compared equal.`,
+    `${proof.unchanged_members.count} other package members retained byte for byte.`,
+    'The transfer manifest identifies the cleaned FBX files; original evidence retains its original hashes.',
+    `Publication archive SHA-256: ${proof.archive.sha256}`,
+    ...proof.limitations,
+  ];
+  const target = document.querySelector('#publication-checks');
+  target.replaceChildren(...facts.map(text => {const li=document.createElement('li');li.textContent=text;return li;}));
+  document.querySelector('#publication-details').hidden = false;
+} catch {
+  document.querySelector('#publication-status').textContent = 'Publication checks are unavailable here. Open the evidence download or the repository to inspect this version.';
+}

@@ -290,20 +290,24 @@
   ],
   "downloads": [
     {
-      "file": "industrial-lab-native.zip",
-      "label": "Native scenes, transfer bundle & scripts"
+      "file": "industrial-lab-native-v2.zip",
+      "label": "Native scenes v2, transfer bundle & scripts"
     },
     {
       "file": "industrial-lab.glb",
       "label": "Actual exported GLB"
     },
     {
+      "file": "publication-proof.json",
+      "label": "Version 2 publication checks"
+    },
+    {
       "file": "evidence.json",
-      "label": "Recorded native evidence"
+      "label": "Historical native evidence"
     },
     {
       "file": "environment-manifest.json",
-      "label": "Environment scene manifest"
+      "label": "Version 2 transfer manifest"
     }
   ]
 }

@@ -6,6 +6,8 @@ The guard applies to that combination. It does not disable ordinary commandlet a
 
 This is a new run of the **original public lab transfer**. Its manifest contains 1,571 mesh instances and 84 asset entries. It is separate from the previous edited-cart scene, which had 82 shared mesh assets. The original scene is authored demonstration content; execution uses the real installed Unreal Editor and the real `Engine`, with no simulated adapter.
 
+The checked-in proof records the October 25 input package. Current reproduction uses `industrial-lab-native-v2.zip`; portable FBX path metadata and its manifest hashes differ. The geometry-preservation checks and fresh transfer of that publication are recorded separately in [publication_safety](../publication_safety/). Historical proof hashes are not relabelled as v2 results.
+
 ## Reproduce
 
 Use the repository's installed Python environment and Unreal 5.7.4 on macOS. Choose a **new empty private work directory**. The `prepare` step extracts only transfer files from the repository's public native ZIP, checking every selected member against its packaged SHA-256 and byte count. It does not extract or execute scene-construction scripts.

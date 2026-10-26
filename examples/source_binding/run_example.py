@@ -28,7 +28,7 @@ from studio_agent_bridge.adapters import blender, unreal  # noqa: E402
 from studio_agent_bridge.engine import Engine  # noqa: E402
 from studio_agent_bridge.workspace import file_digest  # noqa: E402
 
-ARCHIVE = "web/public/assets/environment/industrial-lab-native.zip"
+ARCHIVE = "web/public/assets/environment/industrial-lab-native-v2.zip"
 MEMBERS = {
     "scene-day.blend": "source/scene-day.blend",
     "scripts/revise_and_render.py": "scripts/environments/revise_and_render.py",

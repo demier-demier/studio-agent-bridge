@@ -2,9 +2,19 @@
 
 The original record below was observed on macOS on **2026-10-19**. This record separates orchestration tests from application-backed results. Full machine logs and working files remain in the local workspace; these public reports contain original synthetic geometry measurements and artifact hashes.
 
+## Follow-up: versioned native publication, 26 October 2026
+
+The ordinary suite now has **347 passed, one opt-in Blender integration skipped**. The new tests exercise bounded archive scanning, exact scanned-to-published bytes, overwrite/race refusal, FBX metadata rewrite boundaries, and scene-comparison tolerances. Synthetic tests do not substitute for the separate native record below.
+
+The [publication example](../examples/publication_safety/) creates separate day/night Blender copies, independently reopens them, and compares the declared current-frame model fields. Base geometry and scene fields compare exactly. Evaluated geometry uses a declared absolute tolerance of `1e-6`, with the observed residual published in the evidence; a rounded hash alone is not an acceptance test.
+
+All 84 FBX files are parsed, changed only at 759 allowlisted path fields, encoded and parsed again. Every other ordered typed property compares equal, including 756 numerical arrays. The transfer manifest is updated to identify these exact new FBX bytes, and a new Unreal project is built and independently reopened from that manifest. The v2 package includes original-to-publication hash mappings. Original gallery renders, GLB, textures and historical execution evidence retain their original bytes.
+
+This is a publication and static-transfer check. It does not establish new appearance, animation, navigation, robot control or performance results. Four early scene-measurement attempts were rejected; their limitations and corrected acceptance logic remain in the new record. The [publication threat model](publication-safety.md) describes supported encodings, configured-pattern limits and the trusted-fixture boundary of the FBX helper.
+
 ## Follow-up: Unreal launch preflight, 25 October 2026
 
-The current ordinary suite has **261 passed, one opt-in Blender integration skipped**; lint and wheel build passed locally. These tests include mocked adapter contracts and are separate from native application evidence.
+That day's ordinary suite had **261 passed, one opt-in Blender integration skipped**; lint and wheel build passed locally. These tests include mocked adapter contracts and are separate from native application evidence.
 
 The [new native regression case](../examples/unreal_preflight/) executed five real Engine actions with Unreal 5.7.4 on macOS. All 18 acceptance checks passed. Two known-risk NullRHI environment builds were blocked before any subprocess launch, preserving the absent or existing native project. Explicit GPU construction and fresh inspection each exited 0 and verified the original lab's 1,571 mesh actors, 84 mesh assets, 17 materials, nine lights and four cameras. No image was captured in this follow-up. The historical crash in the [October 24 source-bound revision](../examples/source_binding/observed-native-proof.json) remains unchanged.
 

@@ -4,6 +4,8 @@ This example starts from the original detailed Industrial AI Robotics Lab packag
 
 The workflow uses the real `Engine` and supported native adapters. It does not substitute synthetic host behavior. The cart-editing scripts are the original public scripts extracted from the existing native package after checking their manifest hashes. A small original publication sanitizer overwrites native path properties before saving separate download copies. No new geometry is constructed.
 
+Current reproduction uses `industrial-lab-native-v2.zip`, whose Blender copies have cleaned path metadata and different file hashes. The generator measures the supplied bytes rather than assuming the historical source hash. The checked-in October 24 proof still identifies its original input archive and remains unchanged. See [publication provenance](../publication_safety/) for the original-to-current mapping.
+
 ## Reproduce
 
 Requirements: the repository's Python environment, Blender 5.2 or newer, and the `zstd` command for the final decompressed-byte privacy scan. Unreal is optional for the separate static transfer stage. Native applications can take several minutes to render or import the scene.

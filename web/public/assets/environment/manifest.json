@@ -4,20 +4,20 @@
     "sha256": "0f3ec442a3a6dec9d2863b7a5120309f7258ee90fd26d89958539e11fcccc185"
   },
   "case.json": {
-    "bytes": 8305,
-    "sha256": "511763adc403c77b831a0d508bb3585ed05079c19a215bcd82544e4c6754ac11"
+    "bytes": 8413,
+    "sha256": "87f004120262f504d922e508d5d1c126d0f754774e8f688eab53e78177134e91"
   },
   "environment-manifest.json": {
-    "bytes": 3099072,
-    "sha256": "856ee52312b3d8b38424bf58f09be554ee10797229ce3415e8b6f543547208d4"
+    "bytes": 3099073,
+    "sha256": "97d636d96a20fd16ba21e05e21884d93f1fbc8e0b0bfc0cccd62e8793f9be568"
   },
   "evidence.json": {
     "bytes": 1586306,
     "sha256": "b03f9e86ce1b4206f20220f8a90b86b8d474fd50996cf06c0370fd07639b6783"
   },
-  "industrial-lab-native.zip": {
-    "bytes": 7508197,
-    "sha256": "461fbaa85c1bda7e6a7bd71dece05bfa5c3b48b11db0b1883481c9b815f15485"
+  "industrial-lab-native-v2.zip": {
+    "bytes": 7525274,
+    "sha256": "1e4db55ba67d8c43168ea08bc196f27d45ae99d4021fc49041a7775911a0b9e9"
   },
   "industrial-lab.glb": {
     "bytes": 2479564,
@@ -30,6 +30,10 @@
   "overview.png": {
     "bytes": 2125107,
     "sha256": "9747a141b802f93d85715f0c2f225a4ea618bff7dd835295bb34085d52a1e84c"
+  },
+  "publication-proof.json": {
+    "bytes": 214533,
+    "sha256": "5b86da40f64528c44c3d3b50c5ab43b12359af9fa30bc0b0e970d30e8168e60b"
   },
   "robot.png": {
     "bytes": 2026413,

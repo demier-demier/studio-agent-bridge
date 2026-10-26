@@ -34,6 +34,8 @@ Unreal independently reopened the final saved level with **1,571 mesh actors, 84
 
 The case exposed and fixed a real shared-mesh export failure: the initial GLB silently lost materials. The exporter now uses temporary evaluated prototypes and checks every object's material assignment. Geometry counts alone would not have caught the loss. See [the environment workflow](docs/environments.md) for chat prompts, native evidence and transfer limits.
 
+**Portable publication copies.** The current native download is a separately verified v2 package. Its Blender scenes are resaved and reopened, and its FBX metadata refers to packaged files instead of the author's machine. The publication gate scans every archive member, including decompressed Blender data, and refuses to overwrite an existing version. The [publication record](examples/publication_safety/) distinguishes exact source-geometry comparisons, bounded floating-point differences in evaluated geometry, and a new Unreal transfer check. Original renders and historical execution hashes remain dated evidence; this follow-up makes no new appearance or performance claim. See the [design and limits](docs/publication-safety.md).
+
 ## Reliability case: recovering interrupted native actions
 
 **[Explore the recovery lab](https://bernardo-demier-ai-lab.fancy-fly-9200.chatgpt.site/studio-agent-bridge/recovery/)** — step through recorded process interruptions, preserved effects and explicit reconciliation. The Python bridge and SQLite are real; these fault-injection traces use synthetic host adapters, not native modeling applications.
@@ -139,6 +141,7 @@ The MCP server exposes nine tools, three workflow prompts and resources for role
 | [Unreal](docs/unreal.md) | Editor projects, FBX handoff, scene/sequence creation and native checks |
 | [Detailed environments](docs/environments.md) | Chat briefs, complete Blender scenes, Unreal transfer, visual review and revisions |
 | [Source-bound revisions](docs/source-binding.md) | Reviewed scene hashes, preserved snapshots, packed-resource limits and native edit evidence |
+| [Portable publication](docs/publication-safety.md) | Versioned native copies, metadata checks, model comparisons and preserved historical evidence |
 | [Validation](docs/validation.md) | Recorded native acceptance results and test boundaries |
 | [Agent roles](prompts/) | Prompts for planning, modeling, geometry QA, interchange and review |
 

@@ -1,4 +1,4 @@
-import {readFile} from 'node:fs/promises';
+import {readFile, access} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
@@ -38,6 +38,41 @@ for (const entry of [...environment.views, ...environment.downloads, {file: envi
   if (entry.file && !environmentManifest[entry.file]) throw new Error(`Missing environment evidence asset: ${entry.file}`);
 }
 console.log(`Verified ${Object.keys(environmentManifest).length} environment assets; evidence is recorded native output, not a CI render.`);
+
+const publicationBytes = await readFile(`${environmentRoot}/publication-proof.json`);
+const publicationSource = await readFile(new URL('../../examples/publication_safety/observed-native-proof.json', import.meta.url));
+if (!publicationBytes.equals(publicationSource)) throw new Error('Publication demo differs from its native record');
+const publication = JSON.parse(publicationBytes);
+const transferBytes = await readFile(`${environmentRoot}/environment-manifest.json`);
+const publishedArchive = environmentManifest[publication.archive.filename];
+if (publication.schema_version !== 'publication-safety-native-example/v1' ||
+    publication.provenance.kind !== 'observed-native-execution' ||
+    publication.provenance.synthetic_adapter_used !== false ||
+    !Object.keys(publication.checks).length || Object.values(publication.checks).some(value => value !== true) ||
+    publication.archive.filename !== 'industrial-lab-native-v2.zip' || publication.archive.scan_passed !== true ||
+    publishedArchive?.sha256 !== publication.archive.sha256 || publishedArchive?.bytes !== publication.archive.bytes ||
+    publication.scenes.length !== 2 || publication.scenes.some(scene =>
+      scene.scan.passed !== true || scene.comparison.reopened.passed !== true ||
+      scene.comparison.reopened.exact_categories_equal !== true ||
+      !Number.isFinite(scene.comparison.reopened.max_evaluated_float_residual) ||
+      scene.comparison.reopened.evaluated_float_tolerance !== 1e-6 ||
+      scene.comparison.reopened.max_evaluated_float_residual > scene.comparison.reopened.evaluated_float_tolerance) ||
+    publication.fbx.typed_comparison_passed !== true ||
+    publication.fbx.publication_manifest_sha256 !== createHash('sha256').update(transferBytes).digest('hex') ||
+    publication.unreal.target.status !== 'verified' || publication.unreal.target.reopened !== true ||
+    publication.unreal.target.appearance_validated !== false ||
+    publication.unreal.target.manifest_sha256 !== publication.fbx.publication_manifest_sha256 ||
+    publication.unreal.attempts.length !== 3 || publication.unreal.attempts.some(action => action.status !== 'verified') ||
+    !publication.unchanged_members.all_byte_identical ||
+    !environment.downloads.some(entry => entry.file === publication.archive.filename) ||
+    environment.downloads.some(entry => entry.file === 'industrial-lab-native.zip')) {
+  throw new Error('Invalid versioned publication provenance, asset identity or acceptance boundary');
+}
+try {
+  await access(`${environmentRoot}/industrial-lab-native.zip`);
+  throw new Error('Historical native archive must not remain a current download');
+} catch (error) { if (error.code !== 'ENOENT') throw error; }
+console.log(`Verified v${publication.archive.version} publication identity, ${publication.scenes.length} reopened scenes and ${publication.fbx.files} checked FBX files; historical renders remain separate.`);
 
 const recoveryBytes = await readFile(`${assets}/recovery.json`);
 const recoverySource = await readFile(new URL('../../examples/recovery/observed-recovery.json', import.meta.url));

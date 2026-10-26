@@ -8,8 +8,20 @@ import argparse
 import hashlib
 import importlib.util
 import json
-import zipfile
+import sys
+import tempfile
 from pathlib import Path
+
+REPOSITORY = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPOSITORY / "src"))
+
+from studio_agent_bridge.publication import (  # noqa: E402
+    PublicationError,
+    publish_directory,
+    publish_native_archive,
+    scan_archive,
+    validate_payloads,
+)
 
 
 def read(path):
@@ -21,14 +33,9 @@ def fingerprint(path):
     return {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", type=Path, required=True)
-    config = read(parser.parse_args().config)
-    web = Path(__file__).resolve().parents[1]
-    repo = web.parent
-    dest = web / "public/assets/environment"
-    dest.mkdir(parents=True, exist_ok=True)
+def build_package(config: dict, dest: Path):
+    """Build only in private staging; native reopen is not a byte-privacy scan."""
+    repo = REPOSITORY
     spec = importlib.util.spec_from_file_location(
         "public_asset_metadata", Path(__file__).with_name("package-public-assets.py")
     )
@@ -83,13 +90,20 @@ def main():
             raise ValueError("Unreal gallery render must match the verified native capture")
         filename = view["id"] + ".png"
         (dest / filename).write_bytes(module.strip_png_metadata(path.read_bytes()))
-        views.append({
-            key: value for key, value in {
-                "id": view["id"], "label": view["label"], "host": view["host"],
-                "caption": view["caption"], "file": filename,
-                "camera": cameras.get(view.get("camera")),
-            }.items() if value is not None
-        })
+        views.append(
+            {
+                key: value
+                for key, value in {
+                    "id": view["id"],
+                    "label": view["label"],
+                    "host": view["host"],
+                    "caption": view["caption"],
+                    "file": filename,
+                    "camera": cameras.get(view.get("camera")),
+                }.items()
+                if value is not None
+            }
+        )
     (dest / "industrial-lab.glb").write_bytes((bundle / "industrial-lab.glb").read_bytes())
     (dest / "environment-manifest.json").write_bytes(
         (bundle / "environment-manifest.json").read_bytes()
@@ -111,7 +125,7 @@ def main():
             "changes": read(revision / "revision-evidence.json"),
         },
         "unreal": unreal_proof,
-        "public_packaging": "PNG text metadata removed without pixel changes. Native blend files are portable, packed-texture work copies reopened before packaging. Logs and absolute local paths are omitted.",
+        "public_packaging": "PNG text metadata removed without pixel changes. Native scenes were reopened, then all archive members were byte-scanned under the locally configured publication policy, including decoded .blend bytes. This pattern scan is not a universal private-data guarantee; see publication-scan.json.",
     }
     (dest / "evidence.json").write_text(json.dumps(evidence, indent=2) + "\n")
     payloads = {
@@ -146,34 +160,39 @@ def main():
         "Original procedural scene, scripts and textures by Bernardo Demier; MIT.\n"
         "Native applications and their licenses are separate.\n"
     ).encode()
-    payloads["manifest.json"] = (json.dumps({
-        name: {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
-        for name, data in sorted(payloads.items())
-    }, indent=2) + "\n").encode()
-    zip_path = dest / "industrial-lab-native.zip"
-    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as archive:
-        for name, data in sorted(payloads.items()):
-            info = zipfile.ZipInfo("industrial-lab/" + name, date_time=(2026, 10, 20, 0, 0, 0))
-            info.compress_type = zipfile.ZIP_DEFLATED
-            info.external_attr = 0o644 << 16
-            archive.writestr(info, data)
-    with zipfile.ZipFile(zip_path) as archive:
-        if archive.testzip() is not None:
-            raise ValueError("Native ZIP integrity check failed")
+    payloads["manifest.json"] = (
+        json.dumps(
+            {
+                name: {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+                for name, data in sorted(payloads.items())
+            },
+            indent=2,
+        )
+        + "\n"
+    ).encode()
+    version = config["publication_version"]
+    zip_path = dest / f"industrial-lab-native-v{version}.zip"
+    publication = publish_native_archive(
+        {"industrial-lab/" + name: data for name, data in payloads.items()},
+        zip_path,
+        version=version,
+        forbidden_fragments=config["publication_forbidden_fragments"],
+    )
+    (dest / "publication-scan.json").write_text(json.dumps(publication, indent=2) + "\n")
     totals = source_manifest["totals"]
     case = {
         "views": views,
         "mesh": "industrial-lab.glb",
         "stats": [
-            {"value": f'{totals["meshInstances"]:,}', "label": "placed mesh instances"},
+            {"value": f"{totals['meshInstances']:,}", "label": "placed mesh instances"},
             {"value": str(totals["uniqueAssets"]), "label": "shared evaluated mesh assets"},
             {"value": str(totals["materials"]), "label": "PBR materials"},
-            {"value": f'{totals["instanceTriangles"]:,}', "label": "evaluated scene triangles"},
+            {"value": f"{totals['instanceTriangles']:,}", "label": "evaluated scene triangles"},
         ],
         "observed": config["observed"],
         "limitations": config["limitations"],
         "downloads": [
-            {"file": "industrial-lab-native.zip", "label": "Native scenes, transfer bundle & scripts"},
+            {"file": zip_path.name, "label": "Native scenes, transfer bundle & scripts"},
             {"file": "industrial-lab.glb", "label": "Actual exported GLB"},
             {"file": "evidence.json", "label": "Recorded native evidence"},
             {"file": "environment-manifest.json", "label": "Environment scene manifest"},
@@ -181,11 +200,55 @@ def main():
     }
     (dest / "case.json").write_text(json.dumps(case, indent=2) + "\n")
     asset_manifest = {
-        path.name: fingerprint(path) for path in sorted(dest.iterdir())
+        path.name: fingerprint(path)
+        for path in sorted(dest.iterdir())
         if path.is_file() and path.name != "manifest.json"
     }
     (dest / "manifest.json").write_text(json.dumps(asset_manifest, indent=2) + "\n")
-    print(json.dumps({"files": len(asset_manifest), "zip": fingerprint(zip_path)}))
+    return {"files": len(asset_manifest), "zip": fingerprint(zip_path)}
+
+
+def package(config: dict) -> dict:
+    version = config.get("publication_version")
+    if type(version) is not int or version < 2:
+        raise PublicationError(
+            "publication_version must be an explicit integer >=2; existing packages are never overwritten."
+        )
+    destination = Path(
+        config.get(
+            "publication_output", REPOSITORY / "web/public/assets/environment" / f"v{version}"
+        )
+    )
+    if destination.name != f"v{version}" or destination.exists() or destination.is_symlink():
+        raise PublicationError("publication_output must be a new v<VERSION> directory.")
+    fragments = config.get("publication_forbidden_fragments")
+    # Validate local-only policy before writing staging data; do not echo fragments.
+    validate_payloads({"policy-check.txt": b""}, forbidden_fragments=fragments)
+    with tempfile.TemporaryDirectory(prefix="studio-environment-package-") as temporary:
+        staged = Path(temporary)
+        result = build_package(config, staged)
+        # Freeze exactly the bytes scanned below, then compare the private copied
+        # directory to this manifest before its exclusive publication rename.
+        payloads = {path.name: path.read_bytes() for path in staged.iterdir()}
+        validate_payloads(
+            {name: data for name, data in payloads.items() if not name.endswith(".zip")},
+            forbidden_fragments=fragments,
+        )
+        for name, data in payloads.items():
+            if name.endswith(".zip"):
+                scan_archive(data, forbidden_fragments=fragments)
+        expected_files = {
+            name: {"sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)}
+            for name, data in payloads.items()
+        }
+        publish_directory(staged, destination, expected_files=expected_files)
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", type=Path, required=True)
+    print(json.dumps(package(read(parser.parse_args().config))))
 
 
 if __name__ == "__main__":

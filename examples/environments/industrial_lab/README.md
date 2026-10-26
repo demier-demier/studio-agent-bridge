@@ -34,7 +34,7 @@ Observed final geometry: 1,571 mesh instances; 84 evaluated FBX export prototype
 
 4. Use the returned native file as `input_blend` for `revise_and_render.py`, passing its reviewed artifact SHA-256 as `expected_source_sha256`. Existing-scene script actions require this hash and a packed, self-contained scene. `render_views` accepts `Overview`, `RobotDetail`, `BenchDetail` and `ComputeAisle`. Images are rendered in Cycles on CPU at 1440 × 1000, 48 samples. Render one or two cameras per action on slower machines rather than exceeding the configured host timeout.
 5. Use the final native file as `input_blend` with its reviewed `expected_source_sha256` for `export_environment_bundle.py`. It produces `environment-manifest.json`, unique FBX files, copied texture maps and the complete `industrial-lab.glb`. Its saved `.blend` uses packed images and relative resource paths.
-6. Run `sanitize_scene.py` against a work copy intended for sharing and scan the saved decompressed bytes for private paths. It cleans packed-image records and file-browser state as well as the render path.
+6. For a copy intended for sharing, use the current [publication-safety workflow](../../publication_safety/) and its standalone `sanitize_scene.py`. It cleans known native path fields, scans decompressed Blender bytes and all packaged files, and rewrites FBX metadata through Blender's format parser. The older script in this directory remains historical source; assigning short relative paths alone can leave native string padding behind.
 7. Inspect the returned evidence, independently reopen the native file, and reimport the GLB. An Unreal import must then check its own actor transforms, mesh bounds, materials and render; Blender success alone is not Unreal evidence.
 
 Each native action creates a new run directory. Never replace the input file. Capture its SHA-256 before and after revision.
@@ -61,6 +61,8 @@ The bridge validates reopening and preserves the source hash. This controlled ex
 The manifest stores Blender coordinates in metres and explicit transforms. Unique FBX assets contain local geometry at identity. The Unreal adapter is responsible for handedness and centimetre conversion, material reconstruction and instance placement. Packed Principled base-color/roughness/normal images and scalar metallic/emission values are available; rendering appearance also depends on each engine's lighting, normal strength, exposure and color management. Native curves, text editing, bevel modifiers and hierarchy remain in the `.blend`; exported meshes are evaluated static snapshots.
 
 Raw bridge reports and logs remain in the local workspace and can contain paths. Public evidence should be a curated summary. Strip PNG metadata without modifying pixels before sharing images; keep public artifact hashes distinct from native raw-output hashes.
+
+The current download is `industrial-lab-native-v2.zip`. Native Blender and FBX path metadata have been cleaned in separate copies, and the transfer manifest hashes identify those copies. Historical renders and `evidence.json` retain their original provenance; `publication.json` provides the mapping to v2. The old ZIP is retired from current downloads without rewriting repository history.
 
 ## Recorded native validation
 
