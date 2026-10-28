@@ -26,6 +26,8 @@ These original assets exercise the pipeline. Native scripts allow models beyond 
 
 **[Explore the detailed environment](https://bernardo-demier-ai-lab.fancy-fly-9200.chatgpt.site/studio-agent-bridge/environment/)** — native render gallery, interactive interior mesh, recorded checks and downloadable day/night Blender scenes with the reusable transfer bundle.
 
+**New native visual pilot:** the [optical inspection station](examples/inspection_workcell/) adds 249 detailed mesh parts to the preserved lab. Matching-camera before/after renders, fresh Blender readback and measured gaps are included. This is a reviewable Blender milestone; its Unreal transfer and human visual acceptance remain pending, and the online environment above still shows the earlier published lab.
+
 The [original laboratory](examples/environments/industrial_lab/) contains complete architecture, an equipped robotics cell, an electronics bench, compute racks, utilities and original PBR surfaces: **1,571 mesh instances, 84 evaluated FBX prototypes, 17 materials, 18 texture maps and 253,920 placed triangles**. Four native cameras and nine lights are retained in the interchange manifest. The editable Blender files preserve source curves, text, separate objects and bevel modifiers.
 
 A chat-directed revision changed the lighting to evening and moved the diagnostic cart by 0.4 m. Both native scenes were reopened. Reversing the edit restored all lights exactly and the 28 cart components within floating-point tolerance. A fresh Blender import of the public GLB preserved mesh count, materials and measured bounds.

@@ -1,0 +1,112 @@
+{
+  "schema": "studio-inspection-pilot/v1",
+  "date": "2026-10-28",
+  "blender": "5.2.0 LTS",
+  "status": "native-pilot-not-complete-environment-transfer",
+  "reports": {
+    "baseline": {
+      "mode": "baseline",
+      "original_mesh_count": 1571,
+      "original_fields_sha256": "dd2e62edea37ca62a53d49cb3a215f56c51f522e56a78fa63c879fc47b4f560c",
+      "original_fields_preserved": true,
+      "station_meshes": 0,
+      "station_bounds_m": null,
+      "limits": "Explicit mesh/transform/material fields only; not complete scene equivalence. No robot, optics or safety simulation."
+    },
+    "build": {
+      "mode": "build",
+      "original_mesh_count": 1571,
+      "original_fields_sha256": "dd2e62edea37ca62a53d49cb3a215f56c51f522e56a78fa63c879fc47b4f560c",
+      "original_fields_preserved": true,
+      "station_meshes": 249,
+      "station_bounds_m": {
+        "min": [
+          -4.599999904632568,
+          -0.35750001668930054,
+          0.01499999687075615
+        ],
+        "max": [
+          -3.0,
+          0.6499999761581421,
+          2.2764999866485596
+        ]
+      },
+      "limits": "Explicit mesh/transform/material fields only; not complete scene equivalence. No robot, optics or safety simulation."
+    },
+    "fresh_reopen": {
+      "mode": "inspect",
+      "original_mesh_count": 1571,
+      "original_fields_sha256": "dd2e62edea37ca62a53d49cb3a215f56c51f522e56a78fa63c879fc47b4f560c",
+      "original_fields_preserved": true,
+      "station_meshes": 249,
+      "station_bounds_m": {
+        "min": [
+          -4.599999904632568,
+          -0.35750001668930054,
+          0.01499999687075615
+        ],
+        "max": [
+          -3.0,
+          0.6499999761581421,
+          2.2764999866485596
+        ]
+      },
+      "limits": "Explicit mesh/transform/material fields only; not complete scene equivalence. No robot, optics or safety simulation."
+    }
+  },
+  "source_sha256": "a2c2b4fcecb37596c264ac4fd4a39ceb32033206b862028b41684d2eb9a679d6",
+  "native_scene_sha256": "92667087906956fa4a6c7c5826b3d4d45172b3b5ed115c328634858f8d005922",
+  "renders": {
+    "before": {
+      "sha256": "38cfd8e7d64a433c5bc7314194b358a4fca59af20ea029d31412f93f1dc0fdbc",
+      "dimensions": [
+        1100,
+        850
+      ]
+    },
+    "after": {
+      "sha256": "2862c9f525ad04462aea1b987f8403e9855df07779dd4592d0b462acdcd5b0c9",
+      "dimensions": [
+        1100,
+        850
+      ]
+    }
+  },
+  "observed_failure_and_correction": "First visual sample exposed unsupported illuminator mounts. Revision 2 added two cross-brackets; both attempts retained privately.",
+  "unreal_transfer": "not_run_for_this_revision",
+  "physical_simulation": "not_implemented",
+  "human_visual_acceptance": "pending",
+  "independent_native_readback": {
+    "schema": "studio-inspection-readback/v1",
+    "station_meshes": 249,
+    "evaluated_placed_triangles": 28076,
+    "evaluated_bounds_m": [
+      [
+        -4.599999904632568,
+        -0.35750001668930054,
+        0.01499999687075615
+      ],
+      [
+        -3.0,
+        0.6499999761581421,
+        2.2764999866485596
+      ]
+    ],
+    "clearances": {
+      "robot_table_x_gap_m": 1.600000023841858,
+      "electronics_bench_y_gap_m": 1.8950001001358032
+    },
+    "checks": {
+      "all_required_assemblies_present": true,
+      "positive_dimensions": true,
+      "all_tagged": true,
+      "all_materials_resolve": true,
+      "clearance_to_two_table_envelopes_at_least_1m": true,
+      "floor_contact_within_1mm": true,
+      "added_triangle_budget_under_100k": true
+    },
+    "passed": true,
+    "limits": "AABB separations from two named table envelopes only; not full collision, accessibility, robot safety, optical or structural verification."
+  },
+  "review_method": "Separate native readback script in a fresh process, without builder imports; visual inspection by the same assistant. No independent human or second-model review."
+}
