@@ -80,12 +80,13 @@ class PublicPackageTests(unittest.TestCase):
 
     def test_model_loads_outside_checkout(self):
         old = Path.cwd()
-        try:
-            with tempfile.TemporaryDirectory() as temporary:
+        with tempfile.TemporaryDirectory() as temporary:
+            try:
                 os.chdir(temporary)
                 model = mujoco.MjModel.from_xml_path(str(self.model_path))
-        finally:
-            os.chdir(old)
+            finally:
+                # Windows cannot remove a directory while it is the process cwd.
+                os.chdir(old)
         self.assertEqual((model.nq, model.nv, model.nu), (19, 18, 12))
         self.assertEqual(model.nmesh, 9)
         visual_meshes = [

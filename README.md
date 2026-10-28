@@ -10,7 +10,9 @@ The language model runs in your MCP client. This repository supplies the native 
 
 ## What actually runs
 
-**Solo12 walking with 961,191 simulated grains:** the [open-source Solo12 granular workflow](examples/solo12_granular/) includes the robot assets, CPU/Metal particle solver, feedback crawl, recorded measurements, Blender rendering and video editing scripts. The recorded M4 Pro run traveled 0.578 m; the [16-second video](https://github.com/demier-demier/studio-agent-bridge/releases/download/solo12-granular-v1/Scenward-Solo12-Apple-Silicon.mp4) is available without installation. A small CPU preset and CI checks help reproduce the workflow. This is offline, shallow-layer granular simulation with a load-bearing substrate; it is not a Cosmos/Newton port, calibrated sand model, learned policy, hardware validation or NVIDIA comparison.
+**Solo12 walking with 961,191 simulated grains:** the [open-source Solo12 granular workflow](examples/solo12_granular/) includes the robot assets, CPU/Metal/CUDA/Vulkan particle solver, feedback crawl, recorded measurements, Blender rendering and video editing scripts. The recorded M4 Pro run traveled 0.578 m; the [16-second video](https://github.com/demier-demier/studio-agent-bridge/releases/download/solo12-granular-v1/Scenward-Solo12-Apple-Silicon.mp4) is available without installation. A small CPU preset and CI checks help reproduce the workflow. This is offline, shallow-layer granular simulation with a load-bearing substrate; it is not a Cosmos/Newton port, calibrated sand model, learned policy, hardware validation or NVIDIA comparison.
+
+**Windows GPU routes:** [NVIDIA CUDA/OptiX and AMD Vulkan/HIP setup](examples/solo12_granular/docs/windows.md), with native Windows CPU CI and explicit device diagnostics. Full Windows GPU hardware validation remains pending.
 
 Earlier physics cases remain available: the [604,800-grain walking case](examples/metal_walking/) and [original contact case](examples/metal_terrain/).
 

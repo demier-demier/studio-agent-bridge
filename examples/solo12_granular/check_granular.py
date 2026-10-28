@@ -5,16 +5,17 @@ import json
 from pathlib import Path
 
 import numpy as np
-import taichi as ti
+from backends import BACKENDS, BackendError, initialize_backend
 from granular import GranularBed
 
 p = argparse.ArgumentParser()
-p.add_argument("--backend", choices=["cpu", "metal"], required=True)
+p.add_argument("--backend", choices=BACKENDS, required=True)
 p.add_argument("--output", type=Path)
 a = p.parse_args()
-ti.init(
-    arch=ti.metal if a.backend == "metal" else ti.cpu, enable_fallback=False, cpu_max_num_threads=1
-)
+try:
+    backend_details = initialize_backend(a.backend, cpu_threads=1)
+except BackendError as error:
+    p.exit(1, f"Backend initialization failed: {error}\n")
 checks = []
 
 
@@ -91,7 +92,11 @@ b = bed([[0, 0, 0.001]])
 b.grid()
 b.forces(0)
 check("floor restoring force", b.force.to_numpy()[0, 2] > 0)
-r = {"backend": a.backend, "checks": checks}
+r = {
+    "backend": backend_details["actual_backend"],
+    "backend_details": backend_details,
+    "checks": checks,
+}
 if a.output:
     a.output.write_text(json.dumps(r, indent=2) + "\n")
 print(json.dumps(r, indent=2))

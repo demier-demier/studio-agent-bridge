@@ -7,6 +7,7 @@ lighting and material appearance vary. Particle trajectories are memory mapped.
 import argparse
 import json
 import math
+import platform
 import sys
 import time
 from pathlib import Path
@@ -16,12 +17,14 @@ import numpy as np
 from mathutils import Matrix, Vector
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+from device_selection import DEVICES, configure_device, resolve_device  # noqa: E402
 
 
 def options():
     args = sys.argv[sys.argv.index("--") + 1 :] if "--" in sys.argv else []
     parser = argparse.ArgumentParser()
-    parser.add_argument("run", type=Path)
+    parser.add_argument("run", type=Path, nargs="?")
     parser.add_argument("--geometry", type=Path, help="Override the packaged robot geometry JSON")
     parser.add_argument("--shot", choices=["hero", "contact", "trail", "top"], default="hero")
     parser.add_argument("--start", type=int, default=0)
@@ -32,12 +35,29 @@ def options():
     parser.add_argument("--resolution", nargs=2, type=int, default=[1920, 1080])
     parser.add_argument("--out", type=Path)
     parser.add_argument("--save-blend", action="store_true")
-    parser.add_argument("--cpu", action="store_true")
+    parser.add_argument(
+        "--device",
+        choices=DEVICES,
+        help="Explicit Cycles backend; GPU selection never falls back to CPU",
+    )
+    parser.add_argument("--cpu", action="store_true", help="Compatibility alias for --device CPU")
+    parser.add_argument(
+        "--list-devices",
+        action="store_true",
+        help="Probe the selected backend, print detected devices and exit without loading a run",
+    )
     parser.add_argument("--cpu-threads", type=int, default=8)
     parser.add_argument("--skip-existing", action="store_true")
     parser.add_argument("--foot", type=int, choices=range(4), default=1)
     parser.add_argument("--grain-subdivision", type=int, choices=[1, 2], default=1)
-    return parser.parse_args(args)
+    result = parser.parse_args(args)
+    if result.run is None and not result.list_devices:
+        parser.error("run is required unless --list-devices is used")
+    try:
+        result.device = resolve_device(result.device, cpu=result.cpu, system=platform.system())
+    except ValueError as exc:
+        parser.error(str(exc))
+    return result
 
 
 def material(name, color, metallic=0.0, roughness=0.4):
@@ -110,6 +130,12 @@ def validate_inputs(args, particles, poses, feet, geometry, meta):
 
 def main():
     args = options()
+    if args.list_devices:
+        selection = configure_device(
+            bpy.context.scene, bpy.context.preferences.addons["cycles"].preferences, args.device
+        )
+        print(json.dumps(selection, indent=2), flush=True)
+        return
     metadata_path = args.run / "metadata.json"
     meta = json.loads(metadata_path.read_text()) if metadata_path.exists() else {}
     particles = np.load(args.run / "particles.npy", mmap_mode="r", allow_pickle=False)
@@ -124,7 +150,6 @@ def main():
     radius = float(meta.get("grain_radius_m", 0.001))
     foot_radius = float(meta.get("foot_radius_m", 0.015))
     output = args.out or args.run / ("render-" + args.shot)
-    output.mkdir(parents=True, exist_ok=True)
     if output.is_symlink():
         raise ValueError("Render output must not be a symlink")
     for frame in render_frames:
@@ -138,6 +163,10 @@ def main():
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene = bpy.context.scene
     scene.render.engine = "CYCLES"
+    device_selection = configure_device(
+        scene, bpy.context.preferences.addons["cycles"].preferences, args.device
+    )
+    output.mkdir(parents=True, exist_ok=True)
     scene.cycles.samples = args.samples
     scene.cycles.use_denoising = True
     scene.cycles.adaptive_threshold = 0.012
@@ -147,17 +176,8 @@ def main():
     scene.cycles.transmission_bounces = 2
     scene.cycles.use_light_tree = True
     scene.render.use_persistent_data = True
-    prefs = bpy.context.preferences.addons["cycles"].preferences
-    if not args.cpu:
-        prefs.compute_device_type = "METAL"
-        prefs.get_devices()
-        for device in prefs.devices:
-            device.use = device.type == "METAL"
-        if not any(d.use and d.type == "METAL" for d in prefs.devices):
-            raise RuntimeError("Metal unavailable; use --cpu for the portable CPU renderer")
-    scene.cycles.device = "CPU" if args.cpu else "GPU"
-    scene.render.threads_mode = "FIXED" if args.cpu else "AUTO"
-    if args.cpu:
+    scene.render.threads_mode = "FIXED" if args.device == "CPU" else "AUTO"
+    if args.device == "CPU":
         scene.render.threads = args.cpu_threads
     scene.render.resolution_x, scene.render.resolution_y = args.resolution
     scene.render.resolution_percentage = 100
@@ -379,7 +399,8 @@ def main():
                     "particles": particles.shape[1],
                     "rendered_grain_radius_m": radius,
                     "robot_geometry": geometry_path.name,
-                    "device": "CPU" if args.cpu else "Metal",
+                    "device": args.device,
+                    "device_selection": device_selection,
                     "frames_rendered_in_this_invocation": records,
                 },
                 indent=2,

@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-28",
+  "scope": "Windows GPU routing and native Windows CPU workflow; no Windows GPU execution claimed",
+  "implemented_routes": {
+    "NVIDIA": {
+      "simulation": "cuda",
+      "rendering": [
+        "CUDA",
+        "OPTIX"
+      ]
+    },
+    "AMD": {
+      "simulation": "vulkan",
+      "rendering": [
+        "HIP"
+      ]
+    },
+    "Apple Silicon": {
+      "simulation": "metal",
+      "rendering": [
+        "METAL"
+      ]
+    },
+    "CPU": {
+      "simulation": "cpu",
+      "rendering": [
+        "CPU"
+      ]
+    }
+  },
+  "local_observed": {
+    "host": "Apple M4 Pro / macOS",
+    "python": "3.12.13",
+    "unit_tests_passed": 19,
+    "analytic_checks": {
+      "cpu": 12,
+      "metal": 12
+    },
+    "smoke": {
+      "particles": 4312,
+      "frames": 37,
+      "cpu_audit_checks_passed": 18,
+      "metal_audit_checks_passed": 18
+    },
+    "render_cpu_and_metal": {
+      "resolution": [
+        640,
+        360
+      ],
+      "samples": 4,
+      "frame": 30,
+      "actual_render": "passed"
+    },
+    "failure_cases": [
+      "CUDA unavailable on macOS exits nonzero without creating a run directory",
+      "TI_ARCH override rejected before creating run directory",
+      "HIP unavailable in local Blender exits nonzero without creating render output"
+    ]
+  },
+  "windows_ci": {
+    "workflow": ".github/workflows/solo12.yml",
+    "runner": "windows-2022",
+    "scope": "Pinned wheel installation,19 unit tests,12 CPU contact checks, coupled CPU smoke/audit, PowerShell setup and run with spaced paths, preservation of existing run",
+    "result_location": "Use the GitHub Actions run for the source commit; this record does not substitute for CI output."
+  },
+  "limitations": [
+    "CUDA/Vulkan simulation on Windows NVIDIA/AMD hardware remains unverified.",
+    "Blender CUDA/OptiX/HIP on Windows hardware remains unverified.",
+    "Vulkan API selection does not prove adapter vendor/model or exclude a software Vulkan driver.",
+    "No Windows performance or memory minimum was measured.",
+    "Full original million-particle simulation was not rerun for this portability change."
+  ]
+}

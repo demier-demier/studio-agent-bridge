@@ -2,13 +2,15 @@
 
 **An open-source robot, 961,191 simulated grains, and a local simulation-to-video workflow.**
 
+**Windows NVIDIA / AMD:** [installation, GPU selection and video workflow](docs/windows.md). NVIDIA uses CUDA for simulation and CUDA/OptiX for rendering; AMD uses Vulkan for simulation and HIP for rendering. GPU routes are implemented; native Windows GPU execution and performance still need hardware validation. CPU installation and simulation are covered by Windows CI.
+
 [![Solo12 walking through the granular bed](media/solo12-poster.jpg)](https://github.com/demier-demier/studio-agent-bridge/releases/download/solo12-granular-v1/Scenward-Solo12-Apple-Silicon.mp4)
 
 **[Watch or download the 16-second video](https://github.com/demier-demier/studio-agent-bridge/releases/download/solo12-granular-v1/Scenward-Solo12-Apple-Silicon.mp4)** · [Release and checksums](https://github.com/demier-demier/studio-agent-bridge/releases/tag/solo12-granular-v1) · [Architecture and limits](docs/architecture.md) · [Recorded measurements](evidence/recorded-run.json)
 
 This is the source for Scenward's Solo12 walking video. MuJoCo integrates the free-body robot and its twelve actuated joints. A Taichi/Metal discrete-element solver computes spherical particle contacts and exchanges foot-contact forces and torques with the robot. Blender renders the recorded positions. The controller applies joint torques; the robot's base is not moved along a keyframed path.
 
-The example is self-contained within this directory. It does not require an MCP client, model API, CUDA, or an NVIDIA GPU. Metal acceleration requires an Apple Silicon Mac; a small CPU preset is provided for installation and integration checks on other machines. This is classical control and physics code, **not a Cosmos/Newton port or a learned locomotion policy**.
+The example is self-contained within this directory. It does not require an MCP client or model API. Simulation backends are CPU, Apple Metal, NVIDIA CUDA and Vulkan (including supported AMD GPUs). Each GPU route requires its matching working driver. The recorded full run used Metal on an Apple Silicon Mac; a small CPU preset supports installation and integration checks on other machines. This is classical control and physics code, **not a Cosmos/Newton port or a learned locomotion policy**.
 
 ## Run a small example first
 
@@ -51,6 +53,8 @@ blender --background --python-exit-code 1 --python cinema/render_scene.py -- run
 ```
 
 On macOS, Blender's executable is normally `/Applications/Blender.app/Contents/MacOS/Blender`. Use that quoted path in place of `blender` when it is not on your PATH. Pass `--cpu` to the renderer for CPU rendering. The renderer reads numeric caches and the packaged robot geometry; it does not invent robot or particle motion. The editor combines the continuous walk, a replay from the contact camera, a final-state track view and an English closing card. The track view includes a small camera-style crop of a still frame.
+
+The renderer also accepts `--device CPU|METAL|CUDA|OPTIX|HIP` and `--list-devices`. GPU requests fail if the requested backend has no usable matching device; they do not silently fall back to CPU. Follow the [Windows guide](docs/windows.md) for PowerShell paths and vendor-specific commands.
 
 Use the hardware label of the machine that actually ran your simulation. Omit `--music` for foley-only output, and use `--font` / `--bold-font` if the automatic local font search does not find a suitable font. Recorded sand footsteps and music have CC0 sources; the sound design is synchronized editorial audio, not computed acoustics. See [third-party notices](THIRD_PARTY_NOTICES.md). Fonts and renderer versions can change the exact typography and image appearance of a regenerated video.
 

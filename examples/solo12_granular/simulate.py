@@ -1,4 +1,4 @@
-"""Coupled free-body Solo12 / Metal grains with streamed frame caches."""
+"""Coupled free-body Solo12 / CPU or GPU grains with streamed frame caches."""
 
 import argparse
 import hashlib
@@ -10,6 +10,7 @@ from pathlib import Path
 import mujoco
 import numpy as np
 import taichi as ti
+from backends import BACKENDS, BackendError, initialize_backend
 from granular import GranularBed, make_bed
 from locomotion.controller import LEGS, RADIUS, SoloController, initialize
 
@@ -18,11 +19,13 @@ ROOT = Path(__file__).resolve().parent
 
 def run(a):
     out = Path(a.output).resolve()
+    backend_details = initialize_backend(a.arch, cpu_threads=a.cpu_threads)
     out.mkdir(parents=True, exist_ok=False)
     source_hashes = {
         str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
         for p in [
             ROOT / "simulate.py",
+            ROOT / "backends.py",
             ROOT / "granular.py",
             ROOT / "locomotion/controller.py",
             ROOT / "locomotion/solo12-walk.xml",
@@ -33,14 +36,6 @@ def run(a):
     # Exactly 1 ms rigid steps, integer DEM substeps.
     substeps = round(0.001 / dt)
     dt = 0.001 / substeps
-    ti.init(
-        arch=ti.metal if a.arch == "metal" else ti.cpu,
-        enable_fallback=False,
-        default_fp=ti.f32,
-        offline_cache=True,
-        random_seed=17,
-        cpu_max_num_threads=a.cpu_threads,
-    )
     points = make_bed(radius, a.half_x, a.half_y, a.layers)
     bed = GranularBed(
         points, radius=radius, half_x=a.half_x, half_y=a.half_y, dt=dt, foot_radius=RADIUS
@@ -202,7 +197,8 @@ def run(a):
         "travel_x": float(data.qpos[0] - a.start_x),
         "minimum_upright": min(x["upright"] for x in trace),
         "controller": {**vars(a), "output": out.name},
-        "backend": a.arch,
+        "backend": backend_details["actual_backend"],
+        "backend_details": backend_details,
         "physics_source_sha256": source_hashes,
         "time_note": "Frame labels use pre-step time; saved state is post-step, exactly label + 1 ms. This preserves the released simulation loop.",
         "grid": "occupied-cell clearing",
@@ -265,7 +261,7 @@ PRESETS = {
 def options(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--preset", choices=PRESETS, default="smoke")
-    parser.add_argument("--arch", choices=["cpu", "metal"], default="cpu")
+    parser.add_argument("--arch", choices=BACKENDS, default="cpu")
     parser.add_argument(
         "--output", required=True, help="New run directory; existing paths are refused."
     )
@@ -322,4 +318,7 @@ def options(argv=None):
 
 
 if __name__ == "__main__":
-    run(options())
+    try:
+        run(options())
+    except BackendError as error:
+        raise SystemExit(f"Backend initialization failed: {error}") from None

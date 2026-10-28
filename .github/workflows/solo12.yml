@@ -1,4 +1,4 @@
-name: Solo12 granular example CPU checks
+name: Solo12 portable CPU checks
 on:
   push:
     paths:
@@ -12,7 +12,11 @@ permissions:
   contents: read
 jobs:
   portable-cpu-checks:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-2022]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -30,3 +34,32 @@ jobs:
         run: python examples/solo12_granular/simulate.py --preset smoke --arch cpu --output runs/solo12-ci
       - name: Independent smoke trajectory audit
         run: python examples/solo12_granular/locomotion/audit_run.py runs/solo12-ci --minimum-travel 0
+      - name: Windows setup and launcher from a directory with spaces
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $root = Join-Path $env:GITHUB_WORKSPACE 'examples/solo12_granular'
+          $python = (Get-Command python).Source
+          $venv = Join-Path $env:RUNNER_TEMP 'Solo12 clean environment'
+          & "$root/windows/setup.ps1" -PythonCommand $python -EnvironmentPath $venv
+          $outside = Join-Path $env:RUNNER_TEMP 'Unrelated working directory'
+          New-Item -ItemType Directory -Path $outside | Out-Null
+          Set-Location $outside
+          $output = Join-Path $outside 'CPU smoke run'
+          & "$root/windows/run.ps1" -Vendor CPU -Preset smoke -Python "$venv/Scripts/python.exe" -OutputDirectory $output
+          # Repeat must fail without altering the saved trajectory.
+          $before = (Get-FileHash "$output/particles.npy" -Algorithm SHA256).Hash
+          $rejected = $false
+          try {
+            & "$root/windows/run.ps1" -Vendor CPU -Python "$venv/Scripts/python.exe" -OutputDirectory $output
+          } catch { $rejected = $true }
+          if (-not $rejected) { throw 'Existing output was not rejected' }
+          if ((Get-FileHash "$output/particles.npy" -Algorithm SHA256).Hash -ne $before) { throw 'Existing output changed' }
+      - name: Save CPU evidence (not GPU validation)
+        uses: actions/upload-artifact@v4
+        with:
+          name: solo12-${{ matrix.os }}-cpu-evidence
+          path: |
+            runs/solo12-ci/metadata.json
+            runs/solo12-ci/audit.json
+          retention-days: 14

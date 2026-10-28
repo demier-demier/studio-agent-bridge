@@ -17,7 +17,7 @@ The body's motion is an integration result. There is no body-position animation,
 
 ## Rendering and editing
 
-The renderer reconstructs official Solo12 meshes from the numeric geometry package and instantiates grains at recorded positions. It varies the camera, lighting and materials. Rendering and physics are separate stages, allowing each to use the Metal GPU without running two GPU-heavy jobs concurrently.
+The renderer reconstructs official Solo12 meshes from the numeric geometry package and instantiates grains at recorded positions. It varies the camera, lighting and materials. Rendering and physics are separate stages, allowing each to use the selected device without running two GPU-heavy jobs concurrently. Simulation uses explicit CPU, Metal, CUDA or Vulkan selection. Rendering uses independent CPU, Metal, CUDA, OptiX or HIP selection; a compatible simulation GPU does not imply that the same card supports every renderer.
 
 The 16-second edit contains 7.2 seconds of continuous recorded walking, a 3-second replay from the contact camera, a 2.8-second final-state track view and a 3-second closing card. Source motion plays at its recorded rate. The track view is a still with a small crop animation, not additional simulated time. Recorded foley is synchronized to detected primary scheduled footfalls; music and sound design are presentation assets.
 
@@ -25,7 +25,7 @@ The 16-second edit contains 7.2 seconds of continuous recorded walking, a 3-seco
 
 - **Use an open robot:** upstream Solo12 meshes and inertial data are pinned to a public commit. Four experimental spherical pads and a feedback crawl are explicitly documented changes.
 - **Stream the cache:** the million-particle trajectory is memory-mapped to avoid retaining multiple full trajectories in unified memory.
-- **Keep backend choice explicit:** CPU permits a bounded installation/integration check; Metal is used for the recorded full run. A silent fallback could make an unexpectedly slow run look like an accelerated one.
+- **Keep backend choice explicit:** CPU permits a bounded installation/integration check; Metal is used for the recorded full run. NVIDIA CUDA and AMD Vulkan routes add native Windows simulation options, while Blender uses CUDA/OptiX or HIP. Runtime backend checks and matching render-device selection prevent silent CPU fallback. Actual Windows GPU validation remains separate from Windows CPU CI.
 - **Preserve failures and limits:** rejected visual drafts are not presented as final outputs. Source evidence distinguishes the historical full run from tests of the portable release package.
 - **Keep the physics claim narrow:** no learned policy, hardware validation, deep-sand calibration, real-time claim or competitor parity claim.
 
