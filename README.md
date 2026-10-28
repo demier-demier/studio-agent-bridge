@@ -10,6 +10,8 @@ The language model runs in your MCP client. This repository supplies the native 
 
 ## What actually runs
 
+**Experimental Apple Silicon terrain physics:** an [optional Metal granular-contact case](examples/metal_terrain/) couples 89,856 coarse simulated grains to an eight-joint robot on an M4 Pro. It includes CPU/Metal analytic checks and independent trajectory validation. This is an original local simulation experiment, not a Cosmos/Newton port, a learned walking policy, or a benchmark against NVIDIA hardware.
+
 | Host | Native actions | Editable output | Tested locally |
 | --- | --- | --- | --- |
 | Autodesk Fusion | Parametric solid construction, archive inspection, parameter revision, export, API documentation and trusted Python | `.f3d`, sketches, dimensions, components and timeline | Fusion 2705.1.30 |

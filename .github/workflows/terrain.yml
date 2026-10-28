@@ -1,0 +1,25 @@
+name: Optional granular terrain CPU validation
+on:
+  push:
+    paths:
+      - 'examples/metal_terrain/**'
+      - '.github/workflows/terrain.yml'
+  pull_request:
+    paths:
+      - 'examples/metal_terrain/**'
+      - '.github/workflows/terrain.yml'
+permissions:
+  contents: read
+jobs:
+  contact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r examples/metal_terrain/requirements.txt
+      - run: python examples/metal_terrain/verify_kernels.py --backend cpu
+      - run: python examples/metal_terrain/metal_terrain.py --backend cpu --seconds 0.3 --output runs/terrain-ci
+      - run: python examples/metal_terrain/verify_run.py runs/terrain-ci

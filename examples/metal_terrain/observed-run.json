@@ -1,0 +1,738 @@
+{
+  "backend": "Arch.metal",
+  "hardware": {
+    "model": "Apple M4 Pro",
+    "gpu_cores": 16,
+    "unified_memory_bytes": 25769803776,
+    "metal": "Metal 4",
+    "os": "macOS"
+  },
+  "particles": 89856,
+  "seconds": 4.0,
+  "frames": 120,
+  "warmup_and_settle_seconds": 0.46667429200169863,
+  "wall_seconds": 84.95180683299986,
+  "physics_dt": 5e-05,
+  "rigid_dt": 0.0002,
+  "grid_overflow": 0,
+  "min_z": 0.0006417179247364402,
+  "max_particle_displacement": 0.0734405592083931,
+  "robot_final_base_z": 0.16688071520579703,
+  "trace": [
+    {
+      "time": 0.0,
+      "base_z": 0.23,
+      "speed_max": 0.037376806139945984
+    },
+    {
+      "time": 0.033350000000000005,
+      "base_z": 0.22449541280000007,
+      "speed_max": 0.02239556424319744
+    },
+    {
+      "time": 0.06670000000000001,
+      "base_z": 0.2081782436,
+      "speed_max": 0.035347193479537964
+    },
+    {
+      "time": 0.10005,
+      "base_z": 0.18576472076059453,
+      "speed_max": 0.6728321313858032
+    },
+    {
+      "time": 0.13340000000000002,
+      "base_z": 0.1723551266244566,
+      "speed_max": 0.7790665626525879
+    },
+    {
+      "time": 0.16675,
+      "base_z": 0.1682826344558565,
+      "speed_max": 0.8758985996246338
+    },
+    {
+      "time": 0.2001,
+      "base_z": 0.16714373175988498,
+      "speed_max": 0.7147120833396912
+    },
+    {
+      "time": 0.23345000000000002,
+      "base_z": 0.16702470653237994,
+      "speed_max": 0.7436573505401611
+    },
+    {
+      "time": 0.26680000000000004,
+      "base_z": 0.1670916655915557,
+      "speed_max": 0.5389094948768616
+    },
+    {
+      "time": 0.30015000000000003,
+      "base_z": 0.16711707264538575,
+      "speed_max": 0.5113399624824524
+    },
+    {
+      "time": 0.3335,
+      "base_z": 0.1671237146825631,
+      "speed_max": 0.3702430725097656
+    },
+    {
+      "time": 0.36685,
+      "base_z": 0.1671226364805435,
+      "speed_max": 0.38007795810699463
+    },
+    {
+      "time": 0.4002,
+      "base_z": 0.16711820390868082,
+      "speed_max": 0.3855186998844147
+    },
+    {
+      "time": 0.43355000000000005,
+      "base_z": 0.16711392752232626,
+      "speed_max": 0.3467007875442505
+    },
+    {
+      "time": 0.46690000000000004,
+      "base_z": 0.16711157719996375,
+      "speed_max": 0.32436126470565796
+    },
+    {
+      "time": 0.50025,
+      "base_z": 0.16711118841131561,
+      "speed_max": 0.2554111182689667
+    },
+    {
+      "time": 0.5336000000000001,
+      "base_z": 0.16711172651944048,
+      "speed_max": 0.33414319157600403
+    },
+    {
+      "time": 0.5669500000000001,
+      "base_z": 0.16711259159297331,
+      "speed_max": 0.33156874775886536
+    },
+    {
+      "time": 0.6003000000000001,
+      "base_z": 0.16711314597444668,
+      "speed_max": 0.2693866789340973
+    },
+    {
+      "time": 0.63365,
+      "base_z": 0.16711328350643706,
+      "speed_max": 0.3590421974658966
+    },
+    {
+      "time": 0.667,
+      "base_z": 0.16711316405509027,
+      "speed_max": 0.3867468535900116
+    },
+    {
+      "time": 0.70035,
+      "base_z": 0.16711292006411435,
+      "speed_max": 0.28415411710739136
+    },
+    {
+      "time": 0.7337,
+      "base_z": 0.16711263909321117,
+      "speed_max": 0.2931392192840576
+    },
+    {
+      "time": 0.76705,
+      "base_z": 0.16711235929931512,
+      "speed_max": 0.39702126383781433
+    },
+    {
+      "time": 0.8004,
+      "base_z": 0.1671122347946733,
+      "speed_max": 0.21980760991573334
+    },
+    {
+      "time": 0.83375,
+      "base_z": 0.1671190676171359,
+      "speed_max": 0.19114898145198822
+    },
+    {
+      "time": 0.8671000000000001,
+      "base_z": 0.16712970669913552,
+      "speed_max": 0.1732543557882309
+    },
+    {
+      "time": 0.9004500000000001,
+      "base_z": 0.16712262961642033,
+      "speed_max": 0.2322809100151062
+    },
+    {
+      "time": 0.9338000000000001,
+      "base_z": 0.16709361168261888,
+      "speed_max": 0.1919204145669937
+    },
+    {
+      "time": 0.9671500000000001,
+      "base_z": 0.16705079772530432,
+      "speed_max": 0.21735383570194244
+    },
+    {
+      "time": 1.0005,
+      "base_z": 0.16700524763253582,
+      "speed_max": 0.21107548475265503
+    },
+    {
+      "time": 1.0338500000000002,
+      "base_z": 0.16696409379574514,
+      "speed_max": 0.21147693693637848
+    },
+    {
+      "time": 1.0672000000000001,
+      "base_z": 0.16693076516519262,
+      "speed_max": 0.21646033227443695
+    },
+    {
+      "time": 1.1005500000000001,
+      "base_z": 0.16690501077257644,
+      "speed_max": 0.1789134442806244
+    },
+    {
+      "time": 1.1339000000000001,
+      "base_z": 0.1668861322211917,
+      "speed_max": 0.14225925505161285
+    },
+    {
+      "time": 1.1672500000000001,
+      "base_z": 0.16687380204675648,
+      "speed_max": 0.27167004346847534
+    },
+    {
+      "time": 1.2006000000000001,
+      "base_z": 0.1668687111001845,
+      "speed_max": 0.16540032625198364
+    },
+    {
+      "time": 1.23395,
+      "base_z": 0.1668715662547856,
+      "speed_max": 0.2322254478931427
+    },
+    {
+      "time": 1.2673,
+      "base_z": 0.166882527947925,
+      "speed_max": 0.19225142896175385
+    },
+    {
+      "time": 1.30065,
+      "base_z": 0.1669014112394435,
+      "speed_max": 0.18749113380908966
+    },
+    {
+      "time": 1.334,
+      "base_z": 0.16692694607020017,
+      "speed_max": 0.12540699541568756
+    },
+    {
+      "time": 1.36735,
+      "base_z": 0.1669570976923949,
+      "speed_max": 0.19607867300510406
+    },
+    {
+      "time": 1.4007,
+      "base_z": 0.1669892127184264,
+      "speed_max": 0.11418040096759796
+    },
+    {
+      "time": 1.43405,
+      "base_z": 0.16702114274623622,
+      "speed_max": 0.19815240800380707
+    },
+    {
+      "time": 1.4674,
+      "base_z": 0.1670504240827931,
+      "speed_max": 0.15146318078041077
+    },
+    {
+      "time": 1.50075,
+      "base_z": 0.16707523591761647,
+      "speed_max": 0.18689677119255066
+    },
+    {
+      "time": 1.5341,
+      "base_z": 0.16709379308120023,
+      "speed_max": 0.184538334608078
+    },
+    {
+      "time": 1.56745,
+      "base_z": 0.16710529735744042,
+      "speed_max": 0.17495977878570557
+    },
+    {
+      "time": 1.6008,
+      "base_z": 0.16710947821638636,
+      "speed_max": 0.1896226853132248
+    },
+    {
+      "time": 1.63415,
+      "base_z": 0.16710659481818213,
+      "speed_max": 0.19508373737335205
+    },
+    {
+      "time": 1.6675,
+      "base_z": 0.1670976393808143,
+      "speed_max": 0.19768768548965454
+    },
+    {
+      "time": 1.70085,
+      "base_z": 0.1670839144540579,
+      "speed_max": 0.1246190145611763
+    },
+    {
+      "time": 1.7342000000000002,
+      "base_z": 0.16706725258472485,
+      "speed_max": 0.1648901253938675
+    },
+    {
+      "time": 1.7675500000000002,
+      "base_z": 0.16704957183771638,
+      "speed_max": 0.15573151409626007
+    },
+    {
+      "time": 1.8009000000000002,
+      "base_z": 0.16703305470916507,
+      "speed_max": 0.1631775051355362
+    },
+    {
+      "time": 1.8342500000000002,
+      "base_z": 0.16701937850281284,
+      "speed_max": 0.2025659829378128
+    },
+    {
+      "time": 1.8676000000000001,
+      "base_z": 0.16701025886149923,
+      "speed_max": 0.1019621193408966
+    },
+    {
+      "time": 1.9009500000000001,
+      "base_z": 0.16700677077577172,
+      "speed_max": 0.10945036262273788
+    },
+    {
+      "time": 1.9343000000000001,
+      "base_z": 0.16700944942259877,
+      "speed_max": 0.13744156062602997
+    },
+    {
+      "time": 1.9676500000000001,
+      "base_z": 0.16701804008778,
+      "speed_max": 0.15268664062023163
+    },
+    {
+      "time": 2.001,
+      "base_z": 0.16703166857759857,
+      "speed_max": 0.1401260793209076
+    },
+    {
+      "time": 2.03435,
+      "base_z": 0.16704923845691114,
+      "speed_max": 0.19136863946914673
+    },
+    {
+      "time": 2.0677000000000003,
+      "base_z": 0.16706901196796486,
+      "speed_max": 0.1133105680346489
+    },
+    {
+      "time": 2.1010500000000003,
+      "base_z": 0.16708920041211392,
+      "speed_max": 0.10570159554481506
+    },
+    {
+      "time": 2.1344000000000003,
+      "base_z": 0.16710750347705838,
+      "speed_max": 0.075995072722435
+    },
+    {
+      "time": 2.1677500000000003,
+      "base_z": 0.16712173886195764,
+      "speed_max": 0.1164703518152237
+    },
+    {
+      "time": 2.2011000000000003,
+      "base_z": 0.16713030401640036,
+      "speed_max": 0.10141084343194962
+    },
+    {
+      "time": 2.2344500000000003,
+      "base_z": 0.1671321074008528,
+      "speed_max": 0.19649405777454376
+    },
+    {
+      "time": 2.2678000000000003,
+      "base_z": 0.16712625573182535,
+      "speed_max": 0.11335505545139313
+    },
+    {
+      "time": 2.3011500000000003,
+      "base_z": 0.16711240976875374,
+      "speed_max": 0.08969707787036896
+    },
+    {
+      "time": 2.3345000000000002,
+      "base_z": 0.167091304534804,
+      "speed_max": 0.08053748309612274
+    },
+    {
+      "time": 2.3678500000000002,
+      "base_z": 0.16706406952779737,
+      "speed_max": 0.08417041599750519
+    },
+    {
+      "time": 2.4012000000000002,
+      "base_z": 0.16703236848046732,
+      "speed_max": 0.10244639962911606
+    },
+    {
+      "time": 2.43455,
+      "base_z": 0.16699829461659432,
+      "speed_max": 0.08286120742559433
+    },
+    {
+      "time": 2.4679,
+      "base_z": 0.16696426345308885,
+      "speed_max": 0.09230884909629822
+    },
+    {
+      "time": 2.50125,
+      "base_z": 0.16693232126788113,
+      "speed_max": 0.11504854261875153
+    },
+    {
+      "time": 2.5346,
+      "base_z": 0.16690490544957265,
+      "speed_max": 0.14202840626239777
+    },
+    {
+      "time": 2.56795,
+      "base_z": 0.16688387212895728,
+      "speed_max": 0.07347074151039124
+    },
+    {
+      "time": 2.6013,
+      "base_z": 0.1668708134521721,
+      "speed_max": 0.09703925251960754
+    },
+    {
+      "time": 2.63465,
+      "base_z": 0.16686646996352894,
+      "speed_max": 0.09087907522916794
+    },
+    {
+      "time": 2.668,
+      "base_z": 0.1668711837074311,
+      "speed_max": 0.08953625708818436
+    },
+    {
+      "time": 2.70135,
+      "base_z": 0.16688451585722883,
+      "speed_max": 0.06810980290174484
+    },
+    {
+      "time": 2.7347,
+      "base_z": 0.16690518844337413,
+      "speed_max": 0.11564665287733078
+    },
+    {
+      "time": 2.76805,
+      "base_z": 0.1669318714810181,
+      "speed_max": 0.0496065579354763
+    },
+    {
+      "time": 2.8014,
+      "base_z": 0.16696246826280248,
+      "speed_max": 0.08169133216142654
+    },
+    {
+      "time": 2.83475,
+      "base_z": 0.1669947009748084,
+      "speed_max": 0.03492305800318718
+    },
+    {
+      "time": 2.8681,
+      "base_z": 0.1670259851279032,
+      "speed_max": 0.06276291608810425
+    },
+    {
+      "time": 2.90145,
+      "base_z": 0.16705458186870398,
+      "speed_max": 0.09333715587854385
+    },
+    {
+      "time": 2.9348,
+      "base_z": 0.16707830548733146,
+      "speed_max": 0.11674565076828003
+    },
+    {
+      "time": 2.96815,
+      "base_z": 0.16709574250914122,
+      "speed_max": 0.07670751214027405
+    },
+    {
+      "time": 3.0015,
+      "base_z": 0.1671060675062615,
+      "speed_max": 0.061448436230421066
+    },
+    {
+      "time": 3.03485,
+      "base_z": 0.16710914020158915,
+      "speed_max": 0.061139702796936035
+    },
+    {
+      "time": 3.0682,
+      "base_z": 0.16710519511724095,
+      "speed_max": 0.10004088282585144
+    },
+    {
+      "time": 3.10155,
+      "base_z": 0.1670952136162854,
+      "speed_max": 0.16813233494758606
+    },
+    {
+      "time": 3.1349,
+      "base_z": 0.1670807846566354,
+      "speed_max": 0.07826206088066101
+    },
+    {
+      "time": 3.16825,
+      "base_z": 0.1670636401894434,
+      "speed_max": 0.05111334100365639
+    },
+    {
+      "time": 3.2016,
+      "base_z": 0.16704601571344785,
+      "speed_max": 0.10158542543649673
+    },
+    {
+      "time": 3.23495,
+      "base_z": 0.1670298638529682,
+      "speed_max": 0.08846256881952286
+    },
+    {
+      "time": 3.2683,
+      "base_z": 0.1670169962960424,
+      "speed_max": 0.07999605685472488
+    },
+    {
+      "time": 3.30165,
+      "base_z": 0.16700869444030392,
+      "speed_max": 0.10907337814569473
+    },
+    {
+      "time": 3.335,
+      "base_z": 0.1670060836869026,
+      "speed_max": 0.08042554557323456
+    },
+    {
+      "time": 3.36835,
+      "base_z": 0.1670095876803255,
+      "speed_max": 0.1102820411324501
+    },
+    {
+      "time": 3.4017,
+      "base_z": 0.16701887219567993,
+      "speed_max": 0.04267658665776253
+    },
+    {
+      "time": 3.4350500000000004,
+      "base_z": 0.1670332246417617,
+      "speed_max": 0.06054994463920593
+    },
+    {
+      "time": 3.4684000000000004,
+      "base_z": 0.16705120931648273,
+      "speed_max": 0.09736404567956924
+    },
+    {
+      "time": 3.5017500000000004,
+      "base_z": 0.1670711760432243,
+      "speed_max": 0.12498942762613297
+    },
+    {
+      "time": 3.5351000000000004,
+      "base_z": 0.16709102246481197,
+      "speed_max": 0.08641953021287918
+    },
+    {
+      "time": 3.5684500000000003,
+      "base_z": 0.167108758655605,
+      "speed_max": 0.08713217824697495
+    },
+    {
+      "time": 3.6018000000000003,
+      "base_z": 0.16712223148974265,
+      "speed_max": 0.05073338747024536
+    },
+    {
+      "time": 3.6351500000000003,
+      "base_z": 0.16712975851693695,
+      "speed_max": 0.08364266902208328
+    },
+    {
+      "time": 3.6685000000000003,
+      "base_z": 0.16713015388421382,
+      "speed_max": 0.03836740553379059
+    },
+    {
+      "time": 3.7018500000000003,
+      "base_z": 0.16712289003006708,
+      "speed_max": 0.08352503180503845
+    },
+    {
+      "time": 3.7352000000000003,
+      "base_z": 0.16710792923920145,
+      "speed_max": 0.03816058859229088
+    },
+    {
+      "time": 3.7685500000000003,
+      "base_z": 0.1670857978291521,
+      "speed_max": 0.036457598209381104
+    },
+    {
+      "time": 3.8019000000000003,
+      "base_z": 0.16705782761852192,
+      "speed_max": 0.055100858211517334
+    },
+    {
+      "time": 3.8352500000000003,
+      "base_z": 0.16702551362222703,
+      "speed_max": 0.04416702687740326
+    },
+    {
+      "time": 3.8686000000000003,
+      "base_z": 0.16699129566273135,
+      "speed_max": 0.06773503869771957
+    },
+    {
+      "time": 3.9019500000000003,
+      "base_z": 0.16695729786673688,
+      "speed_max": 0.07689499855041504
+    },
+    {
+      "time": 3.9353000000000002,
+      "base_z": 0.16692604913259948,
+      "speed_max": 0.050652530044317245
+    },
+    {
+      "time": 3.9686500000000002,
+      "base_z": 0.16689947686071652,
+      "speed_max": 0.05596383288502693
+    }
+  ],
+  "limitations": [
+    "Original coarse spherical-grain translational DEM; no grain angular dynamics or calibrated sand parameters.",
+    "Newton/Cosmos models not executed by this Metal solver; MuJoCo integrates original free-body robot dynamics on CPU.",
+    "Eight actuated joints with prescribed posture control, not learned locomotion.",
+    "Only feet contact grains; no chassis/limb terrain contacts. No hardware validation."
+  ],
+  "verification": {
+    "schema": 1,
+    "checks": {
+      "constant_particle_count": true,
+      "frame_count_matches": true,
+      "all_states_finite": true,
+      "no_grid_overflow": true,
+      "floor_tolerance_1mm": true,
+      "x_boundary_tolerance_1mm": true,
+      "y_boundary_tolerance_1mm": true,
+      "robot_stays_upright": true,
+      "robot_base_above_tray": true,
+      "rigid_rotation_determinants": true,
+      "terrain_reaction_present": true,
+      "particles_actually_move": true,
+      "frame_clock_matches": true
+    },
+    "all_passed": true,
+    "particles": 89856,
+    "peak_recorded_foot_reaction_N": 5.467698352012478,
+    "maximum_recorded_particle_speed_m_s": 0.8758985996246338,
+    "minimum_body_upright_cosine": 0.9999933242797852,
+    "trajectory_sha256": "8307c68968f3ba0e7e01e8f8ed2cc6173c34a27017ec79560289351cf9dafd7f",
+    "scope": "Numerical sanity of this trace; not hardware validation or model fidelity certification."
+  },
+  "comparative_claim": "No NVIDIA baseline comparison performed. No Cosmos inference. No real-time claim.",
+  "kernel_checks": {
+    "cpu": {
+      "backend": "Arch.arm64",
+      "checks": [
+        {
+          "name": "sphere-pair normal force matches analytic spring law",
+          "passed": true
+        },
+        {
+          "name": "sphere-pair forces conserve linear momentum",
+          "passed": true
+        },
+        {
+          "name": "friction opposes slip",
+          "passed": true
+        },
+        {
+          "name": "friction obeys Coulomb bound",
+          "passed": true
+        },
+        {
+          "name": "floor restores a penetrating grain",
+          "passed": true
+        },
+        {
+          "name": "grain and robot reaction forces balance",
+          "passed": true
+        },
+        {
+          "name": "robot receives upward terrain reaction",
+          "passed": true
+        },
+        {
+          "name": "capacity overflow is detected",
+          "passed": true
+        }
+      ]
+    },
+    "metal": {
+      "backend": "Arch.metal",
+      "checks": [
+        {
+          "name": "sphere-pair normal force matches analytic spring law",
+          "passed": true
+        },
+        {
+          "name": "sphere-pair forces conserve linear momentum",
+          "passed": true
+        },
+        {
+          "name": "friction opposes slip",
+          "passed": true
+        },
+        {
+          "name": "friction obeys Coulomb bound",
+          "passed": true
+        },
+        {
+          "name": "floor restores a penetrating grain",
+          "passed": true
+        },
+        {
+          "name": "grain and robot reaction forces balance",
+          "passed": true
+        },
+        {
+          "name": "robot receives upward terrain reaction",
+          "passed": true
+        },
+        {
+          "name": "capacity overflow is detected",
+          "passed": true
+        }
+      ]
+    }
+  },
+  "initial_experiment_source_sha256": {
+    "metal_terrain.py": "bc0e98bf9a75b4ff6e436a94384bf2f556aa97c50da2561f3cb62d6e461c2ae9",
+    "verify_kernels.py": "662435eb5375e5c4aea7e9466f47343b7b3d5d060aab54f63475a17b1c78bc79",
+    "verify_run.py": "1b895e345bc982fa23acff48d7bdd44980a315fefaace4300257c579d27d1830",
+    "render_preview.py": "280cda8c4a0489d4e6a3b28a7534ee4245b7ee6f607bf11133315f76c3f33b51"
+  },
+  "source_note": "Hashes record the original experiment scripts before formatting and public packaging. The packaged scripts separately passed CPU and Metal analytic checks and a fresh coupled CPU smoke run."
+}
