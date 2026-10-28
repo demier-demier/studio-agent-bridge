@@ -1,0 +1,67 @@
+{
+  "recorded_date": "2026-10-28",
+  "evidence_scope": "Measurements from the full local simulation that produced the published video. Public-package tests are separate.",
+  "hardware": {
+    "name": "Apple M4 Pro",
+    "cpu_cores": 12,
+    "gpu_cores": 16,
+    "unified_memory_gb": 24
+  },
+  "model": {
+    "robot": "ODRI Solo12",
+    "actuated_joints": 12,
+    "foot_radius_m": 0.02,
+    "controller": "classical smooth scheduled crawl with joint PD and base feedback",
+    "base_motion": "free dynamics; no imposed translation"
+  },
+  "settings": {
+    "seconds": 8.0,
+    "radius": 0.0015,
+    "half_x": 0.8,
+    "half_y": 0.34,
+    "layers": 9,
+    "start_x": -0.33,
+    "speed": 0.08,
+    "step_time": 0.6,
+    "shift": 0.008,
+    "height": 0.235,
+    "smooth": true
+  },
+  "grain_count": 961191,
+  "grain_radius_m": 0.0015,
+  "frames": 241,
+  "fps": 30,
+  "seconds_label": 8.0,
+  "state_timestamp_offset_seconds": 0.001,
+  "grain_dt_seconds": 5e-05,
+  "rigid_dt_seconds": 0.001,
+  "simulation_wall_seconds": 550.5255031670022,
+  "settling_wall_seconds": 15.704597666001064,
+  "forward_travel_m": 0.5781957129451814,
+  "lateral_displacement_m": -0.003117702286431766,
+  "maximum_tilt_degrees": 4.341225034553371,
+  "maximum_motor_torque_nm": 1.5817554588689724,
+  "support": {
+    "substrate_normal_impulse_Ns": 162.48732319631984,
+    "granular_signed_vertical_impulse_Ns": 13.528343058150671,
+    "granular_upward_impulse_Ns": 13.550862492208664,
+    "granular_downward_impulse_Ns": -0.022519434057991065,
+    "substrate_share_of_recorded_vertical_support_percent": 92.3141255855076,
+    "granular_share_of_recorded_vertical_support_percent": 7.685874414492393,
+    "method": "Time-weighted sums of 30 Hz recorded averaged DEM vertical forces and instantaneous MuJoCo contact-normal forces after startup. Floor is horizontal and kinematic checks find no other pad contact partners. Diagnostic sampled impulse estimate, not high-rate integrated ground truth."
+  },
+  "track_diagnostic": {
+    "method": "4mm raster maximum particle-top surface; visited foot neighborhoods behind final hind feet; same grains before/after",
+    "visible_trail_cells": 2774,
+    "depressed_area_cm2": 443.84,
+    "median_surface_change_mm": -3.893521547317505,
+    "particle_count": 961191,
+    "limitation": "Raster surface metric at finite grain scale; not a calibrated soil deformation measurement."
+  },
+  "limitations": [
+    "Spherical translational grains; no angular grain dynamics, rolling resistance, cohesion or calibrated sand law.",
+    "Classical control; no learned policy or model inference.",
+    "Passing these checks does not validate real robot performance, soil fidelity, visual quality or equivalence to NVIDIA.",
+    "Thin granular bed over a load-bearing rigid substrate. Only footpads exchange DEM forces."
+  ]
+}

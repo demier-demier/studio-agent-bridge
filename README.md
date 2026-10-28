@@ -10,7 +10,9 @@ The language model runs in your MCP client. This repository supplies the native 
 
 ## What actually runs
 
-**Experimental Apple Silicon terrain physics:** the [walking and persistent-track case](examples/metal_walking/) uses 604,800 coarse grains and an eight-joint robot, with approximately 30 cm of measured forward travel on an M4 Pro. It extends the [original contact case](examples/metal_terrain/). Includes CPU/Metal contact tests and trajectory validation; no Cosmos/Newton port, learned policy, hardware validation, or NVIDIA parity claim.
+**Solo12 walking with 961,191 simulated grains:** the [open-source Solo12 granular workflow](examples/solo12_granular/) includes the robot assets, CPU/Metal particle solver, feedback crawl, recorded measurements, Blender rendering and video editing scripts. The recorded M4 Pro run traveled 0.578 m; the [16-second video](https://github.com/demier-demier/studio-agent-bridge/releases/download/solo12-granular-v1/Scenward-Solo12-Apple-Silicon.mp4) is available without installation. A small CPU preset and CI checks help reproduce the workflow. This is offline, shallow-layer granular simulation with a load-bearing substrate; it is not a Cosmos/Newton port, calibrated sand model, learned policy, hardware validation or NVIDIA comparison.
+
+Earlier physics cases remain available: the [604,800-grain walking case](examples/metal_walking/) and [original contact case](examples/metal_terrain/).
 
 | Host | Native actions | Editable output | Tested locally |
 | --- | --- | --- | --- |

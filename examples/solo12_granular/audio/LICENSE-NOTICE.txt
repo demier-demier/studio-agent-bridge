@@ -1,0 +1,16 @@
+The six Fantozzi-Sand*.flac recordings in foley/ are dedicated to the public
+domain under CC0 1.0 by their published source: Fantozzi, edited by qubodup.
+
+Source: https://opengameart.org/content/fantozzis-footsteps-grasssand-stone
+License: https://creativecommons.org/publicdomain/zero/1.0/
+Legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Optional music: MindStream, by DST, also published under CC0 1.0.
+Source: https://opengameart.org/content/mindstream
+The original music is not included. download_music.py retrieves it from the
+source URL and verifies the recorded SHA-256 before accepting it.
+
+sources.json identifies exact selected files, source URLs and SHA-256 values.
+These audio terms are separate from the MIT license applying to original code.
+No endorsement by these artists is implied. Foley represents editorial sound
+design aligned to recorded contacts, not a simulated acoustics calculation.

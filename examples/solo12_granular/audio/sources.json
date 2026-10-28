@@ -1,0 +1,50 @@
+{
+  "observed_date": "2026-10-28",
+  "sources": [
+    {
+      "title": "Fantozzi\u2019s Footsteps (Grass/Sand & Stone)",
+      "creator": "Fantozzi",
+      "editor": "qubodup",
+      "source_page": "https://opengameart.org/content/fantozzis-footsteps-grasssand-stone",
+      "original_collection": "https://www.freesound.org/people/Fantozzi/packs/10338/",
+      "download_url": "https://opengameart.org/sites/default/files/Fantozzi-footsteps.7z",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "selected_files": [
+        "foley/Fantozzi-SandL1.flac",
+        "foley/Fantozzi-SandL2.flac",
+        "foley/Fantozzi-SandL3.flac",
+        "foley/Fantozzi-SandR1.flac",
+        "foley/Fantozzi-SandR2.flac",
+        "foley/Fantozzi-SandR3.flac"
+      ],
+      "credits": "Sand footstep recordings: Fantozzi, edited by qubodup (CC0), via OpenGameArt.org.",
+      "processing": "Resampled44.1 to48kHz; high/lowpass and gentle dynamics compression; impactpeak-aligned crop/fades, stereo placement and level adjustment. Event times must come from final picture edit.",
+      "sha256": {
+        "foley/Fantozzi-SandL1.flac": "93a2630579a82507e3c6ceab9b012f71a50cf8922f4beadb14057dcc0636b099",
+        "foley/Fantozzi-SandL2.flac": "9bb57478cc96e1410cae27d926aa8d77d5f2d368d9776822f63cf0b37c6d2faf",
+        "foley/Fantozzi-SandL3.flac": "042820e65cc947d8bb8adf18524ffff7cdf5fc310f9412cbf8bdf7a139984c21",
+        "foley/Fantozzi-SandR1.flac": "3514d12f3369297233e915814364ed02902003d4103b010371c2ac15c2aa48fe",
+        "foley/Fantozzi-SandR2.flac": "0356f659313887f01a9f21fd5bedf57a77073d0d74d57b5621279ee453a80f3c",
+        "foley/Fantozzi-SandR3.flac": "7535306b6ff3b9e071256f12789eb53fb90769a913ff7e00b271298727e0f521"
+      }
+    },
+    {
+      "title": "MindStream",
+      "creator": "DST",
+      "source_page": "https://opengameart.org/content/mindstream",
+      "download_url": "https://opengameart.org/sites/default/files/DST-MindStream.mp3",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "selected_files": [
+        "DST-MindStream.mp3"
+      ],
+      "credits": "Music: MindStream by DST (CC0), via OpenGameArt.org.",
+      "processing": "Optional excerpt; measured loudness normalization, conservative level, fade in/out. Not an AI-generated score.",
+      "sha256": {
+        "DST-MindStream.mp3": "50e3306a36eabead31dc702bb7654ff935351d19b9ef40421e89b4e037f92bb9"
+      }
+    }
+  ],
+  "distribution_note": "Six sand recordings are included. MindStream is not vendored; download_music.py fetches the recorded URL and verifies its SHA-256. CC0 terms apply to these audio assets, separate from repository code licensing."
+}

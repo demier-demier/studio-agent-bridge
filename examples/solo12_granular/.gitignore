@@ -1,0 +1,14 @@
+.venv/
+runs/
+renders/
+delivery/
+__pycache__/
+*.pyc
+*.npy
+*.npz
+*.blend
+*.blend1
+*.mp4
+*.wav
+*.log
+!robot/assets/*.stl

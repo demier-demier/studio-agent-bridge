@@ -1,0 +1,107 @@
+{
+  "run": "historical-video-run-2026-10-28",
+  "status": "passed bounded diagnostics",
+  "checks": {
+    "all_qpos_finite": true,
+    "all_foot_positions_finite": true,
+    "all_recorded_loads_finite": true,
+    "quaternion_normalization": true,
+    "trace_base_matches_qpos": true,
+    "trace_upright_matches_quaternion": true,
+    "trace_grain_force_matches_loads": true,
+    "exported_feet_match_forward_kinematics": true,
+    "remained_upright_post_startup": true,
+    "bounded_height_post_startup": true,
+    "motor_torque_within_2_5_nm": true,
+    "forward_progress_over_0_3m": true,
+    "no_nonfoot_floor_contacts_post_startup": true,
+    "foot_contact_normal_samples_only_floor": true,
+    "bounded_base_speed_post_startup": true,
+    "no_gross_foot_floor_penetration": true,
+    "all_particles_finite": true,
+    "no_gross_particle_floor_penetration": true
+  },
+  "sample_window_seconds": [
+    1.0,
+    8.0
+  ],
+  "time_note": "Simulation loop labels frames by pre-step t but saves post-step state: actual state time is label + rigid_dt (1 ms). Frame derivatives use recorded nonuniform 33/34 ms spacing. This is disclosed, not corrected by changing the simulation.",
+  "geometry_max_error_m": 2.9783872479427487e-08,
+  "forward_travel_m": 0.5781957129451814,
+  "lateral_displacement_m": -0.003117702286431766,
+  "minimum_upright_cosine": 0.9971309272715019,
+  "maximum_tilt_degrees": 4.341225034553371,
+  "base_height_range_m": [
+    0.23465819120702808,
+    0.23775427136661179
+  ],
+  "forward_velocity_range_m_s": [
+    -0.002907508300879158,
+    0.13139980774675042
+  ],
+  "reverse_velocity_sample_fraction": 0.0,
+  "forward_velocity_sign_changes": 2,
+  "foot_center_height_range_by_leg_m": {
+    "FL": [
+      0.01905168779194355,
+      0.05976351723074913
+    ],
+    "FR": [
+      0.019049813970923424,
+      0.059779416769742966
+    ],
+    "HL": [
+      0.019143778830766678,
+      0.05755281075835228
+    ],
+    "HR": [
+      0.01914115622639656,
+      0.05802850052714348
+    ]
+  },
+  "supported_foot_center_tangential_speed_median_m_s": 0.006489940918982029,
+  "supported_foot_center_tangential_speed_p95_m_s": 0.06376049667596817,
+  "foot_speed_note": "Finite-difference center-speed proxy; this is not exact contact-point slip, which also depends on angular velocity and grain contact normals.",
+  "maximum_motor_torque_nm": 1.5817554588689724,
+  "support": {
+    "substrate_normal_impulse_Ns": 162.48732319631984,
+    "granular_signed_vertical_impulse_Ns": 13.528343058150671,
+    "granular_upward_impulse_Ns": 13.550862492208664,
+    "granular_downward_impulse_Ns": -0.022519434057991065,
+    "substrate_share_of_recorded_vertical_support_percent": 92.3141255855076,
+    "granular_share_of_recorded_vertical_support_percent": 7.685874414492393,
+    "method": "Time-weighted sums of 30 Hz recorded averaged DEM vertical forces and instantaneous MuJoCo contact-normal forces after startup. Floor is horizontal and kinematic checks find no other pad contact partners. Diagnostic sampled impulse estimate, not high-rate integrated ground truth."
+  },
+  "particles": {
+    "checked": true,
+    "all_finite": true,
+    "minimum_xyz_m": [
+      -0.7985411882400513,
+      -0.3385387063026428,
+      0.0005483180866576731
+    ],
+    "maximum_xyz_m": [
+      0.7985410690307617,
+      0.3385404050350189,
+      0.03643392026424408
+    ],
+    "grain_count": 961191
+  },
+  "contact_anomalies": {
+    "foot_to_other": [],
+    "nonfoot_floor": []
+  },
+  "limitations": [
+    "Spherical translational grains; no angular grain dynamics, rolling resistance, cohesion or calibrated sand law.",
+    "Classical control; no learned policy or model inference.",
+    "Passing these checks does not validate real robot performance, soil fidelity, visual quality or equivalence to NVIDIA.",
+    "Thin granular bed over a load-bearing rigid substrate. Only footpads exchange DEM forces.",
+    "Current source hashes identify audited files, not proof that an older run executed those exact bytes."
+  ],
+  "evidence_scope": "Recorded full run before public CLI/portability packaging; not a newly rerun full simulation.",
+  "historical_source_sha256": {
+    "granular.py": "c97cb7481807ac66e50184ed4f13c97c77c870974e1628589429e668c27a3d85",
+    "simulate_solo_sand.py": "44159b18935f194026c5767986c6fb1855b1051c7be782d53eaa94e6b8f779fd",
+    "controller_smooth_candidate.py": "58fe375a60399b563722315a93d8ddd79a335f8dbeb4a6d8f98413d3ff8d2fcf"
+  }
+}

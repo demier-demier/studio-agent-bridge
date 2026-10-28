@@ -1,0 +1,68 @@
+{
+  "reviewed_at": "2026-10-28T16:06:20.548543+00:00",
+  "reviewer": "independent cinematography agent",
+  "asset": "Scenward-Solo12-Apple-Silicon.mp4",
+  "sha256": "665f12cd9d064a2c61010a2e9ab2ca430a50834c26d6f11923e78a8f1e9be433",
+  "verdict": "PASS_FOR_USER_REVIEW",
+  "blocking_findings": [],
+  "objective_checks_passed": true,
+  "media": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 480,
+    "duration_seconds": 16,
+    "video": "H.264",
+    "audio": "AAC, 48 kHz stereo",
+    "full_decode_errors": 0
+  },
+  "visual_review": {
+    "representative_frames": [
+      15,
+      45,
+      150,
+      225,
+      282,
+      330,
+      408,
+      450
+    ],
+    "cut_boundary_frames": [
+      215,
+      216,
+      305,
+      306,
+      389,
+      390
+    ],
+    "ending_frames": [
+      465,
+      479
+    ],
+    "findings": [
+      "The full-body hero shot clearly shows left-to-right robot progress with feet and body contained in frame.",
+      "The close-up clearly shows foot contact, particle displacement and leg geometry without visible clipping.",
+      "The final trail shot shows several distinct depressions and provides a readable consequence of the walk.",
+      "The hero/contact cut at 7.2 s and contact/trail cut at 10.2 s are clean; the closing transition begins at 13.0 s.",
+      "Opening, contact and closing typography remain within frame bounds. Closing title and supporting text are readable at native resolution.",
+      "Closing card accurately states 961,191 simulated grains, Apple M4 Pro and Experimental granular testbed; Solo12 attribution is present.",
+      "The final frame is entirely black as intended by the ending fade.",
+      "Previously inspected contact source frames 121 and 122 show no visible exposure, color or material discontinuity across the CPU-to-Metal render transition."
+    ]
+  },
+  "audio_review": {
+    "type": "objective audit only",
+    "integrated_lufs": -23.41,
+    "true_peak_dbtp": -9.36,
+    "loudness_range_lu": 3.7,
+    "subjective_listening_performed": false
+  },
+  "limitations": [
+    "This is a technical and visual release check, not user acceptance; the user still needs to approve the final commercial.",
+    "Granules are uniform simulated spherical particles in an experimental shallow bed, not a calibrated real-sand model.",
+    "The crawl is controller-driven; this video does not demonstrate learned-policy inference or equivalence to NVIDIA simulation platforms.",
+    "Visual review used representative final frames, exact edit boundaries and prior sequential motion review; no subjective audio listening was performed."
+  ],
+  "final_video_modified_by_review": false,
+  "evidence_scope": "Review of the actual released MP4; does not claim bit-identical re-rendering from repackaged scripts."
+}

@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-28",
+  "scope": "Release portability checks. The full 961,191-particle simulation was not rerun after packaging.",
+  "environment": {
+    "python": "3.12.13",
+    "platform": "macOS Apple Silicon",
+    "numpy": "2.5.4",
+    "mujoco": "3.3.7",
+    "taichi": "1.7.4",
+    "Pillow": "13.0.0"
+  },
+  "fresh_environment": {
+    "requirements_install": "passed",
+    "unit_tests_passed": 6,
+    "analytic_cpu_checks_passed": 12,
+    "smoke_particles": 4312,
+    "smoke_frames": 37,
+    "smoke_audit_checks_passed": 18,
+    "minimum_travel_threshold_m": 0.0
+  },
+  "additional_checks": {
+    "analytic_metal_checks_passed": 12,
+    "metal_smoke_audit_checks_passed": 18,
+    "renderer_cpu": {
+      "blender": "5.2.0",
+      "frame": 30,
+      "resolution": [
+        640,
+        360
+      ],
+      "samples": 4,
+      "result": "passed"
+    },
+    "editor": {
+      "resolution": [
+        640,
+        360
+      ],
+      "frames": 480,
+      "duration_seconds": 16,
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "full_decode": "passed",
+      "render_source": "Existing approved full-run image sequence; no new full-scale rendering"
+    },
+    "music_download_sha256": "matched pinned source",
+    "audio_mix_sha256": "5afa8bd34e3a42204b9980c6201a59288d28afdef1c3cd832ef542fe516391c4",
+    "ruff_check": "passed",
+    "ruff_format_check": "passed"
+  },
+  "limitations": [
+    "Smoke checks exercise integration, not full-scale locomotion or soil calibration.",
+    "The unit-test crawl uses a rigid floor, not a granular bed.",
+    "The complete million-particle case has not been timed on CPU.",
+    "CI status belongs to the commit and must be checked separately on GitHub."
+  ]
+}

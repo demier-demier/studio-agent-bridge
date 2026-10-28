@@ -1,0 +1,54 @@
+{
+  "backend": "cpu",
+  "checks": [
+    {
+      "name": "pair normal force matches spring law",
+      "passed": true
+    },
+    {
+      "name": "pair conserves linear momentum",
+      "passed": true
+    },
+    {
+      "name": "old occupied cells clear after migration",
+      "passed": true
+    },
+    {
+      "name": "migrated particles counted once",
+      "passed": true
+    },
+    {
+      "name": "foot reaction equals opposite particle contact",
+      "passed": true
+    },
+    {
+      "name": "robot receives upward reaction",
+      "passed": true
+    },
+    {
+      "name": "foot tangential torque uses center-to-contact arm",
+      "passed": true
+    },
+    {
+      "name": "foot spin contributes contact velocity",
+      "passed": true
+    },
+    {
+      "name": "20-step reactions integrate without dropped forces",
+      "passed": true
+    },
+    {
+      "name": "reaction reset",
+      "passed": true
+    },
+    {
+      "name": "overflow rejected",
+      "passed": true
+    },
+    {
+      "name": "floor restoring force",
+      "passed": true
+    }
+  ],
+  "evidence_scope": "Historical video-source contact checks. Public package verification is recorded separately."
+}

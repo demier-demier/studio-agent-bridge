@@ -1,0 +1,26 @@
+{
+  "upstream": "https://github.com/open-dynamic-robot-initiative/robot_properties_solo",
+  "upstream_commit": "2201f454f4caffa0cad307fa8cbd1d64dd844008",
+  "license": "BSD-3-Clause; verbatim text in LICENSE-BSD-3-Clause.txt",
+  "upstream_mesh_directory": "src/robot_properties_solo/resources/meshes",
+  "derivation": "Original Solo12 URDF expanded with xacro and imported into MuJoCo 3.3.7. Bundled MJCF retains geometry and inertial values; explicit experimental modifications are listed below. No upstream control code is executed.",
+  "modifications": [
+    "Free base and twelve position actuators with 2.5 Nm joint/actuator limits, kp16, kv0.35.",
+    "Four 20 mm spherical foot pads, each with 15 g experimental mass.",
+    "Base-to-upper-leg assembled convex-hull overlaps excluded from rigid contacts.",
+    "Rigid floor and contact settings; 1 ms implicitfast integration.",
+    "Classical scheduled crawl and feedback through joint torques, not a learned policy."
+  ],
+  "mesh_sha256": {
+    "solo12_hip_fe_fl.stl": "f40df7578e28e10ccbf16818a73705050ddba7f7b18f6d7dd48749299653b70a",
+    "solo12_hip_fe_fr.stl": "f5a398b1807ab6027cdbef1330b9657ad5d3c61e6e39addf5ea0f55704b71f9f",
+    "solo12_hip_fe_hl.stl": "388108a66161aa80cb6f6a9c12b8c2f6095e6eac44922de13f75d2a516298423",
+    "solo12_hip_fe_hr.stl": "3564fcfa906a402550f25b9f13d127a3014ee5fe31f8f301eaa3c9f7fb8e4fc2",
+    "solo_12_base.stl": "3c65eb4eeb6a4e52b9ff1e3c53e53c724c8f5d6f0414791864ced79baddd60d7",
+    "solo_lower_leg_v2_left_side.stl": "7bd858ec0bcde356216bad6420f8e560b0e7b9a0a13422b8728a66e4f078af79",
+    "solo_lower_leg_v2_right_side.stl": "cb8a131b0c8070400d66a7f0dacc39374b4b5b4fd32eb4c5d5394e0e4f0b48f7",
+    "solo_upper_leg_left_side.stl": "2546e8c34cbba4b6a573e013344a68de33ded7735c8f66d3b44b8ffe91d15287",
+    "solo_upper_leg_right_side.stl": "1b02de8e1b4ba97a8ca89ff72f4ac43e2c82bbd6bc98b2f36be1f769c40814a1"
+  },
+  "preview_geometry": "Exact visual mesh arrays used by the released video; historical initial transforms are replaced by recorded transforms during rendering."
+}
