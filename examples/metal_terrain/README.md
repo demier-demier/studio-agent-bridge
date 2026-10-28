@@ -1,5 +1,7 @@
 # Experimental granular contact on Apple Silicon
 
+**Follow-up:** [Walking with 604,800 grains and persistent tracks](../metal_walking/), with an analytic gait and measured surface changes.
+
 An original, local robotics contact experiment using **Taichi's Metal GPU backend for granular particles** and **MuJoCo on CPU for an articulated robot**. It explores a lower hardware dependency path for physical simulation. It does not require CUDA.
 
 The current case is a small four-legged robot settling into a bounded bed of coarse spherical grains, followed by a bounded posture motion. Eight actuated joints, a floating chassis and terrain reaction forces are computed. The controller is a classical position controller; it is not a learned walking policy.

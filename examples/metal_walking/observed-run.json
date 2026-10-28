@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "observed_date": "2026-10-28",
+  "hardware": "Apple M4 Pro, 16 GPU cores, 24 GiB unified memory",
+  "run": {
+    "backend": "Arch.metal",
+    "particles": 604800,
+    "seconds": 7.0,
+    "frames": 210,
+    "physics_dt": 3.3333333333333335e-05,
+    "rigid_dt": 0.00013333333333333334,
+    "wall_seconds": 521.7974571250015,
+    "grid_overflow": 0,
+    "robot_forward_travel": 0.3012036535832443,
+    "arena_half_extent": [
+      0.46,
+      0.21
+    ]
+  },
+  "verification": {
+    "all_passed": true,
+    "checks": {
+      "constant_particle_count": true,
+      "frames_match": true,
+      "finite_states": true,
+      "no_grid_overflow": true,
+      "no_floor_escape": true,
+      "x_bounds": true,
+      "y_bounds": true,
+      "robot_upright": true,
+      "body_height_valid": true,
+      "rotation_matrices": true,
+      "forward_motion_over_15cm": true,
+      "feet_stay_within_tray": true,
+      "terrain_reaction_measured": true,
+      "repeated_steps": true,
+      "persistent_trail_depression": true,
+      "clock_consistent": true
+    },
+    "particles": 604800,
+    "forward_travel_m": 0.2974439859390259,
+    "lateral_travel_m": -0.09450297057628632,
+    "minimum_upright_cosine": 0.9213822484016418,
+    "touchdowns_per_foot": [
+      6,
+      6,
+      2,
+      9
+    ],
+    "trail_cells": 867,
+    "depressed_trail_cells": 557,
+    "depressed_trail_area_cm2": 200.52,
+    "median_trail_height_change_mm": -1.7051482200622559,
+    "max_trail_depression_mm": 12.888534545898438,
+    "trail_window_x_m": [
+      -0.28582645058631895,
+      -0.052600332275032996
+    ],
+    "scope": "Surface difference behind the rearmost final foot versus t=0.8s, restricted to visited foot regions and excluding the initial rear-foot position. No calibrated soil or physical robot validation.",
+    "trajectory_sha256": "afb63cf0a56292e4eb65dc20588cb73e969dc6083134194c6878a5e7d6f73bfc"
+  },
+  "timing_note": "Observed elapsed time, not an isolated benchmark; small validation jobs overlapped the run. Rendering and compression excluded.",
+  "source_provenance": {
+    "experiment_simulator_sha256": "49593df5c8531ede4a23a43344ecd7d1ca71bd8484e1be44a16631566fc381d5",
+    "note": "Public packaging removes unused variables/flags and formats source; experiment hash identifies the original executed file."
+  },
+  "model": "1.3 kg chassis plus original leg masses; 0.055 m commanded stroke, 0.04 m lift, 0.85 s gait period",
+  "limitations": [
+    "Original coarse spherical-grain translational DEM; no grain angular dynamics or calibrated sand parameters.",
+    "Newton/Cosmos models not executed by this Metal solver; MuJoCo integrates original free-body robot dynamics on CPU.",
+    "Eight actuated joints with an analytic gait, not learned locomotion. No imposed body translation or supporting forces.",
+    "Only feet contact grains; no chassis/limb terrain contacts. No hardware validation."
+  ],
+  "publication": "Code and numeric record only. Commercial preview requires author approval before social publication."
+}

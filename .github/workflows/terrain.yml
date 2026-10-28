@@ -3,10 +3,12 @@ on:
   push:
     paths:
       - 'examples/metal_terrain/**'
+      - 'examples/metal_walking/**'
       - '.github/workflows/terrain.yml'
   pull_request:
     paths:
       - 'examples/metal_terrain/**'
+      - 'examples/metal_walking/**'
       - '.github/workflows/terrain.yml'
 permissions:
   contents: read
@@ -23,3 +25,5 @@ jobs:
       - run: python examples/metal_terrain/verify_kernels.py --backend cpu
       - run: python examples/metal_terrain/metal_terrain.py --backend cpu --seconds 0.3 --output runs/terrain-ci
       - run: python examples/metal_terrain/verify_run.py runs/terrain-ci
+      - run: python examples/metal_walking/verify_walking_kernels.py --backend cpu
+      - run: python examples/metal_walking/verify_controller.py

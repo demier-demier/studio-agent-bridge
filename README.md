@@ -10,7 +10,7 @@ The language model runs in your MCP client. This repository supplies the native 
 
 ## What actually runs
 
-**Experimental Apple Silicon terrain physics:** an [optional Metal granular-contact case](examples/metal_terrain/) couples 89,856 coarse simulated grains to an eight-joint robot on an M4 Pro. It includes CPU/Metal analytic checks and independent trajectory validation. This is an original local simulation experiment, not a Cosmos/Newton port, a learned walking policy, or a benchmark against NVIDIA hardware.
+**Experimental Apple Silicon terrain physics:** the [walking and persistent-track case](examples/metal_walking/) uses 604,800 coarse grains and an eight-joint robot, with approximately 30 cm of measured forward travel on an M4 Pro. It extends the [original contact case](examples/metal_terrain/). Includes CPU/Metal contact tests and trajectory validation; no Cosmos/Newton port, learned policy, hardware validation, or NVIDIA parity claim.
 
 | Host | Native actions | Editable output | Tested locally |
 | --- | --- | --- | --- |
