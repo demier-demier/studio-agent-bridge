@@ -149,3 +149,50 @@ if (preflight.schema_version !== 'unreal-preflight-native-example/v1' ||
   throw new Error('Invalid Unreal preflight native execution boundary');
 }
 console.log(`Verified ${preflight.attempts.length} actual Unreal actions and ${Object.keys(preflight.checks).length} preflight/transfer checks; no appearance claim.`);
+
+const workcellRoot = `${assets}/inspection-workcell`;
+const workcellBytes = await readFile(`${workcellRoot}/evidence.json`);
+const workcellProof = await readFile(new URL('../../examples/inspection_workcell/observed-utilities-proof.json', import.meta.url));
+if (!workcellBytes.equals(workcellProof)) throw new Error('Workcell demo differs from its native evidence');
+const workcell = JSON.parse(workcellBytes);
+const workcellManifest = JSON.parse(await readFile(`${workcellRoot}/manifest.json`, 'utf8'));
+for (const [name, item] of Object.entries(workcellManifest)) {
+  if (!/^[a-zA-Z0-9_.-]+$/.test(name)) throw new Error('Unsafe workcell asset filename');
+  const bytes = await readFile(`${workcellRoot}/${name}`);
+  if (bytes.length !== item.bytes || createHash('sha256').update(bytes).digest('hex') !== item.sha256) {
+    throw new Error(`Workcell asset integrity failed: ${name}`);
+  }
+}
+const requiredWorkcellChecks = ['preserved_mesh_fields', 'six_routes_geometry', 'materials_resolve', 'metre_units', 'disconnected_endpoint_rejected'];
+if (workcell.schema !== 'studio-inspection-workcell-public/v1' ||
+    workcell.provenance.type !== 'observed-native-execution' || workcell.provenance.synthetic_adapter_used !== false ||
+    workcell.blender.status !== 'verified' || workcell.blender.fresh_reopen !== true ||
+    workcell.blender.preserved_source_meshes !== 1820 || workcell.blender.verified_routes !== 6 ||
+    Object.keys(workcell.blender.checks).length !== requiredWorkcellChecks.length ||
+    requiredWorkcellChecks.some(key => workcell.blender.checks[key] !== true) ||
+    workcell.unreal.status !== 'verified' || workcell.unreal.fresh_reopen !== true ||
+    workcell.unreal.manifest_sha256 !== workcell.transfer.clean_manifest_sha256 ||
+    workcell.unreal.appearance_equivalence_validated !== false ||
+    !Object.values(workcell.transfer.editable_scene.comparison).every(value => value.passed === true && value.max_evaluated_float_residual <= 1e-6) ||
+    workcell.transfer.fbx_typed_tree_checks_passed !== true ||
+    workcell.artifacts.native.publication_checked !== true) {
+  throw new Error('Workcell acceptance boundary or source-to-target evidence is incomplete');
+}
+for (const host of ['blender', 'unreal']) {
+  for (const view of ['close', 'wide']) {
+    const record = workcell[host].views[view];
+    if (record.status !== 'verified' || record.file !== `${host}-${view}.png` ||
+        workcellManifest[record.file]?.sha256 !== record.sha256 ||
+        workcellManifest[record.file]?.bytes !== record.bytes || record.rgb_pixels_preserved !== true) {
+      throw new Error(`Workcell ${host}/${view} image is not bound to its evidence`);
+    }
+  }
+}
+for (const record of Object.values(workcell.artifacts)) {
+  if (record.status !== 'verified' || workcellManifest[record.file]?.sha256 !== record.sha256 ||
+      workcellManifest[record.file]?.bytes !== record.bytes) throw new Error('Workcell artifact differs from its proof');
+}
+if (workcellManifest['evidence.json']?.sha256 !== createHash('sha256').update(workcellBytes).digest('hex')) {
+  throw new Error('Workcell asset manifest does not bind its proof');
+}
+console.log(`Verified ${Object.keys(workcellManifest).length} workcell assets, six measured routes and separate Blender/Unreal image evidence.`);

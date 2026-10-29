@@ -1,0 +1,854 @@
+{
+  "schema": "studio-inspection-workcell-public/v1",
+  "provenance": {
+    "type": "observed-native-execution",
+    "synthetic_adapter_used": false,
+    "observed_on": "2026-10-29",
+    "geometry": "original procedural synthetic scene",
+    "inference": "Chat client authored the trusted scripts. The bridge executed deterministic native operations; no inference runs in the server."
+  },
+  "blender": {
+    "status": "verified",
+    "fresh_reopen": true,
+    "version": "5.2.0 LTS",
+    "render_backend": "Cycles Metal",
+    "preserved_source_meshes": 1820,
+    "verified_routes": 6,
+    "checks": {
+      "preserved_mesh_fields": true,
+      "six_routes_geometry": true,
+      "materials_resolve": true,
+      "metre_units": true,
+      "disconnected_endpoint_rejected": true
+    },
+    "views": {
+      "close": {
+        "status": "verified",
+        "file": "blender-close.png",
+        "sha256": "0cca4ccde477f0adf8890ada9346c9ae3af1f64d85af77ef6a16873fa7d806a6",
+        "bytes": 987845,
+        "source_sha256": "9e739c82ced433a979bb579a380e83a29b84661bd4a410cb4267f5d2a70e3d01",
+        "rgb_pixels_preserved": true,
+        "dimensions": [
+          1100,
+          850
+        ],
+        "camera": {
+          "id": "camera_InspectionV2_Camera_Close_b0b321692c",
+          "name": "InspectionV2_Camera_Close",
+          "transform": {
+            "matrixWorld": [
+              [
+                0.79128497838974,
+                -0.21301645040512085,
+                0.5731422901153564,
+                -1.0499999523162842
+              ],
+              [
+                0.6114475131034851,
+                0.27566832304000854,
+                -0.7417134642601013,
+                -3.049999952316284
+              ],
+              [
+                2.0782948695341474e-09,
+                0.9373531937599182,
+                0.34838059544563293,
+                2.6500000953674316
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "translationMeters": [
+              -1.0499999523162842,
+              -3.049999952316284,
+              2.6500000953674316
+            ],
+            "rotationQuaternionWxyz": [
+              0.777067244052887,
+              0.540193498134613,
+              0.1843927502632141,
+              0.2652485966682434
+            ],
+            "scale": [
+              0.9999999403953552,
+              1.0,
+              1.0
+            ]
+          },
+          "localForward": [
+            0,
+            0,
+            -1
+          ],
+          "localUp": [
+            0,
+            1,
+            0
+          ],
+          "type": "PERSP",
+          "lensMm": 42.0,
+          "sensorWidthMm": 36.0,
+          "sensorHeightMm": 24.0,
+          "clipStart": 0.10000000149011612,
+          "clipEnd": 1000.0,
+          "orthoScale": 6.0,
+          "active": false
+        }
+      },
+      "wide": {
+        "status": "verified",
+        "file": "blender-wide.png",
+        "sha256": "48a62057f39c09ff4c4afbaef6672ee4a9850e18170fb329f821063c3e4a4ac9",
+        "bytes": 1082980,
+        "source_sha256": "2458c256eb042a7b932c36224fbad7f7470d4cdcf62e12fbe069613318292479",
+        "rgb_pixels_preserved": true,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "camera": {
+          "id": "camera_InspectionV2_Camera_Wide_39de3cd1e7",
+          "name": "InspectionV2_Camera_Wide",
+          "transform": {
+            "matrixWorld": [
+              [
+                0.6481962203979492,
+                -0.1016329824924469,
+                0.7546604871749878,
+                5.349999904632568
+              ],
+              [
+                0.7614733576774597,
+                0.0865139439702034,
+                -0.6423968076705933,
+                -3.950000047683716
+              ],
+              [
+                4.8810136377142044e-08,
+                0.9910529851913452,
+                0.13346882164478302,
+                2.6500000953674316
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "translationMeters": [
+              5.349999904632568,
+              -3.950000047683716,
+              2.6500000953674316
+            ],
+            "rotationQuaternionWxyz": [
+              0.6834067106246948,
+              0.597539484500885,
+              0.2760656476020813,
+              0.3157367408275604
+            ],
+            "scale": [
+              1.0,
+              0.9999999403953552,
+              1.0
+            ]
+          },
+          "localForward": [
+            0,
+            0,
+            -1
+          ],
+          "localUp": [
+            0,
+            1,
+            0
+          ],
+          "type": "PERSP",
+          "lensMm": 22.0,
+          "sensorWidthMm": 36.0,
+          "sensorHeightMm": 24.0,
+          "clipStart": 0.029999999329447746,
+          "clipEnd": 100.0,
+          "orthoScale": 6.0,
+          "active": false
+        }
+      }
+    },
+    "counts": {
+      "original_meshes": 1820,
+      "original_lab_meshes": 1571,
+      "inspection_v1_meshes": 249,
+      "utility_objects": 170,
+      "utility_geometry_objects": 168,
+      "utility_meshes": 162,
+      "utility_curves": 6,
+      "presentation_cameras": 2,
+      "utility_evaluated_triangles": 34672
+    },
+    "source_native_sha256": "92667087906956fa4a6c7c5826b3d4d45172b3b5ed115c328634858f8d005922",
+    "revision_native_sha256": "74806233ffb8acc97b4fc160a8ea3c9115ec0ee53940c9da353e6d395473c8ab",
+    "original_mesh_fields_sha256": "a128906e07421ea27d7630b654d6dfaa20f62132ecfbb47599c37c580fde07e5",
+    "measurement": {
+      "max_endpoint_to_gland_centre_delta_m": 0.0,
+      "max_absolute_host_face_gap_m": 0.0010004043579101562,
+      "tolerances_m": {
+        "endpoint_to_evaluated_gland_centre": 0.001,
+        "gland_to_host_aabb_face": 0.002,
+        "route_control_point_envelope": 0.001
+      }
+    },
+    "negative_check": {
+      "kind": "move_one_curve_endpoint_0_1m_in_separate_copy",
+      "reported_status": "failed",
+      "rejected_endpoint": "Camera_L.end",
+      "measured_gap_m": 0.09999990575011103,
+      "original_native_unchanged": true
+    },
+    "script_hashes": {
+      "complete_utilities.py": "63aea49f91a7b69d6e9f3d68c6cb3452b111213b4c5dd69367e11d8069588451",
+      "verify_utilities.py": "4ae2480a3504d4a4ae498eef17e8e8b3f8ae93f25d62ec4bb7363ec173691872",
+      "disconnect_route.py": "fb9186e1a43e3eb0a7c279aa16706a98f30a77f13716ff2c1c22d5197b503655"
+    }
+  },
+  "unreal": {
+    "status": "verified",
+    "fresh_reopen": true,
+    "version": "5.7.4",
+    "rendering": "gpu",
+    "views": {
+      "close": {
+        "status": "verified",
+        "file": "unreal-close.png",
+        "sha256": "f3bcfc5db5b8eb1008d6d69191ce7f74ea2e960bec11d6f9a62c23f4e53200b9",
+        "bytes": 1116474,
+        "source_sha256": "fd6228d054a8692586b75682307b552bfc0b6671e2b5ba39b14ceb74aaca3db1",
+        "rgb_pixels_preserved": true,
+        "dimensions": [
+          1100,
+          850
+        ],
+        "camera": {
+          "id": "camera_InspectionV2_Camera_Close_b0b321692c",
+          "name": "InspectionV2_Camera_Close",
+          "transform": {
+            "matrixWorld": [
+              [
+                0.79128497838974,
+                -0.21301645040512085,
+                0.5731422901153564,
+                -1.0499999523162842
+              ],
+              [
+                0.6114475131034851,
+                0.27566832304000854,
+                -0.7417134642601013,
+                -3.049999952316284
+              ],
+              [
+                2.0782948695341474e-09,
+                0.9373531937599182,
+                0.34838059544563293,
+                2.6500000953674316
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "translationMeters": [
+              -1.0499999523162842,
+              -3.049999952316284,
+              2.6500000953674316
+            ],
+            "rotationQuaternionWxyz": [
+              0.777067244052887,
+              0.540193498134613,
+              0.1843927502632141,
+              0.2652485966682434
+            ],
+            "scale": [
+              0.9999999403953552,
+              1.0,
+              1.0
+            ]
+          },
+          "localForward": [
+            0,
+            0,
+            -1
+          ],
+          "localUp": [
+            0,
+            1,
+            0
+          ],
+          "type": "PERSP",
+          "lensMm": 42.0,
+          "sensorWidthMm": 36.0,
+          "sensorHeightMm": 24.0,
+          "clipStart": 0.10000000149011612,
+          "clipEnd": 1000.0,
+          "orthoScale": 6.0,
+          "active": false
+        }
+      },
+      "wide": {
+        "status": "verified",
+        "file": "unreal-wide.png",
+        "sha256": "30c2d86599999e6f87db3085d67e6b07969ab76a1be828dc603f9f666ebb51f1",
+        "bytes": 1207966,
+        "source_sha256": "1f5d5520b4e601b9ff67bfb29782e45cb8f0c42faff75696de9276ab1c4c8b1c",
+        "rgb_pixels_preserved": true,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "camera": {
+          "id": "camera_InspectionV2_Camera_Wide_39de3cd1e7",
+          "name": "InspectionV2_Camera_Wide",
+          "transform": {
+            "matrixWorld": [
+              [
+                0.6481962203979492,
+                -0.1016329824924469,
+                0.7546604871749878,
+                5.349999904632568
+              ],
+              [
+                0.7614733576774597,
+                0.0865139439702034,
+                -0.6423968076705933,
+                -3.950000047683716
+              ],
+              [
+                4.8810136377142044e-08,
+                0.9910529851913452,
+                0.13346882164478302,
+                2.6500000953674316
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "translationMeters": [
+              5.349999904632568,
+              -3.950000047683716,
+              2.6500000953674316
+            ],
+            "rotationQuaternionWxyz": [
+              0.6834067106246948,
+              0.597539484500885,
+              0.2760656476020813,
+              0.3157367408275604
+            ],
+            "scale": [
+              1.0,
+              0.9999999403953552,
+              1.0
+            ]
+          },
+          "localForward": [
+            0,
+            0,
+            -1
+          ],
+          "localUp": [
+            0,
+            1,
+            0
+          ],
+          "type": "PERSP",
+          "lensMm": 22.0,
+          "sensorWidthMm": 36.0,
+          "sensorHeightMm": 24.0,
+          "clipStart": 0.029999999329447746,
+          "clipEnd": 100.0,
+          "orthoScale": 6.0,
+          "active": false
+        }
+      }
+    },
+    "manifest_sha256": "1c2c1211a0b6dc8853b04b714dd78a1fad56b5508f486f8daeae5d6116259b19",
+    "mesh_actors": 1988,
+    "mesh_assets": 182,
+    "materials": 17,
+    "lights": 9,
+    "cameras": 7,
+    "transform_checks_passed": true,
+    "appearance_equivalence_validated": false
+  },
+  "transfer": {
+    "postflight_review": {
+      "reason": "Native actions verified; initial final PNG validator rejected zero-only trailer bytes. Updated validator checks PNG chunk CRCs, dimensions, terminal IEND and permits only zero-only padding. All captures also fully decoded with Pillow. Original failed state and raw native files remain unchanged.",
+      "original_failed_state_sha256": "6808f485e55dd9670def139175d9cc5396f548e39560b3bc96b8b155d5e166a6",
+      "validator_sha256": "3c31bbe8ae2f3f8d569bbc154e45be14ef39470ddd64f89f43b9019d002b6e4c",
+      "review_script_sha256": "e542ed2c1b45061c60cfce815b5da8504df1ee9a9d3174c2e28b6b999c5cc5cc",
+      "native_actions_replayed": false,
+      "full_pixel_decoding_passed": true
+    },
+    "conversion": {
+      "schema": "inspection-utilities-export-conversion/v1",
+      "source_revision": {
+        "inspection_utilities_revision": 1
+      },
+      "script_parameters": {},
+      "export_helper_sha256": "b1a0fccac2f35d5b274dcdbdb72e80aa13144a3d1da4f5ab3e2cc340250b4029",
+      "required_routes": [
+        "InspectionV2_Route_Camera_L",
+        "InspectionV2_Route_Camera_R",
+        "InspectionV2_Route_Illuminator_L",
+        "InspectionV2_Route_Illuminator_R",
+        "InspectionV2_Route_HMI",
+        "InspectionV2_Route_PowerSupply"
+      ],
+      "conversion_scope": "Only the six named curves in this bridge run snapshot",
+      "editable_source": "The upstream source-bound native utility scene remains the editable source; this exchange scene stores the six routes as meshes.",
+      "editability_loss": "The six cable objects lose spline and curve-parameter editing in this exchange output only.",
+      "comparison_scope": "Measured evaluated surface counts and world bounds only; complete geometry identity is not asserted.",
+      "bounds_tolerance_m": 1e-06,
+      "routes": [
+        {
+          "name": "InspectionV2_Route_Camera_L",
+          "source_splines": [
+            {
+              "type": "POLY",
+              "points": 72,
+              "cyclic": false
+            }
+          ],
+          "before": {
+            "type": "CURVE",
+            "vertices": 740,
+            "triangles": 1436,
+            "bounds_world_m": [
+              [
+                -4.225499629974365,
+                0.3447691798210144,
+                0.7246016263961792
+              ],
+              [
+                -3.0404999256134033,
+                0.7371150851249695,
+                2.3302314281463623
+              ]
+            ]
+          },
+          "after": {
+            "type": "MESH",
+            "vertices": 740,
+            "triangles": 1436,
+            "bounds_world_m": [
+              [
+                -4.225499629974365,
+                0.3447691798210144,
+                0.7246016263961792
+              ],
+              [
+                -3.0404999256134033,
+                0.7371150851249695,
+                2.3302314281463623
+              ]
+            ]
+          },
+          "max_bounds_residual_m": 0.0,
+          "bounds_within_tolerance": true,
+          "vertex_count_equal": true,
+          "triangle_count_equal": true,
+          "geometry_identity": "not_asserted"
+        },
+        {
+          "name": "InspectionV2_Route_Camera_R",
+          "source_splines": [
+            {
+              "type": "POLY",
+              "points": 72,
+              "cyclic": false
+            }
+          ],
+          "before": {
+            "type": "CURVE",
+            "vertices": 740,
+            "triangles": 1436,
+            "bounds_world_m": [
+              [
+                -3.385500431060791,
+                0.3447691798210144,
+                0.7245064973831177
+              ],
+              [
+                -3.0285000801086426,
+                0.7544455528259277,
+                2.3302314281463623
+              ]
+            ]
+          },
+          "after": {
+            "type": "MESH",
+            "vertices": 740,
+            "triangles": 1436,
+            "bounds_world_m": [
+              [
+                -3.385500431060791,
+                0.3447691798210144,
+                0.7245064973831177
+              ],
+              [
+                -3.0285000801086426,
+                0.7544455528259277,
+                2.3302314281463623
+              ]
+            ]
+          },
+          "max_bounds_residual_m": 0.0,
+          "bounds_within_tolerance": true,
+          "vertex_count_equal": true,
+          "triangle_count_equal": true,
+          "geometry_identity": "not_asserted"
+        },
+        {
+          "name": "InspectionV2_Route_Illuminator_L",
+          "source_splines": [
+            {
+              "type": "POLY",
+              "points": 79,
+              "cyclic": false
+            }
+          ],
+          "before": {
+            "type": "CURVE",
+            "vertices": 810,
+            "triangles": 1576,
+            "bounds_world_m": [
+              [
+                -4.483885288238525,
+                0.48900002241134644,
+                0.7261267304420471
+              ],
+              [
+                -3.0111138820648193,
+                0.7820757031440735,
+                2.295825242996216
+              ]
+            ]
+          },
+          "after": {
+            "type": "MESH",
+            "vertices": 810,
+            "triangles": 1576,
+            "bounds_world_m": [
+              [
+                -4.483885288238525,
+                0.48900002241134644,
+                0.7261267304420471
+              ],
+              [
+                -3.0111138820648193,
+                0.7820757031440735,
+                2.295825242996216
+              ]
+            ]
+          },
+          "max_bounds_residual_m": 0.0,
+          "bounds_within_tolerance": true,
+          "vertex_count_equal": true,
+          "triangle_count_equal": true,
+          "geometry_identity": "not_asserted"
+        },
+        {
+          "name": "InspectionV2_Route_Illuminator_R",
+          "source_splines": [
+            {
+              "type": "POLY",
+              "points": 58,
+              "cyclic": false
+            }
+          ],
+          "before": {
+            "type": "CURVE",
+            "vertices": 600,
+            "triangles": 1156,
+            "bounds_world_m": [
+              [
+                -3.493889808654785,
+                0.48900002241134644,
+                0.7260124683380127
+              ],
+              [
+                -2.9930315017700195,
+                0.7991494536399841,
+                1.7344845533370972
+              ]
+            ]
+          },
+          "after": {
+            "type": "MESH",
+            "vertices": 600,
+            "triangles": 1156,
+            "bounds_world_m": [
+              [
+                -3.493889808654785,
+                0.48900002241134644,
+                0.7260124683380127
+              ],
+              [
+                -2.9930315017700195,
+                0.7991494536399841,
+                1.7344845533370972
+              ]
+            ]
+          },
+          "max_bounds_residual_m": 0.0,
+          "bounds_within_tolerance": true,
+          "vertex_count_equal": true,
+          "triangle_count_equal": true,
+          "geometry_identity": "not_asserted"
+        },
+        {
+          "name": "InspectionV2_Route_HMI",
+          "source_splines": [
+            {
+              "type": "POLY",
+              "points": 37,
+              "cyclic": false
+            }
+          ],
+          "before": {
+            "type": "CURVE",
+            "vertices": 390,
+            "triangles": 736,
+            "bounds_world_m": [
+              [
+                -3.1359996795654297,
+                -0.22599999606609344,
+                0.7240779399871826
+              ],
+              [
+                -2.9092273712158203,
+                0.025930099189281464,
+                1.0757063627243042
+              ]
+            ]
+          },
+          "after": {
+            "type": "MESH",
+            "vertices": 390,
+            "triangles": 736,
+            "bounds_world_m": [
+              [
+                -3.1359996795654297,
+                -0.22599999606609344,
+                0.7240779399871826
+              ],
+              [
+                -2.9092273712158203,
+                0.025930099189281464,
+                1.0757063627243042
+              ]
+            ]
+          },
+          "max_bounds_residual_m": 0.0,
+          "bounds_within_tolerance": true,
+          "vertex_count_equal": true,
+          "triangle_count_equal": true,
+          "geometry_identity": "not_asserted"
+        },
+        {
+          "name": "InspectionV2_Route_PowerSupply",
+          "source_splines": [
+            {
+              "type": "POLY",
+              "points": 65,
+              "cyclic": false
+            }
+          ],
+          "before": {
+            "type": "CURVE",
+            "vertices": 670,
+            "triangles": 1296,
+            "bounds_world_m": [
+              [
+                -3.1385631561279297,
+                0.2809999883174896,
+                0.036284029483795166
+              ],
+              [
+                -2.9428141117095947,
+                4.116000175476074,
+                1.128999948501587
+              ]
+            ]
+          },
+          "after": {
+            "type": "MESH",
+            "vertices": 670,
+            "triangles": 1296,
+            "bounds_world_m": [
+              [
+                -3.1385631561279297,
+                0.2809999883174896,
+                0.036284029483795166
+              ],
+              [
+                -2.9428141117095947,
+                4.116000175476074,
+                1.128999948501587
+              ]
+            ]
+          },
+          "max_bounds_residual_m": 0.0,
+          "bounds_within_tolerance": true,
+          "vertex_count_equal": true,
+          "triangle_count_equal": true,
+          "geometry_identity": "not_asserted"
+        }
+      ],
+      "limits": {
+        "max_assets": 256,
+        "max_objects": 5000
+      },
+      "publication_sanitized": false,
+      "status": "exported",
+      "all_six_routes_in_manifest": true,
+      "all_six_routes_in_glb": true,
+      "selection": {
+        "strategy": "explicit-collection",
+        "collection": "StudioEnvironment"
+      },
+      "actual_unique_assets": 182,
+      "actual_mesh_instances": 1988,
+      "manifest": "environment-manifest.json",
+      "manifest_sha256": "f4400ec45ec048dfbd25988d1c995c6a3797296832172c078ce4b34ba8d1461c",
+      "glb": "inspection-utilities.glb",
+      "glb_sha256": "9732aa15b32495bcbec76622ee17e6d0d152970cfd3f41b48df4a154ec2072e2",
+      "exported_file_count": 201,
+      "manifest_route_bindings": [
+        {
+          "name": "InspectionV2_Route_Camera_L",
+          "id": "obj_InspectionV2_Route_Camera_L_8289ebea45",
+          "asset_id": "mesh_fd51bf8c776fa5a3114b",
+          "export_file": "assets/meshes/mesh_fd51bf8c776fa5a3114b.fbx"
+        },
+        {
+          "name": "InspectionV2_Route_Camera_R",
+          "id": "obj_InspectionV2_Route_Camera_R_33f72b31f3",
+          "asset_id": "mesh_41dd1d07910d25949c5d",
+          "export_file": "assets/meshes/mesh_41dd1d07910d25949c5d.fbx"
+        },
+        {
+          "name": "InspectionV2_Route_HMI",
+          "id": "obj_InspectionV2_Route_HMI_2927c87cb1",
+          "asset_id": "mesh_f3baa3f552ed4627971d",
+          "export_file": "assets/meshes/mesh_f3baa3f552ed4627971d.fbx"
+        },
+        {
+          "name": "InspectionV2_Route_Illuminator_L",
+          "id": "obj_InspectionV2_Route_Illuminator_L_3c0c9dcb9e",
+          "asset_id": "mesh_85cb01fd337c31095f65",
+          "export_file": "assets/meshes/mesh_85cb01fd337c31095f65.fbx"
+        },
+        {
+          "name": "InspectionV2_Route_Illuminator_R",
+          "id": "obj_InspectionV2_Route_Illuminator_R_4054879830",
+          "asset_id": "mesh_0fe884241990a5497758",
+          "export_file": "assets/meshes/mesh_0fe884241990a5497758.fbx"
+        },
+        {
+          "name": "InspectionV2_Route_PowerSupply",
+          "id": "obj_InspectionV2_Route_PowerSupply_a410ec3c85",
+          "asset_id": "mesh_b285515c204643e235a3",
+          "export_file": "assets/meshes/mesh_b285515c204643e235a3.fbx"
+        }
+      ]
+    },
+    "clean_manifest_sha256": "1c2c1211a0b6dc8853b04b714dd78a1fad56b5508f486f8daeae5d6116259b19",
+    "fbx_files": 182,
+    "fbx_typed_tree_checks_passed": true,
+    "manifest_changes_only_file_hashes_and_byte_counts": true,
+    "editable_scene": {
+      "sha256": "929b97ccccfdc47bd80cd8a8b472a72cd6e2cae14dc145566ab611d20658a213",
+      "bytes": 2051776,
+      "comparison": {
+        "in_memory": {
+          "passed": true,
+          "evaluated_float_tolerance": 1e-06,
+          "max_evaluated_float_residual": 5.960464477539063e-08,
+          "evaluated_float_values_compared": 3713716,
+          "exact_categories_equal": true
+        },
+        "reopened": {
+          "passed": true,
+          "evaluated_float_tolerance": 1e-06,
+          "max_evaluated_float_residual": 5.960464477539063e-08,
+          "evaluated_float_values_compared": 3713716,
+          "exact_categories_equal": true
+        }
+      },
+      "byte_scan_passed": true
+    },
+    "script_hashes": {
+      "export_utilities.py": "ad089ffe7eaf01879b1cb62c8dfd80ee993db557b7ab17a90d77ab18741858a5",
+      "environment_export.py": "b1a0fccac2f35d5b274dcdbdb72e80aa13144a3d1da4f5ab3e2cc340250b4029",
+      "native_evidence.py": "ec0a33a3625143e907a8ce7977c73e220a1e214f6888bb726aeed8dea9f851ab",
+      "fingerprint_scene.py": "1ea3e64688a977411dfdccb70bb78be48e1888140bc8682e15f8bab44a7c55e2",
+      "sanitize_scene.py": "05dcdffcc50a5297c88ade3fc57c8702ee3824bb3e1b940671fe17b67d2ea8e3",
+      "sanitize_fbx.py": "cb2aaf788ad27300124770f6b7bef10ba40781870328a4be9b3289e9c2711c84",
+      "run_transfer.py": "75f17e2e4c67e36d968eda3c5940c81c00f3b4aa8881d25c3b946184cdb8481b"
+    }
+  },
+  "artifacts": {
+    "glb": {
+      "status": "verified",
+      "file": "inspection-utilities.glb",
+      "sha256": "9732aa15b32495bcbec76622ee17e6d0d152970cfd3f41b48df4a154ec2072e2",
+      "bytes": 3894024
+    },
+    "native": {
+      "status": "verified",
+      "publication_checked": true,
+      "file": "inspection-workcell-native-v2.zip",
+      "version": 2,
+      "sha256": "3730fe36919fea2323a5272cf35ab9222c0265c0b157fb95476448c110147fbc",
+      "bytes": 11524521,
+      "member_count": 210
+    }
+  },
+  "prior_attempts": [
+    {
+      "stage": "utility readback",
+      "status": "failed",
+      "reason": "The first verifier compared evaluated Blender material IDs with originals. It rejected the scene; corrected readback resolves Material.original and retains missing-reference/index checks."
+    },
+    {
+      "stage": "FBX sanitation",
+      "status": "failed",
+      "reason": "A relative output path containing parent segments did not match the canonical clean-bundle boundary. That attempt stopped; the final run uses normalized paths and a fresh directory."
+    },
+    {
+      "stage": "FBX export",
+      "status": "failed",
+      "reason": "Blender exited with signal 11 while writing an FBX export log line in the second transfer attempt. Its crash report and partial outputs were preserved. No output from that failed action was published; a reviewed fresh attempt completed separately."
+    }
+  ],
+  "acceptance": {
+    "automated_geometry": "passed",
+    "native_images_reviewed": "by_assistant",
+    "human_visual_acceptance": "pending",
+    "engineering_approval": "not_claimed"
+  },
+  "limitations": [
+    "Host contacts use evaluated world-space AABBs, not exact surface mating. Cable clips, covers and collision clearances are not independently validated.",
+    "This is a visual environment, without electrical operation, camera sensing, robotics control, physics or safety certification.",
+    "The editable native file preserves six cable splines; the export snapshot converts those six to static meshes. Material and lighting appearance differs between renderers.",
+    "Source preservation covers the stated mesh fields; the publication comparison adds explicit current-frame categories. Neither is a complete file or animation equivalence proof."
+  ]
+}

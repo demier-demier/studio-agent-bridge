@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="An original optical inspection workcell, revised with connected utility geometry. Explore native render evidence, editable cable routes and the exported 3D scene.">
+  <meta name="theme-color" content="#101b20">
+  <title>Studio Agent Bridge · Inspection workcell</title>
+</head>
+<body>
+  <header class="wrap header"><a class="brand" href="../">STUDIO <span>AGENT BRIDGE</span></a><nav><a href="../environment/">Original lab</a><a href="#evidence">Evidence</a><a href="https://github.com/demier-demier/studio-agent-bridge/tree/main/examples/inspection_workcell">Reproduce ↗</a><a href="/">AI Lab</a></nav></header>
+  <main class="wrap">
+    <section class="intro"><p class="eyebrow">ENVIRONMENT / 03 · OPTICAL INSPECTION</p><h1>From a station<br><em>to a connected workcell.</em></h1><p class="lede">Camera and illuminator harnesses, panel connectors, strain relief and a protected supply lead. An additive revision to the original laboratory, with native views and geometric checks that can be inspected separately.</p><p class="revision-status" id="revision-status" role="status">Loading the recorded revision…</p></section>
+    <section class="gallery" aria-labelledby="gallery-title">
+      <div class="toolbar"><h2 id="gallery-title">Inspect the utility revision</h2><span id="host-badge">Evidence pending</span></div>
+      <div class="viewport workcell-viewport">
+        <img id="scene-image" hidden alt="" />
+        <model-viewer id="scene-viewer" hidden camera-controls touch-action="pan-y" environment-image="neutral" interaction-prompt="none" shadow-intensity="0" camera-target="-3.8m 1.1m -0.15m" camera-orbit="42deg 68deg 5.5m" field-of-view="45deg" min-camera-orbit="auto 0.01deg 0.05m" max-camera-orbit="auto 179.99deg 50m" min-field-of-view="20deg" max-field-of-view="90deg" alt="Exported original inspection workcell and laboratory geometry"></model-viewer>
+        <div id="pending-view" class="pending-view"><span class="pending-mark" aria-hidden="true">○</span><h3 id="pending-title">Loading evidence</h3><p id="pending-description">Each image is shown only when its native renderer and recorded status are available.</p></div>
+        <div id="load-state" class="load-state" role="status" aria-live="polite"></div>
+      </div>
+      <div class="gallery-bottom"><p id="view-caption">Native render evidence is loading.</p><button id="mesh-mode" disabled>Explore 3D mesh</button></div>
+      <div class="view-controls">
+        <div class="view-group"><span class="control-label">NATIVE RENDERER</span><div class="view-list" role="group" aria-label="Native renderer"><button data-host="blender" aria-pressed="true">Blender <span class="view-status" id="blender-view-status">pending</span></button><button data-host="unreal" aria-pressed="false">Unreal <span class="view-status" id="unreal-view-status">pending</span></button></div></div>
+        <div class="view-group"><span class="control-label">FRAMING</span><div class="view-list" role="group" aria-label="Camera framing"><button data-view="close" aria-pressed="true">Close view</button><button data-view="wide" aria-pressed="false">Wide view</button></div></div>
+      </div>
+    </section>
+    <section class="stats workcell-stats" aria-label="Measured revision evidence">
+      <div><strong id="route-count">Pending</strong><span>device and supply routes<br>checked from geometric endpoints</span></div>
+      <div><strong id="preserved-count">Pending</strong><span>pre-existing mesh records<br>compared after fresh reopening</span></div>
+      <div><strong id="blender-state">Pending</strong><span>Blender native revision<br>fresh-process readback</span></div>
+      <div><strong id="unreal-state">Pending</strong><span>Unreal native handoff<br>fresh reopening and image evidence</span></div>
+    </section>
+    <section class="story"><div><p class="eyebrow">DETAIL AT THE CONNECTION</p><h2>Follow the route.<br>Check both ends.</h2></div><div class="story-copy"><p>The revision adds cable geometry for two cameras, two illuminators, the HMI and the cabinet supply. New glands meet existing device or cabinet faces; the supply lead terminates at an existing laboratory socket.</p><p>Editable Blender splines retain their actual centreline endpoints. Independent readback checks those points against the evaluated gland geometry and attachment faces. Connector names and metadata alone do not establish the connection.</p><p>Clips, boots, panel fittings and a floor cover make the proposed routing visible. These are original synthetic design details. Electrical continuity, current capacity, physical bend limits and safety compliance have not been simulated or certified.</p></div></section>
+    <section class="workflow-section"><p class="eyebrow">AN ADDITIVE REVISION</p><h2>Preserve. Connect. Reopen.</h2><ol class="workflow-steps"><li><span>01</span><h3>Bind the source</h3><p>The runner checks the reviewed native input before adding the utility assembly.</p></li><li><span>02</span><h3>Read the geometry</h3><p>A separate script measures saved endpoint geometry, attachment faces and retained mesh fields.</p></li><li><span>03</span><h3>Inspect each renderer</h3><p>Blender and Unreal images have separate evidence states. The browser viewer uses its own lighting.</p></li></ol><p class="boundary-note">This page displays exported results. Authoring runs locally through the trusted Studio Agent Bridge adapter; the browser does not control Blender or Unreal.</p></section>
+    <section class="evidence-section" id="evidence"><div><p class="eyebrow">CHECK THE RESULT</p><h2>Measured geometry.<br>Visible limits.</h2><p id="evidence-summary">The evidence record will distinguish completed checks from pending work.</p><div class="downloads" id="downloads"><a id="evidence-download" href="../assets/inspection-workcell/evidence.json" download hidden>Public evidence JSON ↓</a><a id="native-download" hidden>Native publication package ↓</a><a id="glb-download" hidden>Exported GLB mesh ↓</a><a href="https://github.com/demier-demier/studio-agent-bridge/tree/main/examples/inspection_workcell">Scripts and reproduction instructions ↗</a></div><p class="download-status" id="download-status" role="status">Download verification pending.</p></div><div><h3>Recorded checks</h3><ul id="observed-checks"><li>Waiting for the public evidence record.</li></ul><h3>What the evidence does not establish</h3><ul id="case-limits"><li>Endpoint contact is a geometric observation. It does not establish electrical continuity, mechanical fitness or safety approval.</li><li>Preservation checks cover the declared mesh and material fields; they do not prove complete Blender-file equivalence.</li><li>Native images show each renderer's output. They do not establish identical Blender and Unreal appearance.</li><li>The browser GLB uses browser lighting. Editable cable curves are converted to surface geometry for interchange.</li><li>Human visual acceptance and engineering approval are separate from automated checks.</li></ul></div></section>
+    <section class="original-note"><p>Original procedural portfolio scene and utility assembly. No employer assets, client models or private project files. Earlier laboratory and inspection revisions remain separate examples.</p><a href="../environment/">Return to the original environment demonstration →</a></section>
+  </main>
+  <footer class="wrap footer"><span>Bernardo Demier · Studio Agent Bridge</span><a href="../source-binding/">Explore source binding →</a><a href="https://github.com/demier-demier/studio-agent-bridge">Source repository ↗</a></footer>
+  <script type="module" src="/src/inspection-workcell.js"></script>
+</body></html>

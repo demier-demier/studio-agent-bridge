@@ -1,0 +1,30 @@
+{
+  "blender-close.png": {
+    "sha256": "0cca4ccde477f0adf8890ada9346c9ae3af1f64d85af77ef6a16873fa7d806a6",
+    "bytes": 987845
+  },
+  "blender-wide.png": {
+    "sha256": "48a62057f39c09ff4c4afbaef6672ee4a9850e18170fb329f821063c3e4a4ac9",
+    "bytes": 1082980
+  },
+  "evidence.json": {
+    "sha256": "2582524c21977837c04e1bcdad7013f58008764f7aac19169d7d697e07f6e1f1",
+    "bytes": 27411
+  },
+  "inspection-utilities.glb": {
+    "sha256": "9732aa15b32495bcbec76622ee17e6d0d152970cfd3f41b48df4a154ec2072e2",
+    "bytes": 3894024
+  },
+  "inspection-workcell-native-v2.zip": {
+    "sha256": "3730fe36919fea2323a5272cf35ab9222c0265c0b157fb95476448c110147fbc",
+    "bytes": 11524521
+  },
+  "unreal-close.png": {
+    "sha256": "f3bcfc5db5b8eb1008d6d69191ce7f74ea2e960bec11d6f9a62c23f4e53200b9",
+    "bytes": 1116474
+  },
+  "unreal-wide.png": {
+    "sha256": "30c2d86599999e6f87db3085d67e6b07969ab76a1be828dc603f9f666ebb51f1",
+    "bytes": 1207966
+  }
+}
