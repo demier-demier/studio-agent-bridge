@@ -12,3 +12,5 @@ __pycache__/
 *.wav
 *.log
 !robot/assets/*.stl
+
+native/target/

@@ -1,0 +1,29 @@
+{
+  "reports": {
+    "numpy": {
+      "cache_engine": "numpy",
+      "method": "4mm raster maximum particle-top surface; visited foot neighborhoods behind final hind feet; same grains before/after",
+      "visible_trail_cells": 2760,
+      "depressed_area_cm2": 441.59999999999997,
+      "median_surface_change_mm": -3.883854389190674,
+      "particle_count": 961191,
+      "limitation": "Raster surface metric at finite grain scale; not a calibrated soil deformation measurement."
+    },
+    "rust": {
+      "cache_engine": "rust",
+      "method": "4mm raster maximum particle-top surface; visited foot neighborhoods behind final hind feet; same grains before/after",
+      "visible_trail_cells": 2760,
+      "depressed_area_cm2": 441.59999999999997,
+      "median_surface_change_mm": -3.883854389190674,
+      "particle_count": 961191,
+      "limitation": "Raster surface metric at finite grain scale; not a calibrated soil deformation measurement."
+    }
+  },
+  "exact_array_match": [
+    "initial",
+    "final",
+    "visited",
+    "change"
+  ],
+  "frames": "settled and final, all 961191 particles"
+}

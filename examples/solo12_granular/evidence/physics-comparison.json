@@ -1,0 +1,71 @@
+{
+  "schema": "solo12-performance-comparison/v1",
+  "workload": {
+    "grain_count": 961191,
+    "grain_radius_m": 0.0015,
+    "foot_radius_m": 0.02,
+    "frames": 241,
+    "fps": 30,
+    "seconds": 8.0,
+    "grain_dt": 5e-05,
+    "rigid_dt": 0.001,
+    "bed_bounds": [
+      -0.8,
+      0.8,
+      -0.34,
+      0.34
+    ],
+    "backend": "metal"
+  },
+  "before": {
+    "maximum_resident_set_size_bytes": 3039608832,
+    "peak_memory_footprint_bytes": 844891192,
+    "process_wall_seconds": 572.56,
+    "simulation_wall_seconds": 555.415205792,
+    "settling_wall_seconds": 16.169463624974014,
+    "forward_travel_m": 0.5783851355917651,
+    "maximum_tilt_degrees": 4.366740739774936,
+    "maximum_motor_torque_nm": 1.5882848472888895,
+    "granular_support_percent": 7.66167781088321,
+    "audit_checks_passed": 18,
+    "physics_source_sha256": {
+      "simulate.py": "492c7f04e968f5689d5be1175ce0e37d873a8df6618c0af23691c0ea49346bfc",
+      "backends.py": "183b167cef823287e90e31f4f386c95553e64f9af89aec887cdd94e4af70be14",
+      "granular.py": "43a67b6e16ada03e16215757253650ff012f8c4007ee5be8e5c37a5ed5e7543e",
+      "locomotion/controller.py": "4644f1f7254fbb379685a9dca1490ecb40c43d15acddb1339260c3e03811cc0b",
+      "locomotion/solo12-walk.xml": "d1ecb68d706819552e8a1670bd3bd116ff79311cfcfd172065a24eeb675d25e9"
+    }
+  },
+  "after": {
+    "maximum_resident_set_size_bytes": 3033169920,
+    "peak_memory_footprint_bytes": 512820280,
+    "process_wall_seconds": 480.19,
+    "simulation_wall_seconds": 466.3877405419771,
+    "settling_wall_seconds": 13.469288291002158,
+    "forward_travel_m": 0.5785538123799211,
+    "maximum_tilt_degrees": 4.357276876179777,
+    "maximum_motor_torque_nm": 1.5891782083644372,
+    "granular_support_percent": 7.639452317388705,
+    "audit_checks_passed": 18,
+    "physics_source_sha256": {
+      "simulate.py": "a007104105567346be73a20231fb52aa1430fa12d34354f0474bb76d25670678",
+      "backends.py": "183b167cef823287e90e31f4f386c95553e64f9af89aec887cdd94e4af70be14",
+      "granular.py": "bf13c5074eee109b062c0d87315058ec6f1123952db7d6f17685f1b21840ff3a",
+      "locomotion/controller.py": "4644f1f7254fbb379685a9dca1490ecb40c43d15acddb1339260c3e03811cc0b",
+      "locomotion/solo12-walk.xml": "d1ecb68d706819552e8a1670bd3bd116ff79311cfcfd172065a24eeb675d25e9"
+    }
+  },
+  "speedup": 1.1908872328988889,
+  "reductions_percent": {
+    "simulation_wall_seconds": 16.028993142719838,
+    "maximum_resident_set_size_bytes": 0.21183357319577434,
+    "peak_memory_footprint_bytes": 39.30339375581986
+  },
+  "limits": [
+    "One full run per variant; normal desktop workload, not an isolated statistical benchmark.",
+    "macOS process RSS includes file mappings; footprint is a distinct OS process metric, not dedicated GPU VRAM.",
+    "Floating-point atomic reduction ordering can change trajectories; bit-identical GPU results are not claimed.",
+    "Particle count, float32 storage, 241 output frames and physical parameters are preserved.",
+    "Rust raster timing is separate and is not included in the physics speedup."
+  ]
+}

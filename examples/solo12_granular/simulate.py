@@ -38,7 +38,13 @@ def run(a):
     dt = 0.001 / substeps
     points = make_bed(radius, a.half_x, a.half_y, a.layers)
     bed = GranularBed(
-        points, radius=radius, half_x=a.half_x, half_y=a.half_y, dt=dt, foot_radius=RADIUS
+        points,
+        radius=radius,
+        half_x=a.half_x,
+        half_y=a.half_y,
+        dt=dt,
+        foot_radius=RADIUS,
+        grid_layout=a.grid_layout,
     )
     model = mujoco.MjModel.from_xml_path(str(ROOT / "locomotion/solo12-walk.xml"))
     model.opt.timestep = 0.001
@@ -202,6 +208,7 @@ def run(a):
         "physics_source_sha256": source_hashes,
         "time_note": "Frame labels use pre-step time; saved state is post-step, exactly label + 1 ms. This preserves the released simulation loop.",
         "grid": "occupied-cell clearing",
+        "grid_layout": a.grid_layout,
         "trace": trace,
         "limits": [
             "Translational spherical DEM, no grain spin/rolling resistance or calibrated sand parameters.",
@@ -266,6 +273,7 @@ def options(argv=None):
         "--output", required=True, help="New run directory; existing paths are refused."
     )
     parser.add_argument("--cpu-threads", type=int, default=4)
+    parser.add_argument("--grid-layout", choices=("dense", "hashed"), default="hashed")
     for key in PRESETS["video"]:
         parser.add_argument("--" + key.replace("_", "-"), type=int if key == "layers" else float)
     args = parser.parse_args(argv)

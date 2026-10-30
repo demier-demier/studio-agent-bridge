@@ -1,4 +1,4 @@
-"""Metal translational sphere DEM with occupied-cell clearing.
+"""Translational sphere DEM with dense or bounded hashed storage.
 
 Experimental visual simulation: no angular grain dynamics or calibrated soil.
 All represented grains are integrated; no painted tracks or particle deletion.
@@ -13,8 +13,19 @@ import taichi as ti
 @ti.data_oriented
 class GranularBed:
     def __init__(
-        self, points, radius=0.0015, half_x=0.80, half_y=0.34, dt=0.00005, foot_radius=0.015
+        self,
+        points,
+        radius=0.0015,
+        half_x=0.80,
+        half_y=0.34,
+        dt=0.00005,
+        foot_radius=0.015,
+        grid_layout="dense",
     ):
+        if grid_layout not in {"dense", "hashed"}:
+            raise ValueError("grid_layout must be dense or hashed")
+        self.grid_layout = grid_layout
+        self.hashed = grid_layout == "hashed"
         self.n = len(points)
         self.r = radius
         self.mass = 2500 * 4 / 3 * math.pi * radius**3
@@ -35,8 +46,16 @@ class GranularBed:
         self.x = ti.Vector.field(3, ti.f32, shape=self.n)
         self.v = ti.Vector.field(3, ti.f32, shape=self.n)
         self.force = ti.Vector.field(3, ti.f32, shape=self.n)
-        self.count = ti.field(ti.i32, shape=self.shape)
-        self.indices = ti.field(ti.i32, shape=(*self.shape, self.capacity))
+        # Neighbour offsets in the 27-cell stencil span less than this table.
+        # Thus two queried neighbour cells cannot alias one another. Other,
+        # distant cells may share buckets; exact sphere tests filter them.
+        stencil_span = 2 * self.shape[1] * self.shape[2] + 2 * self.shape[2] + 3
+        self.hash_size = 1 << (max(2 * self.n, stencil_span) - 1).bit_length()
+        self.count = ti.field(ti.i32, shape=self.hash_size if self.hashed else self.shape)
+        if self.hashed:
+            self.indices = ti.field(ti.i32, shape=(self.capacity, self.hash_size))
+        else:
+            self.indices = ti.field(ti.i32, shape=(*self.shape, self.capacity))
         self.active = ti.Vector.field(3, ti.i32, shape=self.n)
         self.active_count = ti.field(ti.i32, shape=())
         self.overflow = ti.field(ti.i32, shape=())
@@ -57,26 +76,51 @@ class GranularBed:
             - ti.min(self.damping, self.friction * magnitude / (tangent.norm() + 1e-8)) * tangent
         )
 
+    @ti.func
+    def bucket(self, cell):
+        return ((cell[0] * self.shape[1] + cell[1]) * self.shape[2] + cell[2]) & (
+            self.hash_size - 1
+        )
+
+    @ti.func
+    def cell_count(self, cell):
+        value = 0
+        if ti.static(self.hashed):
+            value = self.count[self.bucket(cell)]
+        else:
+            value = self.count[cell]
+        return value
+
     @ti.kernel
     def grid(self):
         for k in range(self.active_count[None]):
-            self.count[self.active[k]] = 0
+            if ti.static(self.hashed):
+                self.count[self.bucket(self.active[k])] = 0
+            else:
+                self.count[self.active[k]] = 0
         self.active_count[None] = 0
         for k in range(8):
             self.step_reactions[k] = ti.Vector.zero(ti.f32, 3)
         for i in self.x:
             cell = ti.cast(ti.floor((self.x[i] - ti.Vector(self.low)) / self.cell), ti.i32)
+            slot = -1
             if (
                 0 <= cell[0] < self.shape[0]
                 and 0 <= cell[1] < self.shape[1]
                 and 0 <= cell[2] < self.shape[2]
             ):
-                slot = ti.atomic_add(self.count[cell], 1)
+                if ti.static(self.hashed):
+                    slot = ti.atomic_add(self.count[self.bucket(cell)], 1)
+                else:
+                    slot = ti.atomic_add(self.count[cell], 1)
                 if slot == 0:
                     active_slot = ti.atomic_add(self.active_count[None], 1)
                     self.active[active_slot] = cell
                 if slot < self.capacity:
-                    self.indices[cell[0], cell[1], cell[2], slot] = i
+                    if ti.static(self.hashed):
+                        self.indices[slot, self.bucket(cell)] = i
+                    else:
+                        self.indices[cell[0], cell[1], cell[2], slot] = i
                 else:
                     ti.atomic_add(self.overflow[None], 1)
             else:
@@ -84,6 +128,7 @@ class GranularBed:
 
     @ti.kernel
     def forces(self, feet_active: ti.i32):
+        ti.loop_config(block_dim=128)
         for i in self.x:
             force = ti.Vector([0.0, 0.0, -9.81 * self.mass])
             cell = ti.cast(ti.floor((self.x[i] - ti.Vector(self.low)) / self.cell), ti.i32)
@@ -94,14 +139,26 @@ class GranularBed:
                     and 0 <= other[1] < self.shape[1]
                     and 0 <= other[2] < self.shape[2]
                 ):
-                    for k in range(ti.min(self.count[other], self.capacity)):
-                        j = self.indices[other[0], other[1], other[2], k]
+                    for k in range(ti.min(self.cell_count(other), self.capacity)):
+                        j = 0
+                        if ti.static(self.hashed):
+                            j = self.indices[k, self.bucket(other)]
+                        else:
+                            j = self.indices[other[0], other[1], other[2], k]
                         delta = self.x[i] - self.x[j]
-                        distance = delta.norm()
-                        if i != j and 1e-8 < distance < 2 * self.r:
-                            force += self.contact(
-                                delta / distance, 2 * self.r - distance, self.v[i] - self.v[j]
+                        nearby = True
+                        if ti.static(self.hashed):
+                            nearby = (
+                                ti.abs(delta[0]) < 2 * self.r
+                                and ti.abs(delta[1]) < 2 * self.r
+                                and ti.abs(delta[2]) < 2 * self.r
                             )
+                        if nearby:
+                            distance = delta.norm()
+                            if i != j and 1e-8 < distance < 2 * self.r:
+                                force += self.contact(
+                                    delta / distance, 2 * self.r - distance, self.v[i] - self.v[j]
+                                )
             # Ground and lateral bounds, physically represented by restoring forces.
             for axis in ti.static(range(3)):
                 lower = -self.hx

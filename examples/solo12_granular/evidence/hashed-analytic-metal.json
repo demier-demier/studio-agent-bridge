@@ -1,0 +1,65 @@
+{
+  "backend": "metal",
+  "grid_layout": "hashed",
+  "backend_details": {
+    "requested_backend": "metal",
+    "cpu_threads": 1,
+    "system": "Darwin",
+    "actual_backend": "metal",
+    "actual_arch": "metal",
+    "taichi_version": "1.7.4",
+    "fallback_enabled": false,
+    "atomic_execution_probe": "passed",
+    "device_identity": "Not queried; a compute API does not prove a GPU vendor or model."
+  },
+  "checks": [
+    {
+      "name": "pair normal force matches spring law",
+      "passed": true
+    },
+    {
+      "name": "pair conserves linear momentum",
+      "passed": true
+    },
+    {
+      "name": "old occupied cells clear after migration",
+      "passed": true
+    },
+    {
+      "name": "migrated particles counted once",
+      "passed": true
+    },
+    {
+      "name": "foot reaction equals opposite particle contact",
+      "passed": true
+    },
+    {
+      "name": "robot receives upward reaction",
+      "passed": true
+    },
+    {
+      "name": "foot tangential torque uses center-to-contact arm",
+      "passed": true
+    },
+    {
+      "name": "foot spin contributes contact velocity",
+      "passed": true
+    },
+    {
+      "name": "20-step reactions integrate without dropped forces",
+      "passed": true
+    },
+    {
+      "name": "reaction reset",
+      "passed": true
+    },
+    {
+      "name": "overflow rejected",
+      "passed": true
+    },
+    {
+      "name": "floor restoring force",
+      "passed": true
+    }
+  ]
+}

@@ -12,6 +12,8 @@ This is the source for Scenward's Solo12 walking video. MuJoCo integrates the fr
 
 The example is self-contained within this directory. It does not require an MCP client or model API. Simulation backends are CPU, Apple Metal, NVIDIA CUDA and Vulkan (including supported AMD GPUs). Each GPU route requires its matching working driver. The recorded full run used Metal on an Apple Silicon Mac; a small CPU preset supports installation and integration checks on other machines. This is classical control and physics code, **not a Cosmos/Newton port or a learned locomotion policy**.
 
+**Native Rust rendering and measured optimizations:** [open Scenward Render](../../rust/scenward-render/) for interactive GPU cache playback and [read the before/after study](docs/performance.md). The current simulation defaults to the tested hashed grid; `--grid-layout dense` retains the reference. Historical video measurements below remain separately dated.
+
 ## Run a small example first
 
 Use Python 3.12. From a fresh clone:

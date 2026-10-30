@@ -1,0 +1,30 @@
+{
+  "schema": "scenward-render-validation/v1",
+  "date": "2026-10-30",
+  "hardware": "Apple M4 Pro, 12 CPU cores, 16 GPU cores, 24 GB unified memory",
+  "rust": "1.99.1",
+  "native_cache_tests": {
+    "passed": 5,
+    "failed": 0
+  },
+  "clippy": "passed with -D warnings",
+  "cargo_release_build": "passed",
+  "headless_gpu": "Metal, 961191 particles, 1280x720 and 1920x1080, MSAA4",
+  "window_startup": "--exit-after 1 exited 0 after a presented GPU frame",
+  "ui_observed": [
+    "ArrowRight: paused frame 0 to 1",
+    "Space: PLAY and advancing frame numbers",
+    "Space: PAUSED at frame 95",
+    "2: visible side camera",
+    "Drag: visible orbit change",
+    "Scroll: visible close-up of individual grains",
+    "1 then ArrowLeft: default view at paused frame 94"
+  ],
+  "window_launch": "Bundled Rust executable launched through terminal; Finder bundle launch stalled during file open. No permission settings modified.",
+  "limits": [
+    "Recorded cache playback, not live physics",
+    "Windows/Linux GPU execution unverified",
+    "macOS unsigned local bundle; no notarization",
+    "GPU particle-to-particle shadows not implemented"
+  ]
+}

@@ -1,12 +1,18 @@
 """Measure preserved top-surface changes in the actually traversed region."""
 
+import argparse
 import json
-import sys
 from pathlib import Path
 
 import numpy as np
+from cache_analysis import CacheAnalysis
 
-run = Path(sys.argv[1])
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("run", type=Path)
+parser.add_argument("--cache-engine", choices=("numpy", "rust"), default="numpy")
+args = parser.parse_args()
+analysis = CacheAnalysis(args.cache_engine)
+run = args.run
 meta = json.loads((run / "metadata.json").read_text())
 p = np.load(run / "particles.npy", mmap_mode="r")
 initial = np.load(run / "settled.npy", mmap_mode="r")
@@ -19,15 +25,7 @@ ny = int(np.ceil((ymax - ymin) / resolution))
 
 
 def surface(points):
-    ix = np.floor((points[:, 0] - xmin) / resolution).astype(int)
-    iy = np.floor((points[:, 1] - ymin) / resolution).astype(int)
-    valid = (ix >= 0) & (ix < nx) & (iy >= 0) & (iy < ny)
-    h = np.full((nx, ny), np.nan, np.float32)
-    flat = np.full(nx * ny, -np.inf, np.float32)
-    np.maximum.at(flat, ix[valid] * ny + iy[valid], points[valid, 2] + r)
-    h = flat.reshape(nx, ny)
-    h[~np.isfinite(h)] = np.nan
-    return h
+    return analysis.surface(points, nx, ny, xmin, ymin, resolution, r)
 
 
 h0 = surface(initial)
@@ -49,6 +47,7 @@ mask &= np.isfinite(h0) & np.isfinite(h1)
 delta = h1 - h0
 depressed = mask & (delta < -0.002)
 report = {
+    "cache_engine": args.cache_engine,
     "method": "4mm raster maximum particle-top surface; visited foot neighborhoods behind final hind feet; same grains before/after",
     "visible_trail_cells": int(depressed.sum()),
     "depressed_area_cm2": float(depressed.sum() * resolution**2 * 1e4),

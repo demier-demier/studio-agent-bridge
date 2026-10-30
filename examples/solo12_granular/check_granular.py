@@ -11,6 +11,7 @@ from granular import GranularBed
 p = argparse.ArgumentParser()
 p.add_argument("--backend", choices=BACKENDS, required=True)
 p.add_argument("--output", type=Path)
+p.add_argument("--grid-layout", choices=("dense", "hashed"), default="dense")
 a = p.parse_args()
 try:
     backend_details = initialize_backend(a.backend, cpu_threads=1)
@@ -27,7 +28,11 @@ def check(name, ok):
 
 def bed(points):
     return GranularBed(
-        np.array(points, dtype=np.float32), half_x=0.05, half_y=0.05, foot_radius=0.02
+        np.array(points, dtype=np.float32),
+        half_x=0.05,
+        half_y=0.05,
+        foot_radius=0.02,
+        grid_layout=a.grid_layout,
     )
 
 
@@ -94,6 +99,7 @@ b.forces(0)
 check("floor restoring force", b.force.to_numpy()[0, 2] > 0)
 r = {
     "backend": backend_details["actual_backend"],
+    "grid_layout": a.grid_layout,
     "backend_details": backend_details,
     "checks": checks,
 }

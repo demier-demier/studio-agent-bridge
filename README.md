@@ -10,6 +10,8 @@ The language model runs in your MCP client. This repository supplies the native 
 
 ## What actually runs
 
+**Native Rust graphics engine:** [Scenward Render](rust/scenward-render/) draws all 961,191 grains and original Solo12 mesh geometry through wgpu/Metal, with shadows, material lighting, camera navigation and PNG capture. Measured recorded-cache playback: **57.17 frames/s at 1080p/4x MSAA** on M4 Pro. The [separate optimization study](examples/solo12_granular/docs/performance.md) reduced full physics time by 16.03% and macOS physical footprint by 39.30%; an optional Rust raster step is 3.09x faster than its NumPy reference. Rendering FPS does not include physics computation.
+
 **Solo12 walking with 961,191 simulated grains:** the [open-source Solo12 granular workflow](examples/solo12_granular/) includes the robot assets, CPU/Metal/CUDA/Vulkan particle solver, feedback crawl, recorded measurements, Blender rendering and video editing scripts. The recorded M4 Pro run traveled 0.578 m; the [16-second video](https://github.com/demier-demier/studio-agent-bridge/releases/download/solo12-granular-v1/Scenward-Solo12-Apple-Silicon.mp4) is available without installation. A small CPU preset and CI checks help reproduce the workflow. This is offline, shallow-layer granular simulation with a load-bearing substrate; it is not a Cosmos/Newton port, calibrated sand model, learned policy, hardware validation or NVIDIA comparison.
 
 **Windows GPU routes:** [NVIDIA CUDA/OptiX and AMD Vulkan/HIP setup](examples/solo12_granular/docs/windows.md), with native Windows CPU CI and explicit device diagnostics. Full Windows GPU hardware validation remains pending.

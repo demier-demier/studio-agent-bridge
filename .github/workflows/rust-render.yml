@@ -1,0 +1,29 @@
+name: Rust render build and cache checks
+on:
+  push:
+    paths: ['rust/scenward-render/**', '.github/workflows/rust-render.yml']
+  pull_request:
+    paths: ['rust/scenward-render/**', '.github/workflows/rust-render.yml']
+permissions:
+  contents: read
+jobs:
+  build-and-validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-2022, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: rust/scenward-render
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - run: cargo fmt --check
+      - run: cargo test --locked
+      - run: cargo clippy --all-targets --locked -- -D warnings
+      - name: Compile native renderer (not a GPU execution test)
+        run: cargo build --locked
