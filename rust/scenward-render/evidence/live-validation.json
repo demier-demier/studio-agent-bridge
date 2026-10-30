@@ -1,0 +1,94 @@
+{
+  "schema": "scenward-live-validation/v1",
+  "date": "2026-10-30",
+  "hardware": {
+    "soc": "Apple M4 Pro",
+    "cpu_cores": 12,
+    "gpu_cores": 16,
+    "memory_gb": 24,
+    "backend": "Metal"
+  },
+  "rust_tests_passed": 10,
+  "gpu_checks": [
+    "PASS gravity",
+    "PASS pair",
+    "PASS floor",
+    "PASS two-way reaction",
+    "PASS overflow rejection",
+    "PASS bounds rejection",
+    "PASS 80-step CPU oracle: position error 0, velocity error 0.0000002682209",
+    "PASS skin crossing rebuild"
+  ],
+  "native_robot_check": "Native robotics check passed: time=3.000s, travel=0.1695m, height=0.2354m",
+  "blender_reopen": {
+    "native_blend_reopened": true,
+    "export_exact_json_equal": true,
+    "objects": 1619,
+    "triangles": 287648,
+    "source_environment_sha256": "8ebfd0c14f9dd1fb23427912174f31130de1171c7206dff27fe189aabd86bc21"
+  },
+  "benchmark": "live-full-benchmark.json",
+  "prior_same_scene_wall_seconds": 97.23010225,
+  "final_same_scene_wall_seconds": 75.839428917,
+  "observed_loop_reduction_percent": 22.000052286276382,
+  "measurement_scope": "One run per implementation in normal desktop conditions; no repeated statistical comparison. Full workload 961191 grains, 48 dynamic rigid props, 660 static colliders, 287648 Blender triangles.",
+  "physical_realtime_achieved": false,
+  "max_physical_footprint_bytes": 1085375424,
+  "interactive_ui_validation": {
+    "status": "not_completed",
+    "reason": "Mac was locked; the native app is packaged but play/pause/perturbation controls were not exercised in the GUI. Headless Metal physics, native robot and rendering were executed."
+  },
+  "source_sha256": {
+    "src/cache.rs": "0335dafa4ea3e7949b64bfe7471db57ee10ea004906658ae394d3201fd0ca209",
+    "src/environment.rs": "c9fd850b5ac26adf0c06dfe070c8fc6c8c41b61b7d34b8d1206fa1c03233dc75",
+    "src/live.rs": "224d7dc460b328b631c62d734b456392c505888e9a7bf7f042760841203a8858",
+    "src/main.rs": "2d8d3a5e17ef9a02bda88d82cb63cc4104166e5ec3a78f089e1a88f0cc8fb5ba",
+    "src/physics.rs": "e3daa4ff2c1eae3998801e70f6619615abfa5e829e3e277480c1a6cf196fcc71",
+    "src/physics.wgsl": "eaf4496236211f39236cbdbe8357559cf9900153bc9341c6c2d299777c48111c",
+    "src/reference.rs": "43c0b5d43342fe03de0d8d1c4a527aad8f7f438211547524e0ad63cbb0c2e140",
+    "src/renderer.rs": "d1f5270f2a27ffc2147063964e5b72b9fa55164b2ba1debd6c50d3ef8f7142a3",
+    "src/robot.rs": "484a8d5e619ba0c03f9f58e05f3cc1b1fdaf13ae94b8b94032a37a55195786e9",
+    "src/robot_bridge.c": "e38c25c1e5baf7b793cf009eb3d7107ec46f737b8ba9a4850fc33686609de259",
+    "src/scene.wgsl": "6fe31ac8c59f09e52adc27bb7c18201006ad31ae7dcc17b66e5498058b92198f",
+    "build.rs": "e33e30c179471a35df7e1905f9c4904700c5ffb4bbfc7965e679ac33521de6e2",
+    "blender/build_live_lab.py": "f006adea0efc3275878686f9312b56ba91ca9b2b8976ea0c4a0e6da1235c8ad5",
+    "blender/export_visual_scene.py": "142e61e8f44e47e458121389bdf0545768591f030a2a34efecdfb0af330d0ff1"
+  },
+  "limits": [
+    "Full-detail physical real time remains unmet: approximately 31.6 wall seconds per simulated second.",
+    "Classical control, not a learned policy; simulation-only evidence.",
+    "GPU grain coupling supports declared spheres only; dynamic boxes and static lab colliders use native rigid contacts.",
+    "Blender evaluated geometry preserved; textures, lighting, emissive response and arbitrary shader graphs are not reproduced.",
+    "Native robotics executed on macOS; Linux native CI is separate; no Windows GPU execution claim."
+  ],
+  "native_model_validation": {
+    "normal": {
+      "passed": true,
+      "exit_code": 0,
+      "output": "Native robotics check passed: time=3.000s, travel=0.1695m, height=0.2354m"
+    },
+    "wrong_shape": {
+      "passed": true,
+      "exit_code": 1,
+      "output": "Error: Native model: Grain coupling requires spheres and at most 64 coupled geoms"
+    },
+    "overflow": {
+      "passed": true,
+      "exit_code": 1,
+      "output": "Error: Native model: Grain coupling requires spheres and at most 64 coupled geoms"
+    },
+    "wrong_joint": {
+      "passed": true,
+      "exit_code": 1,
+      "output": "Error: Native model: Expected Solo12, free base, 12 actuators, 1ms timestep"
+    }
+  },
+  "memory_comparison": {
+    "prior_peak_footprint_bytes": 1019593616,
+    "final_peak_footprint_bytes": 1085375424,
+    "change_percent": 6.451767348060766,
+    "prior_max_rss_bytes": 175390720,
+    "final_max_rss_bytes": 184385536,
+    "scope": "macOS /usr/bin/time -l whole process; memory increased while wall time decreased."
+  }
+}

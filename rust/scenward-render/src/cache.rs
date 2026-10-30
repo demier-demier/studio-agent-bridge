@@ -127,6 +127,8 @@ pub struct Metadata {
     pub grain_count: usize,
     pub grain_radius_m: f32,
     pub foot_radius_m: f32,
+    #[serde(default)]
+    pub settle_steps: u32,
 }
 
 pub struct Scene {

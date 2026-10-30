@@ -1,0 +1,3318 @@
+{
+  "schema": "scenward-blender-export-proof/v1",
+  "render_objects": 1619,
+  "evaluated_triangles": 287648,
+  "exported_triangles": 287648,
+  "decimation": false,
+  "dynamic_rigid_bodies": 48,
+  "gpu_coupled_spheres": 36,
+  "static_analytic_colliders": 660,
+  "collider_sources": [
+    {
+      "object": "Bench_Bin",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_Bin.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_Bin.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_DrawerCabinet",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_DrawerFront",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_DrawerFront.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_DrawerFront.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_DrawerFront.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_DrawerPull",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_DrawerPull.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_DrawerPull.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_DrawerPull.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_ESDMat",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_KeyboardBase",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_Monitor_Bezel",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_Monitor_Stand",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_Monitor_StandBase",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_Pegboard",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_PowerSocket",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_PowerSocket.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_PowerSocket.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_PowerSocket.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_RubberFoot",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_RubberFoot.001",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_RubberFoot.002",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_RubberFoot.003",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_TSlotLeg",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_TSlotLeg.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_TSlotLeg.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_TSlotLeg.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Bench_Top",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Loom",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Loom.001",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Loom.002",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Loom.003",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Loom.004",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Loom.005",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Loom.006",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Loom.007",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.005",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.006",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.007",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.008",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.009",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.010",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.011",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.012",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.013",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.014",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.015",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.016",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.017",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.018",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.019",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.020",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.021",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.022",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.023",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.024",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.025",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.026",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.027",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.028",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.029",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.030",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.031",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.032",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.033",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.034",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.035",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.036",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.037",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.038",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.039",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.040",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.041",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.042",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.043",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.044",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.045",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.046",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.047",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.048",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.049",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.050",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.051",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.052",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.053",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.054",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.055",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.056",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.057",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.058",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.059",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.060",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.061",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.062",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.063",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.064",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.065",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.066",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.067",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.068",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.069",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.070",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.071",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.072",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.073",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.074",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.075",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.076",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.077",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.078",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_Rung.079",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_SideRail",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_SideRail.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_SideRail.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "CableTray_SideRail.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_DiagnosticMonitor_Bezel",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_DiagnosticMonitor_Stand",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_DiagnosticMonitor_StandBase",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_InstrumentsCase",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_LowerShelf",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_Post",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_Post.001",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_Post.002",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_Post.003",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_Tablet",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_Top",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_Wheel",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_Wheel.001",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_Wheel.002",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cart_Wheel.003",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Case_Latch",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Case_Latch.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_CrossBeam",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_CrossBeam.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_CrossBeam.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_CrossBeam.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_CrossBeam.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_LongBeam",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_LongBeam.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_LongBeam.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.005",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.006",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.007",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.008",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.009",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.010",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.011",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.012",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.013",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.014",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.015",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.016",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Ceiling_RemovablePanel.017",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_ControlBox",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_EmergencyStop",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_FixturePlate",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_FootThread",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_FootThread.001",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_FootThread.002",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_FootThread.003",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_LevelingFoot",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_LevelingFoot.001",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_LevelingFoot.002",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_LevelingFoot.003",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_StatusPanel",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_Table_Leg",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_Table_Leg.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_Table_Leg.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_Table_Leg.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_Table_Stretcher",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_Table_Stretcher.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_Table_Subframe",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Cell_Table_Top",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Climate_Louver",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Climate_Louver.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Climate_Louver.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Climate_Louver.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Climate_Louver.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Climate_Louver.005",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Climate_Louver.006",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Climate_Louver.007",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "DoorLeaf_Open",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "DoorLeaf_Window",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Door_Handle",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Door_Header",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Door_Jamb",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Door_Jamb.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Door_Lintel",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Door_Threshold",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Fixture_ClampBlock",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Fixture_ClampBlock.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_00_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_00_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_00_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_00_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_00_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_00_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_00_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_00_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_00_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_01_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_01_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_01_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_01_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_01_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_01_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_01_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_01_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_01_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_02_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_02_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_02_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_02_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_02_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_02_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_02_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_02_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_02_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_03_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_03_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_03_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_03_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_03_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_03_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_03_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_03_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_03_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_04_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_04_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_04_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_04_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_04_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_04_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_04_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_04_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_04_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_05_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_05_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_05_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_05_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_05_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_05_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_05_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_05_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_05_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_06_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_06_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_06_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_06_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_06_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_06_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_06_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_06_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_06_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_07_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_07_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_07_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_07_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_07_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_07_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_07_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_07_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_07_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_08_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_08_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_08_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_08_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_08_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_08_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_08_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_08_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_08_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_09_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_09_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_09_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_09_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_09_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_09_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_09_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_09_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_09_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_10_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_10_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_10_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_10_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_10_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_10_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_10_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_10_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_10_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_11_00",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_11_01",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_11_02",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_11_03",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_11_04",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_11_05",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_11_06",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_11_07",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FloorTile_11_08",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Foundation",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FrontWall_Panel",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FrontWall_Panel.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FrontWall_Panel.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FrontWall_Panel.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FrontWall_Panel.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FrontWall_Panel.005",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FrontWall_Panel.006",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FrontWall_Panel.007",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FrontWall_Panel.008",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "FrontWall_Panel.009",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Inspection_TargetBase",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Diffuser",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Diffuser.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Diffuser.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Diffuser.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Diffuser.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Diffuser.005",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Housing",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Housing.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Housing.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Housing.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Housing.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "LightFixture_Housing.005",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "ObservationWindow_Frame",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "ObservationWindow_Frame.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "ObservationWindow_Frame.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "ObservationWindow_Glass",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "ObservationWindow_Glass.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "ObservationWindow_Glass.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "ObservationWindow_Mullion",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "ObservationWindow_Mullion.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "ObservationWindow_Mullion.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.005",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.006",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.007",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.008",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.009",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.010",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.011",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.012",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.013",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.014",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.015",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.016",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.017",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.018",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.019",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.020",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Pipe_WallBracket.021",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Prototype_PCB",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_BackPanel",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Base",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_CornerPost",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_CornerPost.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_CornerPost.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_CornerPost.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Top",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit0_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit0_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit1_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit1_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit2_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit2_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit3_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit3_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit4_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit4_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit5_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit5_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit6_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit6_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit7_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit7_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit8_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack0_Unit8_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_BackPanel",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Base",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_CornerPost",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_CornerPost.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_CornerPost.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_CornerPost.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Top",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit0_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit0_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit1_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit1_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit2_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit2_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit3_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit3_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit4_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit4_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit5_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit5_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit6_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit6_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit7_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit7_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit8_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack1_Unit8_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_BackPanel",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Base",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_CornerPost",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_CornerPost.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_CornerPost.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_CornerPost.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Top",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit0_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit0_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit1_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit1_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit2_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit2_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit3_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit3_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit4_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit4_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit5_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit5_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit6_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit6_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit7_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit7_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit8_Chassis",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rack2_Unit8_Face",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.005",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.006",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.007",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.008",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.009",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.010",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.011",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.012",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.013",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.014",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.015",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.016",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.017",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.018",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.019",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.020",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.021",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.022",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.023",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.024",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.025",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.026",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.027",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.028",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.029",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.030",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.031",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.032",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.033",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.034",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Cladding.035",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure.005",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure.006",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure.007",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure.008",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure.009",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure.010",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "RearWall_Structure.011",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rear_AccentRail",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rear_AccentRail.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rear_IdentityPanel",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rear_StructuralColumn",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Rear_StructuralColumn.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_BaseMount",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_BaseTurntable",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_GripperActuator",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_GripperFinger",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_GripperFinger.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_JointCap_0_-1",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_JointCap_0_1",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_JointCap_1_-1",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_JointCap_1_1",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_JointCap_2_-1",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_JointCap_2_1",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_JointHousing_0",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_JointHousing_1",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_JointHousing_2",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_LinkServiceCover_0",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_LinkServiceCover_1",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_LinkServiceCover_2",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_Link_0",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_Link_1",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_Link_2",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_ToolVisionBracket",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_ToolVisionHousing",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_ToolVisionLensBarrel",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Robot_WristCoupling",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Safety_Extinguisher",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Safety_ExtinguisherLever",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Safety_ExtinguisherNeck",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Scope_Case",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Scope_Screen",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.005",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.006",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.007",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.008",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.009",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.010",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.011",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.012",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.013",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.014",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.015",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.016",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.017",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.018",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.019",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.020",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.021",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.022",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.023",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.024",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.025",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.026",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.027",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.028",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.029",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.030",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.031",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.032",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.033",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.034",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.035",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.036",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.037",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.038",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.039",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.040",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.041",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.042",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.043",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.044",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.045",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.046",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.047",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.048",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.049",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.050",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.051",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.052",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Server_PullHandle.053",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "ServicePipe_Rear",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "ServicePipe_Rear.001",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.002",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.003",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.004",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.005",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.006",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.007",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.008",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.009",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.010",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.011",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.012",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.013",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.014",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.015",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.016",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.017",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.018",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.019",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.020",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.021",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.022",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.023",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.024",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.025",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.026",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.027",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.028",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.029",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.030",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.031",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.032",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.033",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.034",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.035",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.036",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.037",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.038",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.039",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.040",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.041",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.042",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.043",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.044",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.045",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.046",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.047",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.048",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.049",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.050",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.051",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.052",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Cladding.053",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Structure",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SideWall_Structure.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "SolderStation",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_BaseSpoke",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_BaseSpoke.001",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_BaseSpoke.002",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_BaseSpoke.003",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_BaseSpoke.004",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_Castor",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_Castor.001",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_Castor.002",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_Castor.003",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_Castor.004",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_GasStrut",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Stool_Seat",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Tool_ScrewdriverGrip",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Tool_ScrewdriverGrip.001",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Tool_ScrewdriverGrip.002",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Tool_ScrewdriverGrip.003",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Tool_ScrewdriverGrip.004",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Tool_ScrewdriverGrip.005",
+      "type": "cylinder",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Utility_Box",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Wall_ClimateUnit",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Wall_Skirting",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    },
+    {
+      "object": "Wall_Skirting.001",
+      "type": "box",
+      "limitation": "Analytic primitive proxy; visual bevels retained in render mesh."
+    }
+  ],
+  "limits": [
+    "Base color/roughness/metallic values retained; Blender texture maps, emissive response and node graphs are not reproduced by this renderer.",
+    "Static primitive collision proxies omit small decorative parts and bevel detail.",
+    "GPU DEM couples declared spheres; dynamic boxes and static environment collide in MuJoCo but not directly with individual grains.",
+    "Original robot arm in background is static visual geometry; Solo12 is the controlled articulated robot."
+  ]
+}

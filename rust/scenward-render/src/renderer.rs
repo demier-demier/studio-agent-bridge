@@ -28,6 +28,7 @@ struct Vertex {
 struct Instance {
     matrix: [[f32; 4]; 4],
     color: [f32; 4],
+    material: [f32; 4],
 }
 struct GpuMesh {
     vertex: wgpu::Buffer,
@@ -130,8 +131,7 @@ fn depth_texture(
 
 fn vertex_layouts() -> [wgpu::VertexBufferLayout<'static>; 2] {
     const VERTEX: [wgpu::VertexAttribute; 2] = wgpu::vertex_attr_array![0=>Float32x3,1=>Float32x3];
-    const INSTANCE: [wgpu::VertexAttribute; 5] =
-        wgpu::vertex_attr_array![2=>Float32x4,3=>Float32x4,4=>Float32x4,5=>Float32x4,6=>Float32x4];
+    const INSTANCE: [wgpu::VertexAttribute; 6] = wgpu::vertex_attr_array![2=>Float32x4,3=>Float32x4,4=>Float32x4,5=>Float32x4,6=>Float32x4,7=>Float32x4];
     [
         wgpu::VertexBufferLayout {
             array_stride: 24,
@@ -139,7 +139,7 @@ fn vertex_layouts() -> [wgpu::VertexBufferLayout<'static>; 2] {
             attributes: &VERTEX,
         },
         wgpu::VertexBufferLayout {
-            array_stride: 80,
+            array_stride: 96,
             step_mode: wgpu::VertexStepMode::Instance,
             attributes: &INSTANCE,
         },
@@ -189,6 +189,7 @@ impl Renderer {
         width: u32,
         height: u32,
         samples: u32,
+        live_compute: bool,
     ) -> Result<Self> {
         let adapter = instance
             .request_adapter(&wgpu::RequestAdapterOptions {
@@ -221,6 +222,10 @@ impl Renderer {
         let (device, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("Scenward native GPU engine"),
+                required_limits: wgpu::Limits {
+                    max_storage_buffers_per_shader_stage: if live_compute { 10 } else { 8 },
+                    ..Default::default()
+                },
                 ..Default::default()
             })
             .await?;
@@ -418,6 +423,7 @@ impl Renderer {
             .iter()
             .map(|g| Instance {
                 matrix: Mat4::IDENTITY.to_cols_array_2d(),
+                material: [0.28, 0.72, 0., 0.],
                 color: if g.body.contains("LOWER") {
                     [0.52, 0.59, 0.65, 1.]
                 } else {
@@ -428,6 +434,7 @@ impl Renderer {
         model_data.push(Instance {
             matrix: Mat4::IDENTITY.to_cols_array_2d(),
             color: [0.018, 0.025, 0.032, 0.],
+            material: [0.85, 0., 0., 0.],
         });
         let models = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("recorded rigid transforms"),
@@ -480,6 +487,57 @@ impl Renderer {
         Ok(this)
     }
 
+    pub fn import_environment(
+        &mut self,
+        env: &crate::environment::Environment,
+    ) -> Vec<(usize, String)> {
+        let mut dynamic = vec![];
+        for o in &env.objects {
+            let mesh = self.meshes.len();
+            self.meshes.push(upload_mesh(&self.device, &o.mesh));
+            let index = self.model_data.len() - 1;
+            self.mesh_refs.insert(index, mesh);
+            self.model_data.insert(
+                index,
+                Instance {
+                    matrix: Mat4::IDENTITY.to_cols_array_2d(),
+                    color: o.color,
+                    material: [o.roughness, o.metallic, 0., 0.],
+                },
+            );
+            if let Some(body) = &o.dynamic_body {
+                dynamic.push((index, body.clone()));
+            }
+        }
+        self.models = self
+            .device
+            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                label: Some("robot and complete Blender environment"),
+                contents: bytemuck::cast_slice(&self.model_data),
+                usage: wgpu::BufferUsages::VERTEX | wgpu::BufferUsages::COPY_DST,
+            });
+        dynamic
+    }
+    pub fn update_pose(&mut self, index: usize, p: &[f32]) {
+        self.model_data[index].matrix = [
+            [p[3], p[6], p[9], 0.],
+            [p[4], p[7], p[10], 0.],
+            [p[5], p[8], p[11], 0.],
+            [p[0], p[1], p[2], 1.],
+        ];
+    }
+    pub fn upload_robot(&mut self, poses: &[f32], feet: &[f32]) {
+        for (i, p) in poses.as_chunks::<12>().0.iter().enumerate() {
+            self.update_pose(i, p);
+        }
+        self.queue
+            .write_buffer(&self.feet, 0, bytemuck::cast_slice(feet));
+        self.queue
+            .write_buffer(&self.models, 0, bytemuck::cast_slice(&self.model_data));
+    }
+    pub fn use_particle_buffer(&mut self, buffer: &wgpu::Buffer) {
+        self.particles = buffer.clone();
+    }
     pub fn format(&self) -> wgpu::TextureFormat {
         self.format
     }
@@ -532,23 +590,9 @@ impl Renderer {
             0,
             bytemuck::cast_slice(&scene.particles.values),
         );
-        self.queue
-            .write_buffer(&self.feet, 0, bytemuck::cast_slice(&scene.feet.values));
-        for (model, p) in self
-            .model_data
-            .iter_mut()
-            .zip(scene.poses.values.as_chunks::<12>().0.iter())
-        {
-            model.matrix = [
-                [p[3], p[6], p[9], 0.],
-                [p[4], p[7], p[10], 0.],
-                [p[5], p[8], p[11], 0.],
-                [p[0], p[1], p[2], 1.],
-            ];
-        }
-        self.queue
-            .write_buffer(&self.models, 0, bytemuck::cast_slice(&self.model_data));
+        self.upload_robot(&scene.poses.values, &scene.feet.values);
     }
+
     fn update_camera(&self) {
         let (vp, eye, right, up) = self.camera.matrices(self.width, self.height);
         let shadow_vp = Mat4::orthographic_rh(-1.2, 1.2, -1.2, 1.2, 0.1, 6.)

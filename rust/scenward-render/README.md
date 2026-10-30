@@ -1,10 +1,16 @@
 # Scenward Render
 
-A native **Rust + wgpu** rendering engine for recorded robotics and granular scenes. Runs directly on Apple Metal: original robot mesh triangles, all **961,191 grains**, depth-correct spherical particles, shadow maps, material lighting and an interactive orbit camera.
+A native **Rust + wgpu** engine for recorded playback and live robotics/granular dynamics. Runs directly on Apple Metal: original robot mesh triangles, all **961,191 grains**, depth-correct spherical particles, shadow maps, material lighting and an interactive orbit camera.
 
 ![Native Metal capture of the full Solo12 scene](media/solo12-metal.png)
 
 This image was rendered by this Rust engine from numeric simulation caches. It is not an AI-generated image or a Blender screenshot.
+
+## Live physics with Blender environments
+
+[Run the live physics workflow](LIVE_PHYSICS.md). A fresh one-state seed feeds GPU integration, a Rust controller and native MuJoCo articulated dynamics. The original Blender lab exports **1,619 objects / 287,648 triangles**, with **48 dynamic props and 660 static collision proxies**. All **961,191 grains** and 50 µs steps are retained. Actual measured result: **2.4 simulated seconds in 75.84 wall seconds (0.0316× real time)**, plus 6.66 s initial settling. The full-detail physical real-time target is **not achieved**. Do not confuse the playback FPS below with live physics speed.
+
+![Live computed robot and particle state inside the Blender laboratory](media/live-robot.png)
 
 ## What runs
 
@@ -16,7 +22,7 @@ This image was rendered by this Rust engine from numeric simulation caches. It i
 - Bounded numeric cache loading into reusable frame buffers. The multi-GB trajectory is not loaded into RAM at once.
 - Reproducible headless GPU-completion benchmark; no silent software-adapter fallback.
 
-This is a working specialized renderer, not yet a general scene editor or a replacement for Blender/Unreal. Physics remains in the existing MuJoCo/Taichi pipeline. It does not implement a learned policy, AI inference or live million-particle physics in Rust.
+This is a working specialized renderer, not yet a general scene editor or a replacement for Blender/Unreal. Recorded playback remains available. The optional live path uses Rust orchestration, a wgpu GPU grain solver and native MuJoCo for articulated/rigid dynamics. It does not implement learned policies or AI inference.
 
 ## Build and run
 
@@ -94,6 +100,6 @@ Only use trusted, locally generated numeric scene caches. The loader bounds inpu
 
 Original engine code is MIT under the [repository license](../../LICENSE). Robot geometry is Open Dynamic Robot Initiative Solo12, BSD-3-Clause; [provenance and attribution](../../examples/solo12_granular/THIRD_PARTY_NOTICES.md) remain unchanged. Caches come from this repository's classical physics model, with [documented shallow-layer soil limitations](../../examples/solo12_granular/README.md#interpretation-and-boundaries). No employer/client code or data is included.
 
-Particles receive robot shadows but do not cast particle-to-particle shadow maps. Lighting is rasterized; it is not Cycles path tracing. Current imports are the documented Solo12 numeric cache/mesh schema, not general glTF/USD scenes. There is no material editor, skeletal animation system, collision solver, asset browser or Unreal exporter in this Rust engine yet. Metal was measured on the Mac; native GPU execution on Windows NVIDIA/AMD and Linux remains unverified. Build-only CI is not a GPU validation claim.
+Particles receive robot shadows but do not cast particle-to-particle shadow maps. Lighting is rasterized; it is not Cycles path tracing. Current imports are the Solo12 numeric schema and evaluated Blender environment meshes; general glTF/USD is not supported. Live collision/dynamics scope is documented separately. There is no material editor, general skeletal-animation system, asset browser or Unreal exporter in this Rust engine yet. Metal was measured on the Mac; native GPU execution on Windows NVIDIA/AMD and Linux remains unverified. Build-only CI is not a GPU validation claim.
 
 Next useful milestones are general scene import with asset budgets, editable material/camera state and measured interoperability with the existing Blender/Unreal pipeline. Each needs its own end-to-end validation.

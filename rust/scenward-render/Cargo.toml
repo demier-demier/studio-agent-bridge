@@ -21,3 +21,9 @@ winit = "0.30"
 [profile.release]
 lto = "thin"
 codegen-units = 1
+
+[features]
+robotics = []
+
+[build-dependencies]
+cc = "1"

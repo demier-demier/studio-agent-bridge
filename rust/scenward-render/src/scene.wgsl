@@ -89,23 +89,23 @@ struct SphereFragment { @location(0) color: vec4<f32>, @builtin(frag_depth) dept
 struct MeshIn {
     @location(0) position: vec3<f32>, @location(1) normal: vec3<f32>,
     @location(2) m0: vec4<f32>, @location(3) m1: vec4<f32>,
-    @location(4) m2: vec4<f32>, @location(5) m3: vec4<f32>, @location(6) color: vec4<f32>,
+    @location(4) m2: vec4<f32>, @location(5) m3: vec4<f32>, @location(6) color: vec4<f32>, @location(7) material: vec4<f32>,
 };
 struct MeshOut {
     @builtin(position) clip: vec4<f32>, @location(0) world: vec3<f32>,
-    @location(1) normal: vec3<f32>, @location(2) color: vec4<f32>,
+    @location(1) normal: vec3<f32>, @location(2) color: vec4<f32>, @location(3) material: vec4<f32>,
 };
 @vertex fn mesh_vs(in: MeshIn) -> MeshOut {
     let model=mat4x4(in.m0,in.m1,in.m2,in.m3);
     let world=model*vec4(in.position,1.0);
     var out: MeshOut; out.clip=camera.vp*world; out.world=world.xyz;
-    out.normal=normalize((model*vec4(in.normal,0.0)).xyz); out.color=in.color; return out;
+    out.normal=normalize((model*vec4(in.normal,0.0)).xyz); out.color=in.color; out.material=in.material; return out;
 }
 @vertex fn shadow_vs(in: MeshIn) -> @builtin(position) vec4<f32> {
     return camera.shadow_vp * mat4x4(in.m0,in.m1,in.m2,in.m3)*vec4(in.position,1.0);
 }
 @fragment fn mesh_fs(in: MeshOut) -> @location(0) vec4<f32> {
-    var color=in.color.xyz; var metallic=0.72; var rough=0.28;
+    var color=in.color.xyz; var metallic=in.material.y; var rough=in.material.x;
     if (in.color.w < 0.5) {
         let grid=abs(fract(in.world.xy*10.0-0.5)-0.5)/max(fwidth(in.world.xy*10.0),vec2(0.001));
         let line=1.0-min(min(grid.x,grid.y),1.0);
