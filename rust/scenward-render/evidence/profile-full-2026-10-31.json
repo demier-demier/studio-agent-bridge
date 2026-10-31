@@ -1,0 +1,229 @@
+{
+  "adapter": {
+    "backend": "Metal",
+    "name": "Apple M4 Pro",
+    "timestamp_period_ns": 1.0
+  },
+  "coupled_spheres": 36,
+  "dynamic_render_objects": 48,
+  "final_particle_diagnostics": {
+    "all_finite": true,
+    "count": 961191,
+    "max_m": [
+      0.7985185980796814,
+      0.33853036165237427,
+      0.024617386981844902
+    ],
+    "min_m": [
+      -0.7985299825668335,
+      -0.33853593468666077,
+      0.0014484715647995472
+    ],
+    "rms_speed_m_s": 0.0012067843167368328,
+    "scope": "Read after timed loop; no reduction or discarded particles."
+  },
+  "final_robot": [
+    -0.2431143239259218,
+    0.011072627211185902,
+    0.24880116913293868,
+    0.9999975963866039,
+    0.0001244748589477652,
+    9.369384469033019e-06,
+    0.0021889813245393724,
+    -0.04086734627064204,
+    0.9743065148572918,
+    -1.6590554834529572,
+    -0.03590001439656096,
+    1.1792101954877232,
+    -1.4198841626738279,
+    -0.03666591396019867,
+    -0.24641250432443598,
+    1.4523079390405782,
+    -0.036381459424560114,
+    -0.8976950276647065,
+    1.6371861097833638,
+    0.08889563884472895,
+    -0.003648804176030993,
+    -0.010935278512489464,
+    0.05817380764083627,
+    0.02431997494275664,
+    0.018220128825720053,
+    0.05684421725855693,
+    0.11829201933264819,
+    -0.02501484882617326,
+    -0.06582413813045368,
+    0.15039700268858042,
+    -0.0096281930120992,
+    0.05548260702590618,
+    -0.005369144244465496,
+    0.03700035583157843,
+    -0.06704230247601728,
+    -0.1088045770013876,
+    0.02667760654817484,
+    2.5613036,
+    2.3999999999998467,
+    0.9999904963169391,
+    -0.004359730245722243,
+    -5.290224730615747e-06,
+    0.004359729156809141,
+    0.999990478125344,
+    -0.00019084109977411174,
+    6.122190072571051e-06,
+    0.00019081622213378035,
+    0.9999999817758439
+  ],
+  "grain_dt": 5e-05,
+  "grain_radius_m": 0.0015,
+  "initial_robot": [
+    -0.36,
+    0.0,
+    0.26582415,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.8,
+    -1.6,
+    0.0,
+    0.8,
+    -1.6,
+    0.0,
+    -0.8,
+    1.6,
+    0.0,
+    -0.8,
+    1.6,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.06204539989838481,
+    0.09595172131934865,
+    -0.0283158537146316,
+    -0.06204539989838481,
+    0.09598254314440258,
+    -0.0283158537146316,
+    0.06204539989838481,
+    -0.09598254314440263,
+    0.028315853714631592,
+    -0.06204539989838481,
+    -0.0959517213193487,
+    0.028315853714631592,
+    2.5613036,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "limits": [
+    "Only the initial position frame is read. Fresh procedural seeds are settled by live GPU integration; no future motion is supplied.",
+    "GPU grains couple to declared spherical robot pads and dynamic spheres; imported rigid-body collisions are handled by MuJoCo.",
+    "Visual mesh detail and collision representation are separately declared.",
+    "Same translational DEM constants; GPU floating-point accumulation may differ.",
+    "Render FPS is not physical real-time factor."
+  ],
+  "mode": "live GPU DEM and optional native articulated dynamics",
+  "neighbour_cache_rebuilds_including_settling": 3940,
+  "particles": 961191,
+  "physics_wall_seconds": 48.98894525799997,
+  "profiling": {
+    "limits": [
+      "Opt-in GPU pass timestamps add overhead; compare throughput with profiling disabled.",
+      "GPU solver pass combines conditional clear/grid/neighbour rebuild, finish and integration; not individual kernel timings.",
+      "GPU pass sums overlap CPU submission/completion wall time; do not add GPU and CPU totals.",
+      "Submit-to-readback includes GPU execution and host scheduling; it is not isolated transfer latency.",
+      "Completed render wall time includes encoding, GPU completion and host wait; no GPU render-only timing."
+    ],
+    "loop_gpu_and_submission": {
+      "completed_batches": 2400,
+      "completed_steps": 48000,
+      "cpu_encode": {
+        "max_seconds": 0.000941583,
+        "samples": 2400,
+        "total_seconds": 1.360055661
+      },
+      "gpu_prepare_pass": {
+        "max_seconds": 2.0625e-05,
+        "samples": 48000,
+        "total_seconds": 0.24387771400000527
+      },
+      "gpu_solver_pass": {
+        "max_seconds": 0.0033748330000000003,
+        "samples": 48000,
+        "total_seconds": 43.99604616599968
+      },
+      "rejected_timestamp_pairs": 0,
+      "submit_to_readback": {
+        "max_seconds": 0.048452125,
+        "samples": 2400,
+        "total_seconds": 47.1341238550001
+      }
+    },
+    "loop_host": {
+      "collect_bodies": {
+        "max_seconds": 1.3291e-05,
+        "samples": 2400,
+        "total_seconds": 0.0018285650000000073
+      },
+      "completed_render": {
+        "max_seconds": 0.043862083,
+        "samples": 2400,
+        "total_seconds": 27.534638277999974
+      },
+      "native_robot_step": {
+        "max_seconds": 0.000289791,
+        "samples": 2400,
+        "total_seconds": 0.3794770739999999
+      },
+      "upload_poses": {
+        "max_seconds": 0.000123042,
+        "samples": 2400,
+        "total_seconds": 0.11189412499999965
+      }
+    },
+    "schema": "scenward-physics-profile/v1",
+    "settling_gpu_and_submission": {
+      "completed_batches": 280,
+      "completed_steps": 5600,
+      "cpu_encode": {
+        "max_seconds": 0.003924042,
+        "samples": 280,
+        "total_seconds": 0.140013086
+      },
+      "gpu_prepare_pass": {
+        "max_seconds": 8.625000000000001e-06,
+        "samples": 5600,
+        "total_seconds": 0.02799473899999988
+      },
+      "gpu_solver_pass": {
+        "max_seconds": 0.01262775,
+        "samples": 5600,
+        "total_seconds": 6.2067780940000254
+      },
+      "rejected_timestamp_pairs": 0,
+      "submit_to_readback": {
+        "max_seconds": 0.055372584,
+        "samples": 280,
+        "total_seconds": 6.526137045999998
+      }
+    }
+  },
+  "real_time_factor": 0.03136271436605209,
+  "realtime_achieved": false,
+  "rigid_dt": 0.001,
+  "schema": "scenward-live-physics/v1",
+  "settling_wall_seconds": 6.666277625,
+  "simulation_seconds": 2.4,
+  "source_frames": 1,
+  "steps": 48000,
+  "wall_seconds_including_render": 76.523988708
+}

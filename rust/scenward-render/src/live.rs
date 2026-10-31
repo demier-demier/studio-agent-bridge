@@ -1,3 +1,4 @@
+use crate::profiling::{LiveTimings, PhysicsTimings};
 use crate::{cache::Scene, physics::GpuPhysics, renderer::Renderer, Args};
 use anyhow::{ensure, Result};
 use std::time::Instant;
@@ -11,6 +12,8 @@ pub struct Live {
     pub settling_wall: f64,
     pub initial_frames: usize,
     pub initial_robot: Option<[f64; 48]>,
+    pub profile: Option<LiveTimings>,
+    pub settling_profile: Option<PhysicsTimings>,
 }
 impl Live {
     pub fn new(args: &Args, scene: &mut Scene, r: &mut Renderer) -> Result<Self> {
@@ -67,6 +70,11 @@ impl Live {
         }
         let settling_wall = settle_start.elapsed().as_secs_f64();
         particles.steps = 0;
+        let settling_profile = particles
+            .profiler
+            .as_mut()
+            .map(|p| std::mem::take(&mut p.timings));
+        let profile = settling_profile.as_ref().map(|_| LiveTimings::default());
         let mut live = Self {
             particles,
             #[cfg(feature = "robotics")]
@@ -77,6 +85,8 @@ impl Live {
             settling_wall,
             initial_frames: scene.meta.frames,
             initial_robot,
+            profile,
+            settling_profile,
         };
         live.upload(r)?;
         Ok(live)
@@ -87,14 +97,27 @@ impl Live {
         let bodies = self.robot.as_ref().map_or_else(Vec::new, |r| r.spheres());
         #[cfg(not(feature = "robotics"))]
         let bodies = vec![];
+        if let Some(p) = &mut self.profile {
+            p.collect_bodies.add(start.elapsed().as_secs_f64());
+        }
         let reactions = self.particles.advance(&r.device, &r.queue, &bodies, 20)?;
+        let native_start = self.profile.as_ref().map(|_| Instant::now());
         #[cfg(feature = "robotics")]
         if let Some(robot) = &mut self.robot {
             robot.step(&reactions)?;
         }
         #[cfg(not(feature = "robotics"))]
         let _ = reactions;
+        if let Some(p) = &mut self.profile {
+            p.native_robot_step
+                .add(native_start.unwrap().elapsed().as_secs_f64());
+        }
+        let upload_start = self.profile.as_ref().map(|_| Instant::now());
         self.upload(r)?;
+        if let Some(p) = &mut self.profile {
+            p.upload_poses
+                .add(upload_start.unwrap().elapsed().as_secs_f64());
+        }
         self.physics_wall += start.elapsed().as_secs_f64();
         self.ticks += 1;
         Ok(())
@@ -134,6 +157,22 @@ impl Live {
         let state = self.robot.as_ref().map(|r| r.state().to_vec());
         #[cfg(not(feature = "robotics"))]
         let state: Option<Vec<f64>> = None;
-        serde_json::json!({"schema":"scenward-live-physics/v1","mode":"live GPU DEM and optional native articulated dynamics","particles":self.particles.count,"grain_radius_m":0.0015,"grain_dt":self.particles.dt,"rigid_dt":0.001,"steps":self.particles.steps,"neighbour_cache_rebuilds_including_settling":self.particles.rebuilds,"settling_wall_seconds":self.settling_wall,"source_frames":self.initial_frames,"simulation_seconds":self.seconds(),"wall_seconds_including_render":wall,"physics_wall_seconds":self.physics_wall,"real_time_factor":self.seconds()/wall,"realtime_achieved":self.seconds()>=wall,"coupled_spheres":self.particles.body_count,"dynamic_render_objects":self.dynamic.len(),"initial_robot":self.initial_robot.map(|v|v.to_vec()),"final_robot":state,"limits":["Only the initial position frame is read. Fresh procedural seeds are settled by live GPU integration; no future motion is supplied.","GPU grains couple to declared spherical robot pads and dynamic spheres; imported rigid-body collisions are handled by MuJoCo.","Visual mesh detail and collision representation are separately declared.","Same translational DEM constants; GPU floating-point accumulation may differ.","Render FPS is not physical real-time factor."]})
+        let mut report = serde_json::json!({"schema":"scenward-live-physics/v1","mode":"live GPU DEM and optional native articulated dynamics","particles":self.particles.count,"grain_radius_m":0.0015,"grain_dt":self.particles.dt,"rigid_dt":0.001,"steps":self.particles.steps,"neighbour_cache_rebuilds_including_settling":self.particles.rebuilds,"settling_wall_seconds":self.settling_wall,"source_frames":self.initial_frames,"simulation_seconds":self.seconds(),"wall_seconds_including_render":wall,"physics_wall_seconds":self.physics_wall,"real_time_factor":self.seconds()/wall,"realtime_achieved":self.seconds()>=wall,"coupled_spheres":self.particles.body_count,"dynamic_render_objects":self.dynamic.len(),"initial_robot":self.initial_robot.map(|v|v.to_vec()),"final_robot":state,"limits":["Only the initial position frame is read. Fresh procedural seeds are settled by live GPU integration; no future motion is supplied.","GPU grains couple to declared spherical robot pads and dynamic spheres; imported rigid-body collisions are handled by MuJoCo.","Visual mesh detail and collision representation are separately declared.","Same translational DEM constants; GPU floating-point accumulation may differ.","Render FPS is not physical real-time factor."]});
+        if let Some(p) = &self.profile {
+            report["profiling"] = serde_json::json!({
+                "schema": "scenward-physics-profile/v1",
+                "loop_gpu_and_submission": self.particles.profiler.as_ref().map(|p| &p.timings),
+                "settling_gpu_and_submission": self.settling_profile,
+                "loop_host": p,
+                "limits": [
+                    "Opt-in GPU pass timestamps add overhead; compare throughput with profiling disabled.",
+                    "GPU solver pass combines conditional clear/grid/neighbour rebuild, finish and integration; not individual kernel timings.",
+                    "GPU pass sums overlap CPU submission/completion wall time; do not add GPU and CPU totals.",
+                    "Submit-to-readback includes GPU execution and host scheduling; it is not isolated transfer latency.",
+                    "Completed render wall time includes encoding, GPU completion and host wait; no GPU render-only timing."
+                ]
+            });
+        }
+        report
     }
 }

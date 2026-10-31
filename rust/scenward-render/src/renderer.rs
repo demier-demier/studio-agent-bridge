@@ -42,6 +42,10 @@ pub struct Camera {
     pub distance: f32,
     pub target: Vec3,
 }
+pub struct ComputeOptions {
+    pub enabled: bool,
+    pub profile: bool,
+}
 impl Default for Camera {
     fn default() -> Self {
         Self {
@@ -189,7 +193,7 @@ impl Renderer {
         width: u32,
         height: u32,
         samples: u32,
-        live_compute: bool,
+        compute: ComputeOptions,
     ) -> Result<Self> {
         let adapter = instance
             .request_adapter(&wgpu::RequestAdapterOptions {
@@ -199,6 +203,10 @@ impl Renderer {
             })
             .await?;
         let info = adapter.get_info();
+        ensure!(
+            !compute.profile || adapter.features().contains(wgpu::Features::TIMESTAMP_QUERY),
+            "GPU timestamp profiling is unsupported on this adapter; omit --profile-physics"
+        );
         ensure!(
             info.device_type != wgpu::DeviceType::Cpu,
             "A hardware GPU is required; software fallback was rejected"
@@ -222,8 +230,13 @@ impl Renderer {
         let (device, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("Scenward native GPU engine"),
+                required_features: if compute.profile {
+                    wgpu::Features::TIMESTAMP_QUERY
+                } else {
+                    wgpu::Features::empty()
+                },
                 required_limits: wgpu::Limits {
-                    max_storage_buffers_per_shader_stage: if live_compute { 10 } else { 8 },
+                    max_storage_buffers_per_shader_stage: if compute.enabled { 10 } else { 8 },
                     ..Default::default()
                 },
                 ..Default::default()

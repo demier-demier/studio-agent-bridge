@@ -1,6 +1,8 @@
 //! GPU-resident fixed-step DEM; storage buffers are shared with the renderer.
+use crate::profiling::{GpuProfiler, MAX_QUERIES, MAX_STEPS, QUERIES_PER_STEP};
 use anyhow::{ensure, Context, Result};
 use bytemuck::{Pod, Zeroable};
+use std::time::Instant;
 use wgpu::util::DeviceExt;
 #[repr(C)]
 #[derive(Clone, Copy, Pod, Zeroable)]
@@ -43,6 +45,7 @@ pub struct GpuPhysics {
     pub steps: u64,
     pub dt: f64,
     pub body_count: usize,
+    pub profiler: Option<GpuProfiler>,
 }
 impl GpuPhysics {
     pub fn new(
@@ -124,9 +127,18 @@ impl GpuPhysics {
         let indices = storage(table as u64 * 16 * 4, "hash slots");
         let bodies = storage(64 * 48, "coupled bodies");
         let status = storage((4 + 64 * 6 + 2) * 4, "faults and reactions");
+        let profiler = device
+            .features()
+            .contains(wgpu::Features::TIMESTAMP_QUERY)
+            .then(|| GpuProfiler::new(device));
         let readback = device.create_buffer(&wgpu::BufferDescriptor {
             label: Some("small reaction readback"),
-            size: status.size(),
+            size: status.size()
+                + if profiler.is_some() {
+                    u64::from(MAX_QUERIES) * 8
+                } else {
+                    0
+                },
             usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
             mapped_at_creation: false,
         });
@@ -270,6 +282,7 @@ impl GpuPhysics {
             steps: 0,
             dt: 0.00005,
             body_count,
+            profiler,
         })
     }
     pub fn advance(
@@ -279,8 +292,9 @@ impl GpuPhysics {
         bodies: &[SphereBody],
         steps: u32,
     ) -> Result<Vec<[f32; 6]>> {
+        let encode_start = self.profiler.as_ref().map(|_| Instant::now());
         ensure!(
-            bodies.len() == self.body_count && steps > 0 && steps <= 256,
+            bodies.len() == self.body_count && steps > 0 && steps <= MAX_STEPS,
             "Invalid coupling batch"
         );
         ensure!(
@@ -297,15 +311,21 @@ impl GpuPhysics {
             queue.write_buffer(&self.status, 388 * 4, bytemuck::bytes_of(&1u32));
         }
         let mut enc = device.create_command_encoder(&Default::default());
-        for _ in 0..steps {
+        for step in 0..steps {
             {
-                let mut p = enc.begin_compute_pass(&Default::default());
+                let mut p = enc.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                    label: Some("DEM prepare"),
+                    timestamp_writes: self.profiler.as_ref().map(|p| p.pass(step, false)),
+                });
                 p.set_bind_group(0, &self.prepare_group, &[]);
                 p.set_pipeline(&self.prepare);
                 p.dispatch_workgroups(1, 1, 1);
             }
             {
-                let mut p = enc.begin_compute_pass(&Default::default());
+                let mut p = enc.begin_compute_pass(&wgpu::ComputePassDescriptor {
+                    label: Some("DEM rebuild and integrate"),
+                    timestamp_writes: self.profiler.as_ref().map(|p| p.pass(step, true)),
+                });
                 p.set_bind_group(0, &self.groups[self.current], &[]);
                 p.set_pipeline(&self.clear);
                 p.dispatch_workgroups_indirect(&self.indirect, 0);
@@ -321,9 +341,16 @@ impl GpuPhysics {
             self.current = 1 - self.current;
         }
         enc.copy_buffer_to_buffer(&self.status, 0, &self.readback, 0, self.status.size());
-        queue.submit(Some(enc.finish()));
+        if let Some(profile) = &self.profiler {
+            profile.resolve(&mut enc, &self.readback, self.status.size(), steps);
+        }
+        let commands = enc.finish();
+        let encode_seconds = encode_start.map(|s| s.elapsed().as_secs_f64());
+        let readback_start = self.profiler.as_ref().map(|_| Instant::now());
+        queue.submit(Some(commands));
         let bytes = read_buffer(device, &self.readback)?;
-        let status: &[u32] = bytemuck::cast_slice(&bytes);
+        let readback_seconds = readback_start.map(|s| s.elapsed().as_secs_f64());
+        let status: &[u32] = bytemuck::cast_slice(&bytes[..self.status.size() as usize]);
         ensure!(
             status[0] == 0 && status[1] == 0 && status[2] == 0,
             "Physics aborted: overflow={}, out-of-grid={}, nonfinite={}",
@@ -333,6 +360,20 @@ impl GpuPhysics {
         );
         self.steps += steps as u64;
         self.rebuilds = status[389];
+        if let Some(profile) = &mut self.profiler {
+            let offset = self.status.size() as usize;
+            let count = steps as usize * QUERIES_PER_STEP as usize * 8;
+            profile.timings.record_gpu(
+                &bytes[offset..offset + count],
+                steps,
+                queue.get_timestamp_period(),
+            )?;
+            profile.timings.cpu_encode.add(encode_seconds.unwrap());
+            profile
+                .timings
+                .submit_to_readback
+                .add(readback_seconds.unwrap());
+        }
         Ok((0..self.body_count)
             .map(|k| std::array::from_fn(|a| f32::from_bits(status[4 + k * 6 + a]) / steps as f32))
             .collect())

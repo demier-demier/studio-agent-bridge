@@ -14,6 +14,9 @@ This image was rendered by this Rust engine from numeric simulation caches. It i
 
 ## What runs
 
+- [Opt-in live physics profiling](PROFILING.md), with GPU pass timestamps, native
+  coupling stages, bounded statistics and separate settling measurements.
+
 - Native window and headless PNG capture, with 1x or 4x MSAA.
 - Every recorded grain rendered analytically as a sphere, with true sphere depth and normal, rather than a flat point sprite. No grain decimation or coarser particle cache.
 - Shared indexed Solo12 meshes with thirteen per-instance transforms, four foot pads and a ground plane.

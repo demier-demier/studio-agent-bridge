@@ -24,6 +24,11 @@ The preceding same-scene version took 97.23 s; persistent neighbour reuse and GP
 
 ## Architecture
 
+For the next optimization step, [opt-in profiling](PROFILING.md) separates GPU
+compute passes, submission/completion, native robot steps and completed rendering
+without changing physical detail. Profiling has its own overhead and is disabled
+by default.
+
 ```text
 Fresh one-state particle seed ──► GPU settling ──► live fixed-step loop
                                                   │

@@ -2,6 +2,7 @@ mod cache;
 mod environment;
 mod live;
 mod physics;
+mod profiling;
 mod reference;
 mod renderer;
 #[cfg(feature = "robotics")]
@@ -10,7 +11,7 @@ mod robot;
 use anyhow::{ensure, Context, Result};
 use cache::Scene;
 use clap::Parser;
-use renderer::{Camera, Renderer};
+use renderer::{Camera, ComputeOptions, Renderer};
 use std::{fs::OpenOptions, path::PathBuf, sync::Arc, time::Instant};
 use winit::{
     application::ApplicationHandler,
@@ -38,6 +39,9 @@ struct Args {
     live_ticks: u32,
     #[arg(long)]
     physics_check: bool,
+    /// Opt-in GPU pass timestamps and host coupling timings; adds measurement overhead.
+    #[arg(long)]
+    profile_physics: bool,
     #[arg(long)]
     headless: bool,
     #[arg(long)]
@@ -85,7 +89,10 @@ fn headless(args: &Args, mut scene: Scene) -> Result<()> {
         args.width,
         args.height,
         args.samples,
-        args.live || args.physics_check,
+        ComputeOptions {
+            enabled: args.live || args.physics_check,
+            profile: args.profile_physics,
+        },
     ))?;
     if args.physics_check {
         return physics_checks(&renderer);
@@ -249,7 +256,10 @@ impl ApplicationHandler for App {
                 size.width.max(1),
                 size.height.max(1),
                 self.args.samples,
-                self.args.live || self.args.physics_check,
+                ComputeOptions {
+                    enabled: self.args.live || self.args.physics_check,
+                    profile: self.args.profile_physics,
+                },
             ))?;
             let config = wgpu::SurfaceConfiguration {
                 usage: wgpu::TextureUsages::RENDER_ATTACHMENT,
@@ -415,6 +425,10 @@ fn main() -> Result<()> {
         }
     }
     let args = Args::parse_from(cli);
+    ensure!(
+        !args.profile_physics || args.live || args.physics_check,
+        "--profile-physics requires --live or --physics-check"
+    );
     ensure!(
         (320..=3840).contains(&args.width) && (180..=2160).contains(&args.height),
         "Resolution outside supported bounds"
@@ -598,6 +612,31 @@ fn physics_checks(r: &Renderer) -> Result<()> {
     );
     println!("PASS skin crossing rebuild");
 
+    if r.device
+        .features()
+        .contains(wgpu::Features::TIMESTAMP_QUERY)
+    {
+        let mut p = GpuPhysics::new(&r.device, &[0., 0., 0.1], &[0.; 3], 0)?;
+        p.advance(&r.device, &r.queue, &[], profiling::MAX_STEPS)?;
+        p.advance(&r.device, &r.queue, &[], 1)?;
+        let timings = &p.profiler.as_ref().unwrap().timings;
+        ensure!(
+            timings.completed_batches == 2 && timings.completed_steps == 257,
+            "Profile counter mismatch"
+        );
+        ensure!(
+            timings.gpu_prepare_pass.samples == 257
+                && timings.gpu_solver_pass.samples == 257
+                && timings.rejected_timestamp_pairs == 0,
+            "GPU timestamp pairs must be valid"
+        );
+        ensure!(
+            timings.gpu_solver_pass.total_seconds > 0.,
+            "GPU timestamps must measure executed work"
+        );
+        println!("PASS GPU profile maximum batch, query reuse and valid pass timestamps");
+    }
+
     Ok(())
 }
 fn live_benchmark(args: &Args, mut scene: Scene, mut r: Renderer) -> Result<()> {
@@ -617,11 +656,18 @@ fn live_benchmark(args: &Args, mut scene: Scene, mut r: Renderer) -> Result<()> 
     let start = Instant::now();
     for _ in 0..args.live_ticks {
         live.tick(&mut r)?;
+        let render_start = live.profile.as_ref().map(|_| Instant::now());
         r.render(&view);
         r.wait()?;
+        if let Some(p) = &mut live.profile {
+            p.completed_render
+                .add(render_start.unwrap().elapsed().as_secs_f64());
+        }
     }
     let wall = start.elapsed().as_secs_f64();
     let mut report = live.report(wall);
+    report["adapter"] = serde_json::json!({"name": r.adapter_info.name, "backend": format!("{:?}", r.adapter_info.backend),
+        "timestamp_period_ns": if args.profile_physics { Some(r.queue.get_timestamp_period()) } else { None }});
     let (positions, velocities) = live.particles.snapshot(&r.device, &r.queue)?;
     ensure!(
         positions.iter().chain(&velocities).all(|v| v.is_finite()),

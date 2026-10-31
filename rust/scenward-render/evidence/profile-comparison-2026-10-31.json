@@ -1,0 +1,92 @@
+{
+  "schema": "scenward-profile-comparison/v1",
+  "observed_at": "2026-10-31T12:11:55.507108+00:00",
+  "baseline_commit": "2d3201c5d0691cb54b59db4b1cbc4c1ae3215cd2",
+  "machine": "Apple M4 Pro, 12 CPU cores, 16 GPU cores, 24 GB unified memory; Metal",
+  "method": "Sequential baseline, instrumented and default-after runs on the same Mac. One full run each; normal desktop conditions, not an isolated repeated performance study.",
+  "settings": {
+    "particles": 961191,
+    "grain_radius_m": 0.0015,
+    "grain_dt": 5e-05,
+    "loop_steps": 48000,
+    "settling_steps": 5600,
+    "rendered_frames": 2400,
+    "resolution": [
+      1280,
+      720
+    ],
+    "msaa_samples": 4,
+    "dynamic_objects": 48,
+    "coupled_spheres": 36,
+    "evaluated_triangles": 287648,
+    "rendered_objects": 1619,
+    "static_colliders": 660
+  },
+  "input_files": {
+    "fresh-state/metadata.json": {
+      "sha256": "880eba5628dc2271e7c468c64c542a60927b9d1a77cb5ac0be0e40f8d43525b4",
+      "bytes": 199
+    },
+    "fresh-state/particles.npy": {
+      "sha256": "12f911eb5237084da5e407779ec53953fc1416c3444ceb252d2f136a6b0ad0da",
+      "bytes": 11534420
+    },
+    "laboratory/environment.json": {
+      "sha256": "8ebfd0c14f9dd1fb23427912174f31130de1171c7206dff27fe189aabd86bc21",
+      "bytes": 12540003
+    },
+    "laboratory/physics.xml": {
+      "sha256": "1798fa3f368d4dccfa6de4b616b16fdc23a05c52c10ca5f4c3e8bc258f269af8",
+      "bytes": 161915
+    }
+  },
+  "unchanged_shader_sha256": "eaf4496236211f39236cbdbe8357559cf9900153bc9341c6c2d299777c48111c",
+  "runs": [
+    {
+      "run": "baseline",
+      "loop_wall_seconds": 75.886941958,
+      "physics_wall_seconds": 48.48323496599988,
+      "real_time_factor": 0.031625994381593234,
+      "peak_physical_footprint_bytes": 1083114408,
+      "max_rss_bytes": 186122240,
+      "all_particles_finite": true
+    },
+    {
+      "run": "profiled",
+      "loop_wall_seconds": 76.523988708,
+      "physics_wall_seconds": 48.98894525799997,
+      "real_time_factor": 0.03136271436605209,
+      "peak_physical_footprint_bytes": 1088471976,
+      "max_rss_bytes": 185696256,
+      "all_particles_finite": true
+    },
+    {
+      "run": "default-after",
+      "loop_wall_seconds": 76.430371834,
+      "physics_wall_seconds": 48.77552424200001,
+      "real_time_factor": 0.031401129451686924,
+      "peak_physical_footprint_bytes": 1082983360,
+      "max_rss_bytes": 185909248,
+      "all_particles_finite": true
+    }
+  ],
+  "scope": [
+    "Instrumentation only; no solver optimization or speedup claim.",
+    "Default-after ran 0.72% slower than baseline in this single comparison; not enough evidence to assign that difference to code rather than normal run variance.",
+    "GPU pass sums overlap host wall timings; do not add them.",
+    "All three full runs retained every grain and a finite final state. No claim of bit-identical long trajectories.",
+    "Native GUI controls still unverified because desktop is locked. Windows/Linux GPU execution not measured.",
+    "Physical real-time factor remains below 1.0."
+  ],
+  "checks": {
+    "rust_base_tests": 12,
+    "rust_robotics_tests": 14,
+    "metal_checks_with_profiling": 9,
+    "independent_cpu_oracle_max_position_error_m": 0.0,
+    "independent_cpu_oracle_max_velocity_error_m_s": 2.682209e-07,
+    "corrupted_report_rejections": 6,
+    "rust_clippy_base_and_robotics": "passed",
+    "python_ruff": "passed",
+    "shader_unchanged": true
+  }
+}

@@ -50,5 +50,7 @@ jobs:
         run: python -c "import mujoco,pathlib,os; open(os.environ['GITHUB_ENV'],'a').write('MUJOCO_DIR='+str(pathlib.Path(mujoco.__file__).parent)+'\n')"
       - run: cargo test --locked --features robotics
       - run: cargo clippy --locked --all-targets --features robotics -- -D warnings
+      - name: Verify archived profile report consistency (not GPU execution)
+        run: python scripts/check_profile.py evidence/profile-full-2026-10-31.json
       - name: Native articulated locomotion check (CPU, no GPU claim)
         run: cargo run --locked --features robotics -- --run unused --geometry unused --robot-check --model ../../examples/solo12_granular/locomotion/solo12-walk.xml
